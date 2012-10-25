@@ -50,8 +50,13 @@ class DHC{
     public static function register($key, $object){
         if (!is_object($object))
         {
-            throw new NotObjectException($object, gettype($object));
+            throw new CoreRegisterNotObjectException($object, gettype($object));
         }
+		if(!isset(self::$_object[$key])){
+			self::$_object[$key] = $object;
+		}else{
+			throw new CoreRegisterHasKeyException($object, gettype($object));
+		}
     }
     
     

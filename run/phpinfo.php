@@ -39,13 +39,6 @@ function get_param_by_type($value,$type){
 	return $func($value);
 }
 
-function get_param_uint($value){
-	if(ctype_digit($value) || is_int($value)){
-		return intval($value);
-	}else{
-		throw new Exception("uint error");
-	}
-}
 
 gets(array('ok'=>'PARAM_INT'));
 var_dump($G);

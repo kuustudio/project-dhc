@@ -28,7 +28,52 @@ class DHCInput{
 	const PARAM_UID		= PARAM_INT ^ PARAM_USERID;
 	const PARAM_TID		= PARAM_INT ^ PARAM_OBJID;
 	const PARAM_URLMD5	= PARAM_STRING ^ PARAM_MD5;
+	const PARAM_NULLOK	= PARAM_UINT ^ PARAM_SINT ^ PARAM_FLOAT ^ PARAM_BOOL ^ PARAM_HEX;
 	
+	/**
+	 * 类型监测函数识别数组
+	 *
+	 * @var array
+	 */
+	var static $input_check_array = array(
+		self::PARAM_STRING	=> 'get_param_string',
+		self::PARAM_UINT	=> 'get_param_uint',
+		self::PARAM_SINT	=> 'get_param_sint',
+		self::PARAM_FLOAT	=> 'get_param_float',
+		self::PARAM_BOOL	=> 'get_param_bool',
+		self::PARAM_HEX		=> 'get_param_hex',
+		self::PARAM_EXISTS	=> 'get_param_exists',
+		self::PARAM_ARRAY	=> 'get_param_array',
+		self::PARAM_RAW		=> 'get_param_raw',
+		self::PARAM_HASHVAR	=> 'get_param_hashvar',
+		self::PARAM_ERROR	=> 'get_param_error',
+		self::PARAM_NULLOK	=> 'get_param_null'
+	);
+
+	/**
+	 * 通过类型安全监测的$_GET
+	 *
+	 * @var array
+	 */
+	var static $gets					= array();
+	/**
+	 * 通过类型安全监测的$_POST
+	 *
+	 * @var array
+	 */
+	var static $posts					= array();
+	/**
+	 * 通过类型安全监测的$_COOKIE
+	 *
+	 * @var array
+	 */
+	var static $cookies				= array();
+	/**
+	 * 通过类型安全监测的$_SERVER
+	 *
+	 * @var array
+	 */
+	var static $servers				= array();
 	/**
 	 * 当前用户的IP地址
 	 *
@@ -71,6 +116,189 @@ class DHCInput{
 	{
 		return ($this->server('HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest');
 	}
+
+	/*
+	* $types = array(
+	*	'content'	=> array('func'=>self::PARAM_STRING,'argv'=>self::PARAM_TEXT),
+	*	'sex'	=> array('func'=>self::PARAM_STRING)
+	* );
+	*/
+	public function gets($types,$prefix = 'get_'){
+		$gets = array();
+		foreach($types as $key=>$type){
+			self::$gets[] = $this->get_param_by_type($_GET[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
+		}
+	}
+
+	public function posts($types,$prefix = 'post_'){
+		$posts = array();
+		foreach($types as $key=>$type){
+			self::$posts[] = $this->get_param_by_type($_POST[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
+		}
+	}
+
+	public function cookies($types,$prefix = 'cookie_'){
+		$cookies = array();
+		foreach($types as $key=>$type){
+			self::$cookies[] = $this->get_param_by_type($_COOKIE[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
+		}
+	}
+
+	public function servers($types,$prefix = 'server_'){
+		$servers = array();
+		foreach($types as $key=>$type){
+			self::$servers[] = $this->get_param_by_type($_SERVER[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
+		}
+	}
+
+	function get_param_by_type($value,$funckey,$argv){
+		$func = self::$input_check_array[$funckey];
+		if(empty($argv)) return $func($value);
+		return $func($value,$argv);
+	}
+
+	protected function noslashes($s) {
+		if(!get_magic_quotes_gpc())
+			return $s;
+		return stripslashes($s);
+	}
+
+	/*
+	* $_GET,$_POST,$_COOKIE,$_SERVER等值的验证依赖函数
+	* 也可以独立使用
+	*/
+	function get_param_exists($value){
+		return isset($value);
+	}
+
+	function get_param_hashvar($value){
+		//用于验证的哈希值
+	}
+
+	function get_param_raw($value){
+		return $value;
+	}
+
+	function get_param_array($arr){
+		if(is_array($arr)){
+			foreach($arr as $k=>$v){
+				//无法支持轮询
+			}
+		}else{
+			return array();
+		}
+	}
+
+	function get_param_null($value){
+		if($value == '') return null;
+	}
+
+	function get_param_uint($value,$argv){
+		if(ctype_digit($value) || is_int($value)){
+			if($argv & self::PARAM_OBJID){
+				//验证是否对象ID,PARAM_TID
+			}
+			if($argv & self::PARAM_USERID){
+				//验证是否用户ID,PARAM_UID
+			}
+			return intval($value);
+		}else{
+			if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.0') !== false && preg_match('/[0-9]+[0-9a-f]{8}$/', $value) == 1) {
+				exit;// 处理ie7 beta2问题
+			}
+			//返回空值或者异常处理
+		}
+	}
+
+
+	function get_param_sint($value){
+		if(ctype_digit($value) || is_int($value)){
+			return intval($value);
+		}else{
+			if($value[0] == '-' && ctype_digit(substr($value, 1))){
+				return intval($value);
+			}else{
+				if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.0') !== false && preg_match('/[0-9]+[0-9a-f]{8}$/', $value) == 1) {
+					exit;// 处理ie7 beta2问题
+				}
+				//返回空值或者异常处理
+			}
+		}
+	}
+
+	function get_param_float($value){
+		if(preg_match('/^[0-9\.]*$/i', $value)){
+			return floatval($value);
+		}else{
+			//返回空值或者异常处理
+		}
+	}
+
+	function get_param_bool($value){
+		switch (strtolower($value)) {
+			case '0':
+			case '1':
+				settype($value,'bool');
+				return $value;
+				break;
+			case 'true':
+			case 'on':
+			case 'yes':
+				return true;
+				break;
+			case 'false':
+			case 'off':
+			case 'no':
+				return false;
+				break;
+			default:
+				//返回空值或者异常处理
+				break;
+		}	
+	}
+
+	function get_param_hex($value){
+		if(ctype_xdigit($value)){
+			return intval(hexdec($value));
+		}else{
+			//返回空值或者异常处理
+		}
+	}
+
+	function get_param_string($str,$argv){
+		if($argv & self::PARAM_MD5){
+			//检验url_md5,PARAM_URLMD5
+		}
+		$str = noslashes($str);
+		if($argv & self::PARAM_STRIPTAGS){
+			$allowtags = '';
+			if($argv & self::PARAM_ALLOW_A){
+				$allowtags .= '<a>';
+			}
+			if($argv & self::PARAM_ALLOW_B){
+				$allowtags .= '<b>';
+			}
+			$str = strip_tags($str, $allowtags);
+			// 实体保护
+			if ($allowtags && strpos($str, '=') !== false) {  // 有没有实体需要保护?
+				// 过滤大多数xss实体
+				$exprs = array('/( on[a-z]{1,}|style|class|id|target)="(.*?)"/i',
+							   '/( on[a-z]{1,}|style|class|id|target)=\'(.*?)\'/i',
+							   '/( on[a-z]{1,}|style|class|id|target)=(.*?)( |>)/i',
+							   '/([a-z]{1,})="(( |\t)*?)(javascript|vbscript|about):(.*?)"/i',
+							   '/([a-z]{1,})=\'(( |\t)*?)(javascript|vbscript|about):(.*?)\'/i',
+							   '/([a-z]{1,})=(( |\t)*?)(javascript|vbscript|about):(.*?)( |>)/i',
+							  );
+
+				$reps = array('', '', '$3', '$1=""', '$1=""', '$1=""$6');
+				$str = preg_replace($exprs, $reps, $str);
+			}
+		}
+		// 过滤\r字符
+		$str = str_replace("\r","",$str);
+		return strval($str);
+	}
+
 	
 	/**
 	* 获取IP地址
