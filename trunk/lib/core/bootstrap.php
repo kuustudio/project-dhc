@@ -1,27 +1,35 @@
 <?php
 if (!defined('DHC_VERSION')) exit('Access is no allowed.');
+
 define('DS', DIRECTORY_SEPARATOR);
 define('PS', PATH_SEPARATOR);
 define('DHC_LIB', dirname(dirname(__FILE__)).DS);
 define('DHC_CONF', dirname(dirname(dirname(__FILE__))).DS.'conf'.DS);
 set_include_path(get_include_path().PS.DHC_LIB.PS.DHC_CONF);
 
-include(DHC_LIB.'core/function.php');
-include(DHC_LIB.'core/exception.php');
+include_once(DHC_LIB.'core/function.php');
+include_once(DHC_LIB.'core/exception.php');
+include_once(DHC_LIB.'core/input.php');
 
 class DHC{
     private static $_config = array();
     private static $_route = array();
     private static $_autoload = array();
     private static $_object = array();
-    private static $_error = array();
+    //private static $_error = array();
     private static $_cache = array();
+    private static $_input;
     
     private static function init(){
         self::$_config = include_once(DHC_CONF.'config.php');
         self::$_route = include_once(DHC_CONF.'route.php');
         self::$_autoload = include_once(DHC_CONF.'autoload_class.php');
-        self::$_error = include_once(DHC_CONF.'errors.php');
+        //self::$_error = include_once(DHC_CONF.'errors.php');
+        self::$_input = new DHCInput(array(
+			'url_method'	=> self::$_config['url_method'],
+			'server'		=> array()
+		));
+
         spl_autoload_register('self::autoload');
     }
     

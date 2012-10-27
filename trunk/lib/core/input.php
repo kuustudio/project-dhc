@@ -1,154 +1,224 @@
 <?php 
 if (!defined('DHC_VERSION')) exit('Access is no allowed.');
 
+// 逻辑过滤
+define('PARAM_STRING',	0x00000001);
+define('PARAM_INT',		0x00000002); // 默认为无符号整数
+define('PARAM_UINT',	0x00000002); // 无符号整数，必须是最常用的整数类型
+define('PARAM_SINT',	0x00000004); // 有符号整数
+define('PARAM_FLOAT',	0x00000008);
+define('PARAM_BOOL',	0x00000010);
+define('PARAM_HEX',		0x00000020);
+define('PARAM_EXISTS',	0x00000040); // 只验证是否设置了该参数，并且得出一个布尔值
+define('PARAM_ARRAY',	0x00000080);
+define('PARAM_RAW',		0x00000100); // 不进行任何处理，这是危险的行为
+// 防毒过滤器以及选项
+define('PARAM_STRIPTAGS', 0x00001000); // 调用 strip_tags, 只适合于字符串
+define('PARAM_HASHVAR',	0x00002000); // user facing 变量是一个hash值, param_ 必须在登录后调用
+define('PARAM_MD5',		0x00004000); // md5 变量, 值必须匹配 url hash, param_ 必须在登录后调用
+define('PARAM_ERROR',	0x00008000); // 当有一个错误的时候，进行错误回调，而不是发送到用户首页
+define('PARAM_ALLOW_A',	0x00010000); // 当调用 strip_tags 时，允许 href 链接,<a>
+define('PARAM_ALLOW_B',	0x00020000); // 当调用 strip_tags 时，允许 bold 链接,<b>
+define('PARAM_USERID',	0x00040000); // 对数字的用户 ID 进行验证
+define('PARAM_OBJID',	0x00080000); // 对数字的对象 ID 进行验证
+// 类型域
+define('PARAM_TEXT',	PARAM_STRING ^ PARAM_STRIPTAGS);
+define('PARAM_ID',		PARAM_INT);
+define('PARAM_UID',		PARAM_INT ^ PARAM_USERID);
+define('PARAM_TID',		PARAM_INT ^ PARAM_OBJID);
+define('PARAM_URLMD5',	PARAM_STRING ^ PARAM_MD5);
+define('PARAM_NULLOK',	PARAM_INT ^ PARAM_SINT ^ PARAM_FLOAT ^ PARAM_BOOL ^ PARAM_HEX);
+
 class DHCInput{
-	// 逻辑过滤
-	const PARAM_STRING	= 0x00000001;
-	const PARAM_INT  	= 0x00000002; // 默认为无符号整数
-	const PARAM_UINT	= 0x00000002; // 无符号整数，必须是最常用的整数类型
-	const PARAM_SINT	= 0x00000004; // 有符号整数
-	const PARAM_FLOAT	= 0x00000008;
-	const PARAM_BOOL	= 0x00000010;
-	const PARAM_HEX		= 0x00000020;
-	const PARAM_EXISTS	= 0x00000040; // 只验证是否设置了该参数，并且得出一个布尔值
-	const PARAM_ARRAY	= 0x00000080;
-	const PARAM_RAW		= 0x00000100; // 不进行任何处理，这是危险的行为
-	// 防毒过滤器以及选项
-	const PARAM_STRIPTAGS	= 0x00001000; // 调用 strip_tags, 只适合于字符串
-	const PARAM_HASHVAR		= 0x00002000; // user facing 变量是一个hash值, param_ 必须在登录后调用
-	const PARAM_MD5			= 0x00004000; // md5 变量, 值必须匹配 url hash, param_ 必须在登录后调用
-	const PARAM_ERROR		= 0x00008000; // 当有一个错误的时候，进行错误回调，而不是发送到用户首页
-	const PARAM_ALLOW_A		= 0x00010000; // 当调用 strip_tags 时，允许 href 链接,<a>
-	const PARAM_ALLOW_B		= 0x00020000; // 当调用 strip_tags 时，允许 bold 链接,<b>
-	const PARAM_USERID		= 0x00040000; // 对数字的用户 ID 进行验证
-	const PARAM_OBJID		= 0x00080000; // 对数字的对象 ID 进行验证
-	// 类型域
-	const PARAM_TEXT	= PARAM_STRING ^ PARAM_STRIPTAGS;
-	const PARAM_ID		= PARAM_INT;
-	const PARAM_UID		= PARAM_INT ^ PARAM_USERID;
-	const PARAM_TID		= PARAM_INT ^ PARAM_OBJID;
-	const PARAM_URLMD5	= PARAM_STRING ^ PARAM_MD5;
-	const PARAM_NULLOK	= PARAM_UINT ^ PARAM_SINT ^ PARAM_FLOAT ^ PARAM_BOOL ^ PARAM_HEX;
-	
+	/**
+	 * 存储url模式
+	 *
+	 * @var array
+	 */
+	var $url_method				= 'url_default';
+	/**
+	 * 通过服务器传送过来的pathinfo
+	 *
+	 * @var array
+	 */
+	var $pathinfo				= '';
 	/**
 	 * 类型监测函数识别数组
 	 *
 	 * @var array
 	 */
-	var static $input_check_array = array(
-		self::PARAM_STRING	=> 'get_param_string',
-		self::PARAM_UINT	=> 'get_param_uint',
-		self::PARAM_SINT	=> 'get_param_sint',
-		self::PARAM_FLOAT	=> 'get_param_float',
-		self::PARAM_BOOL	=> 'get_param_bool',
-		self::PARAM_HEX		=> 'get_param_hex',
-		self::PARAM_EXISTS	=> 'get_param_exists',
-		self::PARAM_ARRAY	=> 'get_param_array',
-		self::PARAM_RAW		=> 'get_param_raw',
-		self::PARAM_HASHVAR	=> 'get_param_hashvar',
-		self::PARAM_ERROR	=> 'get_param_error',
-		self::PARAM_NULLOK	=> 'get_param_null'
+	static $input_check_array = array(
+		PARAM_STRING	=> 'get_param_string',
+		PARAM_UINT		=> 'get_param_uint',
+		PARAM_SINT		=> 'get_param_sint',
+		PARAM_FLOAT		=> 'get_param_float',
+		PARAM_BOOL		=> 'get_param_bool',
+		PARAM_HEX		=> 'get_param_hex',
+		PARAM_EXISTS	=> 'get_param_exists',
+		PARAM_ARRAY		=> 'get_param_array',
+		PARAM_RAW		=> 'get_param_raw',
+		PARAM_HASHVAR	=> 'get_param_hashvar',
+		PARAM_ERROR		=> 'get_param_error',
+		PARAM_NULLOK	=> 'get_param_null'
 	);
-
 	/**
 	 * 通过类型安全监测的$_GET
 	 *
 	 * @var array
 	 */
-	var static $gets					= array();
+	var $gets					= array();
 	/**
 	 * 通过类型安全监测的$_POST
 	 *
 	 * @var array
 	 */
-	var static $posts					= array();
+	var $posts					= array();
 	/**
 	 * 通过类型安全监测的$_COOKIE
 	 *
 	 * @var array
 	 */
-	var static $cookies				= array();
+	var $cookies				= array();
 	/**
 	 * 通过类型安全监测的$_SERVER
 	 *
 	 * @var array
 	 */
-	var static $servers				= array();
+	var $servers				= array();
+	/**
+	 * 系统内$_GET的默认前缀
+	 *
+	 * @var string
+	 */
+	var $get_prefix				= 'get_';
+	/**
+	 * 系统内$_POST的默认前缀
+	 *
+	 * @var string
+	 */
+	var $post_prefix			= 'post_';
+	/**
+	 * 系统内$_COOKIE的默认前缀
+	 *
+	 * @var string
+	 */
+	var $cookie_prefix			= 'cookie_';
+	/**
+	 * 系统内$_SERVER的默认前缀
+	 *
+	 * @var string
+	 */
+	var $server_prefix			= 'server_';
 	/**
 	 * 当前用户的IP地址
 	 *
 	 * @var string
 	 */
-    var $ip_address				= FALSE;
-    /**
+	var $ip_address					= FALSE;
+	/**
 	 * 当前用户使用的浏览器 user agent
 	 *
 	 * @var string
 	 */
-	var $user_agent				= FALSE;
+	var $user_agent						= FALSE;
 	/**
 	 * 如果是false,$_GET为一个空数组
 	 *
 	 * @var bool
 	 */
-	var $_allow_get_array		= TRUE;
+	var $_allow_get_array			= TRUE;
 	/**
 	 * List of all HTTP request headers
 	 *
 	 * @var array
 	 */
 	protected $headers			= array();
-    /*
-    * 优先做平台检测
-    */
+	/*
+	* 优先做平台检测
+	*/
 
-    /*
-    * 判断是否命令行模式
-    */
-    public function is_cli()
+
+	/*
+	* 构造函数
+	*/
+	public function __construct($option = null){
+		$this->gets	= array();
+		$this->posts	= array();
+		$this->cookies	= array();
+		$this->servers	= array();
+		if(!empty($option['url_method'])) $this->url_method = $option['url_method'];
+		if(!empty($option['server'])) $this->servers($option['server']);
+	}
+
+	public function pathinfo(){
+		if($this->url_method == 'url_rewrite'){
+		
+		}elseif($this->url_method == 'url_default'){
+			
+		}else{
+			
+		}
+	}
+
+	/*
+	* 判断是否命令行模式
+	*/
+	public function is_cli()
 	{
 		return (php_sapi_name() == 'cli') or defined('STDIN');
 	}
-    /*
-    * 判断是否ajax request
-    */
-    public function is_ajax()
+	/*
+	* 判断是否ajax request
+	*/
+	public function is_ajax()
 	{
 		return ($this->server('HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest');
 	}
 
 	/*
 	* $types = array(
-	*	'content'	=> array('func'=>self::PARAM_STRING,'argv'=>self::PARAM_TEXT),
-	*	'sex'	=> array('func'=>self::PARAM_STRING)
+	*	'content'	=> array('func'=>PARAM_STRING,'argv'=>PARAM_TEXT),
+	*	'sex'	=> array('func'=>PARAM_STRING)
 	* );
 	*/
-	public function gets($types,$prefix = 'get_'){
-		$gets = array();
+	public function gets($types){
 		foreach($types as $key=>$type){
-			self::$gets[] = $this->get_param_by_type($_GET[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
+			$this->gets[$this->get_prefix.$key] = $this->get_param_by_type($_GET[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
 		}
 	}
 
-	public function posts($types,$prefix = 'post_'){
-		$posts = array();
+	public function posts($types){
 		foreach($types as $key=>$type){
-			self::$posts[] = $this->get_param_by_type($_POST[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
+			$this->posts[$this->post_prefix.$key] = $this->get_param_by_type($_POST[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
 		}
 	}
 
-	public function cookies($types,$prefix = 'cookie_'){
-		$cookies = array();
+	public function cookies($types){
 		foreach($types as $key=>$type){
-			self::$cookies[] = $this->get_param_by_type($_COOKIE[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
+			$this->cookies[$this->cookie_prefix.$key] = $this->get_param_by_type($_COOKIE[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
 		}
 	}
 
-	public function servers($types,$prefix = 'server_'){
-		$servers = array();
+	public function servers($types){
 		foreach($types as $key=>$type){
-			self::$servers[] = $this->get_param_by_type($_SERVER[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
+			$this->servers[$this->server_prefix.$key] = $this->get_param_by_type($_SERVER[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
 		}
+	}
+
+	public function get($key){
+		return isset($this->gets[$this->get_prefix.$key])?$this->gets[$this->get_prefix.$key]:'';
+	}
+
+	public function post($key){
+		return isset($this->posts[$this->post_prefix.$key])?$this->posts[$this->post_prefix.$key]:'';
+	}
+
+	public function cookie($key){
+		return isset($this->cookies[$this->cookie_prefix.$key])?$this->cookies[$this->cookie_prefix.$key]:'';
+	}
+
+	public function server($key){
+		return isset($this->servers[$this->server_prefix.$key])?$this->servers[$this->server_prefix.$key]:'';
 	}
 
 	function get_param_by_type($value,$funckey,$argv){
@@ -195,10 +265,10 @@ class DHCInput{
 
 	function get_param_uint($value,$argv){
 		if(ctype_digit($value) || is_int($value)){
-			if($argv & self::PARAM_OBJID){
+			if($argv & PARAM_OBJID){
 				//验证是否对象ID,PARAM_TID
 			}
-			if($argv & self::PARAM_USERID){
+			if($argv & PARAM_USERID){
 				//验证是否用户ID,PARAM_UID
 			}
 			return intval($value);
@@ -266,16 +336,16 @@ class DHCInput{
 	}
 
 	function get_param_string($str,$argv){
-		if($argv & self::PARAM_MD5){
+		if($argv & PARAM_MD5){
 			//检验url_md5,PARAM_URLMD5
 		}
 		$str = noslashes($str);
-		if($argv & self::PARAM_STRIPTAGS){
+		if($argv & PARAM_STRIPTAGS){
 			$allowtags = '';
-			if($argv & self::PARAM_ALLOW_A){
+			if($argv & PARAM_ALLOW_A){
 				$allowtags .= '<a>';
 			}
-			if($argv & self::PARAM_ALLOW_B){
+			if($argv & PARAM_ALLOW_B){
 				$allowtags .= '<b>';
 			}
 			$str = strip_tags($str, $allowtags);
@@ -299,6 +369,14 @@ class DHCInput{
 		return strval($str);
 	}
 
+	/**
+	* url路由
+	*
+	*
+	*/
+	function match_route(){
+		
+	}
 	
 	/**
 	* 获取IP地址
