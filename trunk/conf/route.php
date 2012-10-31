@@ -1,10 +1,6 @@
 <?php
 if (!defined('DHC_VERSION')) exit('Access is no allowed.');
 
-define('ROUTE_TYPE_DEFAULT', ':default');
-define('ROUTE_REGEXP_TYPE_ANY', ':any');
-define('ROUTE_REGEXP_TYPE_NUM', ':num');
-
 /*
 route:
 '/url/' => array(
@@ -16,9 +12,7 @@ route:
 */
 
 return array(
-    ROUTE_TYPE_DEFAULT => array(
-        'app'        => 'home',
-        'controller' => 'index',
-        'action'     => 'index'
-    )
+    '/city/index'         => 'home/city/index',
+    '/home/(.+)'          => 'home/content/index:tag=&1',
+    '/home/index/(.+)'    => 'home/index/index:id=&1'
 );

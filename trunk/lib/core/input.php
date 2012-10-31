@@ -30,12 +30,7 @@ define('PARAM_URLMD5',	PARAM_STRING ^ PARAM_MD5);
 define('PARAM_NULLOK',	PARAM_INT ^ PARAM_SINT ^ PARAM_FLOAT ^ PARAM_BOOL ^ PARAM_HEX);
 
 class DHCInput{
-	/**
-	 * 存储url模式
-	 *
-	 * @var array
-	 */
-	var $url_method				= 'url_default';
+	
 	/**
 	 * 通过服务器传送过来的pathinfo
 	 *
@@ -151,13 +146,7 @@ class DHCInput{
 	}
 
 	public function pathinfo(){
-		if($this->url_method == 'url_rewrite'){
-		
-		}elseif($this->url_method == 'url_default'){
-			
-		}else{
-			
-		}
+		return $this->server('PATH_INFO');
 	}
 
 	/*
@@ -249,11 +238,19 @@ class DHCInput{
 		return $value;
 	}
 
-	function get_param_array($arr){
+	//禁止二维数组，支持数组内的单一数组类型的值检测
+	function get_param_array($arr,$argv){
+		$arr_r = array();
 		if(is_array($arr)){
-			foreach($arr as $k=>$v){
-				//无法支持轮询
-			}
+			foreach ($arr as $key => $r){
+          if ($ret = $this->get_param_by_type($r, ($argv & ~PARAM_ARRAY)))
+          {  
+          		$arr_r[$key] = $ret;
+          }else{
+          		return false;
+          }
+      }
+      return $arr_r;
 		}else{
 			return array();
 		}
