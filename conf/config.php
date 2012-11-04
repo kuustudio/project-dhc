@@ -2,15 +2,19 @@
 if (!defined('DHC_VERSION')) exit('Access is no allowed.');
 
 return array(
-	  // url_rewrite url_default
-	  'url_method'			      => 'url_rewrite',
-    'url_html_prefix'       => '.html',
+	// url_rewrite url_default
+	'url_method'		    => 'url_rewrite',
+    'url_html_subfix'       => '.html',
     
     //默认配置
-    'default_app'           => 'home',
-    'default_controller'    => 'index',
-    'default_action'        => 'index',
-    'default_client'        => 'pc',
+    'app'                   => 'home',
+    'controller'            => 'index',
+    'action'                => 'index',
+    'client'                => 'pc',
+
+    'app_name'              => 'app',
+    'controller_name'       => 'controller',
+    'action_name'           => 'action',
     
     'cache_start'           => false,
     'default_cache_backend' => 'memory',

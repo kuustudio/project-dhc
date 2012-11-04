@@ -212,7 +212,7 @@ class DHCInput{
 
 	function get_param_by_type($value,$funckey,$argv){
 		$func = self::$input_check_array[$funckey];
-		if(empty($argv)) return $func($value);
+		if(empty($argv)) return $this->$func($value);
 		return $func($value,$argv);
 	}
 
@@ -239,7 +239,7 @@ class DHCInput{
 	}
 
 	//禁止二维数组，支持数组内的单一数组类型的值检测
-	function get_param_array($arr,$argv){
+	function get_param_array($arr,$argv = PARAM_ARRAY){
 		$arr_r = array();
 		if(is_array($arr)){
 			foreach ($arr as $key => $r){
@@ -260,7 +260,7 @@ class DHCInput{
 		if($value == '') return null;
 	}
 
-	function get_param_uint($value,$argv){
+	function get_param_uint($value,$argv = PARAM_UINT){
 		if(ctype_digit($value) || is_int($value)){
 			if($argv & PARAM_OBJID){
 				//验证是否对象ID,PARAM_TID
@@ -332,11 +332,11 @@ class DHCInput{
 		}
 	}
 
-	function get_param_string($str,$argv){
+	function get_param_string($str,$argv = PARAM_STRING){
 		if($argv & PARAM_MD5){
 			//检验url_md5,PARAM_URLMD5
 		}
-		$str = noslashes($str);
+		$str = $this->noslashes($str);
 		if($argv & PARAM_STRIPTAGS){
 			$allowtags = '';
 			if($argv & PARAM_ALLOW_A){
@@ -366,14 +366,6 @@ class DHCInput{
 		return strval($str);
 	}
 
-	/**
-	* url路由
-	*
-	*
-	*/
-	function match_route(){
-		
-	}
 	
 	/**
 	* 获取IP地址
