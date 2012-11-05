@@ -27,17 +27,23 @@ class DHCRouterUri{
     }
 
     public function parse_uri($uri,$subfix = ''){
+		//去掉后缀
         if(!empty($subfix)) $uri = substr($uri,0,-strlen($subfix));
+		//添加默认
+		$container = array(
+			'app'		=> DHC::getConfig('app'),
+			'controller'=> DHC::getConfig('controller'),
+			'action'	=> DHC::getConfig('action')
+		);
         if($this->url_method == 'url_rewrite'){
             //静态路径匹配
             if(isset($this->routes[$uri]))
             {
                 list($app,$controller,$action) = explode('/', $this->routes[$uri]);
-                return array(
-                    'app'           => $app,
-                    'controller'    => $controller,
-                    'action'        => $action
-                );
+				$container['app']		= $app;
+				$container['controller']= $controller;
+				$container['action']	= $action;
+                return $container;
             }
 
             // 动态路径匹配
@@ -48,11 +54,9 @@ class DHCRouterUri{
                 {
                     $urls = explode(':', $val);
                     list($app,$controller,$action) = explode('/', $urls[0]);
-                    $container = array(
-                        'app'           => $app,
-                        'controller'    => $controller,
-                        'action'        => $action
-                    );
+					$container['app']		= $app;
+					$container['controller']= $controller;
+					$container['action']	= $action;
                     $querys = explode('&', $urls[1]);
                     foreach ($querys as $value) {
                         $container[$value] = $matches[$value];
@@ -60,17 +64,13 @@ class DHCRouterUri{
                     return $container;
                 }
             }
+			return $container;
         }elseif($this->url_method == 'url_default'){
             DHC::$_input->gets(array(
                     DHC::getConfig('app_name')           => array('func'=>PARAM_STRING),
                     DHC::getConfig('controller_name')    => array('func'=>PARAM_STRING),
                     DHC::getConfig('action_name')        => array('func'=>PARAM_STRING)
                 )
-            );
-            $container = array(
-                'app'           => DHC::getConfig('app'),
-                'controller'    => DHC::getConfig('controller'),
-                'action'        => DHC::getConfig('action')
             );
             parse_str($uri,$output);
             if(isset($output[DHC::getConfig('app_name')])) $container['app'] = $output[DHC::getConfig('app_name')];
