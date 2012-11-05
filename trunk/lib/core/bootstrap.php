@@ -49,16 +49,18 @@ class DHC{
         self::$_router = new DHCRouterUri(DHC::getConfig('url_method'), include_once(DHC_CONF.'route.php'));
 
         if($pathArray = self::$_router->parse_uri(self::$_input->pathinfo())){
-            $app_name = ucfirst(strtolower($pathArray['app']));
-            $controller_name = ucfirst(strtolower($pathArray['controller']));
-            $action_name = ucfirst(strtolower($pathArray['action']));
-            $controllerfile = DHC_APP . "{$app_name}/Controller/{$controller_name}.php";
+            self::setConfig('app', ucfirst(strtolower($pathArray['app'])));
+            self::setConfig('controller', ucfirst(strtolower($pathArray['controller'])));
+            self::setConfig('action', ucfirst(strtolower($pathArray['action'])));
+            $controllerfile = DHC_APP . self::getConfig('app') .'/Controller/'. self::getConfig('controller') .'.php';
+            //echo $controllerfile;
             if(file_exists($controllerfile)){
                 include_once($controllerfile);
                 $controller = self::getSingleton(
-                    $app_name.'_Controller_'.$controller_name
+                    self::getConfig('app').'_Controller_'.self::getConfig('controller')
                 );
-                dump($controller);
+                $controller->init();
+                $controller->run(self::getConfig('action'));
                 
             }else{
                 Error::logError(CORE_BOOTSTRAP_EC_NO_CONTROLLER,array('file'=>__FILE__,'line'=>__LINE__));
@@ -82,7 +84,7 @@ class DHC{
     public static function getSingleton($classname){
         if(!self::isRegistered($classname)){
             if(class_exists($classname))
-                self::register($classname,new $classname());
+                self::register($classname,new $classname($classname));
         }
         return self::registry($classname);
     }
