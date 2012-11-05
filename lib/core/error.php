@@ -10,6 +10,7 @@ define('API_EC_SUCCESS', 0);
  */
 define('CORE_INPUT_EC_NO_URL_METHOD', 100); //非法的url_method
 define('CORE_ROUTER_EC_UNABLE_URL', 200); //无法形成URL
+define('CORE_CONTROLLER_EC_NO_ACTION', 300);
 define('CORE_BOOTSTRAP_EC_CONFIG_NOT_EXISTS', 1);
 define('CORE_BOOTSTRAP_EC_REGISTER_NOT_OBJECT', 2);
 define('CORE_BOOTSTRAP_EC_REGISTER_HAS_KEY', 3);
@@ -38,6 +39,7 @@ class Error{
 		CORE_BOOTSTRAP_EC_NO_PATH_ARRAY      		=> '无法获取路径数组',
 		CORE_BOOTSTRAP_EC_NO_CONTROLLER      		=> '无法找到控制器',
 		CORE_BOOTSTRAP_EC_CANNOT_REGISTRY      	=> '无法从注册数据中取出当前键',
+		CORE_CONTROLLER_EC_NO_ACTION		      	=> '未找到行动',
 	);
 	
 	/*
