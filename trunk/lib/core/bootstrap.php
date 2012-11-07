@@ -12,6 +12,7 @@ set_include_path(get_include_path().PS.DHC_LIB.PS.DHC_CONF);
 include_once(DHC_LIB.'core/function.php');
 include_once(DHC_LIB.'core/error.php');
 include_once(DHC_LIB.'core/exception.php');
+include_once(DHC_LIB.'core/validator.php');
 include_once(DHC_LIB.'core/input.php');
 include_once(DHC_LIB.'core/router.php');
 

@@ -18,6 +18,16 @@ define('CORE_BOOTSTRAP_EC_NO_PATH_ARRAY', 4);
 define('CORE_BOOTSTRAP_EC_NO_CONTROLLER', 5);
 define('CORE_BOOTSTRAP_EC_CANNOT_REGISTRY', 6);
 
+define('CORE_VALIDATOR_EC_NOT_UINT', 1001);
+define('CORE_VALIDATOR_EC_NOT_ARRAY', 1002);
+define('CORE_VALIDATOR_EC_NOT_SINT', 1003);
+define('CORE_VALIDATOR_EC_NOT_FLOAT', 1004);
+define('CORE_VALIDATOR_EC_NOT_BOOL', 1005);
+define('CORE_VALIDATOR_EC_NOT_DATETIME', 1006);
+define('CORE_VALIDATOR_EC_NOT_EMAIL', 1007);
+define('CORE_VALIDATOR_EC_NOT_IPV4', 1008);
+define('CORE_VALIDATOR_EC_NOT_DOMAIN', 1009);
+
 
 /*
  * 错误日志处理方式
@@ -26,7 +36,7 @@ define('ERROR_SAVE',	0x00000001);//存入日志缓冲
 define('ERROR_SHOW',	0x00000002);//自定义显示
 define('ERROR_LOG',		0x00000004);//error_log() 可记录到服务器，或者发送邮件
 define('EXCEPTION',		0x00000008);//异常方式
-define('LOGSYS',		0x00000010);//发送自定义日志系统
+define('LOGSYS',			0x00000010);//发送自定义日志系统
 
 class Error{
 	private static $errorContainer = array();
@@ -40,6 +50,15 @@ class Error{
 		CORE_BOOTSTRAP_EC_NO_CONTROLLER      		=> '无法找到控制器',
 		CORE_BOOTSTRAP_EC_CANNOT_REGISTRY      	=> '无法从注册数据中取出当前键',
 		CORE_CONTROLLER_EC_NO_ACTION		      	=> '未找到行动',
+		CORE_VALIDATOR_EC_NOT_UINT		      		=> '验证的变量不是无符号整数',
+		CORE_VALIDATOR_EC_NOT_ARRAY		      		=> '验证的变量不是数组',
+		CORE_VALIDATOR_EC_NOT_SINT		      		=> '验证的变量不是有符号整数',
+		CORE_VALIDATOR_EC_NOT_FLOAT		      		=> '验证的变量不是浮点数',
+		CORE_VALIDATOR_EC_NOT_BOOL		      		=> '验证的变量不是布尔值',
+		CORE_VALIDATOR_EC_NOT_DATETIME		      => '验证的变量不是有效日期格式',
+		CORE_VALIDATOR_EC_NOT_EMAIL		      		=> '验证的变量不是邮件地址',
+		CORE_VALIDATOR_EC_NOT_IPV4		      		=> '验证的变量不是IPV4',
+		CORE_VALIDATOR_EC_NOT_DOMAIN		      	=> '验证的变量不是域名',
 	);
 	
 	/*

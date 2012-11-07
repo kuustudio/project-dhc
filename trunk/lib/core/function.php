@@ -7,4 +7,10 @@ function dump($mix){
     echo '</pre>';
 }
 
+function noslashes($s) {
+  if(!get_magic_quotes_gpc())
+    return $s;
+  return stripslashes($s);
+}
+
 
