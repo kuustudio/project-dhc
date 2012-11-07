@@ -18,5 +18,7 @@ return array(
     
     'cache_start'           => false,
     'default_cache_backend' => 'memory',
+
+    'map_path'              => DHC_CONF.'map'.DS,
     
 );
