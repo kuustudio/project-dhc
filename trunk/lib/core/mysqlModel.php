@@ -15,7 +15,7 @@ class mysqlModel implements Imodel{
     private $_validateMap;
 
     public function init(){
-        
+        $this->_db = mysql::init($connectionstring,$database);
     }
 
     public function validator(){

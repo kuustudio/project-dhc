@@ -29,6 +29,9 @@ define('CORE_VALIDATOR_EC_NOT_IPV4', 1008);
 define('CORE_VALIDATOR_EC_NOT_DOMAIN', 1009);
 
 define('CORE_DB_MYSQL_EC_NO_CONNECT', 1101);
+define('CORE_DB_MYSQL_EC_NON_SCALAR', 1102);
+define('CORE_DB_MYSQL_EC_SQL_QUERY_PARAMETER_MISSING', 1103);
+define('CORE_DB_MYSQL_EC_EXECUTE_FAILED', 1104);
 
 /*
  * 错误日志处理方式
@@ -61,7 +64,10 @@ class Error{
 		CORE_VALIDATOR_EC_NOT_IPV4		      		=> '验证的变量不是IPV4',
 		CORE_VALIDATOR_EC_NOT_DOMAIN		      	=> '验证的变量不是域名',
 
-        CORE_DB_MYSQL_EC_NO_CONNECT		      	    => '连接资源不存在',
+    CORE_DB_MYSQL_EC_NO_CONNECT		      	  => '连接资源不存在',
+    CORE_DB_MYSQL_EC_NON_SCALAR		      	  => '参数不是标量',
+    CORE_DB_MYSQL_EC_SQL_QUERY_PARAMETER_MISSING	=> '参数转换无效',
+    CORE_DB_MYSQL_EC_EXECUTE_FAILED		      => '数据库执行失败',
 	);
 	
 	/*
