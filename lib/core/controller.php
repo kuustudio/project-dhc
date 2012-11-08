@@ -29,6 +29,8 @@ class controller{
                     Error::logError(CORE_CONTROLLER_EC_NO_ACTION,array('file'=>__FILE__,'line'=>__LINE__));
             }
         }
+
+        
     }
 
     /* 

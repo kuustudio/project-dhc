@@ -22,9 +22,31 @@ return array(
     'map_path'              => DHC_CONF.'map'.DS,
     
     //数据库连接字串配置(考虑多个数据库，主从以及读写分离)
-    'mysql'                 => array(
-                                    'connectionString' => 'mysql://root:root@192.168.2.80:3306',
-                                    'database' => 'tripbe_mobile'
-                               ),
+    'mysql'                 =>  array(
+                                    'master'=>  array(
+                                                    'one'=> array(
+                                                                'connectionString' => 'mysql://root:root@192.168.2.80:3306',
+                                                                'database' => 'tripbe_mobile'
+                                                            ),
+                                                    'two'=> array(
+                                                                'connectionString' => 'mysql://root:root@192.168.2.80:3306',
+                                                                'database' => 'tripbe_mobile'
+                                                            ),
+                                                ),
+                                    'slave' =>  array(
+                                                    'one'=> array(
+                                                                'connectionString' => 'mysql://root:root@192.168.2.80:3306',
+                                                                'database' => 'tripbe_mobile'
+                                                            ),
+                                                    'two'=> array(
+                                                                'connectionString' => 'mysql://root:root@192.168.2.80:3306',
+                                                                'database' => 'tripbe_mobile'
+                                                            ),
+                                                    'three'=> array(
+                                                                'connectionString' => 'mysql://root:root@192.168.2.80:3306',
+                                                                'database' => 'tripbe_mobile'
+                                                            ),
+                                                )
+                                ),
 
 );
