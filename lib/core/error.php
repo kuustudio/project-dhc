@@ -28,6 +28,7 @@ define('CORE_VALIDATOR_EC_NOT_EMAIL', 1007);
 define('CORE_VALIDATOR_EC_NOT_IPV4', 1008);
 define('CORE_VALIDATOR_EC_NOT_DOMAIN', 1009);
 
+define('CORE_DB_MYSQL_EC_NO_CONNECT', 1101);
 
 /*
  * 错误日志处理方式
@@ -59,6 +60,8 @@ class Error{
 		CORE_VALIDATOR_EC_NOT_EMAIL		      		=> '验证的变量不是邮件地址',
 		CORE_VALIDATOR_EC_NOT_IPV4		      		=> '验证的变量不是IPV4',
 		CORE_VALIDATOR_EC_NOT_DOMAIN		      	=> '验证的变量不是域名',
+
+        CORE_DB_MYSQL_EC_NO_CONNECT		      	    => '连接资源不存在',
 	);
 	
 	/*
