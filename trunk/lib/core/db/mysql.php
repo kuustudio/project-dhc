@@ -7,8 +7,9 @@ class mysql implements Idb{
 
     public static function init($connectionstring,$database){
         if($this->_instance == null){
-            $this->_instance = new mysql();
+            $this->_instance = DHC::getSingleton('mysql');
         }
+
         if($this->_conn == null){
 			$s = parse_url($connectionstring);
 			$this->_conn = mysql_connect($s['host'].':'.$s['port'], $s['user'], $s['pass'], true, MYSQL_CLIENT_SSL | MYSQL_CLIENT_COMPRESS);
@@ -19,32 +20,32 @@ class mysql implements Idb{
         return $this->_instance;
     }
 
-    public function query($sql, $conn){
+    public function query($sql, $conn, $search = array(), $replace = array()){
         if (!is_resource($conn)) {    // 
-            Error::logError(CORE_DB_MYSQL_EC_NO_CONNECT,array('file'=>__FILE__,'line'=>__LINE__));
+            Error::logError(CORE_DB_MYSQL_EC_NO_CONNECT, EXCEPTION);
             return false;
         }
-        $argv = func_get_args();
-        $argc = count($argv);
-        if($argc > 2){
-            for ($x=2; $x<$argc; $x++) {                 
-              if (is_string($argv[$x])) {             
-                $sql_str = $argv[$x];
+        $argc = count($replace);
+        if($argc){
+            for ($x=0; $x<$argc; $x++) {                 
+              if (is_string($replace[$x])) {             
+                $sql_str = $replace[$x];
                 $sql_str = $this->conn_real_escape_string($sql_str, $conn); 
                 $sql_params[] = '\''.$sql_str.'\'';    
-              } elseif (is_scalar($argv[$x])) {        
-                $sql_params[] = $argv[$x];             
+              } elseif (is_scalar($replace[$x])) {        
+                $sql_params[] = $replace[$x];             
               } else {                                  
-                $bad_param = str_replace("\n", '', var_export($argv[$x], true));
-                Error::logError(CORE_DB_MYSQL_EC_NON_SCALAR,array('file'=>__FILE__,'line'=>__LINE__,"SQL_query_parameter"=>$argv[$x],'var'=>$bad_param,'sql'=>$sql));  
+                $bad_param = str_replace("\n", '', var_export($replace[$x], true));
+                Error::logError(CORE_DB_MYSQL_EC_NON_SCALAR, EXCEPTION, array('SQL_query_parameter'=>$replace[$x],'var'=>$bad_param,'sql'=>$sql));  
                 return false;
               }
             }
 
-            $true_sql = vsprintf($sql, $sql_params);    
+            //$true_sql = vsprintf($sql, $sql_params);
+            $true_sql = str_replace($search, $replace, $sql);
 
             if ($true_sql=='') {  
-                Error::logError(CORE_DB_MYSQL_EC_SQL_QUERY_PARAMETER_MISSING,array('file'=>__FILE__,'line'=>__LINE__,'sql'=>$sql));
+                Error::logError(CORE_DB_MYSQL_EC_SQL_QUERY_PARAMETER_MISSING, EXCEPTION, array('sql'=>$sql));
             }
         }else{
             $true_sql = str_replace('%%', '%', $sql);
@@ -67,15 +68,15 @@ class mysql implements Idb{
         return mysql_insert_id();
     }
 
-    public function execute($sql){
-        return $this->query($sql, $this->_conn) or Error::logError(CORE_DB_MYSQL_EC_EXECUTE_FAILED,array('file'=>__FILE__,'line'=>__LINE__,'sql'=>$sql,'mysql_error'=>mysql_error())) or die();
+    public function execute($sql, $search = array(), $argv = array()){
+        return $this->query($sql, $this->_conn, $search, $argv) or Error::logError(CORE_DB_MYSQL_EC_EXECUTE_FAILED, EXCEPTION, array('sql'=>$sql,'mysql_error'=>mysql_error())) or die();
     }
 
     /**
     * @reutrn Assoc
     */
-    public static function findOne($sql){
-        $query = $this->query($sql, $this->_conn);
+    public static function findOne($sql, $search = array(), $argv = array()){
+        $query = $this->query($sql, $this->_conn, $search, $argv);
         while($row = mysql_fetch_assoc($query)) {
             return $row;
         }
@@ -84,12 +85,12 @@ class mysql implements Idb{
     /**
     * @reutrn Array(Assoc,)
     */
-    public static function find($sql,$fetch_type = MYSQL_ASSOC){
-        $query = $this->query($sql, $this->_conn);
+    public static function find($sql, $search = array(), $argv = array(), $fetch_type = MYSQL_ASSOC){
+        $query = $this->query($sql, $this->_conn, $search, $argv);
         $rows = array();
         $err = mysql_error();
         if($err != null){
-            Error::logError(CORE_DB_MYSQL_EC_EXECUTE_FAILED,array('file'=>__FILE__,'line'=>__LINE__,'sql'=>$sql,'mysql_error'=>mysql_error()));
+            Error::logError(CORE_DB_MYSQL_EC_EXECUTE_FAILED, EXCEPTION, array('sql'=>$sql,'mysql_error'=>mysql_error()));
         }
         while($row = mysql_fetch_array($query, $fetch_type)) {
             $rows[] = $row;

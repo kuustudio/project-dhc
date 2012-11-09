@@ -20,31 +20,32 @@ return array(
     'default_cache_backend' => 'memory',
 
     'map_path'              => DHC_CONF.'map'.DS,
+    'db_write_validate'     => true,
     
     //数据库连接字串配置(考虑多个数据库，主从以及读写分离)
     'mysql'                 =>  array(
                                     'master'=>  array(
                                                     'one'=> array(
-                                                                'connectionString' => 'mysql://root:root@192.168.2.80:3306',
-                                                                'database' => 'tripbe_mobile'
+                                                                'connectionString' => 'mysql://root:qeephp@localhost:3306',
+                                                                'database' => 'dhc_demp'
                                                             ),
                                                     'two'=> array(
-                                                                'connectionString' => 'mysql://root:root@192.168.2.80:3306',
-                                                                'database' => 'tripbe_mobile'
+                                                                'connectionString' => 'mysql://root:qeephp@localhost:3306',
+                                                                'database' => 'dhc_demp'
                                                             ),
                                                 ),
                                     'slave' =>  array(
                                                     'one'=> array(
-                                                                'connectionString' => 'mysql://root:root@192.168.2.80:3306',
-                                                                'database' => 'tripbe_mobile'
+                                                                'connectionString' => 'mysql://root:qeephp@localhost:3306',
+                                                                'database' => 'dhc_demp'
                                                             ),
                                                     'two'=> array(
-                                                                'connectionString' => 'mysql://root:root@192.168.2.80:3306',
-                                                                'database' => 'tripbe_mobile'
+                                                                'connectionString' => 'mysql://root:qeephp@localhost:3306',
+                                                                'database' => 'dhc_demp'
                                                             ),
                                                     'three'=> array(
-                                                                'connectionString' => 'mysql://root:root@192.168.2.80:3306',
-                                                                'database' => 'tripbe_mobile'
+                                                                'connectionString' => 'mysql://root:qeephp@localhost:3306',
+                                                                'database' => 'dhc_demp'
                                                             ),
                                                 )
                                 ),

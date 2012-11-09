@@ -32,6 +32,8 @@ class DHC{
         //self::$_route = include_once(DHC_CONF.'route.php');
         self::$_autoload = include_once(DHC_CONF.'autoload_class.php');
         //self::$_error = include_once(DHC_CONF.'errors.php');
+        set_error_handler(array('DHC','_error'), E_ALL);
+        set_exception_handler(array('DHC','_exception'));
         self::$_input = new DHCInput(array(
 			'server'		=> array(
                 'HTTP_USER_AGENT'   =>  array(
@@ -64,10 +66,11 @@ class DHC{
                 $controller->run(self::getConfig('action'));
                 
             }else{
-                Error::logError(CORE_BOOTSTRAP_EC_NO_CONTROLLER,array('file'=>__FILE__,'line'=>__LINE__));
+                Error::logError(CORE_BOOTSTRAP_EC_NO_CONTROLLER, EXCEPTION);
             }
+
         }else{
-            Error::logError(CORE_BOOTSTRAP_EC_NO_PATH_ARRAY,array('file'=>__FILE__,'line'=>__LINE__));
+            Error::logError(CORE_BOOTSTRAP_EC_NO_PATH_ARRAY, EXCEPTION);
         }
 
     }
@@ -94,7 +97,7 @@ class DHC{
         if(isset(self::$_config[$key]))
             return self::$_config[$key];
         else
-            Error::logError(CORE_BOOTSTRAP_EC_CONFIG_NOT_EXISTS,array('file'=>__FILE__,'line'=>__LINE__));
+            Error::logError(CORE_BOOTSTRAP_EC_CONFIG_NOT_EXISTS, EXCEPTION);
     } 
     
     public static function setConfig($key, $value){
@@ -108,12 +111,12 @@ class DHC{
     public static function register($key, $object){
         if (!is_object($object))
         {
-            Error::logError(CORE_BOOTSTRAP_EC_REGISTER_NOT_OBJECT,array('file'=>__FILE__,'line'=>__LINE__));
+            Error::logError(CORE_BOOTSTRAP_EC_REGISTER_NOT_OBJECT, EXCEPTION);
         }
 		if(!isset(self::$_object[$key])){
 			self::$_object[$key] = $object;
 		}else{
-            Error::logError(CORE_BOOTSTRAP_EC_REGISTER_HAS_KEY,array('file'=>__FILE__,'line'=>__LINE__));
+            Error::logError(CORE_BOOTSTRAP_EC_REGISTER_HAS_KEY, EXCEPTION);
 		}
     }
 
@@ -121,7 +124,7 @@ class DHC{
         if (isset(self::$_object[$key]) && is_object(self::$_object[$key])) {
             return self::$_object[$key];
         }else{
-            Error::logError(CORE_BOOTSTRAP_EC_CANNOT_REGISTRY,array('file'=>__FILE__,'line'=>__LINE__));
+            Error::logError(CORE_BOOTSTRAP_EC_CANNOT_REGISTRY, EXCEPTION);
         }
     }
     
@@ -138,6 +141,33 @@ class DHC{
     //需要加载多语言
     public static function __($str){
         return $str;
+    }
+
+
+    public static function _error($errno, $errstr, $errfile, $errline){
+        Error::logError(
+            CORE_BOOTSTRAP_EC_SYSTEM_ERROR,
+            ERROR_SHOW,
+            array(
+                'level'     =>  $errno,
+                'message'   =>  $errstr,
+                'file'      =>  $errfile,
+                'line'      =>  $errline
+            )
+        );
+    }
+
+    public static function _exception($e){
+        Error::logError(
+            CORE_BOOTSTRAP_EC_USER_EXCEPTION,
+            ERROR_SHOW,
+            array(
+                'code'      =>  $e->getCode(),
+                'message'   =>  $e->getMessage(),
+                'file'      =>  $e->getFile(),
+                'line'      =>  $e->getLine()
+            )
+        );
     }
 }
 

@@ -26,7 +26,7 @@ class controller{
                     $return = $this->$actionName();
                 }  
                 else
-                    Error::logError(CORE_CONTROLLER_EC_NO_ACTION,array('file'=>__FILE__,'line'=>__LINE__));
+                    Error::logError(CORE_CONTROLLER_EC_NO_ACTION, EXCEPTION);
             }
         }
 
