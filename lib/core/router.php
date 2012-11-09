@@ -78,7 +78,7 @@ class DHCRouterUri{
             if(isset($output[DHC::getConfig('action_name')])) $container['action'] = $output[DHC::getConfig('action_name')];
             return $container;
         }else{
-            Error::logError(CORE_INPUT_EC_NO_URL_METHOD,array('file'=>__FILE__,'line'=>__LINE__));
+            Error::logError(CORE_INPUT_EC_NO_URL_METHOD, EXCEPTION);
         }
     }
 
@@ -114,10 +114,10 @@ class DHCRouterUri{
                 $url .= '&'.http_build_query($option);
                 return $url;
             }else{
-                Error::logError(CORE_INPUT_EC_NO_URL_METHOD,array('file'=>__FILE__,'line'=>__LINE__));
+                Error::logError(CORE_ROUTER_EC_NO_URL_METHOD, EXCEPTION);
             }
         }else{
-            Error::logError(CORE_ROUTER_EC_UNABLE_URL,array('file'=>__FILE__,'line'=>__LINE__));
+            Error::logError(CORE_ROUTER_EC_UNABLE_URL, EXCEPTION);
         }
     }
 }

@@ -42,6 +42,31 @@ class validator{
   * 2，数据库字段验证
   * 3，也可以独立使用
   */
+
+  /**
+   * 类型监测函数识别数组
+   *
+   * @var array
+   */
+  public static $function_array = array(
+    PARAM_STRING  => 'get_param_string',
+    PARAM_UINT    => 'get_param_uint',
+    PARAM_SINT    => 'get_param_sint',
+    PARAM_FLOAT   => 'get_param_float',
+    PARAM_BOOL    => 'get_param_bool',
+    PARAM_HEX     => 'get_param_hex',
+    PARAM_EXISTS  => 'get_param_exists',
+    PARAM_ARRAY   => 'get_param_array',
+    PARAM_RAW     => 'get_param_raw',
+    PARAM_HASHVAR => 'get_param_hashvar',
+    PARAM_ERROR   => 'get_param_error',
+    PARAM_NULLOK  => 'get_param_null',
+    PARAM_DATETIME=> 'get_param_datetime',
+    PARAM_EMAIL   => 'get_param_email',
+    PARAM_IPV4    => 'get_param_ipv4',
+    PARAM_DOMAIN  => 'get_param_domain',
+
+  );
   public static function get_param_exists($value){
     return isset($value);
   }
@@ -68,7 +93,7 @@ class validator{
       }
       return $arr_r;
     }else{
-      Error::logError(CORE_VALIDATOR_EC_NOT_ARRAY,array('file'=>__FILE__,'line'=>__LINE__));
+      Error::logError(CORE_VALIDATOR_EC_NOT_ARRAY, EXCEPTION);
     }
   }
 
@@ -89,7 +114,7 @@ class validator{
       if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.0') !== false && preg_match('/[0-9]+[0-9a-f]{8}$/', $value) == 1) {
         exit;// 处理ie7 beta2问题
       }
-      Error::logError(CORE_VALIDATOR_EC_NOT_UINT,array('file'=>__FILE__,'line'=>__LINE__));
+      Error::logError(CORE_VALIDATOR_EC_NOT_UINT, EXCEPTION);
     }
   }
 
@@ -104,7 +129,7 @@ class validator{
         if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.0') !== false && preg_match('/[0-9]+[0-9a-f]{8}$/', $value) == 1) {
           exit;// 处理ie7 beta2问题
         }
-        Error::logError(CORE_VALIDATOR_EC_NOT_SINT,array('file'=>__FILE__,'line'=>__LINE__));
+        Error::logError(CORE_VALIDATOR_EC_NOT_SINT, EXCEPTION);
       }
     }
   }
@@ -113,7 +138,7 @@ class validator{
     if(preg_match('/^[0-9\.]*$/i', $value)){
         return floatval($value);
     }else{
-        Error::logError(CORE_VALIDATOR_EC_NOT_FLOAT,array('file'=>__FILE__,'line'=>__LINE__));
+        Error::logError(CORE_VALIDATOR_EC_NOT_FLOAT, EXCEPTION);
     }
   }
 
@@ -135,7 +160,7 @@ class validator{
         return false;
         break;
       default:
-        Error::logError(CORE_VALIDATOR_EC_NOT_BOOL,array('file'=>__FILE__,'line'=>__LINE__));
+        Error::logError(CORE_VALIDATOR_EC_NOT_BOOL, EXCEPTION);
         break;
     } 
   }
@@ -144,7 +169,7 @@ class validator{
     if(ctype_xdigit($value)){
       return intval(hexdec($value));
     }else{
-      Error::logError(CORE_VALIDATOR_EC_NOT_HEX,array('file'=>__FILE__,'line'=>__LINE__));
+      Error::logError(CORE_VALIDATOR_EC_NOT_HEX, EXCEPTION);
     }
   }
 
@@ -188,14 +213,14 @@ class validator{
       $test = @strtotime($str);
       if($test !== -1 && $test !== false)
           return $test;
-      Error::logError(CORE_VALIDATOR_EC_NOT_DATETIME,array('file'=>__FILE__,'line'=>__LINE__));
+      Error::logError(CORE_VALIDATOR_EC_NOT_DATETIME, EXCEPTION);
   }
 
   public static function get_param_email($str){
       self::get_param_string($str, PARAM_STRING);
       if(preg_match('/^[A-Za-z0-9]+([._\-\+]*[A-Za-z0-9]+)*@([A-Za-z0-9]+[-A-Za-z0-9]*[A-Za-z0-9]+\.)+[A-Za-z0-9]+$/', $str)) 
           return $str;
-      Error::logError(CORE_VALIDATOR_EC_NOT_EMAIL,array('file'=>__FILE__,'line'=>__LINE__));
+      Error::logError(CORE_VALIDATOR_EC_NOT_EMAIL, EXCEPTION);
   }
 
   public static function get_param_ipv4($str){
@@ -203,13 +228,13 @@ class validator{
       $test = ip2long($str);
       if($test !== -1 && $test !== false)
           return $test;
-      Error::logError(CORE_VALIDATOR_EC_NOT_IPV4,array('file'=>__FILE__,'line'=>__LINE__));
+      Error::logError(CORE_VALIDATOR_EC_NOT_IPV4, EXCEPTION);
   }
 
   public static function get_param_domain($str){
       self::get_param_string($str, PARAM_STRING);
       if(preg_match('/[a-z0-9\.]+/i', $str))
           return $str;
-      Error::logError(CORE_VALIDATOR_EC_NOT_DOMAIN,array('file'=>__FILE__,'line'=>__LINE__));
+      Error::logError(CORE_VALIDATOR_EC_NOT_DOMAIN, EXCEPTION);
   }
 }

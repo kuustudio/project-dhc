@@ -8,7 +8,7 @@ define('API_EC_SUCCESS', 0);
  * 系统框架核心错误
  *
  */
-define('CORE_INPUT_EC_NO_URL_METHOD', 100); //非法的url_method
+define('CORE_ROUTER_EC_NO_URL_METHOD', 100); //非法的url_method
 define('CORE_ROUTER_EC_UNABLE_URL', 200); //无法形成URL
 define('CORE_CONTROLLER_EC_NO_ACTION', 300);
 define('CORE_BOOTSTRAP_EC_CONFIG_NOT_EXISTS', 1);
@@ -17,6 +17,8 @@ define('CORE_BOOTSTRAP_EC_REGISTER_HAS_KEY', 3);
 define('CORE_BOOTSTRAP_EC_NO_PATH_ARRAY', 4);
 define('CORE_BOOTSTRAP_EC_NO_CONTROLLER', 5);
 define('CORE_BOOTSTRAP_EC_CANNOT_REGISTRY', 6);
+define('CORE_BOOTSTRAP_EC_SYSTEM_ERROR', 7);
+define('CORE_BOOTSTRAP_EC_USER_EXCEPTION', 8);
 
 define('CORE_VALIDATOR_EC_NOT_UINT', 1001);
 define('CORE_VALIDATOR_EC_NOT_ARRAY', 1002);
@@ -45,7 +47,7 @@ define('LOGSYS',			0x00000010);//发送自定义日志系统
 class Error{
 	private static $errorContainer = array();
 	private static $errorExplain = array(
-		CORE_INPUT_EC_NO_URL_METHOD             => '非法的url_method',
+		CORE_ROUTER_EC_NO_URL_METHOD            => '非法的url_method',
 		CORE_ROUTER_EC_UNABLE_URL             	=> '无法形成URL',
 		CORE_BOOTSTRAP_EC_CONFIG_NOT_EXISTS     => '配置项不存在',
 		CORE_BOOTSTRAP_EC_REGISTER_NOT_OBJECT   => '注册的不是对象',
@@ -53,6 +55,8 @@ class Error{
 		CORE_BOOTSTRAP_EC_NO_PATH_ARRAY      		=> '无法获取路径数组',
 		CORE_BOOTSTRAP_EC_NO_CONTROLLER      		=> '无法找到控制器',
 		CORE_BOOTSTRAP_EC_CANNOT_REGISTRY      	=> '无法从注册数据中取出当前键',
+		CORE_BOOTSTRAP_EC_SYSTEM_ERROR		      => 'PHP脚本错误',
+		CORE_BOOTSTRAP_EC_USER_EXCEPTION		    => '用户异常',
 		CORE_CONTROLLER_EC_NO_ACTION		      	=> '未找到行动',
 		CORE_VALIDATOR_EC_NOT_UINT		      		=> '验证的变量不是无符号整数',
 		CORE_VALIDATOR_EC_NOT_ARRAY		      		=> '验证的变量不是数组',
@@ -85,9 +89,9 @@ class Error{
 	* $ext为$method的附加选项
 	*/
 	public static function logError(
-															$code, 
+															$code,
+															$method = EXCEPTION,
 															$option,
-															$method = ERROR_SHOW, 
 															$ext = array(
 																	'format'	=> true
 															)

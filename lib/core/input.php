@@ -10,25 +10,6 @@ class DHCInput{
 	 */
 	var $pathinfo				= '';
 	/**
-	 * 类型监测函数识别数组
-	 *
-	 * @var array
-	 */
-	static $input_check_array = array(
-		PARAM_STRING	=> 'get_param_string',
-		PARAM_UINT		=> 'get_param_uint',
-		PARAM_SINT		=> 'get_param_sint',
-		PARAM_FLOAT		=> 'get_param_float',
-		PARAM_BOOL		=> 'get_param_bool',
-		PARAM_HEX			=> 'get_param_hex',
-		PARAM_EXISTS	=> 'get_param_exists',
-		PARAM_ARRAY		=> 'get_param_array',
-		PARAM_RAW			=> 'get_param_raw',
-		PARAM_HASHVAR	=> 'get_param_hashvar',
-		PARAM_ERROR		=> 'get_param_error',
-		PARAM_NULLOK	=> 'get_param_null'
-	);
-	/**
 	 * 通过类型安全监测的$_GET
 	 *
 	 * @var array
@@ -183,7 +164,7 @@ class DHCInput{
 	}
 
 	function get_param_by_type($value,$funckey,$argv){
-		$func = self::$input_check_array[$funckey];
+		$func = validator::$function_array[$funckey];
 		if(empty($argv)) return validator::$func($value);
 		return $func($value,$argv);
 	}
