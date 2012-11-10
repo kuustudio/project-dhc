@@ -27,6 +27,7 @@ define('PARAM_DATETIME',  0x00100000); // DATETIME 类型
 define('PARAM_EMAIL',     0x00200000); // EMAIL 类型
 define('PARAM_IPV4',      0x00400000); // ipv4 类型
 define('PARAM_DOMAIN',    0x00800000); // 域名类型
+define('PARAM_AUTO_INCREMENT',    0x01000000); // 自增字段
 
 // 类型域
 define('PARAM_TEXT',    PARAM_STRING ^ PARAM_STRIPTAGS);
