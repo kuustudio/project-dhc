@@ -15,7 +15,7 @@ class controller{
         if($this->beforeAction()){
             $actions = $this->actions();
             if(isset($actions[$actionName])){
-                include_once($actions[$actionName]);
+                include($actions[$actionName]);
                 $action = DHC::getSingleton(
                     self::getConfig('app').'_Controller_'.self::getConfig('controller').'_Action_'.$actionName
                 );

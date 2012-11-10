@@ -9,12 +9,12 @@ define('DHC_CONF', DHC_ROOT.'conf'.DS);
 define('DHC_APP', DHC_ROOT.'app'.DS);
 set_include_path(get_include_path().PS.DHC_LIB.PS.DHC_CONF);
 
-include_once(DHC_LIB.'core/function.php');
-include_once(DHC_LIB.'core/error.php');
-include_once(DHC_LIB.'core/exception.php');
-include_once(DHC_LIB.'core/validator.php');
-include_once(DHC_LIB.'core/input.php');
-include_once(DHC_LIB.'core/router.php');
+include(DHC_LIB.'core/function.php');
+include(DHC_LIB.'core/error.php');
+include(DHC_LIB.'core/exception.php');
+include(DHC_LIB.'core/validator.php');
+include(DHC_LIB.'core/input.php');
+include(DHC_LIB.'core/router.php');
 
 class DHC{
     public static $_config = array();
@@ -28,10 +28,10 @@ class DHC{
     
     private static function init(){
         spl_autoload_register('self::autoload');
-        self::$_config = include_once(DHC_CONF.'config.php');
-        //self::$_route = include_once(DHC_CONF.'route.php');
-        self::$_autoload = include_once(DHC_CONF.'autoload_class.php');
-        //self::$_error = include_once(DHC_CONF.'errors.php');
+        self::$_config = include(DHC_CONF.'config.php');
+        //self::$_route = include(DHC_CONF.'route.php');
+        self::$_autoload = include(DHC_CONF.'autoload_class.php');
+        //self::$_error = include(DHC_CONF.'errors.php');
         set_error_handler(array('DHC','_error'), E_ALL);
         set_exception_handler(array('DHC','_exception'));
         self::$_input = new DHCInput(array(
@@ -49,7 +49,7 @@ class DHC{
                                         )
             )
 		));
-        self::$_router = new DHCRouterUri(DHC::getConfig('url_method'), include_once(DHC_CONF.'route.php'));
+        self::$_router = new DHCRouterUri(DHC::getConfig('url_method'), include(DHC_CONF.'route.php'));
 
         if($pathArray = self::$_router->parse_uri(self::$_input->pathinfo())){
             self::setConfig('app', ucfirst(strtolower($pathArray['app'])));
@@ -58,7 +58,7 @@ class DHC{
             $controllerfile = DHC_APP . self::getConfig('app') .'/Controller/'. self::getConfig('controller') .'.php';
             //echo $controllerfile;
             if(file_exists($controllerfile)){
-                include_once($controllerfile);
+                include($controllerfile);
                 $controller = self::getSingleton(
                     self::getConfig('app').'_Controller_'.self::getConfig('controller')
                 );
@@ -132,9 +132,9 @@ class DHC{
     //自动加载类 
     private static function autoload($classname){
         if(isset(self::$_autoload[$classname])){
-            if(is_file(self::$_autoload[$classname])) include_once(self::$_autoload[$classname]);
+            if(is_file(self::$_autoload[$classname])) include(self::$_autoload[$classname]);
         }else{
-            include_once($classname);
+            include($classname);
         }
     }
     

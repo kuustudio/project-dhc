@@ -21,6 +21,7 @@ return array(
 
     'map_path'              => DHC_CONF.'map'.DS,
     'db_write_validate'     => true,
+    'db_where_validate'     => true,
     
     //数据库连接字串配置(考虑多个数据库，主从以及读写分离)
     'mysql'                 =>  array(
