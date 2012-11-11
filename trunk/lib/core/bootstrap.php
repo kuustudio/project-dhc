@@ -9,6 +9,7 @@ define('DHC_CONF', DHC_ROOT.'conf'.DS);
 define('DHC_APP', DHC_ROOT.'app'.DS);
 set_include_path(get_include_path().PS.DHC_LIB.PS.DHC_CONF);
 
+include(DHC_LIB.'core/interface.php');
 include(DHC_LIB.'core/function.php');
 include(DHC_LIB.'core/error.php');
 include(DHC_LIB.'core/exception.php');
@@ -88,7 +89,7 @@ class DHC{
     public static function getSingleton($classname){
         if(!self::isRegistered($classname)){
             if(class_exists($classname))
-                self::register($classname,new $classname($classname));
+                self::register($classname,new $classname());
         }
         return self::registry($classname);
     }
@@ -133,9 +134,19 @@ class DHC{
     private static function autoload($classname){
         if(isset(self::$_autoload[$classname])){
             if(is_file(self::$_autoload[$classname])) include(self::$_autoload[$classname]);
+        }elseif ($class_array = self::parse_class($classname)) {
+            include(DHC_APP.$class_array[0].DS.$class_array[1].DS.$class_array[2].'.php');
         }else{
             include($classname);
         }
+    }
+
+    //类路径解析
+    private static function parse_class($classname){
+        if(strpos($classname, '_')){
+            return explode('_', $classname);
+        }
+        return false;
     }
     
     //需要加载多语言

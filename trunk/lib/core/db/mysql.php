@@ -5,31 +5,30 @@ if (!defined('DHC_VERSION')) exit('Access is no allowed.');
 //规则 INSERT INTO TABLENAME (KEY1,KEY2...) VALUES ({@VALUE1},{@VALUE2},...);
 define('INSERT_STR', 'INSERT INTO `{table}` ({keys}) VALUES ({values})');
 define('UPDATE_STR', 'UPDATE `{table}` SET {sets} {where}');
-define('SELECT_STR', 'SELECT `{fields}` FROM {table} {where}');
+define('SELECT_STR', 'SELECT {fields} FROM `{table}` {where}');
 define('DELETE_STR', 'DELETE FROM `{table}` {where}');
 
 define('ORDER_BY_ASC', 1);
 define('ORDER_BY_DESC', -1);
 
+define('MYSQL_WHERE_SYMBOL', 'symbol');
+
 class mysql implements Idb{
-    private $_instance;
-    private $_conn;
-    private $_tableName;
+    private static $_conn;
+    private static $_tableName;
 
     public static function init($connectionstring,$database){
-        if($this->_instance == null){
-            $this->_instance = DHC::getSingleton('mysql');
-        }
-
-        if($this->_conn == null){
-			$s = parse_url($connectionstring);
-			$this->_conn = mysql_connect($s['host'].':'.$s['port'], $s['user'], $s['pass'], true, MYSQL_CLIENT_SSL | MYSQL_CLIENT_COMPRESS);
-			mysql_select_db($database, $this->_conn);
-			$this->query("SET character_set_connection=utf8, character_set_results=utf8, character_set_client=binary", $this->_conn);
-			$this->query("SET sql_mode = ''", $this->_conn);
+        if(self::$_conn == null){
+            try{
+                $s = parse_url($connectionstring);
+                self::$_conn = mysql_connect($s['host'].':'.$s['port'], $s['user'], $s['pass'], true);
+                mysql_select_db($database, self::$_conn);
+                self::query("SET character_set_connection=utf8, character_set_results=utf8, character_set_client=binary", self::$_conn);
+                self::query("SET sql_mode = ''", self::$_conn);
+            }catch(Exception $e){
+                Error::logError(CORE_MODEL_EC_DB_INIT_FAILED, EXCEPTION);
+            }
 		}
-
-        return $this->_instance;
     }
 
     private static $_order_by = array(
@@ -37,49 +36,59 @@ class mysql implements Idb{
                                     ORDER_BY_DESC   =>  'DESC'
                                 );
 
-    public function setTableName($tableName){
-        $this->_tableName = $tableName;
+    public static function setTableName($tableName){
+        self::$_tableName = $tableName;
     }
 
-    private function _makeKey($key){
+    private static function _makeKey($key){
         return '[@'.$key.']';
     }
 
-    private function _keyEqValue($key){
+    private static function _keyEqValue($key){
         return $key.'=[@'.$key.']';
     }
 
-    private function _order(){
-
+    private static function _where($where, & $whereKeyValue){
+        $_whereContainer = array();
+        foreach ($where as $key => $value_arr) {
+            $_whereContainer[] = $key.$value_arr['symbol'].'[@'.$key.']';
+            $whereKeyValue[$key] = $value_arr['value'];
+        }
+        return ' WHERE '.implode(' AND ',$_whereContainer);
     }
 
 
-    public function create($data){
+
+    public static function create($data){
         $keys = array_keys($data);
-        $search = array_map(array($this,'_makeKey'),$keys);
-        $sql = str_replace('{table}', $this->_tableName, INSERT_STR);
+        $search = array_map(array('self','_makeKey'),$keys);
+        $sql = str_replace('{table}', self::$_tableName, INSERT_STR);
         $sql = str_replace('{keys}', implode(',',$keys), $sql);
         $sql = str_replace('{values}', implode(',',$search), $sql);
-        if($this->execute($sql,$data))
-            return $this->insertId();
+        if(self::execute($sql,$data))
+            return self::insertId();
     }
 
     //默认情况下where只考虑and
-    public function update($data, $where = array()){
+    public static function update($data, $where = array()){
         $dataKeys = array_keys($data);
-        $whereKeys = array_keys($where);
-        $sql = str_replace('{table}', $this->_tableName, UPDATE_STR);
-        $sql = str_replace('{sets}', implode(',',array_map(array($this,'_keyEqValue'),$dataKeys)), $sql);
-        $sql = str_replace('{where}', implode(' AND ',array_map(array($this,'_keyEqValue'),$whereKeys)), $sql);
-        return $this->execute($sql,$data+$where);
+        $_where = array();
+        $whereSql = empty($where)?'':self::_where($where,$_where);
+        $sql = str_replace('{table}', self::$_tableName, UPDATE_STR);
+        $sql = str_replace('{sets}', implode(',',array_map(array('self','_keyEqValue'),$dataKeys)), $sql);
+        $sql = str_replace('{where}', $whereSql, $sql);
+        return self::execute($sql,$data+$_where);
     }
 
 
-    public function all($where = array(), $fields = '*', $sort = array(), $limit = array()){
-        $whereKeys = array_keys($where);
-        $sql = str_replace('{table}', $this->_tableName, SELECT_STR);
-        $sql = str_replace('{fields}', ($fields == '*')?'*':implode(',',$fields), $sql);
-        $sql = str_replace('{where}', empty($whereKeys)?'':implode(' AND ',array_map(array($this,'_keyEqValue'),$whereKeys)), $sql);
+    public static function all($where = array(), $fields = '*', $sort = array(), $limit = array(), $fetch_type = MYSQL_ASSOC){
+        $_where = array();
+        $whereSql = empty($where)?'':self::_where($where,$_where);
+        if($fields != '*')
+            $fields = implode(',',$fields);
+        $sql = str_replace('{table}', self::$_tableName, SELECT_STR);
+        $sql = str_replace('{fields}', $fields, $sql);
+        $sql = str_replace('{where}', $whereSql, $sql);
         if(!empty($sort)){
             $sql .= ' ORDER BY ';
             $sort_tmp = array();
@@ -94,10 +103,10 @@ class mysql implements Idb{
             else
                 $sql .= ' LIMIT '.$limit['offset'].','.$limit['length'];
         }
-        $query = $this->query($sql, $this->_conn, $where);
+        $query = self::query($sql, self::$_conn, $_where);
         $rows = array();
         if(!$query){
-            $this->_error($this->_conn);
+            self::_error($sql, self::$_conn);
         }
 
         while($row = mysql_fetch_array($query, $fetch_type)) {
@@ -106,20 +115,17 @@ class mysql implements Idb{
         return $rows;
     }
 
-    public function one($where = array(), $fields = '*'){
-        $rows = $this->all($where, $fields,array(),array('length'=>1));
-        return $rows[0];
-    }
 
-    public function delete($where = array()){
-        $whereKeys = array_keys($where);
-        $sql = str_replace('{table}', $this->_tableName, DELETE_STR);
-        $sql = str_replace('{where}', empty($whereKeys)?'':implode(' AND ',array_map(array($this,'_keyEqValue'),$whereKeys)), $sql);
-        return $this->execute($sql,$where);
+    public static function delete($where = array()){
+        $_where = array();
+        $whereSql = empty($where)?'':self::_where($where,$_where);
+        $sql = str_replace('{table}', self::$_tableName, DELETE_STR);
+        $sql = str_replace('{where}', $whereSql, $sql);
+        return self::execute($sql,$_where);
     }
 
    
-    public function query($sql, $conn, $replace = array()){
+    public static function query($sql, $conn, $replace = array()){
         if (!is_resource($conn)) {    // 
             Error::logError(CORE_DB_MYSQL_EC_NO_CONNECT, EXCEPTION);
             return false;
@@ -128,7 +134,7 @@ class mysql implements Idb{
         if($argc){
             foreach ($replace as $key => $value) {
                 if(is_string($value)){
-                    $sql = str_replace('[@'.$key.']', '\''.$this->conn_real_escape_string($value, $conn).'\'', $sql);
+                    $sql = str_replace('[@'.$key.']', '\''.self::conn_real_escape_string($value, $conn).'\'', $sql);
                 }elseif (is_scalar($value)) {
                     $sql = str_replace('[@'.$key.']', $value, $sql);
                 }else{
@@ -147,12 +153,12 @@ class mysql implements Idb{
         }
         $ret = @mysql_query($sql, $conn);
         if(!$ret){
-            $this->_error($conn);
+            self::_error($sql, $conn);
         }
         return $ret;
     }
 
-    private function conn_real_escape_string($str, $conn = NULL) {
+    private static function conn_real_escape_string($str, $conn = NULL) {
         if (!$conn) {
             $escaped = @mysql_real_escape_string($str);
             if (!$escaped) {
@@ -164,27 +170,27 @@ class mysql implements Idb{
         return mysql_real_escape_string($str, $conn);
     }
 
-    public function insertId(){
+    public static function insertId(){
         return mysql_insert_id();
     }
 
-    public function execute($sql, $argv = array()){
-        return $this->query($sql, $this->_conn, $argv) or $this->_error($this->_conn) or die();
+    public static function execute($sql, $argv = array()){
+        return self::query($sql, self::$_conn, $argv) or self::_error($sql, self::$_conn) or die();
     }
 
-    public function _q($sql){
+    public static function _q($sql){
         if (!is_resource($conn)) {    // 
             Error::logError(CORE_DB_MYSQL_EC_NO_CONNECT, EXCEPTION);
             return false;
         }
-        $ret = @mysql_query($sql, $this->conn);
+        $ret = @mysql_query($sql, self::conn);
         if(!$ret){
-            $this->_error($this->conn);
+            self::_error($sql, self::conn);
         }
         return $ret;
     }
 
-    private function _error($conn){
-        Error::logError(CORE_DB_MYSQL_EC_SYSTEM_ERROR, EXCEPTION, array('sql'=>$sql,'mysql_errno'=>mysql_errno($conn),'mysql_error'=>mysql_error($conn)));
+    private static function _error($sql, $conn){
+        Error::logError(CORE_DB_MYSQL_EC_SYSTEM_ERROR, ERROR_SHOW, array('sql'=>$sql,'mysql_errno'=>mysql_errno($conn),'mysql_error'=>mysql_error($conn)));
     } 
 }
