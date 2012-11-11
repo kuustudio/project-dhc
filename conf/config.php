@@ -28,25 +28,25 @@ return array(
                                     'master'=>  array(
                                                     'one'=> array(
                                                                 'connectionString' => 'mysql://root:qeephp@localhost:3306',
-                                                                'database' => 'dhc_demp'
+                                                                'database' => 'dhc_demo'
                                                             ),
                                                     'two'=> array(
                                                                 'connectionString' => 'mysql://root:qeephp@localhost:3306',
-                                                                'database' => 'dhc_demp'
+                                                                'database' => 'dhc_demo'
                                                             ),
                                                 ),
                                     'slave' =>  array(
                                                     'one'=> array(
                                                                 'connectionString' => 'mysql://root:qeephp@localhost:3306',
-                                                                'database' => 'dhc_demp'
+                                                                'database' => 'dhc_demo'
                                                             ),
                                                     'two'=> array(
                                                                 'connectionString' => 'mysql://root:qeephp@localhost:3306',
-                                                                'database' => 'dhc_demp'
+                                                                'database' => 'dhc_demo'
                                                             ),
                                                     'three'=> array(
                                                                 'connectionString' => 'mysql://root:qeephp@localhost:3306',
-                                                                'database' => 'dhc_demp'
+                                                                'database' => 'dhc_demo'
                                                             ),
                                                 )
                                 ),

@@ -6,12 +6,15 @@ if (!defined('DHC_VERSION')) exit('Access is no allowed.');
  * 调用map文件对数据库输入数据进行类型验证，
  * 一致性统一调度
  */
+define('DRIVERPATH', DHC_LIB.'core'.DS.'db'.DS);
 
 class model implements Imodel{
     //需要实现的接口函数
     //public function init(){}
     //public function validator(){}
     //public function validateAttribute($attrName, $typeName){}
+
+    private $_mapName;
 
     //数据库操作句柄
     private $_db;
@@ -28,29 +31,32 @@ class model implements Imodel{
     //用于验证的键值对
     private $_validateKeyMap = array();
 
+    const CREATE_TIME_FIELD = 'created';
 
-    const $mapPath      = DHC_CONF.'map'.DS;
-    const $driverPath   = DHC_LIB.'core'.DS.'db'.DS;
+    const UPDATE_TIME_FIELD = 'updated';
 
-    public function init($map_name){
-        list($this->_dbType, $this->_tableName, $this->_primary, $this->_validateKeyMap) = $this->_getMap($name);
-        $this->_db = $this->_dbFactory($this->_dbType);
-        $this->_db->setTableName($this->_tableName);
+    public function __construct(){
+        $map = $this->_getMap($this->_mapName);
+        $this->_dbType = $map['type'];
+        $this->_tableName = $map['table'];
+        $this->_primary = $map['primary'];
+        $this->_validateKeyMap = $map['field'];
+        $this->_dbFactory($this->_dbType);
+        call_user_func_array(array($this->_dbType, 'setTableName'), array('tableName'=>$this->_tableName));
+    }
+
+    public function setMapName($map_name){
+        $this->_mapName = $map_name;
     }
 
     private function _dbFactory($dbType){
-        $db = null;
         try{
-            include($this->$driverPath.$dbType.'.php');
+            include(DRIVERPATH.$dbType.'.php');
             $DSN = DHC::getConfig($dbType);
-            $db = {$dbType}::init($DSN['master']['one']['connectionstring'],$DSN['master']['one']['database']);
-        }catch($e){
+            $dbType::init($DSN['master']['one']['connectionString'],$DSN['master']['one']['database']);
+        }catch(exception $e){
             DHC::_exception($e);
         }
-        if(!$db){
-            Error::logError(CORE_MODEL_EC_DB_INIT_FAILED, EXCEPTION);
-        }
-        return $db;
     }
 
     private function _getMap($name){
@@ -58,17 +64,25 @@ class model implements Imodel{
     }
 
     //field所有都需要验证
-    public function validator($data){
-        $_dataContainer = array();
+    public function validator_data($data){
         $_data = array_intersect_key($data, $this->_validateKeyMap);
         foreach ($_data as $key => $value) {
-            $_dataContainer[$key] = $this->validateAtrribute($value, $this->_validateKeyMap[$key]);
+            $_data[$key] = $this->validateAtrribute($value, $this->_validateKeyMap[$key]);
         }
-        return $_dataContainer;
+        return $_data;
+    }
+    //field所有都需要验证
+    public function validator_where($where){
+        $_where = array_intersect_key($where, $this->_validateKeyMap);
+        foreach ($_where as $key => $value_arr) {
+            $_where[$key]['value'] = $this->validateAtrribute($value_arr['value'], $this->_validateKeyMap[$key]);
+        }
+        return $_where;
     }
 
     public function validateAtrribute($value, $typeName){
-        return {validator::$function_array[$typeName]}($value);
+        $func = validator::$function_array[$typeName];
+        return validator::$func($value);
     }
 
     public function create($data){
@@ -76,9 +90,10 @@ class model implements Imodel{
         if(isset($data[$this->_primary['name']]) && isset($data[$this->_primary['auto_increment']]) && $data[$this->_primary['auto_increment']] == true)
             unset($data[$this->_primary['name']]);
         if(DHC::getConfig('db_write_validate')){
-           $data = $this->validator($data);
+           $data = $this->validator_data($data);
         }
-        call_user_func_array(array($this->_db, 'create'), array('data'=>$data));
+        $this->_setTime(self::CREATE_TIME_FIELD, $data);
+        call_user_func_array(array($this->_dbType, 'create'), array('data'=>$data));
     }
 
     public function update($data, $where = array()){
@@ -86,37 +101,42 @@ class model implements Imodel{
         if(isset($data[$this->_primary['name']]) && isset($data[$this->_primary['auto_increment']]) && $data[$this->_primary['auto_increment']] == true)
             unset($data[$this->_primary['name']]);
         if(DHC::getConfig('db_write_validate')){
-           $data = $this->validator($data);
+           $data = $this->validator_data($data);
         }
+        $this->_setTime(self::UPDATE_TIME_FIELD, $data);
         if (DHC::getConfig('db_where_validate') && !$where) {
-            $where = $this->validator($where);
+            $where = $this->validator_where($where);
         }
-        call_user_func_array(array($this->_db, 'update'), array('data'=>$data,'where'=>$where));
+        call_user_func_array(array($this->_dbType, 'update'), array('data'=>$data,'where'=>$where));
     }
 
     //$where格式 array('key1'=>'value1',...);
     //$fields格式 array('value1','value2',...);
     //$sort格式 array('key1'=>1,'key2'=>-1,...);
     //$limit格式 array('offset'=>2,'length'=>10); offset可以为空
-    public function all($where = array(), $fields = array(), $sort = array(), $limit = array()){
+    public function all($where = array(), $fields = '*', $sort = array(), $limit = array()){
         if (DHC::getConfig('db_where_validate') && !$where) {
-            $where = $this->validator($where);
+            $where = $this->validator_where($where);
         }
         $map_field_keys = array_keys($this->_validateKeyMap);
-        $fields = array_values(array_intersect($fields, $map_field_keys));
-        call_user_func_array(array($this->_db, 'all'), array('where'=>$where,'fields'=>$fields,'sort'=>$sort,'limit'=>$limit));
+        if($fields != '*' && is_array($fields)) $fields = array_values(array_intersect($fields, $map_field_keys));
+        return call_user_func_array(array($this->_dbType, 'all'), array('where'=>$where,'fields'=>$fields,'sort'=>$sort,'limit'=>$limit));
     }
 
-    public function one($where = array(), $fields = array()){
-        if (DHC::getConfig('db_where_validate') && !$where) {
-            $where = $this->validator($where);
-        }
-        $map_field_keys = array_keys($this->_validateKeyMap);
-        $fields = array_values(array_intersect($fields, $map_field_keys));
-        call_user_func_array(array($this->_db, 'one'), array('where'=>$where,'fields'=>$fields));
+    public function one($where = array(), $fields = '*', $sort = array()){
+        $rows = $this->all($where,$fields,$sort,array('length'=>1));
+        if(!empty($rows)) return $rows[0];
+        return array();
     }
 
     public function delete($where = array()){
-        call_user_func_array(array($this->_db, 'delete'), array('where'=>$where));
+        call_user_func_array(array($this->_dbType, 'delete'), array('where'=>$where));
     }
+
+    private function _setTime($time_field, & $data){
+        if(!in_array($time_field, array_keys($data)) && in_array($time_field, array_keys($this->_validateKeyMap))){
+            $data[$time_field] = time();
+        }
+    }
+
 }

@@ -100,7 +100,7 @@ class Error{
 	public static function logError(
 															$code,
 															$method = EXCEPTION,
-															$option,
+															$option = array(),
 															$ext = array(
 																	'format'	=> true
 															)
