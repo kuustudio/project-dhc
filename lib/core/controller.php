@@ -103,15 +103,19 @@ class controller{
 
     public function refresh(){}
 
-    public function render(){
-        if($this->beforeRender()){
-            //todo
-            $this->afterRender();
-        }
+    public function render($param = array(), $method = 'view'){
+        $this->beforeRender($param);
+        //todo
+        view::init($method);
+        view::_render($param);
+        $this->afterRender();
     }
 
-    protected function beforeRender(){
-        return true;
+    protected function beforeRender(& $param){
+        return $param + array(
+                            'controllor'    =>  DHC::getConfig('controllor'),
+                            'action'        =>  DHC::getConfig('action')
+                        );
     }
 
     protected function afterRender(){
