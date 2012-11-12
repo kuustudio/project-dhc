@@ -10,3 +10,7 @@ interface Idb{
 
 }
 
+interface Iview{
+    
+}
+
