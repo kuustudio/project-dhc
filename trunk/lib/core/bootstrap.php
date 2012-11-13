@@ -63,6 +63,7 @@ class DHC{
                 $controller = self::getSingleton(
                     self::getConfig('app').'_Controller_'.self::getConfig('controller')
                 );
+                $controller->initBase();
                 $controller->init();
                 $controller->run(self::getConfig('action'));
                 
