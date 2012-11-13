@@ -3,21 +3,25 @@ if (!defined('DHC_VERSION')) exit('Access is no allowed.');
 
 class controller{
     /**/
+    private $_view;
     private $_action;
     private $_pageTitle;
     /**/
-    public function __construct(){
+
+    final public function initBase(){
+        $this->_view = DHC::getSingleton('view');
+        $this->_view->setPath(DHC_APP.DHC::getConfig('app').DS);
         $this->_pageTitle = '';
     }
 
     public function run($actionName){
-        if(empty($actionName)) $actionName = self::getConfig('action');
+        if(empty($actionName)) $actionName = DHC::getConfig('action');
         if($this->beforeAction()){
             $actions = $this->actions();
             if(isset($actions[$actionName])){
                 include($actions[$actionName]);
                 $action = DHC::getSingleton(
-                    self::getConfig('app').'_Controller_'.self::getConfig('controller').'_Action_'.$actionName
+                    DHC::getConfig('app').'_Controller_'.DHC::getConfig('controller').'_Action_'.$actionName
                 );
                 $return = $action->run();
             }else{
@@ -103,19 +107,22 @@ class controller{
 
     public function refresh(){}
 
+    public function assign($key, $val=null){
+        $this->_view->assign($key,$val);
+    }
     public function render($param = array(), $method = 'view'){
-        $this->beforeRender($param);
+        $this->beforeRender();
         //todo
-        view::init($method);
-        view::_render($param);
+        call_user_func_array(array($this->_view,'_'.$method), array($param));
         $this->afterRender();
     }
 
-    protected function beforeRender(& $param){
-        return $param + array(
-                            'controllor'    =>  DHC::getConfig('controllor'),
+    protected function beforeRender(){
+        $controllerParam = array(
+                            'controller'    =>  DHC::getConfig('controller'),
                             'action'        =>  DHC::getConfig('action')
                         );
+        $this->assign($controllerParam);
     }
 
     protected function afterRender(){

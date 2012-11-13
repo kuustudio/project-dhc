@@ -15,6 +15,9 @@ return array(
     'app_name'              => 'app',
     'controller_name'       => 'controller',
     'action_name'           => 'action',
+
+    'view_dir_name'         => 'views',
+    'compile_dir_name'      => 'c_views',
     
     'cache_start'           => false,
     'default_cache_backend' => 'memory',

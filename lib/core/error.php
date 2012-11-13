@@ -39,6 +39,9 @@ define('CORE_MODEL_EC_DB_INIT_FAILED', 1201);
 define('CORE_MODEL_EC_NO_CREATE_DATA', 1202);
 define('CORE_MODEL_EC_NO_UPDATE_DATA', 1203);
 
+define('CORE_VIEW_EC_THEME_NOT_EXISTS', 1301);
+define('CORE_VIEW_EC_VIEW_NOT_EXISTS', 1302);
+
 
 /*
  * 错误日志处理方式
@@ -81,6 +84,9 @@ class Error{
     CORE_MODEL_EC_DB_INIT_FAILED						=> '数据库初始化失败',
     CORE_MODEL_EC_NO_CREATE_DATA						=> '没有提交创建的数据',
     CORE_MODEL_EC_NO_UPDATE_DATA						=> '没有提交更新的数据',
+
+    CORE_VIEW_EC_THEME_NOT_EXISTS						=> '风格不存在',
+    CORE_VIEW_EC_VIEW_NOT_EXISTS						=> '模板目录不存在',
 	);
 	
 	/*
@@ -122,6 +128,7 @@ class Error{
 					$html.=	'<li>'.$k.':'.$v.'</li><br />';
 				}
 				$html .='</ul>';
+				header("Content-Type: text/html; charset=utf-8");
 				echo $html;
 			}else{
 				$str = '[code:'.$code.',说明:'.self::$errorExplain[$code];
