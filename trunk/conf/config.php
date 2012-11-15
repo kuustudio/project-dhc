@@ -11,14 +11,19 @@ return array(
     'controller'            => 'index',
     'action'                => 'index',
     'client'                => 'pc',
+    'theme'                 => 'default',
 
     'app_name'              => 'app',
     'controller_name'       => 'controller',
     'action_name'           => 'action',
 
     'view_dir_name'         => 'views',
-    'compile_dir_name'      => 'c_views',
-    
+    'compile_dir'           => DHC_ROOT.'c_views'.DS,
+    'view_file_subfix'      => '.php',
+    'view_complie'          => true,
+    'view_complie_expires'  => 3600,
+
+
     'cache_start'           => false,
     'default_cache_backend' => 'memory',
 
