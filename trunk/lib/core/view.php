@@ -81,8 +81,8 @@ class view{
                 $this->filePath = strtolower($controller).DS.strtolower($action);
             }
         }
-        $viewFile = $this->viewPath.$this->theme.DS.$filePath;
-        $compileFile = $this->compilePath.md5($viewFile);
+        $viewFile = $this->viewPath.$this->theme.DS.$this->filePath;
+        $compileFile = $this->getComplieFile($viewFile);
        
         if(DHC::getConfig('view_complie')){
             if(!file_exists($compileFile))
@@ -113,7 +113,11 @@ class view{
 
     }
 
+    private function getComplieFile($viewFile){
+        return $this->compilePath.md5($viewFile);
+    }
+
     private function compile($viewFile){
-        
+        $compileFile = $this->getComplieFile($viewFile);
     }
 }
