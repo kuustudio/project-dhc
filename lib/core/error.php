@@ -41,7 +41,7 @@ define('CORE_MODEL_EC_NO_UPDATE_DATA', 1203);
 
 define('CORE_VIEW_EC_THEME_NOT_EXISTS', 1301);
 define('CORE_VIEW_EC_VIEW_NOT_EXISTS', 1302);
-
+define('CORE_VIEW_EC_C_VIEW_NOT_EXISTS', 1303);
 
 /*
  * 错误日志处理方式
@@ -87,6 +87,7 @@ class Error{
 
     CORE_VIEW_EC_THEME_NOT_EXISTS						=> '风格不存在',
     CORE_VIEW_EC_VIEW_NOT_EXISTS						=> '模板目录不存在',
+    CORE_VIEW_EC_C_VIEW_NOT_EXISTS					=> '模板编译目录不存在',
 	);
 	
 	/*
@@ -159,7 +160,7 @@ class Error{
 		if($method & EXCEPTION){
 			$exception = (!empty($ext['exception']))?$ext['exception']:'';
 			if(empty($exception)){
-				throw new Exception(self::$errorExplain[$code],$code);
+				//throw new Exception(self::$errorExplain[$code],$code);
 			}else{
 				throw new $exception(self::$errorExplain[$code],$code,$option);
 			}
