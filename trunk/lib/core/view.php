@@ -4,13 +4,16 @@ if (!defined('DHC_VERSION')) exit('Access is no allowed.');
 //BigPipe ，页面分段输出
 class view{
     private $method;
-    private $theme;
-    private $viewPath;
-    private $compilePath;
-    private $filePath;
+    private $theme; //风格目录名称
+    private $compilePath;//编译文件夹的路径
+    private $filePath;//模板文件路径 name
+    private $viewFile;//模板文件绝对路径
+    private $compileFile; //编译文件的绝对路径
 
-    const TYPE_REMOTE   = 1;
-    const TYPE_ROOT     = 2;
+    const TYPE_DEFAULT  = 'default';
+    const TYPE_REMOTE   = 'remote';
+    const TYPE_ROOT     = 'root';
+
 
     public function assign($key, $val=null){
         if(is_string($key)){
@@ -27,28 +30,26 @@ class view{
             Error::logError(CORE_VIEW_EC_VIEW_NOT_EXISTS, EXCEPTION);
         if(!is_dir($path.DHC::getConfig('view_dir_name').DS.$theme))
             Error::logError(CORE_VIEW_EC_THEME_NOT_EXISTS, EXCEPTION);
-        if(!is_dir(DHC::getConfig('compile_dir_name')))
-            Error::logError(CORE_VIEW_EC_C_VIEW_NOT_EXISTS, EXCEPTION);
 
-        $this->viewPath = $path.DHC::getConfig('view_dir_name').DS;
-        $this->theme = $theme;
+        $this->themePath = $path.DHC::getConfig('view_dir_name').DS.$theme.DS;
     }
     /*  base::代表跟目录下的views
     *   scheme://user:pass@host
     *   app://
     *   remote url
     *   $param = array(
-    *       'type' => 1
+    *       'type' => 'remote'
     *       'file'  => '...'               
     *   )
     *   root view
     *   $param = array(
-    *       'type'  => 2,
+    *       'type'  => 'root',
     *       'theme' => '...' 可以为空
-    *       'file'  => '...'
+    *       'filename'  => '...'
     *   )
     *   一般状况下
     *   $param = array(
+    *       'type'  => 'default',
     *       'app'   => '...', 可以为空
     *       'theme' => '...', 可以为空
     *       'controller'=> '...' 可以为空
@@ -56,22 +57,20 @@ class view{
     *   )
     */
     public function _view($param = array()){
+        if(empty($param['type']))   $param['type'] = self::TYPE_DEFAULT;
+        if(!is_dir(DHC::getConfig('compile_dir_name')))
+            Error::logError(CORE_VIEW_EC_C_VIEW_NOT_EXISTS, EXCEPTION);
         $this->compilePath = DHC::getConfig('compile_dir_name');
         if(empty($param)){
             $this->setPath(DHC_APP.DHC::getConfig('app').DS);
             $this->filePath = strtolower(DHC::getConfig('controller')).DS.strtolower(DHC::getConfig('action'));
         }else{
-            if(isset($param['type'])){
-                if($param['type']==TYPE_REMOTE){
-                    $this->viewPath = '';
-                    $this->theme = '';
-                    $this->filePath = $param['file'];
-                }
-                if($param['type']==TYPE_ROOT){
-                    $this->viewPath = DHC_ROOT;
-                    $this->theme = empty($param['theme'])?DHC::getConfig('theme'):$param['theme'];;
-                    $this->filePath = $param['file'];
-                }
+            if($param['type']==self::TYPE_REMOTE){
+               $this->viewFile = $param['file'];
+            }elseif($param['type']==self::TYPE_ROOT){
+                $this->setPath(DHC_ROOT, empty($param['theme'])?DHC::getConfig('theme'):$param['theme']);
+                $this->filePath = $param['filename'];
+                $this->viewFile = $this->themePath.$this->filePath.DS.DHC::getConfig('view_file_subfix');
             }else{
                 $app = empty($param['app'])?DHC::getConfig('app'):$param['app'];
                 $theme = empty($param['theme'])?DHC::getConfig('theme'):$param['theme'];
@@ -79,15 +78,15 @@ class view{
                 $action = empty($param['action'])?DHC::getConfig('action'):$param['action'];
                 $this->setPath(DHC_APP.$app.DS, $theme);
                 $this->filePath = strtolower($controller).DS.strtolower($action);
+                $this->viewFile = $this->themePath.$this->filePath.DS.DHC::getConfig('view_file_subfix');
             }
         }
-        $viewFile = $this->viewPath.$this->theme.DS.$this->filePath.DHC::getConfig('view_file_subfix');
-        $compileFile = $this->getComplieFile($viewFile);
+        $this->compileFile = $this->getComplieFile($this->viewFile);
        
         if(DHC::getConfig('view_complie')){
-            if(!file_exists($compileFile))
-                $this->template_parse($viewFile);
-            include($compileFile);
+            if(!file_exists($this->compileFile))
+                call_user_func_array(array($this,'view_parse_'.$param['type']), array());
+            include($this->compileFile);
         }
 
 
@@ -113,32 +112,73 @@ class view{
 
     }
 
+    private function view_parse_default(){
+        $this->themePath;
+        $this->filePath;
+        $this->viewFile;
+        $this->compileFile;
+
+        $filecontent = $this->view_filecontent($this->filePath);
+        if($filecontent["type"] == "page"){
+            $this->parse_page($filecontent);
+        }else if($filecontent["type"] == "layout"){
+            $this->parse_layout($filecontent);
+        }
+    }
+
+    private function view_parse_remote(){
+        file_put_contents($this->compileFile, file_get_contents($this->viewFile));
+    }
+
+    private function view_parse_root(){
+
+    }
+
     private function getComplieFile($viewFile){
         return $this->compilePath.md5($viewFile);
     }
 
-    function template_filepath($name){
-        $f = $this->template_dir . '/' . $name .'.php';
-        $this->viewPath.$this->theme.DS.$this->filePath;
-        if(is_file($f)){
-            return $f;
-        }
-        exit($f . ' Not Found');
-        return '';
-    }
-
-
-    function template_filecontent($name) {
-        $array=array("name"=>$name,"type"=>"","masterfile"=>"","content"=>"");
-        $filename=$this->template_filepath($name);
+    function view_filecontent($name) {
+        $array=array("name"=>$name,"type"=>"","layout"=>"","content"=>"");
+        $filename = $this->themePath.$name.DHC::getConfig('view_file_subfix');
         $content = file_get_contents($filename);
-        if(preg_match("/^\<\!\-\-\{\@([master|page|control]+)( masterfile=\"([^\"]+?)\"){0,1}\}\-\-\>/ie", $content, $filetype)){
+        if(preg_match("/^\<\!\-\-\{\@([layout|page]+)( layout=\"([^\"]+?)\"){0,1}\}\-\-\>/ie", $content, $filetype)){
             $array["type"]=$filetype[1];
-            $array["masterfile"]=isset($filetype[3])?$filetype[3]:"";
+            $array["layout"]=isset($filetype[3])?$filetype[3]:"";
             $content = preg_replace("/^\<\!\-\-\{\@([\s\S]+?)\}\-\-\>/i","",$content);
             $array["content"]=$content;
         }
         return $array;
+    }
+
+    private function parse_layout(){
+
+        $content = $filecontent["content"];
+        $contents=array();
+        $preg_pattern="/\<\!\-\-\{content\s+([a-z0-9_\/]+)\}\-\-\>([\s\S]+?)\<\!\-\-{\/content}\-\-\>/ie";
+        if(preg_match_all($preg_pattern, $content,$tcontent)){
+            foreach($tcontent[1] as $matchcontent){
+                $contents[$matchcontent]="";
+            }
+            for($i=0;$i<count($tcontent[2]);$i++){
+                $contents[$tcontent[1][$i]]=$tcontent[2][$i];
+            }
+        }
+        if($filecontent["layout"]!=""){
+            $contentwithmaster = $this->template_compiled_content($filecontent["layout"]);
+
+            $contentwithmaster = preg_replace_callback(
+                "/\<\!\-\-\{contentplaceholderid\s+([a-z0-9_\/]+)\}\-\-\>/i",
+                function($cid)use($contents){ return isset($contents[$cid[1]]) ? $contents[$cid[1]] : ''; },
+                $contentwithmaster
+            );
+            $content=$contentwithmaster;
+        }
+        $this->template_writefile($compiled, trim($content));        
+    }
+
+    private function parse_page(){
+
     }
 
     function template_compiled_content($name) {
@@ -148,10 +188,16 @@ class view{
         $filename = $this->template_compilepath($name);
         $content = file_get_contents($filename);
         return $content;
+        if(DHC::getConfig('view_complie')){
+            $compileFile = $this->getComplieFile($this->themePath.$name.DS.DHC::getConfig('view_file_subfix'));
+            if(!file_exists($compileFile))
+                call_user_func_array(array($this,'view_parse_default'), array());
+            include($this->compileFile);
+        }
     }
 
     function template_parse($name){
-        $filecontent = $this->template_filecontent($name);
+        $filecontent = $this->view_filecontent($name);
         if($filecontent["type"] == "page"){
             $this->template_parse_page($filecontent);
         }else if($filecontent["type"] == "master"){
