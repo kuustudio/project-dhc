@@ -112,7 +112,6 @@ class controller{
     }
     public function render($param = array(), $method = 'view'){
         $this->beforeRender();
-        //todo
         call_user_func_array(array($this->_view,'_'.$method), array($param));
         $this->afterRender();
     }
