@@ -23,7 +23,7 @@ if (!defined('DHC_VERSION')) exit('Access is no allowed.');
 *           theme
 *               layout 布局文件
 *               block 区块文件
-*               controller/action.php 标准控制器对应文件
+*               filename.php 对应文件
 * 编译文件规范
 *   根目录
 *       c_views
@@ -36,12 +36,11 @@ if (!defined('DHC_VERSION')) exit('Access is no allowed.');
 
 //BigPipe ，页面分段输出
 class view{
-    private $method;
     private $theme; //风格目录名称
-    private $compilePath;//编译文件夹的路径
     private $filePath;//模板文件路径 name
     private $viewFile;//模板文件绝对路径
-    private $compileFile; //编译文件的绝对路径
+    private $compileFile;//编译文件路径
+    private $themePath;//模板路径
 
     const TYPE_DEFAULT  = 'default';
     const TYPE_REMOTE   = 'remote';
@@ -90,19 +89,17 @@ class view{
     *   )
     */
     public function _view($param = array()){
-        if(empty($param['type']))   $param['type'] = self::TYPE_DEFAULT;
-        if(!is_dir(DHC::getConfig('compile_dir_name')))
-            Error::logError(CORE_VIEW_EC_C_VIEW_NOT_EXISTS, EXCEPTION);
-        $this->compilePath = DHC::getConfig('compile_dir_name');
+        if(empty($param['type'])) $param['type'] = self::TYPE_DEFAULT;
+
         if(empty($param)){
-            $this->setPath(DHC_APP.DHC::getConfig('app').DS);
-            $this->filePath = strtolower(DHC::getConfig('controller')).DS.strtolower(DHC::getConfig('action'));
+            //$this->setPath(DHC_APP.DHC::getConfig('app').DS);
+            //$this->filePath = strtolower(DHC::getConfig('controller')).DS.strtolower(DHC::getConfig('action'));
         }else{
             if($param['type']==self::TYPE_REMOTE){
                $this->viewFile = $param['file'];
             }elseif($param['type']==self::TYPE_ROOT){
                 $this->setPath(DHC_ROOT, empty($param['theme'])?DHC::getConfig('theme'):$param['theme']);
-                $this->filePath = $param['filename'];
+                $this->filePath = strtolower($param['filename']);
                 $this->viewFile = $this->themePath.$this->filePath.DS.DHC::getConfig('view_file_subfix');
             }else{
                 $app = empty($param['app'])?DHC::getConfig('app'):$param['app'];
@@ -114,9 +111,9 @@ class view{
                 $this->viewFile = $this->themePath.$this->filePath.DS.DHC::getConfig('view_file_subfix');
             }
         }
-        $this->compileFile = $this->getComplieFile($this->viewFile);
        
         if(DHC::getConfig('view_complie')){
+            $this->compileFile = $this->getComplieFile($this->viewFile,$param['type']);
             if(!file_exists($this->compileFile))
                 call_user_func_array(array($this,'view_parse_'.$param['type']), array());
             include($this->compileFile);
@@ -146,8 +143,6 @@ class view{
     }
 
     private function view_parse_default(){
-        
-
         $filecontent = $this->view_filecontent($this->filePath);
         call_user_func_array(array($this,'parse_'.$filecontent['type']), array($filecontent));
     }
@@ -160,8 +155,15 @@ class view{
 
     }
 
-    private function getComplieFile($viewFile){
-        return $this->compilePath.md5($viewFile);
+    private function getComplieFile($viewFile, $type = self::TYPE_DEFAULT){
+        $compile_dir = DHC::getConfig('compile_dir');
+        if(!is_dir($compile_dir.$type))
+            Error::logError(CORE_VIEW_EC_C_VIEW_NOT_EXISTS, EXCEPTION);
+        return $compile_dir.$type.DS.md5($viewFile);
+    }
+
+    private function getViewFile($name){
+        return $this->themePath.$name.DHC::getConfig('view_file_subfix');
     }
 
     function view_filecontent($name) {
@@ -178,11 +180,6 @@ class view{
     }
 
     private function parse_page($filecontent){
-        //$this->themePath;
-        //$this->filePath;
-        //$this->viewFile;
-        //$this->compileFile;
-
         $content = $filecontent["content"];
 
         $contents=array();
@@ -197,8 +194,8 @@ class view{
         }
 
         //解析 layout
-        if($filecontent["layoutfile"] != ""){
-            $contentwithlayout = file_get_contents($filecontent["layoutfile"]);
+        if($filecontent["layout"] != ""){
+            $contentwithlayout = file_get_contents($this->getViewFile($filecontent["layout"]));
             
             if(preg_match_all("/\<\!\-\-\{contentplaceholderid ([\S]+)\}\-\-\>/ie",$contentwithlayout,$holdermatchs)){
 
@@ -212,87 +209,7 @@ class view{
             }
             $content = $contentwithlayout;
         }
-
-        //解析 includefile
-        $includefile_pattern="/\<\!\-\-\{includefile\:([\S]+?)\}\-\-\>/ie";
-        $includefiles=array();
-        if(preg_match_all($includefile_pattern, $content,$tincludefiles)){
-            for($i=0;$i<count($tincludefiles[1]);$i++){
-
-                $f = $this->template_filepath($tincludefiles[1][$i]);
-                if($f == ''){
-                    $include_file = substr($tincludefiles[1][$i],0,strrpos($filecontent["name"],'/')) . '/' . $tincludefiles[1][$i];
-                }else{
-                    $include_file = $tincludefiles[1][$i];
-                }
-
-                $includefiles[$tincludefiles[1][$i]]=array(
-                    "file" => $tincludefiles[1][$i],
-                    "content" => $this->template_compiled_content($include_file)
-                    );
-            }
-        }
-            foreach($includefiles as $includekey => $includefile){
-                $content=str_replace("<!--{includefile:".$includefile["file"] . "}-->",$includefile["content"],$content);
-            }
-
-        //解析 control
-        $control_pattern="/\<\!\-\-\{control\:([\S]+?)\ id\=\"([^\"]+)\"}\-\-\>/ie";
-        $controls = array();
         
-        if(preg_match_all($control_pattern, $content,$tcontrols)){
-            for($i=0;$i<count($tcontrols[1]);$i++){
-                $f = $this->template_filepath($tcontrols[1][$i]);
-                if($f == ''){
-                    $control_file = substr($filecontent["name"], 0, strrpos($filecontent["name"],'/')) . '/' . $tcontrols[1][$i];
-                    
-                }else{
-                    $control_file = $tcontrols[1][$i];
-                }
-                $controls[$tcontrols[2][$i]]=array(
-                    "id" => $tcontrols[2][$i],
-                    "controlname" => $tcontrols[1][$i],
-                    "content" => $this->template_compiled_content($control_file)
-                    );
-            };
-            foreach($controls as &$control){
-                
-                $var_pattern="/\<\!\-\-\{\@var ([^\}]+)\}\-\-\>/ie";
-                $vars=array();
-                if(preg_match_all($var_pattern, $control["content"], $matchvars)){
-                    $vars=explode(' ',$matchvars[1][0]);
-                }
-                
-                $tagvar_pattern="/\\$\_var\_((?:" . implode("|",explode(",",$matchvars[1][0])) . ")+?)/i";
-                $control["content"]=preg_replace(
-                        $tagvar_pattern,
-                        '$'. $control["id"] . "['\\1']",
-                        $control["content"]
-                    );
-
-                $control["content"] = preg_replace("/\<\!\-\-\{\@var ([^\}]+)\}\-\-\>/i","",$control["content"]);
-                
-            }
-        }
-        foreach($controls as $key=>$c){
-            $content = str_replace("<!--{control:".$c["controlname"] . " id=\"" . $c["id"] . "\""."}-->",$c["content"],$content);
-        }
-        
-        $this->template_writefile($this->compileFile, trim($content));
-    }
-
-    function template_compiled_content($name) {
-        if(!$this->template_iscompiled($name)){
-            $this->template_parse($name);
-        }
-        $filename = $this->template_compilepath($name);
-        $content = file_get_contents($filename);
-        return $content;
-        if(DHC::getConfig('view_complie')){
-            $compileFile = $this->getComplieFile($this->themePath.$name.DS.DHC::getConfig('view_file_subfix'));
-            if(!file_exists($compileFile))
-                call_user_func_array(array($this,'view_parse_default'), array());
-            include($this->compileFile);
-        }
+        file_put_contents($this->compileFile, trim($content));
     }
 }
