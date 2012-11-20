@@ -125,7 +125,7 @@ class controller{
     }
 
     protected function afterRender(){
-        return true;
+        exit;
     }
 
     public function init(){}

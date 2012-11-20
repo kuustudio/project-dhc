@@ -32,6 +32,7 @@ if (!defined('DHC_VERSION')) exit('Access is no allowed.');
 *           TYPE_ROOT
 *           TYPE_REMOTE
 *               filename
+* 约束1，layout文件必须和@page layout="layout/xxx"在同一个views路径下
 */
 
 //BigPipe ，页面分段输出
@@ -91,39 +92,70 @@ class view{
     public function _view($param = array()){
         if(empty($param['type'])) $param['type'] = self::TYPE_DEFAULT;
 
-        if(empty($param)){
-            //$this->setPath(DHC_APP.DHC::getConfig('app').DS);
-            //$this->filePath = strtolower(DHC::getConfig('controller')).DS.strtolower(DHC::getConfig('action'));
+        if($param['type']==self::TYPE_REMOTE){
+            $this->viewFile = $param['file'];
+        }elseif($param['type']==self::TYPE_ROOT){
+            $this->setPath(DHC_ROOT, empty($param['theme'])?DHC::getConfig('theme'):$param['theme']);
+            $this->filePath = strtolower($param['filename']);
+            $this->viewFile = $this->themePath.$this->filePath.DS.DHC::getConfig('view_file_subfix');
         }else{
-            if($param['type']==self::TYPE_REMOTE){
-               $this->viewFile = $param['file'];
-            }elseif($param['type']==self::TYPE_ROOT){
-                $this->setPath(DHC_ROOT, empty($param['theme'])?DHC::getConfig('theme'):$param['theme']);
-                $this->filePath = strtolower($param['filename']);
-                $this->viewFile = $this->themePath.$this->filePath.DS.DHC::getConfig('view_file_subfix');
-            }else{
-                $app = empty($param['app'])?DHC::getConfig('app'):$param['app'];
-                $theme = empty($param['theme'])?DHC::getConfig('theme'):$param['theme'];
-                $controller = empty($param['controller'])?DHC::getConfig('controller'):$param['controller'];
-                $action = empty($param['action'])?DHC::getConfig('action'):$param['action'];
-                $this->setPath(DHC_APP.$app.DS, $theme);
-                $this->filePath = strtolower($controller).DS.strtolower($action);
-                $this->viewFile = $this->themePath.$this->filePath.DS.DHC::getConfig('view_file_subfix');
-            }
-        }
+            $app = empty($param['app'])?DHC::getConfig('app'):$param['app'];
+            $theme = empty($param['theme'])?DHC::getConfig('theme'):$param['theme'];
+            $controller = empty($param['controller'])?DHC::getConfig('controller'):$param['controller'];
+            $action = empty($param['action'])?DHC::getConfig('action'):$param['action'];
+            $this->setPath(DHC_APP.$app.DS, $theme);
+            $this->filePath = strtolower($controller).DS.strtolower($action);
+            $this->viewFile = $this->themePath.$this->filePath.DS.DHC::getConfig('view_file_subfix');
+        }   
        
         if(DHC::getConfig('view_complie')){
             $this->compileFile = $this->getComplieFile($this->viewFile,$param['type']);
             if(!file_exists($this->compileFile))
                 call_user_func_array(array($this,'view_parse_'.$param['type']), array());
             include($this->compileFile);
+        }else{
+            $this->compileFile = $this->getComplieFile($this->viewFile,$param['type']);
+            call_user_func_array(array($this,'view_parse_'.$param['type']), array());
+            include($this->compileFile);
         }
+    }
 
+    public function _blockView($param = array()){
+        if(empty($param['type'])) $param['type'] = self::TYPE_DEFAULT;
 
+        if($param['type']==self::TYPE_REMOTE){
+            $this->viewFile = $param['file'];
+        }elseif($param['type']==self::TYPE_ROOT){
+            $this->setPath(DHC_ROOT, empty($param['theme'])?DHC::getConfig('theme'):$param['theme']);
+            $this->filePath = strtolower($param['filename']);
+            $this->viewFile = $this->themePath.'block'.DS.$this->filePath.DS.DHC::getConfig('view_file_subfix');
+        }else{
+            $app = empty($param['app'])?DHC::getConfig('app'):$param['app'];
+            $theme = empty($param['theme'])?DHC::getConfig('theme'):$param['theme'];
+            $block = empty($param['block'])?DHC::getConfig('block'):$param['block'];
+            $this->setPath(DHC_APP.$app.DS, $theme);
+            $this->filePath = strtolower($block);
+            $this->viewFile = $this->themePath.'block'.DS.$this->filePath.DS.DHC::getConfig('view_file_subfix');
+        }
+        if(DHC::getConfig('view_complie')){
+            $this->compileFile = $this->getComplieFile($this->viewFile,$param['type']);
+            if(!file_exists($this->compileFile))
+                call_user_func_array(array($this,'view_parse_'.$param['type']), array());
+            include($this->compileFile);
+        }else{
+            $this->compileFile = $this->getComplieFile($this->viewFile,$param['type']);
+            call_user_func_array(array($this,'view_parse_'.$param['type']), array());
+            include($this->compileFile);
+        }
     }
 
     public function _json($param = array()){
-
+        header("Content-Type: " . isset($param['ContentType']) ? $param['ContentType'] : 'application/json' . "; charset=utf-8");
+        if($param['callback'] == ''){
+            echo(json_encode($param['data']));
+        }else{
+            echo($param['callback'] . '(' . json_encode($param['data']) . ')');
+        }        
     }
 
     public function _file($param){
@@ -152,7 +184,7 @@ class view{
     }
 
     private function view_parse_root(){
-
+        $this->view_parse_default();
     }
 
     private function getComplieFile($viewFile, $type = self::TYPE_DEFAULT){
@@ -177,6 +209,10 @@ class view{
             $array["content"]=$content;
         }
         return $array;
+    }
+
+    private function parse_block($filecontent){
+        $this->parse_page($filecontent);
     }
 
     private function parse_page($filecontent){
