@@ -1,4 +1,4 @@
-<!--{@page masterfile="master/base"}-->
+<!--{@page layout="master/base"}-->
 <!--{content head}-->
 <!--{/content}-->
 <!--{content body}-->
