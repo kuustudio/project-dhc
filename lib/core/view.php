@@ -1,5 +1,38 @@
 <?php
 if (!defined('DHC_VERSION')) exit('Access is no allowed.');
+/**
+* 控制器内调用规则
+* rander(array(),'view'); 默认
+* rander(array('xx'=>xx,'json')); xx为视图配置参数,包含type,file(可选)等等，一般性传入由assign($key,$value);
+*
+* view type 结构性总览
+* 3种类型
+* default 默认视图类型，属于每个app下标准视图结构
+*   appname
+*       views
+*           theme
+*               layout 布局文件
+*               block 区块文件
+*               controller
+*                   action.php 标准控制器对应文件
+* remote 远程文件
+*   file 远程文件路径
+* root 根目录全局视图，风格等同于默认
+*   根目录
+*       views
+*           theme
+*               layout 布局文件
+*               block 区块文件
+*               controller/action.php 标准控制器对应文件
+* 编译文件规范
+*   根目录
+*       c_views
+*           type 编译视图的类型TYPE_DEFAULT，TYPE_REMOTE，TYPE_ROOT
+*           TYPE_DEFAULT
+*           TYPE_ROOT
+*           TYPE_REMOTE
+*               filename
+*/
 
 //BigPipe ，页面分段输出
 class view{
@@ -113,17 +146,10 @@ class view{
     }
 
     private function view_parse_default(){
-        $this->themePath;
-        $this->filePath;
-        $this->viewFile;
-        $this->compileFile;
+        
 
         $filecontent = $this->view_filecontent($this->filePath);
-        if($filecontent["type"] == "page"){
-            $this->parse_page($filecontent);
-        }else if($filecontent["type"] == "layout"){
-            $this->parse_layout($filecontent);
-        }
+        call_user_func_array(array($this,'parse_'.$filecontent['type']), array($filecontent));
     }
 
     private function view_parse_remote(){
@@ -151,98 +177,11 @@ class view{
         return $array;
     }
 
-    private function parse_layout(){
-
-        $content = $filecontent["content"];
-        $contents=array();
-        $preg_pattern="/\<\!\-\-\{content\s+([a-z0-9_\/]+)\}\-\-\>([\s\S]+?)\<\!\-\-{\/content}\-\-\>/ie";
-        if(preg_match_all($preg_pattern, $content,$tcontent)){
-            foreach($tcontent[1] as $matchcontent){
-                $contents[$matchcontent]="";
-            }
-            for($i=0;$i<count($tcontent[2]);$i++){
-                $contents[$tcontent[1][$i]]=$tcontent[2][$i];
-            }
-        }
-        if($filecontent["layout"]!=""){
-            $contentwithmaster = $this->template_compiled_content($filecontent["layout"]);
-
-            $contentwithmaster = preg_replace_callback(
-                "/\<\!\-\-\{contentplaceholderid\s+([a-z0-9_\/]+)\}\-\-\>/i",
-                function($cid)use($contents){ return isset($contents[$cid[1]]) ? $contents[$cid[1]] : ''; },
-                $contentwithmaster
-            );
-            $content=$contentwithmaster;
-        }
-        $this->template_writefile($compiled, trim($content));        
-    }
-
-    private function parse_page(){
-
-    }
-
-    function template_compiled_content($name) {
-        if(!$this->template_iscompiled($name)){
-            $this->template_parse($name);
-        }
-        $filename = $this->template_compilepath($name);
-        $content = file_get_contents($filename);
-        return $content;
-        if(DHC::getConfig('view_complie')){
-            $compileFile = $this->getComplieFile($this->themePath.$name.DS.DHC::getConfig('view_file_subfix'));
-            if(!file_exists($compileFile))
-                call_user_func_array(array($this,'view_parse_default'), array());
-            include($this->compileFile);
-        }
-    }
-
-    function template_parse($name){
-        $filecontent = $this->view_filecontent($name);
-        if($filecontent["type"] == "page"){
-            $this->template_parse_page($filecontent);
-        }else if($filecontent["type"] == "master"){
-            $this->template_parse_master($filecontent);
-        }else if($filecontent["type"] == "control"){
-            $this->template_parse_control($filecontent);
-        }
-    }
-    function template_parse_master($filecontent){
-        $tplfile = $this->template_filepath($filecontent["name"]);
-        $compiled = $this->template_compilepath($filecontent["name"]);
-
-        $content = $filecontent["content"];
-        $contents=array();
-        $preg_pattern="/\<\!\-\-\{content\s+([a-z0-9_\/]+)\}\-\-\>([\s\S]+?)\<\!\-\-{\/content}\-\-\>/ie";
-        if(preg_match_all($preg_pattern, $content,$tcontent)){
-            foreach($tcontent[1] as $matchcontent){
-                $contents[$matchcontent]="";
-            }
-            for($i=0;$i<count($tcontent[2]);$i++){
-                $contents[$tcontent[1][$i]]=$tcontent[2][$i];
-            }
-        }
-        if($filecontent["masterfile"]!=""){
-            $contentwithmaster = $this->template_compiled_content($filecontent["masterfile"]);
-
-            $contentwithmaster = preg_replace_callback(
-                "/\<\!\-\-\{contentplaceholderid\s+([a-z0-9_\/]+)\}\-\-\>/i",
-                function($cid)use($contents){ return isset($contents[$cid[1]]) ? $contents[$cid[1]] : ''; },
-                $contentwithmaster
-            );
-            $content=$contentwithmaster;
-        }
-        $this->template_writefile($compiled, trim($content));
-    }
-    function template_parse_control($filecontent){
-
-        $tplfile = $this->template_filepath($filecontent["name"]);
-        $compiled = $this->template_compilepath($filecontent["name"]);
-        $content = $filecontent["content"];
-        $this->template_writefile($compiled, trim($content));
-    }
-    function template_parse_page($filecontent){
-        $tplfile = $this->template_filepath($filecontent["name"]);
-        $compiled = $this->template_compilepath($filecontent["name"]);
+    private function parse_page($filecontent){
+        //$this->themePath;
+        //$this->filePath;
+        //$this->viewFile;
+        //$this->compileFile;
 
         $content = $filecontent["content"];
 
@@ -257,21 +196,21 @@ class view{
             }
         }
 
-        //解析 master
-        if($filecontent["masterfile"] != ""){
-            $contentwithmaster = $this->template_compiled_content($filecontent["masterfile"]);
+        //解析 layout
+        if($filecontent["layoutfile"] != ""){
+            $contentwithlayout = file_get_contents($filecontent["layoutfile"]);
             
-            if(preg_match_all("/\<\!\-\-\{contentplaceholderid ([\S]+)\}\-\-\>/ie",$contentwithmaster,$holdermatchs)){
+            if(preg_match_all("/\<\!\-\-\{contentplaceholderid ([\S]+)\}\-\-\>/ie",$contentwithlayout,$holdermatchs)){
 
                 foreach($holdermatchs[1] as $holdermatch){
-                    $contentwithmaster = preg_replace(
+                    $contentwithlayout = preg_replace(
                         "/\<\!\-\-\{contentplaceholderid $holdermatch\}\-\-\>/i",
                         isset($contents[$holdermatch]) ? $contents[$holdermatch] : "",
-                        $contentwithmaster
+                        $contentwithlayout
                         );
                 }
             }
-            $content = $contentwithmaster;
+            $content = $contentwithlayout;
         }
 
         //解析 includefile
@@ -339,6 +278,21 @@ class view{
             $content = str_replace("<!--{control:".$c["controlname"] . " id=\"" . $c["id"] . "\""."}-->",$c["content"],$content);
         }
         
-        $this->template_writefile($compiled, trim($content));
+        $this->template_writefile($this->compileFile, trim($content));
+    }
+
+    function template_compiled_content($name) {
+        if(!$this->template_iscompiled($name)){
+            $this->template_parse($name);
+        }
+        $filename = $this->template_compilepath($name);
+        $content = file_get_contents($filename);
+        return $content;
+        if(DHC::getConfig('view_complie')){
+            $compileFile = $this->getComplieFile($this->themePath.$name.DS.DHC::getConfig('view_file_subfix'));
+            if(!file_exists($compileFile))
+                call_user_func_array(array($this,'view_parse_default'), array());
+            include($this->compileFile);
+        }
     }
 }
