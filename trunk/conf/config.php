@@ -20,7 +20,7 @@ return array(
     'view_dir_name'         => 'views',
     'compile_dir'           => DHC_ROOT.'c_views'.DS,
     'view_file_subfix'      => '.php',
-    'view_complie'          => true,
+    'view_complie'          => false,
     'view_complie_expires'  => 3600,
 
 
