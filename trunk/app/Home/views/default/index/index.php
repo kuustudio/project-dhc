@@ -1,6 +1,6 @@
-<!--{@page layout="master/base"}-->
+<!--{@page layout="layout/base"}-->
 <!--{content head}-->
 <!--{/content}-->
 <!--{content body}-->
-111111111
+1111111112222222222
 <!--{/content}-->
