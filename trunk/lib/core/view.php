@@ -107,6 +107,10 @@ class view{
             $this->filePath = strtolower($controller).DS.strtolower($action);
             $this->viewFile = $this->themePath.$this->filePath.DS.DHC::getConfig('view_file_subfix');
         }   
+
+        foreach($this->vars as $key=>$val){
+			$$key = $val;
+		}
        
         if(DHC::getConfig('view_complie')){
             $this->compileFile = $this->getComplieFile($this->viewFile,$param['type']);

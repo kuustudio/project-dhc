@@ -1,7 +1,7 @@
 <?php
-class Home_Controller_Index extends controller {
+class Home_Controller_Index extends Home_Controller_Base {
     public function init(){
-        //parent::init();
+        parent::init();
     }
     public function actionIndex(){
         /*
