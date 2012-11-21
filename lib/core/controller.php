@@ -5,7 +5,6 @@ class controller{
     /**/
     private $_view;
     private $_action;
-    private $_pageTitle;
     /**/
 
     final public function initBase(){
@@ -85,10 +84,6 @@ class controller{
     protected function afterForward(){
         return true;
     }
-
-    public function getPageTitle(){}
-
-    public function setPageTitle(){}
 
     public function redirect(){
         if($this->beforeRedirect()){
