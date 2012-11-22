@@ -1,6 +1,16 @@
 <!--{@page layout="layout/base"}-->
 <!--{content head}-->
+<style type="text/css">
+.header{height:97px;width:945px;position:relative;margin: 0 auto;}
+.header .logo{position: absolute;height:70px;width:180px;background: url("/source/images/logo.png?id=<?php echo time();?>") no-repeat center;}
+.header .search{height:70px;display: block;padding-left: 20px;}
+</style>
 <!--{/content}-->
 <!--{content body}-->
-1111111112222222222333333333333355555555555
+<div class="header">
+    <div class="logo"></div>
+    <div class="search"><input type="text" placeholder="想吃什么，想看什么" /></div>
+</div>
+<div class="content"></div>
+<div class="footer"></div>
 <!--{/content}-->
