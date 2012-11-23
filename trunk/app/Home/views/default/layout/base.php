@@ -6,7 +6,8 @@
 <meta name="description" content="<?php echo $Description?>" />
 <meta name="keywords" content="<?php echo $Keywords?>" />
 <link rel="stylesheet" type="text/css" href="/source/styles/base.css">
-<!--<script language="javascript" src="Home/source/scripts/base.js"></script>-->
+<link rel="stylesheet" type="text/css" href="Home/source/styles/base.css">
+<script language="javascript" src="/source/scripts/jquery-1.8.3.js"></script>
 <script type="text/javascript">
 </script>
 <!--{contentplaceholderid head}-->
