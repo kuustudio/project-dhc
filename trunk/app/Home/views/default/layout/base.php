@@ -6,7 +6,7 @@
 <meta name="description" content="<?php echo $Description?>" />
 <meta name="keywords" content="<?php echo $Keywords?>" />
 <link rel="stylesheet" type="text/css" href="/source/styles/base.css">
-<script language="javascript" src="/source/scripts/base.js"></script>
+<!--<script language="javascript" src="Home/source/scripts/base.js"></script>-->
 <script type="text/javascript">
 </script>
 <!--{contentplaceholderid head}-->
