@@ -1,16 +1,52 @@
 /*
-MySQL Data Transfer
-Source Host: localhost
-Source Database: dhc_demo
-Target Host: localhost
-Target Database: dhc_demo
-Date: 2012/11/27 0:14:12
+Navicat MySQL Data Transfer
+
+Source Server         : localhost
+Source Server Version : 50528
+Source Host           : 127.0.0.1:3306
+Source Database       : dhc_demo
+
+Target Server Type    : MYSQL
+Target Server Version : 50528
+File Encoding         : 65001
+
+Date: 2012-11-27 16:50:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
--- Table structure for area
+-- Table structure for `account`
 -- ----------------------------
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE `account` (
+  `account_id` int(11) NOT NULL AUTO_INCREMENT,
+  `account_name` varchar(100) NOT NULL,
+  `account_password` varchar(100) NOT NULL,
+  `created` int(10) DEFAULT NULL,
+  PRIMARY KEY (`account_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of account
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `admin`
+-- ----------------------------
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin` (
+  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`admin_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of admin
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `area`
+-- ----------------------------
+DROP TABLE IF EXISTS `area`;
 CREATE TABLE `area` (
   `area_id` int(11) NOT NULL AUTO_INCREMENT,
   `area_name` varchar(255) NOT NULL,
@@ -24,8 +60,13 @@ CREATE TABLE `area` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for category_combo
+-- Records of area
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `category_combo`
+-- ----------------------------
+DROP TABLE IF EXISTS `category_combo`;
 CREATE TABLE `category_combo` (
   `category_combo_id` int(11) NOT NULL AUTO_INCREMENT,
   `category_combo_name` varchar(100) NOT NULL,
@@ -33,8 +74,13 @@ CREATE TABLE `category_combo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for category_dish
+-- Records of category_combo
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `category_dish`
+-- ----------------------------
+DROP TABLE IF EXISTS `category_dish`;
 CREATE TABLE `category_dish` (
   `category_dish_id` int(11) NOT NULL AUTO_INCREMENT,
   `category_dish_name` varchar(100) NOT NULL,
@@ -42,8 +88,13 @@ CREATE TABLE `category_dish` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for combo
+-- Records of category_dish
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `combo`
+-- ----------------------------
+DROP TABLE IF EXISTS `combo`;
 CREATE TABLE `combo` (
   `combo_id` int(11) NOT NULL AUTO_INCREMENT,
   `combo_item` text NOT NULL COMMENT 'JSON，包含产品以及数量',
@@ -58,16 +109,27 @@ CREATE TABLE `combo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for custom
+-- Records of combo
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `custom`
+-- ----------------------------
+DROP TABLE IF EXISTS `custom`;
 CREATE TABLE `custom` (
   `custom_id` int(11) NOT NULL AUTO_INCREMENT,
+  `account_id` int(11) NOT NULL,
   PRIMARY KEY (`custom_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for dish
+-- Records of custom
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `dish`
+-- ----------------------------
+DROP TABLE IF EXISTS `dish`;
 CREATE TABLE `dish` (
   `dish_id` int(11) NOT NULL AUTO_INCREMENT,
   `dish_name` varchar(255) NOT NULL,
@@ -86,8 +148,13 @@ CREATE TABLE `dish` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for dish_price_group
+-- Records of dish
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `dish_price_group`
+-- ----------------------------
+DROP TABLE IF EXISTS `dish_price_group`;
 CREATE TABLE `dish_price_group` (
   `price_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `dish_id` int(11) NOT NULL,
@@ -101,8 +168,14 @@ CREATE TABLE `dish_price_group` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for group
+-- Records of dish_price_group
 -- ----------------------------
+INSERT INTO `dish_price_group` VALUES ('1', '1', '默认', '999999.99', '份', '元', '0', '1111.00');
+
+-- ----------------------------
+-- Table structure for `group`
+-- ----------------------------
+DROP TABLE IF EXISTS `group`;
 CREATE TABLE `group` (
   `group_id` int(11) NOT NULL AUTO_INCREMENT,
   `group_name` varchar(100) NOT NULL,
@@ -111,8 +184,13 @@ CREATE TABLE `group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for menu
+-- Records of group
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `menu`
+-- ----------------------------
+DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
   `menu_id` int(11) NOT NULL AUTO_INCREMENT,
   `can_order` tinyint(1) DEFAULT '0',
@@ -126,8 +204,13 @@ CREATE TABLE `menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for order
+-- Records of menu
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `order`
+-- ----------------------------
+DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_number` varchar(20) NOT NULL,
@@ -141,8 +224,13 @@ CREATE TABLE `order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for store
+-- Records of order
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `store`
+-- ----------------------------
+DROP TABLE IF EXISTS `store`;
 CREATE TABLE `store` (
   `store_id` int(11) NOT NULL AUTO_INCREMENT,
   `store_name` varchar(100) NOT NULL,
@@ -155,6 +243,5 @@ CREATE TABLE `store` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records 
+-- Records of store
 -- ----------------------------
-INSERT INTO `dish_price_group` VALUES ('1', '1', '默认', '999999.99', '份', '元', '0', '1111.00');
