@@ -1,5 +1,5 @@
 <?php
-class Home_Controller_Index extends Home_Controller_Base {
+class Admin_Controller_Index extends Admin_Controller_Base {
     public function init(){
         parent::init();
     }
@@ -16,6 +16,7 @@ class Home_Controller_Index extends Home_Controller_Base {
         $row = $model_store->one($_where,'*',array('store_id'=>-1));
         dump($row);
         */
+        //echo time();
         $this->render();
     }
 }
