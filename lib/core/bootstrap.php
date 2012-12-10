@@ -16,6 +16,7 @@ include(DHC_LIB.'core/exception.php');
 include(DHC_LIB.'core/validator.php');
 include(DHC_LIB.'core/input.php');
 include(DHC_LIB.'core/router.php');
+include(DHC_LIB.'core/block.php');
 
 class DHC{
     public static $_config = array();
@@ -26,6 +27,10 @@ class DHC{
     public static $_cache = array();
     public static $_input;
     public static $_router;
+    //是否是post
+    private static $_isPost;
+    //是否是ajax
+    private static $_isAjax;
     
     private static function init(){
         spl_autoload_register('self::autoload');
@@ -36,21 +41,11 @@ class DHC{
         set_error_handler(array('DHC','_error'), E_ALL);
         set_exception_handler(array('DHC','_exception'));
         self::$_input = new DHCInput(array(
-			'server'		=> array(
-                'HTTP_USER_AGENT'   =>  array(
-                                            'func'  => PARAM_STRING
-                                        ),
-                'HTTP_HOST'         =>  array(
-                                            'func'  => PARAM_STRING,
-                                            //'argv'  => '对域名主机进行验证'
-                                        ),
-                'PATH_INFO'         =>  array(
-                                            'func'  => PARAM_STRING
-                                            //'argv'  => '对PATH_INFO'进行验证
-                                        )
-            )
+			'server' => DHC::getConfig('allowed_server_param')
 		));
         self::$_router = new DHCRouterUri(DHC::getConfig('url_method'), include(DHC_CONF.'route.php'));
+
+
 
         if($pathArray = self::$_router->parse_uri(self::$_input->pathinfo())){
             self::setConfig('app', ucfirst(strtolower($pathArray['app'])));
@@ -65,7 +60,10 @@ class DHC{
                 );
                 $controller->initBase();
                 $controller->init();
-                $controller->run(self::getConfig('action'));
+                $action_subfix = '';
+                if(self::$_input->is_ajax()) $action_subfix .= '_AJAX';
+                if(self::$_input->is_post()) $action_subfix .= '_POST';
+                $controller->run(self::getConfig('action').$action_subfix);
                 
             }else{
                 Error::logError(CORE_BOOTSTRAP_EC_NO_CONTROLLER, EXCEPTION);
@@ -76,14 +74,22 @@ class DHC{
         }
 
     }
+
+    public static function block($block_class){
+        return self::getSingleton($block_class);
+    }
+
+    public static function widget($widget_class){
+        return self::getSingleton($widget_class);
+    }
     
     public static function run(){
+        header('Content-Type: text/html;charset=utf8');
         self::init();
         //dump(self::$_input->pathinfo());
         //$pathinfo = self::$_router->parse_uri(self::$_input->pathinfo());
         //dump($pathinfo);
         //echo self::$_router->url(array('app'=>'home','controller'=>'index','action'=>'index','id'=>156,'foodid'=>566));
-        header('Content-Type: text/html;charset=utf8');
         echo 'run';
     } 
 
@@ -153,6 +159,20 @@ class DHC{
     //需要加载多语言
     public static function __($str){
         return $str;
+    }
+
+    /*
+    * 路由说明
+    * 表示当前应用，控制器，方法
+    */
+    public static function _url($uri = '*/*/*', $additional = array()){
+        $option = array();
+        $uriArray = explode('/', $uri);
+        $option['app'] = ($uriArray[0] == '*')?DHC::getConfig('app'):$uriArray[0];
+        $option['controller'] = ($uriArray[1] == '*')?DHC::getConfig('controller'):$uriArray[1];
+        $option['action'] = ($uriArray[2] == '*')?DHC::getConfig('action'):$uriArray[2];
+        $option += $additional;
+        return DHC::$_router->url($option);
     }
 
 

@@ -3,7 +3,7 @@ if (!defined('DHC_VERSION')) exit('Access is no allowed.');
 
 return array(
     'type'  => 'mysql',
-    'table'   => 'order',
+    'table'   => 'orders',
     'primary' => array(
         'name'  =>  'order_id',
         'auto_increment'  =>  true,

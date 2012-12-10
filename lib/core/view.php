@@ -153,12 +153,12 @@ class view{
         }
     }
 
-    public function _json($param = array()){
-        header("Content-Type: " . isset($param['ContentType']) ? $param['ContentType'] : 'application/json' . "; charset=utf-8");
-        if($param['callback'] == ''){
-            echo(json_encode($param['data']));
+    public function _json($param = array(), $callback = '', $ContentType = 'application/json'){
+        header("Content-Type: " . $ContentType . "; charset=utf-8");
+        if(empty($callback)){
+            echo(json_encode($param));
         }else{
-            echo($param['callback'] . '(' . json_encode($param['data']) . ')');
+            echo($callback . '(' . json_encode($param) . ')');
         }        
     }
 

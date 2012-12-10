@@ -1,7 +1,7 @@
 <?php
 if (!defined('DHC_VERSION')) exit('Access is no allowed.');
 
-//基本SQL语句 如果不需要同步要求的数据可以使用LOW_PRIORITY
+//基本SQL语句 如果不需要 同步要求的数据可以使用LOW_PRIORITY
 //规则 INSERT INTO TABLENAME (KEY1,KEY2...) VALUES ({@VALUE1},{@VALUE2},...);
 define('INSERT_STR', 'INSERT INTO `{table}` ({keys}) VALUES ({values})');
 define('UPDATE_STR', 'UPDATE `{table}` SET {sets} {where}');
@@ -16,6 +16,10 @@ define('MYSQL_WHERE_SYMBOL', 'symbol');
 class mysql implements Idb{
     private static $_conn;
     private static $_tableName;
+    private static $_order_by = array(
+        ORDER_BY_ASC    =>  'ASC',
+        ORDER_BY_DESC   =>  'DESC'
+    );
 
     public static function init($connectionstring,$database){
         if(self::$_conn == null){
@@ -23,18 +27,13 @@ class mysql implements Idb{
                 $s = parse_url($connectionstring);
                 self::$_conn = mysql_connect($s['host'].':'.$s['port'], $s['user'], $s['pass'], true);
                 mysql_select_db($database, self::$_conn);
-                self::query("SET character_set_connection=utf8, character_set_results=utf8, character_set_client=binary", self::$_conn);
-                self::query("SET sql_mode = ''", self::$_conn);
+                self::command("SET character_set_connection=utf8, character_set_results=utf8, character_set_client=binary;", self::$_conn);
+                self::command("SET sql_mode = '';", self::$_conn);
             }catch(Exception $e){
                 Error::logError(CORE_MODEL_EC_DB_INIT_FAILED, EXCEPTION);
             }
 		}
     }
-
-    private static $_order_by = array(
-                                    ORDER_BY_ASC    =>  'ASC',
-                                    ORDER_BY_DESC   =>  'DESC'
-                                );
 
     public static function setTableName($tableName){
         self::$_tableName = $tableName;
@@ -151,11 +150,7 @@ class mysql implements Idb{
         }else{
             $sql = str_replace('%%', '%', $sql);
         }
-        $ret = @mysql_query($sql, $conn);
-        if(!$ret){
-            self::_error($sql, $conn);
-        }
-        return $ret;
+        return self::command($sql, $conn);
     }
 
     private static function conn_real_escape_string($str, $conn = NULL) {
@@ -178,16 +173,27 @@ class mysql implements Idb{
         return self::query($sql, self::$_conn, $argv) or self::_error($sql, self::$_conn) or die();
     }
 
-    public static function _q($sql){
+    public static function command($sql, $conn = null){
+        if(empty($conn)) $conn = self::$_conn;
         if (!is_resource($conn)) {    // 
             Error::logError(CORE_DB_MYSQL_EC_NO_CONNECT, EXCEPTION);
             return false;
         }
-        $ret = @mysql_query($sql, self::conn);
+        $ret = @mysql_query($sql, $conn);
         if(!$ret){
-            self::_error($sql, self::conn);
+            self::_error($sql, $conn);
         }
         return $ret;
+    }
+
+    public static function q($sql){
+        $rows = array();
+        $rs = self::command($sql);
+        if (!$rs) { return false; }
+        while (($row = mysql_fetch_assoc($rs))) {
+            $rows[] = $row;
+        }
+        return $rows;
     }
 
     private static function _error($sql, $conn){
