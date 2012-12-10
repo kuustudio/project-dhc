@@ -64,6 +64,16 @@ class DHCRouterUri{
                     return $container;
                 }
             }
+            $middle_c = explode('/', substr($uri, 1));
+            $container['app'] = array_shift($middle_c);
+            $container['controller'] = array_shift($middle_c);
+            $container['action'] = array_shift($middle_c);
+            $param_count = count($middle_c);
+            if($param_count%2 == 1) Error::logError(CORE_ROUTER_EC_PARAM_ALIGNMENT, EXCEPTION);
+            for ($i=0; $i < $param_count/2; $i++) { 
+                $key = array_shift($middle_c);
+                $_GET[$key] = array_shift($middle_c);
+            }
 			return $container;
         }elseif($this->url_method == 'url_default'){
             DHC::$_input->gets(array(
@@ -91,17 +101,32 @@ class DHCRouterUri{
                 unset($option['controller']);
                 unset($option['action']);
                 $reroutes = array_flip($this->routes);
+                if(!empty($option))
+                    $uri_comp = $uri.':'.implode('&',array_keys($option));
+                else
+                    $uri_comp = $uri;
                 //静态路径匹配
-                if (isset($reroutes[$uri])) {
-                    return $reroutes[$uri];
-                }else{
-                    //动态路径匹配
-                    $uri .= ':'.implode('&',array_keys($option));
-                    $url = $reroutes[$uri];
-                    foreach ($option as $key=>$value) {
-                        $url = str_replace('(?<'.$key.'>[^\/]+)', $value, $url);
+                if (isset($reroutes[$uri_comp])) {
+                    if(empty($option)){
+                        return $reroutes[$uri_comp];
+                    }else{
+                        //动态路径匹配
+                        $url = $reroutes[$uri_comp];
+                        foreach ($option as $key=>$value) {
+                            $url = str_replace('(?<'.$key.'>[^\/]+)', $value, $url);
+                        }
+                        return $url;
                     }
-                    return $url;
+                }else{
+                    if(empty($option)){
+                        return '/'.$uri;
+                    }else{
+                        $url = '/'.$uri;
+                        foreach ($option as $key => $value) {
+                            $url .= '/'.$key.'/'.$value;
+                        }
+                        return $url;
+                    }
                 }
 
             }elseif($this->url_method == 'url_default'){
@@ -119,5 +144,9 @@ class DHCRouterUri{
         }else{
             Error::logError(CORE_ROUTER_EC_UNABLE_URL, EXCEPTION);
         }
+    }
+
+    private function _url_rewrite(){
+
     }
 }

@@ -126,5 +126,24 @@ class controller{
     public function init(){}
 
     public function __destruct(){}
+
+    public function _setType($types, $op = 'get'){
+        call_user_func_array(array(DHC::$_input,$op.'s'), array($types));
+    }
     
+    public function _get($key){
+        return DHC::$_input->get($key);
+    }
+
+    public function _post(){
+        return DHC::$_input->post($key);
+    }
+
+    public function _cookie(){
+        return DHC::$_input->cookie($key);
+    }
+
+    public function _server(){
+        return DHC::$_input->server($key);
+    }
 }

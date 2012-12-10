@@ -36,7 +36,7 @@ class model implements Imodel{
     const UPDATE_TIME_FIELD = 'updated';
 
     public function __construct(){
-        $map = $this->_getMap($this->_mapName);
+        $map = $this->getMap($this->_mapName);
         $this->_dbType = $map['type'];
         $this->_tableName = $map['table'];
         $this->_primary = $map['primary'];
@@ -59,7 +59,7 @@ class model implements Imodel{
         }
     }
 
-    private function _getMap($name){
+    public function getMap($name){
         return include(DHC::getConfig('map_path').$name.'.php');
     }
 
@@ -137,6 +137,10 @@ class model implements Imodel{
         if(!in_array($time_field, array_keys($data)) && in_array($time_field, array_keys($this->_validateKeyMap))){
             $data[$time_field] = time();
         }
+    }
+
+    public function q($com){
+        return call_user_func_array(array($this->_dbType, 'q'), array($com));
     }
 
 }

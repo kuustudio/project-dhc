@@ -114,36 +114,75 @@ class DHCInput{
 	*/
 	public function is_ajax()
 	{
-		return ($this->server('HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest');
+		return ($this->server('HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest') ||
+					 ($this->server('x-requested-with') === 'XMLHttpRequest');
+	}
+
+	/*
+	* 是否post request
+	*/
+	public function is_post(){
+		return ($this->server('REQUEST_METHOD') === 'POST');
+	}
+
+	/*
+	* 获取当前 website url
+	*/
+	public function website_url(){
+		return $this->http_or_s() . '://' . $this->server('SERVER_NAME');
+	}
+
+	private function http_or_s(){
+		$scheme = $this->server('HTTPS');
+		return (empty($scheme)||($scheme=='off'))?'http':'https';
+	}
+
+	/*
+	* 当前页地址
+	*/
+	public function raw_url(){
+		return $this->website_url . $this->server('REQUEST_URI');
+	}
+
+	/*
+	*	获取来源页的地址
+	*/
+	public function referer(){
+		return $this->server('HTTP_REFERER');
 	}
 
 	/*
 	* $types = array(
+	* 'name'	=> PARAM_STRING,
 	*	'content'	=> array('func'=>PARAM_STRING,'argv'=>PARAM_TEXT),
 	*	'sex'	=> array('func'=>PARAM_STRING)
 	* );
 	*/
 	public function gets($types){
 		foreach($types as $key=>$type){
-			$this->gets[$this->get_prefix.$key] = $this->get_param_by_type($_GET[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
+			if(!isset($_GET[$key])) return false;
+			$this->gets[$this->get_prefix.$key] = $this->get_param_by_type($_GET[$key],isset($type['func'])?$type['func']:$type,isset($type['argv'])?$type['argv']:'');
 		}
 	}
 
 	public function posts($types){
 		foreach($types as $key=>$type){
-			$this->posts[$this->post_prefix.$key] = $this->get_param_by_type($_POST[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
+			if(!isset($_POST[$key])) return false;
+			$this->posts[$this->post_prefix.$key] = $this->get_param_by_type($_POST[$key],isset($type['func'])?$type['func']:$type,isset($type['argv'])?$type['argv']:'');
 		}
 	}
 
 	public function cookies($types){
 		foreach($types as $key=>$type){
-			$this->cookies[$this->cookie_prefix.$key] = $this->get_param_by_type($_COOKIE[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
+			if(!isset($_COOKIE[$key])) return false;
+			$this->cookies[$this->cookie_prefix.$key] = $this->get_param_by_type($_COOKIE[$key],isset($type['func'])?$type['func']:$type,isset($type['argv'])?$type['argv']:'');
 		}
 	}
 
 	public function servers($types){
 		foreach($types as $key=>$type){
-			$this->servers[$this->server_prefix.$key] = $this->get_param_by_type($_SERVER[$key],$type['func'],isset($type['argv'])?$type['argv']:'');
+			if(!isset($_SERVER[$key])) return false;
+			$this->servers[$this->server_prefix.$key] = $this->get_param_by_type($_SERVER[$key],isset($type['func'])?$type['func']:$type,isset($type['argv'])?$type['argv']:'');
 		}
 	}
 

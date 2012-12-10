@@ -10,6 +10,7 @@ define('API_EC_SUCCESS', 0);
  */
 define('CORE_ROUTER_EC_NO_URL_METHOD', 100); //非法的url_method
 define('CORE_ROUTER_EC_UNABLE_URL', 200); //无法形成URL
+define('CORE_ROUTER_EC_PARAM_ALIGNMENT', 201); //url参数错误
 define('CORE_CONTROLLER_EC_NO_ACTION', 300);
 define('CORE_BOOTSTRAP_EC_CONFIG_NOT_EXISTS', 1);
 define('CORE_BOOTSTRAP_EC_REGISTER_NOT_OBJECT', 2);
@@ -57,6 +58,7 @@ class Error{
 	private static $errorExplain = array(
 		CORE_ROUTER_EC_NO_URL_METHOD            => '非法的url_method',
 		CORE_ROUTER_EC_UNABLE_URL             	=> '无法形成URL',
+		CORE_ROUTER_EC_PARAM_ALIGNMENT					=> 'URL参数错误',
 		CORE_BOOTSTRAP_EC_CONFIG_NOT_EXISTS     => '配置项不存在',
 		CORE_BOOTSTRAP_EC_REGISTER_NOT_OBJECT   => '注册的不是对象',
 		CORE_BOOTSTRAP_EC_REGISTER_HAS_KEY      => '该键已经注册',
