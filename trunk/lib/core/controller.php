@@ -85,9 +85,10 @@ class controller{
         return true;
     }
 
-    public function redirect(){
+    public function redirect($url){
         if($this->beforeRedirect()){
-            //todo
+            header("Location:" . $url);
+            exit;
             $this->afterRedirect();
         }
     }
@@ -113,9 +114,9 @@ class controller{
 
     protected function beforeRender(){
         $controllerParam = array(
-                            'controller'    =>  DHC::getConfig('controller'),
-                            'action'        =>  DHC::getConfig('action')
-                        );
+            'controller' => DHC::getConfig('controller'),
+            'action' => DHC::getConfig('action')
+        );
         $this->assign($controllerParam);
     }
 
@@ -135,15 +136,15 @@ class controller{
         return DHC::$_input->get($key);
     }
 
-    public function _post(){
+    public function _post($key){
         return DHC::$_input->post($key);
     }
 
-    public function _cookie(){
+    public function _cookie($key){
         return DHC::$_input->cookie($key);
     }
 
-    public function _server(){
+    public function _server($key){
         return DHC::$_input->server($key);
     }
 }

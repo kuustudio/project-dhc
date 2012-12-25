@@ -93,7 +93,7 @@ class model implements Imodel{
            $data = $this->validator_data($data);
         }
         $this->_setTime(self::CREATE_TIME_FIELD, $data);
-        call_user_func_array(array($this->_dbType, 'create'), array('data'=>$data));
+        return call_user_func_array(array($this->_dbType, 'create'), array('data'=>$data));
     }
 
     public function update($data, $where = array()){
@@ -107,7 +107,7 @@ class model implements Imodel{
         if (DHC::getConfig('db_where_validate') && !$where) {
             $where = $this->validator_where($where);
         }
-        call_user_func_array(array($this->_dbType, 'update'), array('data'=>$data,'where'=>$where));
+        return call_user_func_array(array($this->_dbType, 'update'), array('data'=>$data,'where'=>$where));
     }
 
     //$where格式 array('key1'=>'value1',...);
@@ -130,7 +130,7 @@ class model implements Imodel{
     }
 
     public function delete($where = array()){
-        call_user_func_array(array($this->_dbType, 'delete'), array('where'=>$where));
+        return call_user_func_array(array($this->_dbType, 'delete'), array('where'=>$where));
     }
 
     private function _setTime($time_field, & $data){
