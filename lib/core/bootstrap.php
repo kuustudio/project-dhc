@@ -31,6 +31,10 @@ class DHC{
     private static $_isPost;
     //是否是ajax
     private static $_isAjax;
+    //存储引入的JS文件
+    private static $_js = array();
+    //存储引入的CSS文件
+    private static $_css = array();
     
     private static function init(){
         spl_autoload_register('self::autoload');
@@ -200,6 +204,26 @@ class DHC{
                 'line'      =>  $e->getLine()
             )
         );
+    }
+
+    public static function include_js($id, $file, $ifMerge = true, $debug = false, $mergeName = ''){
+        if($ifMerge) {
+            //
+            if(!isset(self::$_js[$id])) self::$_js[$id] = $file;
+        }else{
+            if($debug) return $file.'?'.time();
+        }
+        return $file;
+    }
+
+    public static function include_css($id, $file, $ifMerge = true, $debug = false, $mergeName = ''){
+        if($ifMerge) {
+            //
+            if(!isset(self::$_css[$id])) self::$_css[$id] = $file;
+        }else{
+            if($debug) return $file.'?'.time();
+        }
+        return $file;
     }
 }
 

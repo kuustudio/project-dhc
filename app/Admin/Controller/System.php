@@ -44,6 +44,7 @@ class Admin_Controller_System extends Admin_Controller_Base{
     }
 
     public function actionDictionary(){
+        $this->assign('Title','数据字典');
         $this->assign('db_map',$this->_dbMap);
         $this->_setType(array('table_name'=>PARAM_STRING));
         $tableName = $this->_get('table_name');
@@ -86,26 +87,7 @@ class Admin_Controller_System extends Admin_Controller_Base{
             $cols[$k]['map_type'] = $this->_types[$map['field'][$col['Field']]];
         }
         $this->assign('cols',$cols);
+        $this->assign('cols_count',count($cols));
         $this->render();
-    }
-
-    public function actionTable_AJAX(){
-        /*
-        * Collation: "latin1_swedish_ci"
-          Comment: ""
-          Default: null
-          Extra: ""
-          Field: "account_password"
-          Key: ""
-          Null: "NO"
-          Privileges: "select,insert,update,references"
-          Type
-        */
-        $this->_setType(array('table_name'=>PARAM_STRING));
-        $tableName = $this->_get('table_name');
-        $model = DHC::getSingleton('Admin_Model_'.$tableName);
-        $map = $model->getMap($tableName);
-        $col = $model->q('SHOW FULL COLUMNS FROM '.$map['table']);
-        $this->render($col,'json');
     }
 }

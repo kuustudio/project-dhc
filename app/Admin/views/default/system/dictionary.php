@@ -1,19 +1,6 @@
 <!--{@page layout="layout/base"}-->
 <!--{content head}-->
 <style type="text/css">
-tr{height:30px;}
-.list tr.hr{height:1px;}
-.bar-header .data-table-list{
-    margin-left: 20px;
-    float: left;
-}
-.bar-header .data-table-list .info{
-    margin-left: 20px;
-    color:red;
-}
-.list-header{
-    border-bottom: 1px solid #ccc;
-}
 .list-header .field_name{width:280px;}
 .list .field{text-align:left;}
 .list .field span{float:right;color:red;}
@@ -23,22 +10,12 @@ tr{height:30px;}
 .list-header .len{width:40px;}
 .list-header .collation{width:120px;}
 .list-header .default{width:40px;}
-.list .second{background-color: #eee;}
-.list .error{background-color: red;}
-.list .hover{background-color: #ddd;}
-.list .singleClick{background-color: #ddd;}
-.list .doubleClick{background-color: #ccc;}
-.bar-footer{border-top:1px solid #ccc;margin:10px 0;padding: 10px 0;}
-.bar-footer .operate{float:left;padding: 5px 20px;border-top: 1px solid #ccc;}
-.bar-footer .page-info{float:left;margin-left:10px;line-height:30px;}
-.bar-footer .page-list{float:right;line-height:30px;margin-right:10px;}
 </style>
 <!--{/content}--> 
 <!--{content body}-->
 <div class="content">
     <div class="submenu">
         <a class="current">字段列表</a>
-        <a href="#">添加店铺</a>
     </div>
     <div class="bar-header">
         <div class="data-table-list">
@@ -50,7 +27,7 @@ tr{height:30px;}
             </select>
             <span class="info">说明：√ 主键；K(索引类型)；↑ 自增；● 非空；○ 空；红色为有误，并说明</span>
         </div>
-        供 2445 条记录 | <a href="javascript:;" class="reload">刷新本页</a>
+        共 <?php echo $cols_count; ?> 条记录 | <a href="javascript:;" class="reload">刷新本页</a>
     </div>
     <div class="list">
         <table>
@@ -79,48 +56,9 @@ tr{height:30px;}
             <?php } ?>
         </table>
     </div>
-    <div class="bar-footer none">
-        <button class="operate">操作▲</button>
-        <div class="page-info">每页10条，共分4页</div>
-        <div class="page-list">
-            <a href="#">上一页</a>
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">下一页</a>
-        </div>
-    </div>
 </div>
 <script type="text/javascript">
 var get_table_url = "<?php echo DHC::_url('*/*/*'); ?>";
-
-(function(){
-    $('.bar-header .reload').on('click',function(){
-        location.reload();
-    });
-    $('.list-header .info').width(window.innerWidth-900);
-    $('.list tr').hover(
-        function(){
-            $(this).addClass('hover');
-        },
-        function(){
-            $(this).removeClass('hover');
-        }
-    );
-    $(".list tr").toggle(
-        function(){
-            $(this).addClass('singleClick');
-        },
-        function(){
-            $(this).addClass('doubleClick');
-        },
-        function(){
-            $(this).removeClass('singleClick doubleClick');
-        }
-    );
-    $('.data-table-list select').on('change',function(){
-        location.href = get_table_url+'?table_name='+$(this).val();
-    });
-})();
+seajs.use('default.system.dictionary');
 </script>
 <!--{/content}-->

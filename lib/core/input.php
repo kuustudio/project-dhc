@@ -160,28 +160,28 @@ class DHCInput{
 	*/
 	public function gets($types){
 		foreach($types as $key=>$type){
-			if(!isset($_GET[$key])) return false;
+			if(!isset($_GET[$key])) continue;
 			$this->gets[$this->get_prefix.$key] = $this->get_param_by_type($_GET[$key],isset($type['func'])?$type['func']:$type,isset($type['argv'])?$type['argv']:'');
 		}
 	}
 
 	public function posts($types){
 		foreach($types as $key=>$type){
-			if(!isset($_POST[$key])) return false;
+			if(!isset($_POST[$key])) continue;
 			$this->posts[$this->post_prefix.$key] = $this->get_param_by_type($_POST[$key],isset($type['func'])?$type['func']:$type,isset($type['argv'])?$type['argv']:'');
 		}
 	}
 
 	public function cookies($types){
 		foreach($types as $key=>$type){
-			if(!isset($_COOKIE[$key])) return false;
+			if(!isset($_COOKIE[$key])) continue;
 			$this->cookies[$this->cookie_prefix.$key] = $this->get_param_by_type($_COOKIE[$key],isset($type['func'])?$type['func']:$type,isset($type['argv'])?$type['argv']:'');
 		}
 	}
 
 	public function servers($types){
 		foreach($types as $key=>$type){
-			if(!isset($_SERVER[$key])) return false;
+			if(!isset($_SERVER[$key])) continue;
 			$this->servers[$this->server_prefix.$key] = $this->get_param_by_type($_SERVER[$key],isset($type['func'])?$type['func']:$type,isset($type['argv'])?$type['argv']:'');
 		}
 	}
