@@ -23,9 +23,10 @@
                 <td class="operation text-left">操作</td>
             </tr>
             <tr class="hr"><td colspan="4"><hr /></td></tr>
+            <form id="store-category-form" method="POST">
             <?php foreach($store_categorys as $k=>$store_category){ ?>
             <tr class="<?php if($k%2 == 1){echo 'second'; } ?>">
-                <td class="checkbox"><input id="store_category_id" type="checkbox" name="store_category_id[]" /></td>
+                <td class="checkbox"><input id="store_category_id" value="<?php echo $store_category['category_store_id']; ?>" type="checkbox" name="store_category_id[]" /></td>
                 <td class="category_id"><?php echo $store_category['category_store_id']; ?></td>
                 <td class="text-left"><?php echo $store_category['category_store_name']; ?></td>
                 <td class="operation text-left">
@@ -34,13 +35,14 @@
                 </td>
             </tr>
             <?php } ?>
+            </form>
         </table>
     </div>
     <div class="bar-footer">
-        <button class="operate">操作<span class="symbol">▲</span></button>
+        <button class="operate">操作</button>
         <div class="operate-list">
             <ul>
-                <li class="delete">删除</li>
+                <li action="deleteMultCategory">删除</li>
             </ul>
         </div>
     </div>
