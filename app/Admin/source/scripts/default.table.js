@@ -19,11 +19,9 @@ define(function(require, exports, module){
             history.go(-1);
         });
         $('.bar-footer .operate').toggle(function(){
-            $(this).find('.symbol').addClass('rotate');
-            $('.bar-footer ul').slideToggle('slow');
+            $('.bar-footer ul').show();
         },function(){
-            $(this).find('.symbol').removeClass('rotate');
-            $('.bar-footer ul').slideToggle('slow');
+            $('.bar-footer ul').hide();
         });
     })();
 });

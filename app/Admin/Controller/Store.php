@@ -95,4 +95,9 @@ class Admin_Controller_Store extends Admin_Controller_Base{
             $this->redirect(DHC::_url('*/*/category',array('result'=>'fail','message'=>urlencode('店铺分类编辑失败，ID:'.$categoryStoreId))));
         }
     }
+
+    public function actionDeleteMultCategory_POST(){
+        $this->_setType(array('store_category_id'=>array('func'=>PARAM_ARRAY,'argv'=>PARAM_UINT^PARAM_ARRAY)),'post');
+        dump($this->_post('store_category_id'));
+    }
 }

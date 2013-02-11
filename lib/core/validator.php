@@ -85,7 +85,7 @@ class validator{
     $arr_r = array();
     if(is_array($arr)){
       foreach ($arr as $key => $r){
-          if ($ret = $this->get_param_by_type($r, ($argv & ~PARAM_ARRAY)))
+          if ($ret = self::get_param_by_type($r, ($argv & ~PARAM_ARRAY)))
           {  
               $arr_r[$key] = $ret;
           }else{
@@ -96,6 +96,12 @@ class validator{
     }else{
       Error::logError(CORE_VALIDATOR_EC_NOT_ARRAY, EXCEPTION);
     }
+  }
+
+  public static function get_param_by_type($value,$funckey,$argv = ''){
+    $func = self::$function_array[$funckey];
+    if(empty($argv)) return self::$func($value);
+    return self::$func($value,$argv);
   }
 
   public static function get_param_null($value){
