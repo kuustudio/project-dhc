@@ -25,12 +25,12 @@ class DHC{
     public static $_object = array();
     //private static $_error = array();
     public static $_cache = array();
-    public static $_input;
-    public static $_router;
+    public static $_input = null;
+    public static $_router = null;
     //是否是post
-    private static $_isPost;
+    private static $_isPost = false;
     //是否是ajax
-    private static $_isAjax;
+    private static $_isAjax = false;
     //存储引入的JS文件
     private static $_js = array();
     //存储引入的CSS文件
@@ -48,8 +48,6 @@ class DHC{
 			'server' => DHC::getConfig('allowed_server_param')
 		));
         self::$_router = new DHCRouterUri(DHC::getConfig('url_method'), include(DHC_CONF.'route.php'));
-
-
 
         if($pathArray = self::$_router->parse_uri(self::$_input->pathinfo())){
             self::setConfig('app', ucfirst(strtolower($pathArray['app'])));
