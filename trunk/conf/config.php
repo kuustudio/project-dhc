@@ -20,7 +20,7 @@ return array(
     'action_name'           => 'action',
 
     'view_dir_name'         => 'views',
-    'compile_dir'           => DHC_ROOT.'c_views'.DS,
+    'compile_dir'           => MONK_ROOT.'c_views'.DS,
     'view_file_subfix'      => '.php',
     'view_complie'          => false,
     'view_complie_expires'  => 3600,
@@ -29,7 +29,7 @@ return array(
     'cache_start'           => false,
     'default_cache_backend' => 'memory',
 
-    'map_path'              => DHC_CONF.'map'.DS,
+    'map_path'              => MONK_CONF.'map'.DS,
     'db_write_validate'     => true,
     'db_where_validate'     => true,
 
