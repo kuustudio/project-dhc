@@ -4,7 +4,7 @@ class Admin_Controller_Store extends Admin_Controller_Base{
     var $model_store_categoray = null;
 
     public function init(){
-        $this->model_store_categoray = DHC::getSingleton('Admin_Model_CategoryStore');
+        $this->model_store_categoray = MONK::getSingleton('Admin_Model_CategoryStore');
         parent::init();
     }
 
@@ -48,9 +48,9 @@ class Admin_Controller_Store extends Admin_Controller_Base{
         );
         $categoryStoreId = $this->model_store_categoray->create($_data);
         if($categoryStoreId){
-            $this->redirect(DHC::_url('*/*/AddCategory',array('result'=>'success','message'=>urlencode('店铺分类添加成功，ID:'.$categoryStoreId))));
+            $this->redirect(MONK::_url('*/*/AddCategory',array('result'=>'success','message'=>urlencode('店铺分类添加成功，ID:'.$categoryStoreId))));
         }else{
-            $this->redirect(DHC::_url('*/*/AddCategory',array('result'=>'fail','message'=>urlencode('店铺分类添加失败'))));
+            $this->redirect(MONK::_url('*/*/AddCategory',array('result'=>'fail','message'=>urlencode('店铺分类添加失败'))));
         }
     }    
 
@@ -80,9 +80,9 @@ class Admin_Controller_Store extends Admin_Controller_Base{
         );
         $ret = $this->model_store_categoray->update($_data,array('category_store_id'=>array('symbol'=>'=','value'=>$categoryStoreId)));
         if($ret){
-            $this->redirect(DHC::_url('*/*/EditCategory',array('category_store_id'=>$categoryStoreId,'result'=>'success','message'=>urlencode('店铺分类编辑成功，ID:'.$categoryStoreId))));
+            $this->redirect(MONK::_url('*/*/EditCategory',array('category_store_id'=>$categoryStoreId,'result'=>'success','message'=>urlencode('店铺分类编辑成功，ID:'.$categoryStoreId))));
         }else{
-            $this->redirect(DHC::_url('*/*/EditCategory',array('category_store_id'=>$categoryStoreId,'result'=>'fail','message'=>urlencode('店铺分类编辑失败'))));
+            $this->redirect(MONK::_url('*/*/EditCategory',array('category_store_id'=>$categoryStoreId,'result'=>'fail','message'=>urlencode('店铺分类编辑失败'))));
         }
     }
     public function actionDeleteCategory(){
@@ -90,9 +90,9 @@ class Admin_Controller_Store extends Admin_Controller_Base{
         $categoryStoreId = $this->_get('category_store_id');
         $ret = $this->model_store_categoray->delete(array('category_store_id'=>array('symbol'=>'=','value'=>$categoryStoreId)));
         if($ret){
-            $this->redirect(DHC::_url('*/*/category',array('result'=>'success','message'=>urlencode('店铺分类删除成功，ID:'.$categoryStoreId))));
+            $this->redirect(MONK::_url('*/*/category',array('result'=>'success','message'=>urlencode('店铺分类删除成功，ID:'.$categoryStoreId))));
         }else{
-            $this->redirect(DHC::_url('*/*/category',array('result'=>'fail','message'=>urlencode('店铺分类编辑失败，ID:'.$categoryStoreId))));
+            $this->redirect(MONK::_url('*/*/category',array('result'=>'fail','message'=>urlencode('店铺分类编辑失败，ID:'.$categoryStoreId))));
         }
     }
 
