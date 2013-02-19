@@ -1,12 +1,12 @@
 <?php
-if (!defined('DHC_VERSION')) exit('Access is no allowed.');
+if (!defined('MONK_VERSION')) exit('Access is no allowed.');
 
 /*
  * model 是各类数据库的单表映射，并具有数据库工厂的功能，
  * 调用map文件对数据库输入数据进行类型验证，
  * 一致性统一调度
  */
-define('DRIVERPATH', DHC_LIB.'core'.DS.'db'.DS);
+define('DRIVERPATH', MONK_LIB.'core'.DS.'db'.DS);
 
 class model implements Imodel{
     //需要实现的接口函数
@@ -52,15 +52,15 @@ class model implements Imodel{
     private function _dbFactory($dbType){
         try{
             include(DRIVERPATH.$dbType.'.php');
-            $DSN = DHC::getConfig($dbType);
+            $DSN = MONK::getConfig($dbType);
             $dbType::init($DSN['master']['one']['connectionString'],$DSN['master']['one']['database']);
         }catch(exception $e){
-            DHC::_exception($e);
+            MONK::_exception($e);
         }
     }
 
     public function getMap($name){
-        return include(DHC::getConfig('map_path').$name.'.php');
+        return include(MONK::getConfig('map_path').$name.'.php');
     }
 
     //field所有都需要验证
@@ -89,7 +89,7 @@ class model implements Imodel{
         if(empty($data)) Error::logError(CORE_MODEL_EC_NO_CREATE_DATA, EXCEPTION);
         if(isset($data[$this->_primary['name']]) && isset($data[$this->_primary['auto_increment']]) && $data[$this->_primary['auto_increment']] == true)
             unset($data[$this->_primary['name']]);
-        if(DHC::getConfig('db_write_validate')){
+        if(MONK::getConfig('db_write_validate')){
            $data = $this->validator_data($data);
         }
         $this->_setTime(self::CREATE_TIME_FIELD, $data);
@@ -100,11 +100,11 @@ class model implements Imodel{
         if(empty($data)) Error::logError(CORE_MODEL_EC_NO_UPDATE_DATA, EXCEPTION);
         if(isset($data[$this->_primary['name']]) && isset($data[$this->_primary['auto_increment']]) && $data[$this->_primary['auto_increment']] == true)
             unset($data[$this->_primary['name']]);
-        if(DHC::getConfig('db_write_validate')){
+        if(MONK::getConfig('db_write_validate')){
            $data = $this->validator_data($data);
         }
         $this->_setTime(self::UPDATE_TIME_FIELD, $data);
-        if (DHC::getConfig('db_where_validate') && !$where) {
+        if (MONK::getConfig('db_where_validate') && !$where) {
             $where = $this->validator_where($where);
         }
         return call_user_func_array(array($this->_dbType, 'update'), array('data'=>$data,'where'=>$where));
@@ -115,7 +115,7 @@ class model implements Imodel{
     //$sort格式 array('key1'=>1,'key2'=>-1,...);
     //$limit格式 array('offset'=>2,'length'=>10); offset可以为空
     public function all($where = array(), $fields = '*', $sort = array(), $limit = array()){
-        if (DHC::getConfig('db_where_validate') && !$where) {
+        if (MONK::getConfig('db_where_validate') && !$where) {
             $where = $this->validator_where($where);
         }
         $map_field_keys = array_keys($this->_validateKeyMap);

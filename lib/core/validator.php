@@ -1,5 +1,5 @@
 <?php
-if (!defined('DHC_VERSION')) exit('Access is no allowed.');
+if (!defined('MONK_VERSION')) exit('Access is no allowed.');
 
 // 逻辑过滤
 define('PARAM_STRING',  0x00000001);
