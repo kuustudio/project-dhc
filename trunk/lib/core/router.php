@@ -1,12 +1,12 @@
 <?php
-if (!defined('DHC_VERSION')) exit('Access is no allowed.');
+if (!defined('MONK_VERSION')) exit('Access is no allowed.');
 /*
  * 路由匹配规则
  * PATHINFO => 'app/controller/action[:tag1&tag2&tag3 ...]'
  * 默认url:'app/controller/action/id/1'
  *
  */
-class DHCRouterUri{
+class MONKRouterUri{
     /**
      * 存储url模式
      *
@@ -31,9 +31,9 @@ class DHCRouterUri{
         if(!empty($subfix)) $uri = substr($uri,0,-strlen($subfix));
 		//添加默认
 		$container = array(
-			'app'		=> DHC::getConfig('app'),
-			'controller'=> DHC::getConfig('controller'),
-			'action'	=> DHC::getConfig('action')
+			'app'		=> MONK::getConfig('app'),
+			'controller'=> MONK::getConfig('controller'),
+			'action'	=> MONK::getConfig('action')
 		);
         if($this->url_method == 'url_rewrite'){
             //静态路径匹配
@@ -76,16 +76,16 @@ class DHCRouterUri{
             }
 			return $container;
         }elseif($this->url_method == 'url_default'){
-            DHC::$_input->gets(array(
-                    DHC::getConfig('app_name')           => array('func'=>PARAM_STRING),
-                    DHC::getConfig('controller_name')    => array('func'=>PARAM_STRING),
-                    DHC::getConfig('action_name')        => array('func'=>PARAM_STRING)
+            MONK::$_input->gets(array(
+                    MONK::getConfig('app_name')           => array('func'=>PARAM_STRING),
+                    MONK::getConfig('controller_name')    => array('func'=>PARAM_STRING),
+                    MONK::getConfig('action_name')        => array('func'=>PARAM_STRING)
                 )
             );
             parse_str($uri,$output);
-            if(isset($output[DHC::getConfig('app_name')])) $container['app'] = $output[DHC::getConfig('app_name')];
-            if(isset($output[DHC::getConfig('controller_name')])) $container['controller'] = $output[DHC::getConfig('controller_name')];
-            if(isset($output[DHC::getConfig('action_name')])) $container['action'] = $output[DHC::getConfig('action_name')];
+            if(isset($output[MONK::getConfig('app_name')])) $container['app'] = $output[MONK::getConfig('app_name')];
+            if(isset($output[MONK::getConfig('controller_name')])) $container['controller'] = $output[MONK::getConfig('controller_name')];
+            if(isset($output[MONK::getConfig('action_name')])) $container['action'] = $output[MONK::getConfig('action_name')];
             return $container;
         }else{
             Error::logError(CORE_INPUT_EC_NO_URL_METHOD, EXCEPTION);
@@ -130,9 +130,9 @@ class DHCRouterUri{
                 }
 
             }elseif($this->url_method == 'url_default'){
-                $url =  '?'.DHC::getConfig('app_name').'='.$option['app'].
-                        '&'.DHC::getConfig('controller_name').'='.$option['controller'].
-                        '&'.DHC::getConfig('action_name').'='.$option['action'];
+                $url =  '?'.MONK::getConfig('app_name').'='.$option['app'].
+                        '&'.MONK::getConfig('controller_name').'='.$option['controller'].
+                        '&'.MONK::getConfig('action_name').'='.$option['action'];
                 unset($option['app']);
                 unset($option['controller']);
                 unset($option['action']);

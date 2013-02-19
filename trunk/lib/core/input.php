@@ -1,7 +1,7 @@
 <?php 
-if (!defined('DHC_VERSION')) exit('Access is no allowed.');
+if (!defined('MONK_VERSION')) exit('Access is no allowed.');
 
-class DHCInput{
+class MONKInput{
 	
 	/**
 	 * 通过服务器传送过来的pathinfo

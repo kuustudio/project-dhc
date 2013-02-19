@@ -1,24 +1,24 @@
 <?php
-if (!defined('DHC_VERSION')) exit('Access is no allowed.');
+if (!defined('MONK_VERSION')) exit('Access is no allowed.');
 
 define('DS', DIRECTORY_SEPARATOR);
 define('PS', PATH_SEPARATOR);
-define('DHC_ROOT', dirname(dirname(dirname(__FILE__))).DS);
-define('DHC_LIB', DHC_ROOT.'lib'.DS);
-define('DHC_CONF', DHC_ROOT.'conf'.DS);
-define('DHC_APP', DHC_ROOT.'app'.DS);
-set_include_path(get_include_path().PS.DHC_LIB.PS.DHC_CONF);
+define('MONK_ROOT', dirname(dirname(dirname(__FILE__))).DS);
+define('MONK_LIB', MONK_ROOT.'lib'.DS);
+define('MONK_CONF', MONK_ROOT.'conf'.DS);
+define('MONK_APP', MONK_ROOT.'app'.DS);
+set_include_path(get_include_path().PS.MONK_LIB.PS.MONK_CONF);
 
-include(DHC_LIB.'core/interface.php');
-include(DHC_LIB.'core/function.php');
-include(DHC_LIB.'core/error.php');
-include(DHC_LIB.'core/exception.php');
-include(DHC_LIB.'core/validator.php');
-include(DHC_LIB.'core/input.php');
-include(DHC_LIB.'core/router.php');
-include(DHC_LIB.'core/block.php');
+include(MONK_LIB.'core/interface.php');
+include(MONK_LIB.'core/function.php');
+include(MONK_LIB.'core/error.php');
+include(MONK_LIB.'core/exception.php');
+include(MONK_LIB.'core/validator.php');
+include(MONK_LIB.'core/input.php');
+include(MONK_LIB.'core/router.php');
+include(MONK_LIB.'core/block.php');
 
-class DHC{
+class MONK{
     public static $_config = array();
     //private static $_route = array();
     public static $_autoload = array();
@@ -38,22 +38,22 @@ class DHC{
     
     private static function init(){
         spl_autoload_register('self::autoload');
-        self::$_config = include(DHC_CONF.'config.php');
-        //self::$_route = include(DHC_CONF.'route.php');
-        self::$_autoload = include(DHC_CONF.'autoload_class.php');
-        //self::$_error = include(DHC_CONF.'errors.php');
-        set_error_handler(array('DHC','_error'), E_ALL);
-        set_exception_handler(array('DHC','_exception'));
-        self::$_input = new DHCInput(array(
-			'server' => DHC::getConfig('allowed_server_param')
+        self::$_config = include(MONK_CONF.'config.php');
+        //self::$_route = include(MONK_CONF.'route.php');
+        self::$_autoload = include(MONK_CONF.'autoload_class.php');
+        //self::$_error = include(MONK_CONF.'errors.php');
+        set_error_handler(array('MONK','_error'), E_ALL);
+        set_exception_handler(array('MONK','_exception'));
+        self::$_input = new MONKInput(array(
+			'server' => MONK::getConfig('allowed_server_param')
 		));
-        self::$_router = new DHCRouterUri(DHC::getConfig('url_method'), include(DHC_CONF.'route.php'));
+        self::$_router = new MONKRouterUri(MONK::getConfig('url_method'), include(MONK_CONF.'route.php'));
 
         if($pathArray = self::$_router->parse_uri(self::$_input->pathinfo())){
             self::setConfig('app', ucfirst(strtolower($pathArray['app'])));
             self::setConfig('controller', ucfirst(strtolower($pathArray['controller'])));
             self::setConfig('action', ucfirst(strtolower($pathArray['action'])));
-            $controllerfile = DHC_APP . self::getConfig('app') .'/Controller/'. self::getConfig('controller') .'.php';
+            $controllerfile = MONK_APP . self::getConfig('app') .'/Controller/'. self::getConfig('controller') .'.php';
             //echo $controllerfile;
             if(file_exists($controllerfile)){
                 include($controllerfile);
@@ -144,7 +144,7 @@ class DHC{
         if(isset(self::$_autoload[$classname])){
             if(is_file(self::$_autoload[$classname])) include(self::$_autoload[$classname]);
         }elseif ($class_array = self::parse_class($classname)) {
-            include(DHC_APP.$class_array[0].DS.$class_array[1].DS.$class_array[2].'.php');
+            include(MONK_APP.$class_array[0].DS.$class_array[1].DS.$class_array[2].'.php');
         }else{
             include($classname);
         }
@@ -170,11 +170,11 @@ class DHC{
     public static function _url($uri = '*/*/*', $additional = array()){
         $option = array();
         $uriArray = explode('/', $uri);
-        $option['app'] = ($uriArray[0] == '*')?DHC::getConfig('app'):$uriArray[0];
-        $option['controller'] = ($uriArray[1] == '*')?DHC::getConfig('controller'):$uriArray[1];
-        $option['action'] = ($uriArray[2] == '*')?DHC::getConfig('action'):$uriArray[2];
+        $option['app'] = ($uriArray[0] == '*')?MONK::getConfig('app'):$uriArray[0];
+        $option['controller'] = ($uriArray[1] == '*')?MONK::getConfig('controller'):$uriArray[1];
+        $option['action'] = ($uriArray[2] == '*')?MONK::getConfig('action'):$uriArray[2];
         $option += $additional;
-        return DHC::$_router->url($option);
+        return MONK::$_router->url($option);
     }
 
 

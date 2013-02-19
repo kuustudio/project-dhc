@@ -1,5 +1,5 @@
 <?php
-if (!defined('DHC_VERSION')) exit('Access is no allowed.');
+if (!defined('MONK_VERSION')) exit('Access is no allowed.');
 
 /*
 * 区块类似于控制器

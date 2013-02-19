@@ -1,5 +1,5 @@
 <?php
-if (!defined('DHC_VERSION')) exit('Access is no allowed.');
+if (!defined('MONK_VERSION')) exit('Access is no allowed.');
 
 class controller{
     /**/
@@ -8,19 +8,19 @@ class controller{
     /**/
 
     final public function initBase(){
-        $this->_view = DHC::getSingleton('view');
-        $this->_view->setPath(DHC_APP.DHC::getConfig('app').DS);
+        $this->_view = MONK::getSingleton('view');
+        $this->_view->setPath(MONK_APP.MONK::getConfig('app').DS);
         $this->_pageTitle = '';
     }
 
     public function run($actionName){
-        if(empty($actionName)) $actionName = DHC::getConfig('action');
+        if(empty($actionName)) $actionName = MONK::getConfig('action');
         if($this->beforeAction()){
             $actions = $this->actions();
             if(isset($actions[$actionName])){
                 include($actions[$actionName]);
-                $action = DHC::getSingleton(
-                    DHC::getConfig('app').'_Controller_'.DHC::getConfig('controller').'_Action_'.$actionName
+                $action = MONK::getSingleton(
+                    MONK::getConfig('app').'_Controller_'.MONK::getConfig('controller').'_Action_'.$actionName
                 );
                 $return = $action->run();
             }else{
@@ -114,8 +114,8 @@ class controller{
 
     protected function beforeRender(){
         $controllerParam = array(
-            'controller' => DHC::getConfig('controller'),
-            'action' => DHC::getConfig('action')
+            'controller' => MONK::getConfig('controller'),
+            'action' => MONK::getConfig('action')
         );
         $this->assign($controllerParam);
     }
@@ -129,22 +129,22 @@ class controller{
     public function __destruct(){}
 
     public function _setType($types, $op = 'get'){
-        call_user_func_array(array(DHC::$_input,$op.'s'), array($types));
+        call_user_func_array(array(MONK::$_input,$op.'s'), array($types));
     }
     
     public function _get($key){
-        return DHC::$_input->get($key);
+        return MONK::$_input->get($key);
     }
 
     public function _post($key){
-        return DHC::$_input->post($key);
+        return MONK::$_input->post($key);
     }
 
     public function _cookie($key){
-        return DHC::$_input->cookie($key);
+        return MONK::$_input->cookie($key);
     }
 
     public function _server($key){
-        return DHC::$_input->server($key);
+        return MONK::$_input->server($key);
     }
 }

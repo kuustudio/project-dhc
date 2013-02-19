@@ -1,5 +1,5 @@
 <?php
-if (!defined('DHC_VERSION')) exit('Access is no allowed.');
+if (!defined('MONK_VERSION')) exit('Access is no allowed.');
 /**
 * 控制器内调用规则
 * rander(array(),'view'); 默认
@@ -59,12 +59,12 @@ class view{
     }
 
     public function setPath($path, $theme = 'default'){
-        if(!is_dir($path.DHC::getConfig('view_dir_name')))
+        if(!is_dir($path.MONK::getConfig('view_dir_name')))
             Error::logError(CORE_VIEW_EC_VIEW_NOT_EXISTS, EXCEPTION);
-        if(!is_dir($path.DHC::getConfig('view_dir_name').DS.$theme))
+        if(!is_dir($path.MONK::getConfig('view_dir_name').DS.$theme))
             Error::logError(CORE_VIEW_EC_THEME_NOT_EXISTS, EXCEPTION);
 
-        $this->themePath = $path.DHC::getConfig('view_dir_name').DS.$theme.DS;
+        $this->themePath = $path.MONK::getConfig('view_dir_name').DS.$theme.DS;
     }
     /*  base::代表跟目录下的views
     *   scheme://user:pass@host
@@ -95,24 +95,24 @@ class view{
         if($param['type']==self::TYPE_REMOTE){
             $this->viewFile = $param['file'];
         }elseif($param['type']==self::TYPE_ROOT){
-            $this->setPath(DHC_ROOT, empty($param['theme'])?DHC::getConfig('theme'):$param['theme']);
+            $this->setPath(MONK_ROOT, empty($param['theme'])?MONK::getConfig('theme'):$param['theme']);
             $this->filePath = strtolower($param['filename']);
-            $this->viewFile = $this->themePath.$this->filePath.DS.DHC::getConfig('view_file_subfix');
+            $this->viewFile = $this->themePath.$this->filePath.DS.MONK::getConfig('view_file_subfix');
         }else{
-            $app = empty($param['app'])?DHC::getConfig('app'):$param['app'];
-            $theme = empty($param['theme'])?DHC::getConfig('theme'):$param['theme'];
-            $controller = empty($param['controller'])?DHC::getConfig('controller'):$param['controller'];
-            $action = empty($param['action'])?DHC::getConfig('action'):$param['action'];
-            $this->setPath(DHC_APP.$app.DS, $theme);
+            $app = empty($param['app'])?MONK::getConfig('app'):$param['app'];
+            $theme = empty($param['theme'])?MONK::getConfig('theme'):$param['theme'];
+            $controller = empty($param['controller'])?MONK::getConfig('controller'):$param['controller'];
+            $action = empty($param['action'])?MONK::getConfig('action'):$param['action'];
+            $this->setPath(MONK_APP.$app.DS, $theme);
             $this->filePath = strtolower($controller).DS.strtolower($action);
-            $this->viewFile = $this->themePath.$this->filePath.DS.DHC::getConfig('view_file_subfix');
+            $this->viewFile = $this->themePath.$this->filePath.DS.MONK::getConfig('view_file_subfix');
         }   
 
         foreach($this->vars as $key=>$val){
 			$$key = $val;
 		}
        
-        if(DHC::getConfig('view_complie')){
+        if(MONK::getConfig('view_complie')){
             $this->compileFile = $this->getComplieFile($this->viewFile,$param['type']);
             if(!file_exists($this->compileFile))
                 call_user_func_array(array($this,'view_parse_'.$param['type']), array());
@@ -130,18 +130,18 @@ class view{
         if($param['type']==self::TYPE_REMOTE){
             $this->viewFile = $param['file'];
         }elseif($param['type']==self::TYPE_ROOT){
-            $this->setPath(DHC_ROOT, empty($param['theme'])?DHC::getConfig('theme'):$param['theme']);
+            $this->setPath(MONK_ROOT, empty($param['theme'])?MONK::getConfig('theme'):$param['theme']);
             $this->filePath = strtolower($param['filename']);
-            $this->viewFile = $this->themePath.'block'.DS.$this->filePath.DS.DHC::getConfig('view_file_subfix');
+            $this->viewFile = $this->themePath.'block'.DS.$this->filePath.DS.MONK::getConfig('view_file_subfix');
         }else{
-            $app = empty($param['app'])?DHC::getConfig('app'):$param['app'];
-            $theme = empty($param['theme'])?DHC::getConfig('theme'):$param['theme'];
-            $block = empty($param['block'])?DHC::getConfig('block'):$param['block'];
-            $this->setPath(DHC_APP.$app.DS, $theme);
+            $app = empty($param['app'])?MONK::getConfig('app'):$param['app'];
+            $theme = empty($param['theme'])?MONK::getConfig('theme'):$param['theme'];
+            $block = empty($param['block'])?MONK::getConfig('block'):$param['block'];
+            $this->setPath(MONK_APP.$app.DS, $theme);
             $this->filePath = strtolower($block);
-            $this->viewFile = $this->themePath.'block'.DS.$this->filePath.DS.DHC::getConfig('view_file_subfix');
+            $this->viewFile = $this->themePath.'block'.DS.$this->filePath.DS.MONK::getConfig('view_file_subfix');
         }
-        if(DHC::getConfig('view_complie')){
+        if(MONK::getConfig('view_complie')){
             $this->compileFile = $this->getComplieFile($this->viewFile,$param['type']);
             if(!file_exists($this->compileFile))
                 call_user_func_array(array($this,'view_parse_'.$param['type']), array());
@@ -192,19 +192,19 @@ class view{
     }
 
     private function getComplieFile($viewFile, $type = self::TYPE_DEFAULT){
-        $compile_dir = DHC::getConfig('compile_dir');
+        $compile_dir = MONK::getConfig('compile_dir');
         if(!is_dir($compile_dir.$type))
             Error::logError(CORE_VIEW_EC_C_VIEW_NOT_EXISTS, EXCEPTION);
         return $compile_dir.$type.DS.md5($viewFile);
     }
 
     private function getViewFile($name){
-        return $this->themePath.$name.DHC::getConfig('view_file_subfix');
+        return $this->themePath.$name.MONK::getConfig('view_file_subfix');
     }
 
     function view_filecontent($name) {
         $array=array("name"=>$name,"type"=>"","layout"=>"","content"=>"");
-        $filename = $this->themePath.$name.DHC::getConfig('view_file_subfix');
+        $filename = $this->themePath.$name.MONK::getConfig('view_file_subfix');
         $content = file_get_contents($filename);
         if(preg_match("/^\<\!\-\-\{\@([layout|page]+)( layout=\"([^\"]+?)\"){0,1}\}\-\-\>/ie", $content, $filetype)){
             $array["type"]=$filetype[1];

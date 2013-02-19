@@ -1,7 +1,7 @@
 <?php
-if (!defined('DHC_VERSION')) exit('Access is no allowed.');
+if (!defined('MONK_VERSION')) exit('Access is no allowed.');
 
-class DHCException extends Exception {
+class MONKException extends Exception {
     /**
      * 构造函数
      *
@@ -42,7 +42,7 @@ class DHCException extends Exception {
     }
 }
 
-class NotObjectException extends DHCException {
+class NotObjectException extends MONKException {
     function __construct($name, $type)
     {
         parent::__construct("Type mismatch. $name expected is object, actual is $type .", API_EC_OBJECT);
