@@ -46,33 +46,9 @@ return array(
         'HTTP_REFERER'      => PARAM_STRING,
     ),
     
-    //数据库连接字串配置(考虑多个数据库，主从以及读写分离)
-    'mysql' => array(
-        'master'=> array(
-            'one'=> array(
-                'connectionString' => 'mysql://root:11112222tq@localhost:3306',
-                'database' => 'dhc_demo'
-            ),
-            'two'=> array(
-                'connectionString' => 'mysql://root:11112222tq@localhost:3306',
-                'database' => 'dhc_demo'
-            ),
-        ),
-        'slave' =>  array(
-            'one'=> array(
-                'connectionString' => 'mysql://root:11112222tq@localhost:3306',
-                'database' => 'dhc_demo'
-            ),
-            'two'=> array(
-                'connectionString' => 'mysql://root:11112222tq@localhost:3306',
-                'database' => 'dhc_demo'
-            ),
-            'three'=> array(
-                'connectionString' => 'mysql://root:11112222tq@localhost:3306',
-                'database' => 'dhc_demo'
-            ),
-        )
-    ),
+    //数据库连接字串配置(连接到数据库中间层)
+    'mysql' => 'mysql://root:11112222tq@localhost:3306',
+
     'db_map' => array(
         'Account' => '账户表',
         'Area' => '地区表',
