@@ -2,7 +2,7 @@
 if (!defined('MONK_VERSION')) exit('Access is no allowed.');
 
 /*
- * model 是各类数据库的单表映射，并具有数据库工厂的功能，
+ * model 是数据实体模型，
  * 调用map文件对数据库输入数据进行类型验证，
  * 一致性统一调度
  */
@@ -84,7 +84,7 @@ class model implements Imodel{
         $func = validator::$function_array[$typeName];
         return validator::$func($value);
     }
-
+    /*
     public function create($data){
         if(empty($data)) Error::logError(CORE_MODEL_EC_NO_CREATE_DATA, EXCEPTION);
         if(isset($data[$this->_primary['name']]) && isset($data[$this->_primary['auto_increment']]) && $data[$this->_primary['auto_increment']] == true)
@@ -132,6 +132,7 @@ class model implements Imodel{
     public function delete($where = array()){
         return call_user_func_array(array($this->_dbType, 'delete'), array('where'=>$where));
     }
+    */
 
     private function _setTime($time_field, & $data){
         if(!in_array($time_field, array_keys($data)) && in_array($time_field, array_keys($this->_validateKeyMap))){
