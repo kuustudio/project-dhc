@@ -9,7 +9,6 @@ class controller{
 
     final public function initBase(){
         $this->_view = MONK::getSingleton('view');
-        $this->_view->setPath(MONK_APP.MONK::getConfig('app').DS);
         $this->_pageTitle = '';
     }
 
@@ -29,7 +28,7 @@ class controller{
                     $return = $this->$actionName();
                 }  
                 else
-                    Error::logError(CORE_CONTROLLER_EC_NO_ACTION, EXCEPTION);
+                    throw new Exception(CORE_CONTROLLER_EC_NO_ACTION);
             }
         }
 

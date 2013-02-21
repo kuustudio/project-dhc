@@ -64,12 +64,20 @@ class MONKRouterUri{
                     return $container;
                 }
             }
+
             $middle_c = explode('/', substr($uri, 1));
-            if(!empty($middle_c[0])) $container['app'] = array_shift($middle_c);
-            if(!empty($middle_c[0])) $container['controller'] = array_shift($middle_c);
-            if(!empty($middle_c[0])) $container['action'] = array_shift($middle_c);
+            $temp_app = array_shift($middle_c);
+            $temp_controller = array_shift($middle_c);
+            $temp_action = array_shift($middle_c);
+            if(!empty($temp_app)) $container['app'] = $temp_app;
+            if(!empty($temp_controller)) $container['controller'] = $temp_controller;
+            if(!empty($temp_action)) $container['action'] = $temp_action;
+            unset($temp_app);
+            unset($temp_controller);
+            unset($temp_action);
+
             $param_count = count($middle_c);
-            if($param_count%2 == 1) Error::logError(CORE_ROUTER_EC_PARAM_ALIGNMENT, EXCEPTION);
+            if($param_count%2 == 1) throw new Exception(CORE_ROUTER_EC_PARAM_ALIGNMENT);
             for ($i=0; $i < $param_count/2; $i++) { 
                 $key = array_shift($middle_c);
                 $_GET[$key] = array_shift($middle_c);
@@ -88,7 +96,7 @@ class MONKRouterUri{
             if(isset($output[MONK::getConfig('action_name')])) $container['action'] = $output[MONK::getConfig('action_name')];
             return $container;
         }else{
-            Error::logError(CORE_INPUT_EC_NO_URL_METHOD, EXCEPTION);
+            throw new Exception(CORE_INPUT_EC_NO_URL_METHOD);
         }
     }
 
@@ -139,10 +147,10 @@ class MONKRouterUri{
                 $url .= '&'.http_build_query($option);
                 return $url;
             }else{
-                Error::logError(CORE_ROUTER_EC_NO_URL_METHOD, EXCEPTION);
+                throw new Exception(CORE_ROUTER_EC_NO_URL_METHOD);
             }
         }else{
-            Error::logError(CORE_ROUTER_EC_UNABLE_URL, EXCEPTION);
+            throw new Exception(CORE_ROUTER_EC_UNABLE_URL);
         }
     }
 
