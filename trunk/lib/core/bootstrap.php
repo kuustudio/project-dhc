@@ -12,18 +12,14 @@ set_include_path(get_include_path().PS.MONK_LIB.PS.MONK_CONF);
 include(MONK_LIB.'core/interface.php');
 include(MONK_LIB.'core/function.php');
 include(MONK_LIB.'core/error.php');
-include(MONK_LIB.'core/exception.php');
 include(MONK_LIB.'core/validator.php');
 include(MONK_LIB.'core/input.php');
 include(MONK_LIB.'core/router.php');
-//include(MONK_LIB.'core/block.php');
 
 class MONK{
     public static $_config = array();
-    //private static $_route = array();
     public static $_autoload = array();
     public static $_object = array();
-    //private static $_error = array();
     public static $_cache = array();
     public static $_input = null;
     public static $_router = null;
@@ -39,9 +35,7 @@ class MONK{
     private static function init(){
         spl_autoload_register('self::autoload');
         self::$_config = include(MONK_CONF.'config.php');
-        //self::$_route = include(MONK_CONF.'route.php');
         self::$_autoload = include(MONK_CONF.'autoload_class.php');
-        //self::$_error = include(MONK_CONF.'errors.php');
         set_error_handler(array('MONK','_error'), E_ALL);
         set_exception_handler(array('MONK','_exception'));
         self::$_input = new MONKInput(array(
@@ -54,7 +48,6 @@ class MONK{
             self::setConfig('controller', ucfirst(strtolower($pathArray['controller'])));
             self::setConfig('action', ucfirst(strtolower($pathArray['action'])));
             $controllerfile = MONK_APP . self::getConfig('app') .'/Controller/'. self::getConfig('controller') .'.php';
-            echo $controllerfile;
             if(file_exists($controllerfile)){
                 include($controllerfile);
                 $controller = self::getSingleton(
@@ -67,12 +60,11 @@ class MONK{
                 if(self::$_input->is_post()) $action_subfix .= '_POST';
                 $controller->run(self::getConfig('action').$action_subfix);
             }else{
-                Error::logError(CORE_BOOTSTRAP_EC_NO_CONTROLLER, EXCEPTION);
+                throw new Exception(CORE_BOOTSTRAP_EC_NO_CONTROLLER);
             }
         }else{
-            Error::logError(CORE_BOOTSTRAP_EC_NO_PATH_ARRAY, EXCEPTION);
+            throw new Exception(CORE_BOOTSTRAP_EC_NO_PATH_ARRAY);
         }
-
     }
 
     public static function block($block_class){
@@ -86,11 +78,6 @@ class MONK{
     public static function run(){
         header('Content-Type: text/html;charset=utf8');
         self::init();
-        //dump(self::$_input->pathinfo());
-        //$pathinfo = self::$_router->parse_uri(self::$_input->pathinfo());
-        //dump($pathinfo);
-        //echo self::$_router->url(array('app'=>'home','controller'=>'index','action'=>'index','id'=>156,'foodid'=>566));
-        echo 'run';
     } 
 
     public static function getSingleton($classname){
@@ -105,7 +92,7 @@ class MONK{
         if(isset(self::$_config[$key]))
             return self::$_config[$key];
         else
-            Error::logError(CORE_BOOTSTRAP_EC_CONFIG_NOT_EXISTS, EXCEPTION);
+            throw new Exception(CORE_BOOTSTRAP_EC_CONFIG_NOT_EXISTS);
     } 
     
     public static function setConfig($key, $value){
@@ -119,12 +106,12 @@ class MONK{
     public static function register($key, $object){
         if (!is_object($object))
         {
-            Error::logError(CORE_BOOTSTRAP_EC_REGISTER_NOT_OBJECT, EXCEPTION);
+            throw new Exception(CORE_BOOTSTRAP_EC_REGISTER_NOT_OBJECT);
         }
 		if(!isset(self::$_object[$key])){
 			self::$_object[$key] = $object;
 		}else{
-            Error::logError(CORE_BOOTSTRAP_EC_REGISTER_HAS_KEY, EXCEPTION);
+            throw new Exception(CORE_BOOTSTRAP_EC_REGISTER_HAS_KEY);
 		}
     }
 
@@ -132,7 +119,7 @@ class MONK{
         if (isset(self::$_object[$key]) && is_object(self::$_object[$key])) {
             return self::$_object[$key];
         }else{
-            Error::logError(CORE_BOOTSTRAP_EC_CANNOT_REGISTRY, EXCEPTION);
+            throw new Exception(CORE_BOOTSTRAP_EC_CANNOT_REGISTRY);
         }
     }
     
@@ -191,11 +178,9 @@ class MONK{
 
     public static function _exception($e){
         Error::logError(
-            CORE_BOOTSTRAP_EC_USER_EXCEPTION,
+            $e->getMessage(),
             ERROR_SHOW,
             array(
-                'code'      =>  $e->getCode(),
-                'message'   =>  $e->getMessage(),
                 'file'      =>  $e->getFile(),
                 'line'      =>  $e->getLine()
             )

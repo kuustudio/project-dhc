@@ -108,7 +108,7 @@ class Error{
 	*/
 	public static function logError(
 			$code,
-			$method = EXCEPTION,
+			$method = ERROR_SHOW,
 			$option = array(),
 			$ext = array(
 					'format'	=> true
@@ -157,14 +157,6 @@ class Error{
 				error_log($str, 4);
 			}else{
 				error_log($str, 0);
-			}
-		}
-		if($method & EXCEPTION){
-			$exception = (!empty($ext['exception']))?$ext['exception']:'';
-			if(empty($exception)){
-				//throw new Exception(self::$errorExplain[$code],$code);
-			}else{
-				throw new $exception(self::$errorExplain[$code],$code,$option);
 			}
 		}
 		if($method & LOGSYS){

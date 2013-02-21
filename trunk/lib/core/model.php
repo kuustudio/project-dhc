@@ -10,9 +10,10 @@ define('DRIVERPATH', MONK_LIB.'core'.DS.'db'.DS);
 
 class model implements Imodel{
     //需要实现的接口函数
-    //public function init(){}
-    //public function validator(){}
     //public function validateAttribute($attrName, $typeName){}
+    
+    //存储模型用到的所有SQL原型
+    private $sqls = array();
 
     private $_mapName;
 
@@ -86,7 +87,7 @@ class model implements Imodel{
     }
     /*
     public function create($data){
-        if(empty($data)) Error::logError(CORE_MODEL_EC_NO_CREATE_DATA, EXCEPTION);
+        if(empty($data)) throw new Exception(CORE_MODEL_EC_NO_CREATE_DATA, EXCEPTION);
         if(isset($data[$this->_primary['name']]) && isset($data[$this->_primary['auto_increment']]) && $data[$this->_primary['auto_increment']] == true)
             unset($data[$this->_primary['name']]);
         if(MONK::getConfig('db_write_validate')){
@@ -97,7 +98,7 @@ class model implements Imodel{
     }
 
     public function update($data, $where = array()){
-        if(empty($data)) Error::logError(CORE_MODEL_EC_NO_UPDATE_DATA, EXCEPTION);
+        if(empty($data)) throw new Exception(CORE_MODEL_EC_NO_UPDATE_DATA, EXCEPTION);
         if(isset($data[$this->_primary['name']]) && isset($data[$this->_primary['auto_increment']]) && $data[$this->_primary['auto_increment']] == true)
             unset($data[$this->_primary['name']]);
         if(MONK::getConfig('db_write_validate')){

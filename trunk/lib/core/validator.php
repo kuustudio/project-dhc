@@ -94,7 +94,7 @@ class validator{
       }
       return $arr_r;
     }else{
-      Error::logError(CORE_VALIDATOR_EC_NOT_ARRAY, EXCEPTION);
+      throw new Exception(CORE_VALIDATOR_EC_NOT_ARRAY);
     }
   }
 
@@ -121,7 +121,7 @@ class validator{
       if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.0') !== false && preg_match('/[0-9]+[0-9a-f]{8}$/', $value) == 1) {
         exit;// 处理ie7 beta2问题
       }
-      Error::logError(CORE_VALIDATOR_EC_NOT_UINT, EXCEPTION);
+      throw new Exception(CORE_VALIDATOR_EC_NOT_UINT);
     }
   }
 
@@ -136,7 +136,7 @@ class validator{
         if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.0') !== false && preg_match('/[0-9]+[0-9a-f]{8}$/', $value) == 1) {
           exit;// 处理ie7 beta2问题
         }
-        Error::logError(CORE_VALIDATOR_EC_NOT_SINT, EXCEPTION);
+        throw new Exception(CORE_VALIDATOR_EC_NOT_SINT);
       }
     }
   }
@@ -145,7 +145,7 @@ class validator{
     if(preg_match('/^[0-9\.]*$/i', $value)){
         return floatval($value);
     }else{
-        Error::logError(CORE_VALIDATOR_EC_NOT_FLOAT, EXCEPTION);
+        throw new Exception(CORE_VALIDATOR_EC_NOT_FLOAT);
     }
   }
 
@@ -167,7 +167,7 @@ class validator{
         return false;
         break;
       default:
-        Error::logError(CORE_VALIDATOR_EC_NOT_BOOL, EXCEPTION);
+        throw new Exception(CORE_VALIDATOR_EC_NOT_BOOL);
         break;
     } 
   }
@@ -176,7 +176,7 @@ class validator{
     if(ctype_xdigit($value)){
       return intval(hexdec($value));
     }else{
-      Error::logError(CORE_VALIDATOR_EC_NOT_HEX, EXCEPTION);
+      throw new Exception(CORE_VALIDATOR_EC_NOT_HEX);
     }
   }
 
@@ -220,14 +220,14 @@ class validator{
       $test = @strtotime($str);
       if($test !== -1 && $test !== false)
           return $test;
-      Error::logError(CORE_VALIDATOR_EC_NOT_DATETIME, EXCEPTION);
+      throw new Exception(CORE_VALIDATOR_EC_NOT_DATETIME);
   }
 
   public static function get_param_email($str){
       self::get_param_string($str, PARAM_STRING);
       if(preg_match('/^[A-Za-z0-9]+([._\-\+]*[A-Za-z0-9]+)*@([A-Za-z0-9]+[-A-Za-z0-9]*[A-Za-z0-9]+\.)+[A-Za-z0-9]+$/', $str)) 
           return $str;
-      Error::logError(CORE_VALIDATOR_EC_NOT_EMAIL, EXCEPTION);
+      throw new Exception(CORE_VALIDATOR_EC_NOT_EMAIL);
   }
 
   public static function get_param_ipv4($str){
@@ -235,13 +235,13 @@ class validator{
       $test = ip2long($str);
       if($test !== -1 && $test !== false)
           return $test;
-      Error::logError(CORE_VALIDATOR_EC_NOT_IPV4, EXCEPTION);
+      throw new Exception(CORE_VALIDATOR_EC_NOT_IPV4);
   }
 
   public static function get_param_domain($str){
       self::get_param_string($str, PARAM_STRING);
       if(preg_match('/[a-z0-9\.]+/i', $str))
           return $str;
-      Error::logError(CORE_VALIDATOR_EC_NOT_DOMAIN, EXCEPTION);
+      throw new Exception(CORE_VALIDATOR_EC_NOT_DOMAIN);
   }
 }

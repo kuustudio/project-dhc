@@ -32,7 +32,7 @@ if (!defined('MONK_VERSION')) exit('Access is no allowed.');
 *           TYPE_ROOT
 *           TYPE_REMOTE
 *               filename
-* 约束1，layout文件必须和@page layout="layout/xxx"在同一个views路径下
+* 约束1，layout文件必须和@page layout="xxx"在同一个views路径下
 */
 
 //BigPipe ，页面分段输出
@@ -60,9 +60,9 @@ class view{
 
     public function setPath($path, $theme = 'default'){
         if(!is_dir($path.MONK::getConfig('view_dir_name')))
-            Error::logError(CORE_VIEW_EC_VIEW_NOT_EXISTS, EXCEPTION);
+            throw new Exception(CORE_VIEW_EC_VIEW_NOT_EXISTS);
         if(!is_dir($path.MONK::getConfig('view_dir_name').DS.$theme))
-            Error::logError(CORE_VIEW_EC_THEME_NOT_EXISTS, EXCEPTION);
+            throw new Exception(CORE_VIEW_EC_THEME_NOT_EXISTS);
 
         $this->themePath = $path.MONK::getConfig('view_dir_name').DS.$theme.DS;
     }
@@ -111,15 +111,14 @@ class view{
         foreach($this->vars as $key=>$val){
 			$$key = $val;
 		}
-       
-        if(MONK::getConfig('view_complie')){
+        if(MONK::getConfig('run_model') == 'debug'){
             $this->compileFile = $this->getComplieFile($this->viewFile,$param['type']);
-            if(!file_exists($this->compileFile))
-                call_user_func_array(array($this,'view_parse_'.$param['type']), array());
+            call_user_func_array(array($this,'view_parse_'.$param['type']), array());
             include($this->compileFile);
         }else{
             $this->compileFile = $this->getComplieFile($this->viewFile,$param['type']);
-            call_user_func_array(array($this,'view_parse_'.$param['type']), array());
+            if(!file_exists($this->compileFile))
+                call_user_func_array(array($this,'view_parse_'.$param['type']), array());
             include($this->compileFile);
         }
     }
@@ -141,14 +140,14 @@ class view{
             $this->filePath = strtolower($block);
             $this->viewFile = $this->themePath.'block'.DS.$this->filePath.DS.MONK::getConfig('view_file_subfix');
         }
-        if(MONK::getConfig('view_complie')){
+        if(MONK::getConfig('run_model') == 'debug'){
             $this->compileFile = $this->getComplieFile($this->viewFile,$param['type']);
-            if(!file_exists($this->compileFile))
-                call_user_func_array(array($this,'view_parse_'.$param['type']), array());
+            call_user_func_array(array($this,'view_parse_'.$param['type']), array());
             include($this->compileFile);
         }else{
             $this->compileFile = $this->getComplieFile($this->viewFile,$param['type']);
-            call_user_func_array(array($this,'view_parse_'.$param['type']), array());
+            if(!file_exists($this->compileFile))
+                call_user_func_array(array($this,'view_parse_'.$param['type']), array());
             include($this->compileFile);
         }
     }
@@ -160,22 +159,6 @@ class view{
         }else{
             echo($callback . '(' . json_encode($param) . ')');
         }        
-    }
-
-    public function _file($param){
-
-    }
-
-    public function _error($param){
-
-    }
-
-    public function _content($param){
-
-    }
-
-    public function _script($param){
-
     }
 
     private function view_parse_default(){
@@ -194,12 +177,12 @@ class view{
     private function getComplieFile($viewFile, $type = self::TYPE_DEFAULT){
         $compile_dir = MONK::getConfig('compile_dir');
         if(!is_dir($compile_dir.$type))
-            Error::logError(CORE_VIEW_EC_C_VIEW_NOT_EXISTS, EXCEPTION);
+            throw new Exception(CORE_VIEW_EC_C_VIEW_NOT_EXISTS);
         return $compile_dir.$type.DS.md5($viewFile);
     }
 
     private function getViewFile($name){
-        return $this->themePath.$name.MONK::getConfig('view_file_subfix');
+        return $this->themePath.MONK::getConfig('layout_dir_name').DS.$name.MONK::getConfig('view_file_subfix');
     }
 
     function view_filecontent($name) {
@@ -222,21 +205,19 @@ class view{
     private function parse_page($filecontent){
         $content = $filecontent["content"];
 
-        $contents=array();
-        $preg_pattern="/\<\!\-\-\{content\s+([a-z0-9_\/]+)\}\-\-\>([\s\S]+?)\<\!\-\-{\/content}\-\-\>/ie";
-        if(preg_match_all($preg_pattern, $content, $tcontent)){
-            foreach($tcontent[1] as $matchcontent){
-                $contents[$matchcontent]="";
-            }
-            for($i=0;$i<count($tcontent[2]);$i++){
-                $contents[$tcontent[1][$i]]=$tcontent[2][$i];
-            }
-        }
-
         //解析 layout
         if($filecontent["layout"] != ""){
+            $contents=array();
+            $preg_pattern="/\<\!\-\-\{content\s+([a-z0-9_\/]+)\}\-\-\>([\s\S]+?)\<\!\-\-{\/content}\-\-\>/ie";
+            if(preg_match_all($preg_pattern, $content, $tcontent)){
+                foreach($tcontent[1] as $matchcontent){
+                    $contents[$matchcontent]="";
+                }
+                for($i=0;$i<count($tcontent[2]);$i++){
+                    $contents[$tcontent[1][$i]]=$tcontent[2][$i];
+                }
+            }
             $contentwithlayout = file_get_contents($this->getViewFile($filecontent["layout"]));
-            
             if(preg_match_all("/\<\!\-\-\{contentplaceholderid ([\S]+)\}\-\-\>/ie",$contentwithlayout,$holdermatchs)){
 
                 foreach($holdermatchs[1] as $holdermatch){
