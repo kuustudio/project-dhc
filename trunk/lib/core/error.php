@@ -8,10 +8,6 @@ define('API_EC_SUCCESS', 0);
  * 系统框架核心错误
  *
  */
-define('CORE_ROUTER_EC_NO_URL_METHOD', 100); //非法的url_method
-define('CORE_ROUTER_EC_UNABLE_URL', 200); //无法形成URL
-define('CORE_ROUTER_EC_PARAM_ALIGNMENT', 201); //url参数错误
-define('CORE_CONTROLLER_EC_NO_ACTION', 300);
 define('CORE_BOOTSTRAP_EC_CONFIG_NOT_EXISTS', 1);
 define('CORE_BOOTSTRAP_EC_REGISTER_NOT_OBJECT', 2);
 define('CORE_BOOTSTRAP_EC_REGISTER_HAS_KEY', 3);
@@ -20,6 +16,12 @@ define('CORE_BOOTSTRAP_EC_NO_CONTROLLER', 5);
 define('CORE_BOOTSTRAP_EC_CANNOT_REGISTRY', 6);
 define('CORE_BOOTSTRAP_EC_SYSTEM_ERROR', 7);
 define('CORE_BOOTSTRAP_EC_USER_EXCEPTION', 8);
+define('CORE_BOOTSTRAP_EC_CLASS_FILE_NOT_EXISTS', 9);
+
+define('CORE_ROUTER_EC_NO_URL_METHOD', 100); //非法的url_method
+define('CORE_ROUTER_EC_PARAM_ALIGNMENT', 101); //url参数错误
+
+define('CORE_CONTROLLER_EC_NO_ACTION', 200);
 
 define('CORE_VALIDATOR_EC_NOT_UINT', 1001);
 define('CORE_VALIDATOR_EC_NOT_ARRAY', 1002);
@@ -39,6 +41,8 @@ define('CORE_DB_MYSQL_EC_SQL_QUERY_PARAMETER_MISSING', 1103);
 define('CORE_MODEL_EC_DB_INIT_FAILED', 1201);
 define('CORE_MODEL_EC_NO_CREATE_DATA', 1202);
 define('CORE_MODEL_EC_NO_UPDATE_DATA', 1203);
+define('CORE_MODEL_EC_MAP_FILE_CONNOT_FOUND', 1204);
+define('CORE_MODEL_EC_NOT_SQL', 1205);
 
 define('CORE_VIEW_EC_THEME_NOT_EXISTS', 1301);
 define('CORE_VIEW_EC_VIEW_NOT_EXISTS', 1302);
@@ -57,7 +61,6 @@ class Error{
 	private static $errorContainer = array();
 	private static $errorExplain = array(
 		CORE_ROUTER_EC_NO_URL_METHOD            => '非法的url_method',
-		CORE_ROUTER_EC_UNABLE_URL             	=> '无法形成URL',
 		CORE_ROUTER_EC_PARAM_ALIGNMENT					=> 'URL参数错误',
 		CORE_BOOTSTRAP_EC_CONFIG_NOT_EXISTS     => '配置项不存在',
 		CORE_BOOTSTRAP_EC_REGISTER_NOT_OBJECT   => '注册的不是对象',
@@ -67,6 +70,7 @@ class Error{
 		CORE_BOOTSTRAP_EC_CANNOT_REGISTRY      	=> '无法从注册数据中取出当前键',
 		CORE_BOOTSTRAP_EC_SYSTEM_ERROR		      => 'PHP脚本错误',
 		CORE_BOOTSTRAP_EC_USER_EXCEPTION		    => '用户异常',
+        CORE_BOOTSTRAP_EC_CLASS_FILE_NOT_EXISTS     => '该类的文件不存在',
 		CORE_CONTROLLER_EC_NO_ACTION		      	=> '未找到行动',
 		CORE_VALIDATOR_EC_NOT_UINT		      		=> '验证的变量不是无符号整数',
 		CORE_VALIDATOR_EC_NOT_ARRAY		      		=> '验证的变量不是数组',
@@ -86,6 +90,8 @@ class Error{
     CORE_MODEL_EC_DB_INIT_FAILED						=> '数据库初始化失败',
     CORE_MODEL_EC_NO_CREATE_DATA						=> '没有提交创建的数据',
     CORE_MODEL_EC_NO_UPDATE_DATA						=> '没有提交更新的数据',
+    CORE_MODEL_EC_MAP_FILE_CONNOT_FOUND                 => '数据映射文件不存在',
+    CORE_MODEL_EC_NOT_SQL                               => 'SQL语句不存在',
 
     CORE_VIEW_EC_THEME_NOT_EXISTS						=> '风格不存在',
     CORE_VIEW_EC_VIEW_NOT_EXISTS						=> '模板目录不存在',

@@ -60,9 +60,9 @@ class view{
 
     public function setPath($path, $theme = 'default'){
         if(!is_dir($path.MONK::getConfig('view_dir_name')))
-            throw new Exception(CORE_VIEW_EC_VIEW_NOT_EXISTS);
+            throw new Exception('模板目录不存在，路径为`'.$path.MONK::getConfig('view_dir_name').'`',CORE_VIEW_EC_VIEW_NOT_EXISTS);
         if(!is_dir($path.MONK::getConfig('view_dir_name').DS.$theme))
-            throw new Exception(CORE_VIEW_EC_THEME_NOT_EXISTS);
+            throw new Exception('风格目录不存在，路径为`'.$path.MONK::getConfig('view_dir_name').DS.$theme.'`',CORE_VIEW_EC_THEME_NOT_EXISTS);
 
         $this->themePath = $path.MONK::getConfig('view_dir_name').DS.$theme.DS;
     }
@@ -177,7 +177,7 @@ class view{
     private function getComplieFile($viewFile, $type = self::TYPE_DEFAULT){
         $compile_dir = MONK::getConfig('compile_dir');
         if(!is_dir($compile_dir.$type))
-            throw new Exception(CORE_VIEW_EC_C_VIEW_NOT_EXISTS);
+            throw new Exception('模板编译目录不存在，路径为`'.$compile_dir.$type.'`',CORE_VIEW_EC_C_VIEW_NOT_EXISTS);
         return $compile_dir.$type.DS.md5($viewFile);
     }
 

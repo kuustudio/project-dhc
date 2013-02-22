@@ -77,7 +77,7 @@ class MONKRouterUri{
             unset($temp_action);
 
             $param_count = count($middle_c);
-            if($param_count%2 == 1) throw new Exception(CORE_ROUTER_EC_PARAM_ALIGNMENT);
+            if($param_count%2 == 1) throw new Exception('路由参数无法对应，URI为`'.$uri.'`',CORE_ROUTER_EC_PARAM_ALIGNMENT);
             for ($i=0; $i < $param_count/2; $i++) { 
                 $key = array_shift($middle_c);
                 $_GET[$key] = array_shift($middle_c);
@@ -96,61 +96,61 @@ class MONKRouterUri{
             if(isset($output[MONK::getConfig('action_name')])) $container['action'] = $output[MONK::getConfig('action_name')];
             return $container;
         }else{
-            throw new Exception(CORE_INPUT_EC_NO_URL_METHOD);
+            throw new Exception('未配置路由模式`url_method`',CORE_INPUT_EC_NO_URL_METHOD);
         }
     }
 
     public function url($option){
-        if(!empty($option['app']) && !empty($option['controller']) && !empty($option['action'])){
-            if($this->url_method == 'url_rewrite'){
-                //URL重写模式下
-                $uri = $option['app'].'/'.$option['controller'].'/'.$option['action'];
-                unset($option['app']);
-                unset($option['controller']);
-                unset($option['action']);
-                $reroutes = array_flip($this->routes);
-                if(!empty($option))
-                    $uri_comp = $uri.':'.implode('&',array_keys($option));
-                else
-                    $uri_comp = $uri;
-                //静态路径匹配
-                if (isset($reroutes[$uri_comp])) {
-                    if(empty($option)){
-                        return $reroutes[$uri_comp];
-                    }else{
-                        //动态路径匹配
-                        $url = $reroutes[$uri_comp];
-                        foreach ($option as $key=>$value) {
-                            $url = str_replace('(?<'.$key.'>[^\/]+)', $value, $url);
-                        }
-                        return $url;
-                    }
-                }else{
-                    if(empty($option)){
-                        return '/'.$uri;
-                    }else{
-                        $url = '/'.$uri;
-                        foreach ($option as $key => $value) {
-                            $url .= '/'.$key.'/'.$value;
-                        }
-                        return $url;
-                    }
-                }
+        if(empty($option['app']))           $option['app'] = MONK::getConfig('app');
+        if(empty($option['controller']))    $option['controller'] = MONK::getConfig('controller');
+        if(empty($option['action']))        $option['action'] = MONK::getConfig('action');
 
-            }elseif($this->url_method == 'url_default'){
-                $url =  '?'.MONK::getConfig('app_name').'='.$option['app'].
-                        '&'.MONK::getConfig('controller_name').'='.$option['controller'].
-                        '&'.MONK::getConfig('action_name').'='.$option['action'];
-                unset($option['app']);
-                unset($option['controller']);
-                unset($option['action']);
-                $url .= '&'.http_build_query($option);
-                return $url;
+        if($this->url_method == 'url_rewrite'){
+            //URL重写模式下
+            $uri = $option['app'].'/'.$option['controller'].'/'.$option['action'];
+            unset($option['app']);
+            unset($option['controller']);
+            unset($option['action']);
+            $reroutes = array_flip($this->routes);
+            if(!empty($option))
+                $uri_comp = $uri.':'.implode('&',array_keys($option));
+            else
+                $uri_comp = $uri;
+            //静态路径匹配
+            if (isset($reroutes[$uri_comp])) {
+                if(empty($option)){
+                    return $reroutes[$uri_comp];
+                }else{
+                    //动态路径匹配
+                    $url = $reroutes[$uri_comp];
+                    foreach ($option as $key=>$value) {
+                        $url = str_replace('(?<'.$key.'>[^\/]+)', $value, $url);
+                    }
+                    return $url;
+                }
             }else{
-                throw new Exception(CORE_ROUTER_EC_NO_URL_METHOD);
+                if(empty($option)){
+                    return '/'.$uri;
+                }else{
+                    $url = '/'.$uri;
+                    foreach ($option as $key => $value) {
+                        $url .= '/'.$key.'/'.$value;
+                    }
+                    return $url;
+                }
             }
+
+        }elseif($this->url_method == 'url_default'){
+            $url =  '?'.MONK::getConfig('app_name').'='.$option['app'].
+                    '&'.MONK::getConfig('controller_name').'='.$option['controller'].
+                    '&'.MONK::getConfig('action_name').'='.$option['action'];
+            unset($option['app']);
+            unset($option['controller']);
+            unset($option['action']);
+            $url .= '&'.http_build_query($option);
+            return $url;
         }else{
-            throw new Exception(CORE_ROUTER_EC_UNABLE_URL);
+            throw new Exception('未配置路由模式`url_method`',CORE_ROUTER_EC_NO_URL_METHOD);
         }
     }
 

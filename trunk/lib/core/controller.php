@@ -28,7 +28,7 @@ class controller{
                     $return = $this->$actionName();
                 }  
                 else
-                    throw new Exception(CORE_CONTROLLER_EC_NO_ACTION);
+                    throw new Exception('当前控制器不存在方法`'.'action'.$actionName.'`或`'.MONK::getConfig('app').'_Controller_'.MONK::getConfig('controller').'_Action_'.$actionName.'`类',CORE_CONTROLLER_EC_NO_ACTION);
             }
         }
 
