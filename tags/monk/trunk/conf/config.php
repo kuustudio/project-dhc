@@ -37,6 +37,8 @@ return array(
     'default_cache_backend' => 'memory',
 
     //数据表字符集及映射表相关配置
+    'mysql'                 => 'mysql://root:11112222tq@localhost:3306',
+    'dbname'                => 'monk',
     'character_set_connection'  => 'utf8',
     'character_set_results'     => 'utf8',
     'character_set_client'      => 'binary',

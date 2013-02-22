@@ -6,7 +6,7 @@ interface Imodel{
 }
 
 interface Idb{
-    public static function init($connectionstring,$database);
+    public static function init();
 
 }
 

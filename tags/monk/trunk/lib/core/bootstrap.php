@@ -60,10 +60,10 @@ class MONK{
                 if(self::$_input->is_post()) $action_subfix .= '_POST';
                 $controller->run(self::getConfig('action').$action_subfix);
             }else{
-                throw new Exception(CORE_BOOTSTRAP_EC_NO_CONTROLLER);
+                throw new Exception('不存在文件`'.$controllerfile.'`', CORE_BOOTSTRAP_EC_NO_CONTROLLER);
             }
         }else{
-            throw new Exception(CORE_BOOTSTRAP_EC_NO_PATH_ARRAY);
+            throw new Exception('',CORE_BOOTSTRAP_EC_NO_PATH_ARRAY);
         }
     }
 
@@ -92,7 +92,7 @@ class MONK{
         if(isset(self::$_config[$key]))
             return self::$_config[$key];
         else
-            throw new Exception(CORE_BOOTSTRAP_EC_CONFIG_NOT_EXISTS);
+            throw new Exception('不存在变量为`'.$key.'`的配置',CORE_BOOTSTRAP_EC_CONFIG_NOT_EXISTS);
     } 
     
     public static function setConfig($key, $value){
@@ -106,12 +106,12 @@ class MONK{
     public static function register($key, $object){
         if (!is_object($object))
         {
-            throw new Exception(CORE_BOOTSTRAP_EC_REGISTER_NOT_OBJECT);
+            throw new Exception('当前键`'.$key.'`注册的不是对象，变量类型为`'.gettype($object).'`',CORE_BOOTSTRAP_EC_REGISTER_NOT_OBJECT);
         }
 		if(!isset(self::$_object[$key])){
 			self::$_object[$key] = $object;
 		}else{
-            throw new Exception(CORE_BOOTSTRAP_EC_REGISTER_HAS_KEY);
+            throw new Exception('已经存在键`'.$key.'`的对象，请不要重复注册',CORE_BOOTSTRAP_EC_REGISTER_HAS_KEY);
 		}
     }
 
@@ -119,7 +119,7 @@ class MONK{
         if (isset(self::$_object[$key]) && is_object(self::$_object[$key])) {
             return self::$_object[$key];
         }else{
-            throw new Exception(CORE_BOOTSTRAP_EC_CANNOT_REGISTRY);
+            throw new Exception('未注册键`'.$key.'`对应的对象',CORE_BOOTSTRAP_EC_CANNOT_REGISTRY);
         }
     }
     
@@ -128,8 +128,11 @@ class MONK{
     private static function autoload($classname){
         if(isset(self::$_autoload[$classname])){
             if(is_file(self::$_autoload[$classname])) include(self::$_autoload[$classname]);
-        }elseif ($class_array = self::parse_class($classname)) {
-            include(MONK_APP.$class_array[0].DS.$class_array[1].DS.$class_array[2].'.php');
+        }elseif ($class_path = self::parse_class($classname)) {
+            if(file_exists(MONK_APP.$class_path.'.php'))
+                include(MONK_APP.$class_path.'.php');
+            else
+                throw new Exception('类`'.$classname.'`对应的文件路径`'.MONK_APP.$class_path.'.php'.'`不存在',CORE_BOOTSTRAP_EC_CLASS_FILE_NOT_EXISTS);
         }else{
             include($classname);
         }
@@ -138,7 +141,7 @@ class MONK{
     //类路径解析
     private static function parse_class($classname){
         if(strpos($classname, '_')){
-            return explode('_', $classname);
+            return str_replace('_', DS, $classname);
         }
         return false;
     }
@@ -178,11 +181,12 @@ class MONK{
 
     public static function _exception($e){
         Error::logError(
-            $e->getMessage(),
+            $e->getCode(),
             ERROR_SHOW,
             array(
-                'file'      =>  $e->getFile(),
-                'line'      =>  $e->getLine()
+                '报错文件'  =>  $e->getFile(),
+                '行'        =>  $e->getLine(),
+                '详情'      =>  $e->getMessage(),
             )
         );
     }
