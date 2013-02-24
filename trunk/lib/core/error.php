@@ -54,7 +54,6 @@ define('CORE_VIEW_EC_C_VIEW_NOT_EXISTS', 1303);
 define('ERROR_SAVE',	0x00000001);//存入日志缓冲
 define('ERROR_SHOW',	0x00000002);//自定义显示
 define('ERROR_LOG',		0x00000004);//error_log() 可记录到服务器，或者发送邮件
-define('EXCEPTION',		0x00000008);//异常方式
 define('LOGSYS',			0x00000010);//发送自定义日志系统
 
 class Error{

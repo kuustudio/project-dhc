@@ -121,7 +121,7 @@ class validator{
       if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.0') !== false && preg_match('/[0-9]+[0-9a-f]{8}$/', $value) == 1) {
         exit;// 处理ie7 beta2问题
       }
-      throw new Exception('检验的变量不是正整数,变量为`'.$value.'`',CORE_VALIDATOR_EC_NOT_UINT);
+      throw new Exception('检验的变量不是正整数,变量值为`'.$value.'`',CORE_VALIDATOR_EC_NOT_UINT);
     }
   }
 
@@ -136,7 +136,7 @@ class validator{
         if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.0') !== false && preg_match('/[0-9]+[0-9a-f]{8}$/', $value) == 1) {
           exit;// 处理ie7 beta2问题
         }
-        throw new Exception('检验的变量不是有符号整数,变量为`'.$value.'`',CORE_VALIDATOR_EC_NOT_SINT);
+        throw new Exception('检验的变量不是有符号整数,变量值为`'.$value.'`',CORE_VALIDATOR_EC_NOT_SINT);
       }
     }
   }
@@ -145,7 +145,7 @@ class validator{
     if(preg_match('/^[0-9\.]*$/i', $value)){
         return floatval($value);
     }else{
-        throw new Exception('检验的变量不是浮点数,变量为`'.$value.'`',CORE_VALIDATOR_EC_NOT_FLOAT);
+        throw new Exception('检验的变量不是浮点数,变量值为`'.$value.'`',CORE_VALIDATOR_EC_NOT_FLOAT);
     }
   }
 
@@ -167,7 +167,7 @@ class validator{
         return false;
         break;
       default:
-        throw new Exception('检验的变量不是布尔型,变量为`'.$value.'`',CORE_VALIDATOR_EC_NOT_BOOL);
+        throw new Exception('检验的变量不是布尔型,变量值为`'.$value.'`',CORE_VALIDATOR_EC_NOT_BOOL);
         break;
     } 
   }
@@ -176,7 +176,7 @@ class validator{
     if(ctype_xdigit($value)){
       return intval(hexdec($value));
     }else{
-      throw new Exception('检验的变量不是16进制数,变量为`'.$value.'`',CORE_VALIDATOR_EC_NOT_HEX);
+      throw new Exception('检验的变量不是16进制数,变量值为`'.$value.'`',CORE_VALIDATOR_EC_NOT_HEX);
     }
   }
 
@@ -220,14 +220,14 @@ class validator{
       $test = @strtotime($str);
       if($test !== -1 && $test !== false)
           return $test;
-      throw new Exception('检验的变量不是有效的日期类型,变量为`'.$str.'`',CORE_VALIDATOR_EC_NOT_DATETIME);
+      throw new Exception('检验的变量不是有效的日期类型,变量值为`'.$str.'`',CORE_VALIDATOR_EC_NOT_DATETIME);
   }
 
   public static function get_param_email($str){
       self::get_param_string($str, PARAM_STRING);
       if(preg_match('/^[A-Za-z0-9]+([._\-\+]*[A-Za-z0-9]+)*@([A-Za-z0-9]+[-A-Za-z0-9]*[A-Za-z0-9]+\.)+[A-Za-z0-9]+$/', $str)) 
           return $str;
-      throw new Exception('检验的变量不是有效的邮件类型,变量为`'.$str.'`',CORE_VALIDATOR_EC_NOT_EMAIL);
+      throw new Exception('检验的变量不是有效的邮件类型,变量值为`'.$str.'`',CORE_VALIDATOR_EC_NOT_EMAIL);
   }
 
   public static function get_param_ipv4($str){
@@ -235,13 +235,13 @@ class validator{
       $test = ip2long($str);
       if($test !== -1 && $test !== false)
           return $test;
-      throw new Exception('检验的变量不是有效的IP地址类型,变量为`'.$str.'`',CORE_VALIDATOR_EC_NOT_IPV4);
+      throw new Exception('检验的变量不是有效的IP地址类型,变量值为`'.$str.'`',CORE_VALIDATOR_EC_NOT_IPV4);
   }
 
   public static function get_param_domain($str){
       self::get_param_string($str, PARAM_STRING);
       if(preg_match('/[a-z0-9\.]+/i', $str))
           return $str;
-      throw new Exception('检验的变量不是有效的域名类型,变量为`'.$str.'`',CORE_VALIDATOR_EC_NOT_DOMAIN);
+      throw new Exception('检验的变量不是有效的域名类型,变量值为`'.$str.'`',CORE_VALIDATOR_EC_NOT_DOMAIN);
   }
 }
