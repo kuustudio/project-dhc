@@ -5,8 +5,8 @@ class Home_Model_Test extends model {
     var $test2_map = array();
 
     protected $sqls = array(
-        'create1'   => 'insert into test1(`name`,`created`,`value`) values([@name],[@created],[@value]);',
-        'select1'   => 'select test1.name as t1name,test1.value as t1value,test2.value as t2value from test1,test2 where test1.name = [@test1.name] and test1.name = test2.name;',
+        'create'   => 'insert into test1(`name`,`created`,`value`) values([@name],[@created],[@value]);',
+        'select'   => 'select test1.name as t1name,test1.value as t1value,test2.value as t2value from test1,test2 where test1.name = [@test1.name] and test1.name = test2.name;',
     );
     
     public function __construct(){
@@ -18,13 +18,13 @@ class Home_Model_Test extends model {
     * 传入的$data的key应该和SQL语句中的[@key]相匹配
     *
     */
-    public function create($data){
-        mysql::execute($this->getSql('create1'),$data);
+    public function create($sql, $data){
+        mysql::execute($sql, $data);
 
     }
 
-    public function select($data){
-        return mysql::fetch($this->getSql('select1'),$data);
+    public function select($sql, $data){
+        return mysql::fetch($sql, $data);
 
     }
 }
