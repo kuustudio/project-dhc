@@ -30,7 +30,6 @@ class mysql implements Idb{
         $rs = self::escape_query($sql, self::$_conn, $argv) or self::_error($sql, self::$_conn) or die();
         if (!$rs) { return false; }
         while (($row = mysql_fetch_assoc($rs))) {
-            var_dump($row);
             $rows[] = $row;
         }
         return $rows;
