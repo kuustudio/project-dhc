@@ -31,13 +31,6 @@ class model implements Imodel{
             
         return $this->maps[$name];
     }
-
-    public function getSql($key){
-        if(!empty($this->sqls[$key]))
-            return $this->sqls[$key];
-        else
-            throw new Exception('该键`'.$key.'`不存在对应的SQL语句',CORE_MODEL_EC_NOT_SQL);
-    }
     
     //$isMultiple 是否多表结构
     //$tables 如果是单表，则是表名称字符串，如果是多表，则是表数组
