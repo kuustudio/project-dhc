@@ -45,7 +45,7 @@ class model implements Imodel{
     public function M($func,$tables,$data,$isMultiple = false){
         if(MONK::getConfig('db_param_validate'))
             $data = $this->validator($tables,$data,$isMultiple);
-        $this->$func($data);
+        return $this->$func($data);
     }
 
     public function validateAtrribute($value, $typeName){
@@ -99,34 +99,6 @@ class model implements Imodel{
 
     public function setMapName($map_name){
         $this->_mapName = $map_name;
-    }
-
-    private function _dbFactory($dbType){
-        try{
-            include(DRIVERPATH.$dbType.'.php');
-            $DSN = MONK::getConfig($dbType);
-            $dbType::init($DSN['master']['one']['connectionString'],$DSN['master']['one']['database']);
-        }catch(exception $e){
-            MONK::_exception($e);
-        }
-    }
-
-    //field所有都需要验证
-    public function validator_data($data){
-        $_data = array_intersect_key($data, $this->_validateKeyMap);
-        foreach ($_data as $key => $value) {
-            $_data[$key] = $this->validateAtrribute($value, $this->_validateKeyMap[$key]);
-        }
-        return $_data;
-    }
-    //field所有都需要验证
-    public function validator_where($where){
-        $_where = array_intersect_key($where, $this->_validateKeyMap);
-        foreach ($_where as $key => $value_arr) {
-            $_where[$key]['value'] = $this->validateAtrribute($value_arr['value'], $this->_validateKeyMap[$key]);
-        }
-        return $_where;
-    }
     
 
     private function _setTime($time_field, & $data){
