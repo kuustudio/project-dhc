@@ -45,7 +45,7 @@ class model implements Imodel{
     public function M($func,$tables,$data,$isMultiple = false){
         if(MONK::getConfig('db_param_validate'))
             $data = $this->validator($tables,$data,$isMultiple);
-        return $this->$func($data);
+        return $this->$func($this->sqls[$func],$data);
     }
 
     public function validateAtrribute($value, $typeName){
