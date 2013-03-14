@@ -1,4 +1,4 @@
-<!--{@page layout="layout/base"}-->
+<!--{@page layout="base"}-->
 <!--{content head}-->
 <style type="text/css">
 .header{height:97px;width:945px;position:relative;margin: 0 auto;}

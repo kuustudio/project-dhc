@@ -1,4 +1,4 @@
-<!--{@page layout="layout/base"}-->
+<!--{@page layout="base"}-->
 <!--{content head}-->
 <style type="text/css">
 .list-header .checkbox{width:40px;}
@@ -11,7 +11,7 @@
 <!--{content body}-->
 <div class="content">
     <div class="submenu">
-        <a href="<?php echo DHC::_url('*/*/index'); ?>">店铺列表</a>
+        <a href="<?php echo Monk::_url('*/index'); ?>">店铺列表</a>
         <a class="current">添加店铺</a>
     </div>
     <div class="bar-header"><a href="javascript:;" class="reload">刷新本页</a></div>

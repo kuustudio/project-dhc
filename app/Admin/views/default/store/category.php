@@ -1,4 +1,4 @@
-<!--{@page layout="layout/base"}-->
+s<!--{@page layout="base"}-->
 <!--{content head}-->
 <style type="text/css">
 .list-header .checkbox{width:40px;}
@@ -11,7 +11,7 @@
 <div class="content">
     <div class="submenu">
         <a class="current">店铺分类列表</a>
-        <a href="<?php echo DHC::_url('*/*/addcategory'); ?>">添加店铺分类</a>
+        <a href="<?php echo Monk::_url('*/addcategory'); ?>">添加店铺分类</a>
     </div>
     <div class="bar-header"><?php if(!empty($result)){ ?><span class="<?php echo $result; ?>"><?php echo $message; ?></span><?php } ?><a href="javascript:;" class="reload">刷新本页</a></div>
     <div class="list">
@@ -30,8 +30,8 @@
                 <td class="category_id"><?php echo $store_category['category_store_id']; ?></td>
                 <td class="text-left"><?php echo $store_category['category_store_name']; ?></td>
                 <td class="operation text-left">
-                    <a href="<?php echo DHC::_url('*/*/editCategory',array('category_store_id'=>$store_category['category_store_id'])); ?>">编辑</a> | 
-                    <a href="<?php echo DHC::_url('*/*/deleteCategory',array('category_store_id'=>$store_category['category_store_id'])); ?>">删除</a>
+                    <a href="<?php echo Monk::_url('*/editCategory',array('category_store_id'=>$store_category['category_store_id'])); ?>">编辑</a> | 
+                    <a href="<?php echo Monk::_url('*/deleteCategory',array('category_store_id'=>$store_category['category_store_id'])); ?>">删除</a>
                 </td>
             </tr>
             <?php } ?>

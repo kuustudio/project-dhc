@@ -39,7 +39,7 @@ class Admin_Controller_System extends Admin_Controller_Base{
     );
 
     public function init(){
-        $this->_dbMap = DHC::getConfig('db_map');
+        $this->_dbMap = Monk::getConfig('db_map');
         parent::init();
     }
 
@@ -50,7 +50,7 @@ class Admin_Controller_System extends Admin_Controller_Base{
         $tableName = $this->_get('table_name');
         if(empty($tableName)) $tableName = key($this->_dbMap);
         $this->assign('table_name',$tableName);
-        $model = DHC::getSingleton('Admin_Model_'.$tableName);
+        $model = Monk::getSingleton('Admin_Model_'.$tableName);
         $map = $model->getMap($tableName);
         $cols = $model->q('SHOW FULL COLUMNS FROM '.$map['table']);
         foreach($cols as $k=>$col){

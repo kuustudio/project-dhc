@@ -1,4 +1,4 @@
-<!--{@page layout="layout/base"}-->
+<!--{@page layout="base"}-->
 <!--{content head}-->
 <style type="text/css">
 .list-header .checkbox{width:40px;}
@@ -12,7 +12,7 @@
 <div class="content">
     <div class="submenu">
         <a class="current">店铺列表</a>
-        <a href="<?php echo DHC::_url('*/*/add'); ?>">添加店铺</a>
+        <a href="<?php echo Monk::_url('*/add'); ?>">添加店铺</a>
     </div>
     <div class="bar-header">供 2445 条记录 | <a href="javascript:;" class="reload">刷新本页</a></div>
     <div class="list">
@@ -32,7 +32,7 @@
                 <td>分类</td>
                 <td class="text-left">店铺名</td>
                 <td>12345678901</td>
-                <td class="text-left"><a href="<?php echo DHC::_url('*/*/edit',array('store_id'=>1111))?>">编辑</a></td>
+                <td class="text-left"><a href="<?php echo Monk::_url('*/edit',array('store_id'=>1111))?>">编辑</a></td>
             </tr>
             <tr>
                 <td><input type="checkbox" name="store_id" /></td>
