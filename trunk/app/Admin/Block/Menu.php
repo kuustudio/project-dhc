@@ -1,5 +1,8 @@
 <?php
 class Admin_Block_Menu extends block{
+    public function init(){
+        return $this->render();
+    }
     public function getMenu(){
         return array(
             array(
@@ -8,39 +11,39 @@ class Admin_Block_Menu extends block{
                 'list'  => array(
                     array(
                         'menuName'  => '店铺管理',
-                        'menuUrl'   => DHC::_url('*/Store/Index')
+                        'menuUrl'   => Monk::_url('Store/Index')
                     ),
                     array(
                         'menuName'  => '<span class="pl15">店铺分类</span>',
-                        'menuUrl'   => DHC::_url('*/Store/Category')
+                        'menuUrl'   => Monk::_url('Store/Category')
                     ),
                     array(
                         'menuName'  => '菜品管理',
-                        'menuUrl'   => DHC::_url('*/Store/Dish')
+                        'menuUrl'   => Monk::_url('Store/Dish')
                     ),
                     array(
                         'menuName'  => '<span class="pl15">菜品分类</span>',
-                        'menuUrl'   => DHC::_url('*/Store/DishCategory')
+                        'menuUrl'   => Monk::_url('Store/DishCategory')
                     ),
                     array(
                         'menuName'  => '<span class="pl15">价格分组</span>',
-                        'menuUrl'   => DHC::_url('*/Store/priceGroup')
+                        'menuUrl'   => Monk::_url('Store/priceGroup')
                     ),
                     array(
                         'menuName'  => '套餐管理',
-                        'menuUrl'   => DHC::_url('*/Store/Combo')
+                        'menuUrl'   => Monk::_url('Store/Combo')
                     ),
                     array(
                         'menuName'  => '<span class="pl15">套餐分类</span>',
-                        'menuUrl'   => DHC::_url('*/Store/ComboCategory')
+                        'menuUrl'   => Monk::_url('Store/ComboCategory')
                     ),
                     array(
                         'menuName'  => '菜单管理',
-                        'menuUrl'   => DHC::_url('*/Store/Menu')
+                        'menuUrl'   => Monk::_url('Store/Menu')
                     ),
                     array(
                         'menuName'  => '订单管理',
-                        'menuUrl'   => DHC::_url('*/Store/Order')
+                        'menuUrl'   => Monk::_url('Store/Order')
                     )
                 )
             ),
@@ -50,11 +53,11 @@ class Admin_Block_Menu extends block{
                 'list'  => array(
                     array(
                         'menuName'  => '客户管理',
-                        'menuUrl'   => DHC::_url('*/Custom/Index')
+                        'menuUrl'   => Monk::_url('Custom/Index')
                     ),
                     array(
                         'menuName'  => '客户订单地址',
-                        'menuUrl'   => DHC::_url('*/Custom/BookAddress')
+                        'menuUrl'   => Monk::_url('Custom/BookAddress')
                     )
                 )
             ),
@@ -64,19 +67,19 @@ class Admin_Block_Menu extends block{
                 'list'  => array(
                     array(
                         'menuName'  => '地区管理',
-                        'menuUrl'   => DHC::_url('*/Group/Area')
+                        'menuUrl'   => Monk::_url('Group/Area')
                     ),
                     array(
                         'menuName'  => '地理点管理',
-                        'menuUrl'   => DHC::_url('*/Group/Geo')
+                        'menuUrl'   => Monk::_url('Group/Geo')
                     ),
                     array(
                         'menuName'  => '团餐圈管理',
-                        'menuUrl'   => DHC::_url('*/Group/Mission')
+                        'menuUrl'   => Monk::_url('Group/Mission')
                     ),
                     array(
                         'menuName'  => '吃货圈管理',
-                        'menuUrl'   => DHC::_url('*/Group/Custom')
+                        'menuUrl'   => Monk::_url('Group/Custom')
                     )
                 )
             ),
@@ -86,35 +89,35 @@ class Admin_Block_Menu extends block{
                 'list'  => array(
                     array(
                         'menuName'  => '系统配置',
-                        'menuUrl'   => DHC::_url('*/System/Config')
+                        'menuUrl'   => Monk::_url('System/Config')
                     ),
                     array(
                         'menuName'  => '账户管理',
-                        'menuUrl'   => DHC::_url('*/System/Account')
+                        'menuUrl'   => Monk::_url('System/Account')
                     ),
                     array(
                         'menuName'  => '管理员',
-                        'menuUrl'   => DHC::_url('*/System/Admin')
+                        'menuUrl'   => Monk::_url('System/Admin')
                     ),
                     array(
                         'menuName'  => '<span class="pl15">管理组</span>',
-                        'menuUrl'   => DHC::_url('*/System/AdminGroup')
+                        'menuUrl'   => Monk::_url('System/AdminGroup')
                     ),
                     array(
                         'menuName'  => '权限管理',
-                        'menuUrl'   => DHC::_url('*/System/Authority')
+                        'menuUrl'   => Monk::_url('System/Authority')
                     ),
                     array(
                         'menuName'  => '<span class="pl15">权限组</span>',
-                        'menuUrl'   => DHC::_url('*/System/AuthorityGroup')
+                        'menuUrl'   => Monk::_url('System/AuthorityGroup')
                     ),
                     array(
                         'menuName'  => '邮件配置',
-                        'menuUrl'   => DHC::_url('*/System/Email')
+                        'menuUrl'   => Monk::_url('System/Email')
                     ),
                     array(
                         'menuName'  => '数据字典',
-                        'menuUrl'   => DHC::_url('*/System/Dictionary')
+                        'menuUrl'   => Monk::_url('System/Dictionary')
                     )
                 )
             ),

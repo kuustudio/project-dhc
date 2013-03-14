@@ -1,4 +1,4 @@
-<!--{@page layout="layout/base"}-->
+<!--{@page layout="base"}-->
 <!--{content head}-->
 <style type="text/css">
 .list-header .checkbox{width:40px;}
@@ -10,8 +10,8 @@
 <!--{content body}-->
 <div class="content">
     <div class="submenu">
-        <a href="<?php echo DHC::_url('*/*/category'); ?>">店铺分类列表</a>
-        <a href="<?php echo DHC::_url('*/*/addCategory'); ?>">添加店铺分类</a>
+        <a href="<?php echo Monk::_url('*/category'); ?>">店铺分类列表</a>
+        <a href="<?php echo Monk::_url('*/addCategory'); ?>">添加店铺分类</a>
         <a class="current">编辑店铺分类</a>
     </div>
     <div class="bar-header"><?php if(!empty($result)){ ?><span class="<?php echo $result; ?>"><?php echo $message; ?></span><?php } ?><a href="javascript:;" class="reload">刷新本页</a></div>

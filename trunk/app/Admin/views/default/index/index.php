@@ -1,63 +1,13 @@
-<!--{@page}-->
-<!DOCTYPE html> 
-<html>
-<head>
-<meta charset="utf-8">
-<title>网站管理后台</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<!--{@page layout="base"}-->
+<!--{content head}-->
 <style type="text/css">
-html,body,h1,h2,h3,h4,h5,h6,dl,dt,dd,ul,ol,li,th,td,p,blockquote,pre,form,fieldset,legend,input,button,textarea,hr{margin:0; padding:0;}
-ul,ol{list-style-type: none;}
-html,body{font-size:12px; height:100%;overflow: hidden;}
-a{text-decoration:none;}
-.header{
-    height:59px; border-bottom:1px solid #CCC;
-    background:#f1f1f1;
-}
-.header .logo{float:left; margin:20px 10px 10px 20px; font-size:20px;}
-.header .topstatus{float:left; margin:10px 60px;}
-.header .topmenu{float:right; margin:10px 20px;}
-.main{position:relative; margin: 0; padding-bottom: 70px;height:auto; }
-.menu{float:left; margin:20px; width:178px;height:auto; border:1px solid #CCC;}
-.footer{position:absolute; bottom:0; clear:both; height:59px; width:100%; font-family: Georgia; font-size:14px; line-height:20px; text-align: center; background-color: #FFF;}
-.content{padding: 20px 0 0 0; margin: 0 20px 0 220px; height:auto;}
-
+html,body{height:100%;}
+.content{height:100%;text-align:center;font-size:30px;}
+.content p{padding-top: 250px;}
 </style>
-</head>
-<body>
-<div class="header">
-    <div class="logo">网站管理后台</div>
-    <div class="topstatus">您好，<span class="uname">admin</span>[<a href="#">退出</a>]</div>
-    <div class="topmenu">
-        <a href="#">Maps</a> | 
-        <a href="#">网站首页</a> |
-        <a href="#">管理后台</a> |
-        <a href="#">帮助中心</a>
-    </div>
+<!--{/content}-->
+<!--{content body}-->
+<div class="content">
+    <p>欢迎登陆后台</p>
 </div>
-<div class="main">
-  <div class="menu">
-      <iframe name="menuframe" id="menuframe" src="<?php echo DHC::_url('*/*/menu');?>" height="100%" width="100%" frameborder="0" scrolling="auto" style="background-color:#ffffff;" allowTransparency="true" resize=1></iframe>
-      <noframes>
-          <body><h1>您的浏览器不支持框架，该升级您的浏览器了！</h1></body>
-      </noframes>
-  </div>
-  <div class="content">
-      <iframe name="contentframe" id="contentframe" src="<?php echo DHC::_url('*/*/first');?>" height="100%" width="100%" scrolling="auto" frameborder="0" style="background-color:#ffffff;" allowTransparency="true" resize=1></iframe>
-      <noframes>
-          <body><h1>您的浏览器不支持框架，该升级您的浏览器了！</h1></body>
-      </noframes>
-  </div>
-</div>
-<div class="footer">
-  Copyright &copy; 2012<br />
-  Powered by <a href="#" target="_blank">noskycn</a>
-</div>
-<script type="text/javascript" src="/source/scripts/jquery-1.8.3-mini.js"></script>
-<script type="text/javascript">
-    (function(){
-        $("iframe").height(window.innerHeight - 160);
-    })();
-</script>
-</body>
-</html>
+<!--{/content}-->

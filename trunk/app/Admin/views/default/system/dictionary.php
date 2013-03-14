@@ -1,4 +1,4 @@
-<!--{@page layout="layout/base"}-->
+<!--{@page layout="base"}-->
 <!--{content head}-->
 <style type="text/css">
 .list-header .field_name{width:280px;}
@@ -58,7 +58,7 @@
     </div>
 </div>
 <script type="text/javascript">
-var get_table_url = "<?php echo DHC::_url('*/*/*'); ?>";
+var get_table_url = "<?php echo Monk::_url('*/*'); ?>";
 seajs.use('default.system.dictionary');
 </script>
 <!--{/content}-->
