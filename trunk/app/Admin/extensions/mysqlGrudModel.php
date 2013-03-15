@@ -17,21 +17,14 @@ class mysqlGrudModel implements model{
 
     private $_mapName;
 
-    //数据库操作句柄
-    private $_db;
-
     //表名称
     private $_tableName;
-
-    //主键信息
-    private $_primary = array();
-
 
     const CREATE_TIME_FIELD = 'created';
 
     const UPDATE_TIME_FIELD = 'updated';
 
-    private static $_order_by = array(
+    private $_order_by = array(
         ORDER_BY_ASC    =>  'ASC',
         ORDER_BY_DESC   =>  'DESC'
     );
@@ -40,50 +33,60 @@ class mysqlGrudModel implements model{
         
     }
 
-    public static function setTableName($tableName){
-        self::$_tableName = $tableName;
+    public function setTableName($tableName){
+        $this->_tableName = $tableName;
     }
 
-    private static function _makeKey($key){
+    public function setMapName($mapName){
+        $this->_mapName = $mapName;
+    }
+
+    private function _makeKey($key){
         return '[@'.$key.']';
     }
 
-    private static function _keyEqValue($key){
+    private function _keyEqValue($key){
         return $key.'=[@'.$key.']';
     }
 
-    private static function _where($where, & $whereKeyValue){
+    private function _where($where, & $whereKeyValue){
         $_whereContainer = array();
         foreach ($where as $key => $value_arr) {
-            $_whereContainer[] = $key.$value_arr['symbol'].'[@'.$key.']';
+            $_whereContainer[] = $key.$value_arr[MYSQL_WHERE_SYMBOL].'[@'.$key.']';
             $whereKeyValue[$key] = $value_arr['value'];
         }
         return ' WHERE '.implode(' AND ',$_whereContainer);
     }
 
+    private function _setTime($time_field, & $data){
+        if(!in_array($time_field, array_keys($data))){
+            $data[$time_field] = time();
+        }
+    }
+
     public function create($data){
-        if(empty($data)) Error::logError(CORE_MODEL_EC_NO_CREATE_DATA, EXCEPTION);
-        $this->_setTime(self::CREATE_TIME_FIELD, $data);
+        if(empty($data)) Error::logError('创建数据为空', CORE_MODEL_EC_NO_CREATE_DATA);
+        $this->_setTime($this->CREATE_TIME_FIELD, $data);
         $keys = array_keys($data);
-        $search = array_map(array('self','_makeKey'),$keys);
-        $sql = str_replace('{table}', self::$_tableName, INSERT_STR);
+        $search = array_map(array('this','_makeKey'),$keys);
+        $sql = str_replace('{table}', $this->_tableName, INSERT_STR);
         $sql = str_replace('{keys}', implode(',',$keys), $sql);
         $sql = str_replace('{values}', implode(',',$search), $sql);
-        if(self::execute($sql,$data))
-            return self::insertId();
+        if(mysql::execute($this->_mapName, $sql,$data))
+            return mysql::insertId();
     }
 
     public function update($data, $where = array()){
-        if(empty($data)) Error::logError(CORE_MODEL_EC_NO_UPDATE_DATA, EXCEPTION);
+        if(empty($data)) Error::logError('更新数据为空', CORE_MODEL_EC_NO_UPDATE_DATA);
 
-        $this->_setTime(self::UPDATE_TIME_FIELD, $data);
+        $this->_setTime($this->UPDATE_TIME_FIELD, $data);
         $dataKeys = array_keys($data);
         $_where = array();
-        $whereSql = empty($where)?'':self::_where($where,$_where);
-        $sql = str_replace('{table}', self::$_tableName, UPDATE_STR);
-        $sql = str_replace('{sets}', implode(',',array_map(array('self','_keyEqValue'),$dataKeys)), $sql);
+        $whereSql = empty($where)?'':$this->_where($where,$_where);
+        $sql = str_replace('{table}', $this->_tableName, UPDATE_STR);
+        $sql = str_replace('{sets}', implode(',',array_map(array('this','_keyEqValue'),$dataKeys)), $sql);
         $sql = str_replace('{where}', $whereSql, $sql);
-        return self::execute($sql,$data+$_where);
+        return mysql::execute($this->_mapName, $sql,$data+$_where);
     }
 
     //$where格式 array('key1'=>'value1',...);
@@ -91,21 +94,18 @@ class mysqlGrudModel implements model{
     //$sort格式 array('key1'=>1,'key2'=>-1,...);
     //$limit格式 array('offset'=>2,'length'=>10); offset可以为空
     public function all($where = array(), $fields = '*', $sort = array(), $limit = array()){
-        $map_field_keys = array_keys($this->_validateKeyMap);
-        if($fields != '*' && is_array($fields)) $fields = array_values(array_intersect($fields, $map_field_keys));
-        
         $_where = array();
-        $whereSql = empty($where)?'':self::_where($where,$_where);
+        $whereSql = empty($where)?'':$this->_where($where,$_where);
         if($fields != '*')
             $fields = implode(',',$fields);
-        $sql = str_replace('{table}', self::$_tableName, SELECT_STR);
+        $sql = str_replace('{table}', $this->_tableName, SELECT_STR);
         $sql = str_replace('{fields}', $fields, $sql);
         $sql = str_replace('{where}', $whereSql, $sql);
         if(!empty($sort)){
             $sql .= ' ORDER BY ';
             $sort_tmp = array();
             foreach ($sort as $key => $value) {
-                $sort_tmp[] = $key.' '.self::$_order_by[$value];
+                $sort_tmp[] = $key.' '.$this->_order_by[$value];
             }
             $sql .= implode(',', $sort_tmp);
         }
@@ -115,16 +115,7 @@ class mysqlGrudModel implements model{
             else
                 $sql .= ' LIMIT '.$limit['offset'].','.$limit['length'];
         }
-        $query = self::query($sql, self::$_conn, $_where);
-        $rows = array();
-        if(!$query){
-            self::_error($sql, self::$_conn);
-        }
-
-        while($row = mysql_fetch_array($query, $fetch_type)) {
-            $rows[] = $row;
-        }
-        return $rows;
+        return mysql::fetch($this->_mapName, $sql, $_where);
     }
 
     public function one($where = array(), $fields = '*', $sort = array()){
@@ -135,20 +126,11 @@ class mysqlGrudModel implements model{
 
     public function delete($where = array()){
         $_where = array();
-        $whereSql = empty($where)?'':self::_where($where,$_where);
-        $sql = str_replace('{table}', self::$_tableName, DELETE_STR);
+        $whereSql = empty($where)?'':$this->_where($where,$_where);
+        $sql = str_replace('{table}', $this->_tableName, DELETE_STR);
         $sql = str_replace('{where}', $whereSql, $sql);
-        return self::execute($sql,$_where);
+        return mysql::execute($this->_mapName, $sql,$_where);
     }
 
-    private function _setTime($time_field, & $data){
-        if(!in_array($time_field, array_keys($data)) && in_array($time_field, array_keys($this->_validateKeyMap))){
-            $data[$time_field] = time();
-        }
-    }
-
-    public function q($com){
-        return call_user_func_array(array($this->_dbType, 'q'), array($com));
-    }
 
 }
