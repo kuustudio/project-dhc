@@ -1,10 +1,7 @@
 <?php
 class Admin_Controller_Store extends Admin_Controller_Base{
 
-    var $model_store_categoray = null;
-
     public function init(){
-        $this->model_store_categoray = Monk::getSingleton('Admin_Model_CategoryStore');
         parent::init();
     }
 
