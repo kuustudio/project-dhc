@@ -14,7 +14,8 @@
 <body>
 <noscript>提示：检测到您的浏览器未开启JavaScript，请开启后刷新页面重试:)</noscript>
 <div class="wrapper">
-    <div class="page">
+    <div class="page" id="page-<?php echo MONK::getConfig('action'); ?>">
+        <?php if(isset($no_topbar)&&!$no_topbar){ ?>
         <div class="topbar">
             <h1 class="logo">
                 <a href="/" title="返回">dhc</a>
@@ -25,6 +26,7 @@
                 <a href="/users/sign_out" data-method="" rel="nofollow">退出</a>
             </div>
         </div>
+        <?php } ?>
         <!--{contentplaceholderid content}-->
         <div class="footer">
         © <a href="#">官方微博</a>
