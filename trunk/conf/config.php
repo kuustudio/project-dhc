@@ -122,7 +122,7 @@ return array(
     'auth_token'    => '81849ce94cd39aab067a921d55c97175', //禁止更改 md5('_minic_auth')
     'name'          => '0dfa82948db5803ab512ccc0dc2ba564', //禁止更改 md5('_minic_nickname')
    
-
+    'default_timezone'      => 'PRC',
 
     'db_map' => array(
         'Account' => '账户表',

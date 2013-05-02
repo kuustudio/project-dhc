@@ -1,0 +1,17 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, input, textarea, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+body{line-height:1.5;}
+body{background:#F6F7F1 url("/Store/source/images/bg.png") repeat 0 0;}
+ol, ul{list-style:none;list-style-image:none;margin:0;padding:0;}
+a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:rgba(0, 0, 0, 0);}
+a{color:#4298BA;text-decoration:none;}
+em{font-style:normal;}
+.page{position:relative;}
+.topbar{padding:30px 10px;margin:0 auto;max-width:600px;}
+.topbar .logo{float:left;}
+.topbar .logo a{display:block;width:124px;height:26px;overflow:hidden;}
+.topbar .account-info{margin-top:8px;float:right;font-size:12px;}
+.topbar .account-info .welcome{color:#666;}
+.topbar .account-info a{color:#99AAA5;margin-left:10px;}
+.footer{max-width:600px;margin:0 auto;padding:20px 0;font-size:12px;color:#AAA;text-align:center;}
+.footer a{color:#AAA;}
+.footer em{padding:0 4px;}
