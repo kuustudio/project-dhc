@@ -1,4 +1,4 @@
-.page .teams{margin:50px auto 50px;width:80%;max-width:400px;background-color:#FFF;border:1px solid #CCC;text-align:center;overflow:hidden;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;-webkit-box-shadow:0px 1px 6px rgba(0, 0, 0, 0.15);-moz-box-shadow:0px 1px 6px rgba(0,0,0,0.15);box-shadow:0px 1px 6px rgba(0, 0, 0, 0.15);}
-.page .teams li{font-size:24px;border-bottom:1px solid #CCC;}
-.page .teams li a{position:relative;display:block;height:80px;line-height:80px;color:#666;padding:0 40px;background:#FFF;}
-.page .teams li a:hover{background:#f9f9f9;}
+.teams{margin:50px auto 50px;width:80%;max-width:400px;background-color:#FFF;border:1px solid #CCC;text-align:center;overflow:hidden;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;-webkit-box-shadow:0px 1px 6px rgba(0, 0, 0, 0.15);-moz-box-shadow:0px 1px 6px rgba(0,0,0,0.15);box-shadow:0px 1px 6px rgba(0, 0, 0, 0.15);}
+.teams li{font-size:24px;border-bottom:1px solid #CCC;}
+.teams li a{position:relative;display:block;height:80px;line-height:80px;color:#666;padding:0 40px;background:#FFF;}
+.teams li a:hover{background:#f9f9f9;}
