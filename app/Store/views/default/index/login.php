@@ -1,10 +1,11 @@
 <!--{@page layout="base"}-->
 <!--{content head}-->
-<link rel="stylesheet" href="<?php echo MONK::include_css('store-login','/Store/source/styles/login.css',false,true); ?>">
+<link rel="stylesheet" href="<?php echo MONK::include_css('index-login','/Store/source/styles/index/login.css',false,true); ?>">
 <!--{/content}-->
 <!--{content content}-->
 <div class="hd">
-    <h1 class="logo">鼎好吃</h1>
+    <h1 class="logo">喵星人</h1>
+    <i><a href="#">宁波</a></i>
 </div>
 <div class="bd">
     <form class="form" action="/users/sign_in" method="post" data-remote="true" novalidate="">
@@ -32,7 +33,7 @@
     </form>
     
     <div class="sign-nav">
-        没有帐号？<span><a href="<?php echo MONK::_url('*/reg')?>">免费注册 →</a></span>
+        没有帐号？<span><a href="<?php echo MONK::_url('*/reg')?>">喵咪注册 →</a></span>
     </div>
 </div>
 <!--{/content}-->

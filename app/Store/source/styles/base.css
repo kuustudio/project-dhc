@@ -5,16 +5,20 @@ body{background:#F6F7F1 url("/Store/source/images/bg.png") repeat 0 0;}
 ol, ul{list-style:none;list-style-image:none;margin:0;padding:0;}
 a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:rgba(0, 0, 0, 0);}
 a{color:#4298BA;text-decoration:none;}
+button{padding:13px 15px;border:1px solid #fff;}
 em{font-style:normal;}
-input[type="text"],input[type="password"],input[type="email"],textarea{width:220px;height:18px;line-height:18px;margin:0;padding:8px 12px;border:1px solid #ccc;outline:0;}
-input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,textarea:focus{border-color:#95b93d;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.hide{display:none;}
+input[type="text"],input[type="password"],input[type="email"],input[type="telephone"],.form-item input[type="number"],textarea{width:220px;height:18px;line-height:18px;margin:0;padding:8px 12px;border:1px solid #ccc;outline:0;}
+input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,input[type="telephone"]:focus,input[type="number"]:focus,textarea:focus{border-color:#95b93d;}
 .page{position:relative;}
-.topbar{padding:30px 10px;margin:0 auto;max-width:600px;}
+.topbar{padding:0 10px;margin:30px auto;max-width:960px;overflow:hidden;}
 .topbar .logo{float:left;}
-.topbar .logo a{display:block;width:124px;height:26px;overflow:hidden;}
+.topbar .logo a{width:124px;height:26px;overflow:hidden;}
+.topbar .logo i a{font-size:14px;}
 .topbar .account-info{margin-top:8px;float:right;font-size:12px;}
 .topbar .account-info .welcome{color:#666;}
 .topbar .account-info a{color:#99AAA5;margin-left:10px;}
-.footer{max-width:600px;margin:0 auto;padding:20px 0;font-size:12px;color:#AAA;text-align:center;}
+.footer{max-width:960px;margin:30px auto;padding:0 10px;font-size:12px;color:#AAA;text-align:center;overflow:hidden;}
 .footer a{color:#AAA;}
 .footer em{padding:0 4px;}

@@ -1,0 +1,17 @@
+.bd{width:88%;max-width:960px;margin:0 auto;background-color:#fff;overflow:hidden;border-color:#FFF;-webkit-box-shadow:0 0 5px rgba(0, 0, 0, 0.15);-moz-box-shadow:0 0 5px rgba(0,0,0,0.15);box-shadow:0 0 5px rgba(0, 0, 0, 0.15);border-color:#CCC 9;}
+.bd .page-inner{padding:0 5% 40px;}
+.bd .page-inner h1{font-family:"Microsoft Yahei";margin:30px 0;font-size:20px;line-height:28px;color:#84A099;}
+.form{padding:0 0 0 5px;}
+.btn{display:inline-block;padding:8px 12px;margin:0 10px 0 0;color:#FFF;background-color:#A6BBB6;border:none;font-size:14px;cursor:pointer;}
+.form .form-item{margin-bottom:15px;}
+.form .form-buttons{margin:30px 0 20px 0;margin-left:70px;}
+.form .form-item p.desc{font-size:12px;color:#999;margin:5px 0 0 2px;}
+.form .form-item.upload-avatar{height:50px;position:relative;padding:2px 0 0 80px;margin:0 0 30px 0;}
+.form .form-item.upload-avatar .avatar-wrapper{width:60px;height:60px;position:absolute;top:0;left:0;}
+.form .form-item.upload-avatar .link-upload{display:inline-block;font-size:14px;line-height:18px;cursor:pointer;margin-top:6px;vertical-align:text-bottom;}
+.form .form-item.upload-avatar p.desc{margin:2px 0 0 0;clear:both;}
+.form .form-item.upload-avatar .avatar-wrapper .avatar{display:block;width:100%;height:100%;-moz-border-radius:5%;-webkit-border-radius:5%;border-radius:5%;-webkit-box-shadow:0 2px 3px rgba(0, 0, 0, 0.15);-moz-box-shadow:0 2px 3px rgba(0,0,0,0.15);box-shadow:0 2px 3px rgba(0, 0, 0, 0.15);}
+.form .form-item.upload-avatar .avatar-wrapper .loading{display:none;width:20px;height:20px;background:#FFF url(/Store/source/images/loading-upload.gif) no-repeat center center;position:absolute;top:20px;left:20px;-moz-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;}
+.form .form-item .form-label{color:#555;float:left;width:60px;margin-top:12px;font-size:14px;text-align:right;}
+.form .form-item .form-field{margin:5px 0 0 70px;}
+.form input{width:80%;max-width:220px;}
