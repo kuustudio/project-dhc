@@ -1,0 +1,9 @@
+.main dl li{float:left;padding:5px 10px;}
+.main dl ul{display:inline-block;}
+.main li.city-id{width:20px;}
+.main li.city-name{width:40px;}
+.main li.parent-province{width:40px;}
+.main li.start-with{width:30px;}
+.main li.long-lat{width:120px;}
+.main li.date{width:60px;}
+.main .page-bar{margin-top:20px;}

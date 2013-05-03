@@ -2,6 +2,7 @@
 class Admin_Controller_Store extends Admin_Controller_Base{
 
     public function init(){
+        
         parent::init();
     }
 
@@ -16,13 +17,9 @@ class Admin_Controller_Store extends Admin_Controller_Base{
 
     public function actionCategory(){
         $this->assign('Title','店铺分类列表');
-        $this->_setType(array('result'=>PARAM_STRING,'message'=>PARAM_STRING));
-        $storeCategorys = $this->model_store_categoray->all(array(),'*',array('category_store_id'=>1));
-        $this->assign(array(
-            'result'    => $this->_get('result'),
-            'message'   => urldecode($this->_get('message'))
-        ));
-        $this->assign('store_categorys',$storeCategorys);
+        $this->model_store = MONK::getSingleton('Admin_Model_Store');
+        $categorys = $this->model_store->_store_categorys;
+        $this->assign('categorys',$categorys);
         $this->render();
     }
 
