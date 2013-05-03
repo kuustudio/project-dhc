@@ -18,4 +18,8 @@ class Store_Controller_Index extends Store_Controller_Base {
         $this->assign('no_topbar',true);
         $this->render();
     }
+
+    public function actionLogout(){
+        
+    }
 }

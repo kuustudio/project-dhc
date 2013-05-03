@@ -1,0 +1,28 @@
+.page#page-Store-Index-Reg{margin:30px auto 0;}
+.hd .logo{overflow:hidden;width:251px;height:60px;margin:0 auto 40px;font-size:46px;font-weight:bold;font-family:"Microsoft Yahei";color:#577570;text-align:center;}
+.hd i{position:absolute;left:50%;margin-left:100px;top:5px;}
+.bd{margin:0 auto;overflow:hidden;text-align:center;}
+.form-item{margin-bottom:10px;}
+.form-item input[type="email"],.form-item input[type="telephone"],.form-item input[type="password"],.form-item input[type="text"],.form-item textarea{width:80%;max-width:300px;height:26px;line-height:26px;}
+.form-item textarea{height:66px;}
+.form-item input[type="number"]{width:80px;height:26px;line-height:26px;}
+.bd .fix-width{width:88%;max-width:326px;}
+.bd .btn-submit{padding:10px;margin:0;border:none;background:#95b93d;font-size:20px;font-weight:bold;color:#fff;cursor:pointer;}
+.sign-in-btn .desc{margin:0 auto;padding:15px 0;color:#999;font-size:12px;}
+.bd .form-item .desc a{color:#999;}
+.bd .sign-nav{margin:30px auto 0;padding:15px 0;font-size:14px;color:#999;background:url(/Store/source/images/sign-page-line.png) no-repeat 50% 0;}
+.bd .form-item .select{width:87%;max-width:324px;margin:0 auto;height:42px;line-height:44px;color:#aaa;background-color:#f9f9f9;border:1px solid #fff;}
+.bd .form-item .select:hover{border-color:#95b93d;cursor:pointer;}
+.select .list{background-color:#fff;overflow:hidden;padding:10px;}
+.select .list ul li{float:left;padding:0 10px;}
+.select .list ul li:hover{background-color:#95b93d;color:#fff;}
+.bd .form-item{color:#aaa;}
+.bd .form-item .search-area-result{width:87%;max-width:324px;margin:0 auto;background-color:#fff;overflow:hidden;margin-top:10px;}
+.search-area-result .result-list{padding:10px;}
+.search-area-result .result-list dl{overflow:hidden;}
+.search-area-result .result-list dt{float:left;width:40px;font-size:12px;overflow:hidden;}
+.search-area-result .result-list dd{margin-left:42px;}
+.search-area-result .result-list dd h4{float:left;font-size:12px;width:40px;}
+.search-area-result .result-list dd ul{margin-left:42px;}
+.search-area-result .result-list dd ul li{float:left;padding:0 4px;margin:0 5px 4px;border:1px solid #95b93d;}
+.search-area-result .result-list dd ul li i{}
