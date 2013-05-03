@@ -169,5 +169,5 @@
 <!--{/content}-->
 <!--{content foot}-->
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
-<script type="text/javascript" src="<?php echo MONK::include_css('index-reg','/Store/source/scripts/index/reg.js',false,true); ?>"></script>
+<script type="text/javascript" src="<?php echo MONK::include_js('index-reg','/Store/source/scripts/index/reg.js',false,true); ?>"></script>
 <!--{/content}-->

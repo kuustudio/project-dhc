@@ -45,6 +45,10 @@ return array(
 
     //应用MYSQL数据池 //禁止更改
     'app_mysql_pool'        => array(
+        'Admin' => array(
+            'connectString'         => 'mysql://root:11112222tq@localhost:3306',
+            'dbname'                => 'dhc_demo',
+        ),
         'Home' => array(
             'connectString'         => 'mysql://root:11112222tq@localhost:3306',
             'dbname'                => 'dhc_demo',

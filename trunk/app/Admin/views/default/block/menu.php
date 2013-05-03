@@ -1,4 +1,3 @@
-<!--{@page}-->
 <!DOCTYPE html> 
 <html>
 <head>
@@ -39,7 +38,7 @@ a{text-decoration:none;}
     <ul id="<?php echo $menuGroup['menuGroupKey']; ?>" class="bbc pb5">
         <?php foreach($menuGroup['list'] as $menu){ ?>
         <li class="list_li">
-            <a class="list_link" href="<?php echo $menu['menuUrl']; ?>" target="contentframe"><?php echo $menu['menuName']; ?> <span class="g9">»</span></a>
+            <a class="list_link" href="<?php echo $menu['menuUrl']; ?>"><?php echo $menu['menuName']; ?> <span class="g9">»</span></a>
         </li>
         <?php } ?>
     </ul>
