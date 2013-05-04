@@ -1,5 +1,5 @@
-.page#page-Store-Index-Reg{margin:30px auto 0;}
-.hd .logo{overflow:hidden;width:251px;height:60px;margin:0 auto 40px;font-size:46px;font-weight:bold;font-family:"Microsoft Yahei";color:#577570;text-align:center;}
+.page#page-Store-Index-Reg{margin:40px auto 0;}
+.hd .logo{overflow:hidden;width:251px;height:60px;margin:0 auto 50px;font-size:46px;font-weight:bold;font-family:"Microsoft Yahei";color:#577570;text-align:center;}
 .hd i{position:absolute;left:50%;margin-left:100px;top:5px;}
 .bd{margin:0 auto;overflow:hidden;text-align:center;}
 .form-item{margin-bottom:10px;}
@@ -10,7 +10,7 @@
 .bd .btn-submit{padding:10px;margin:0;border:none;background:#95b93d;font-size:20px;font-weight:bold;color:#fff;cursor:pointer;}
 .sign-in-btn .desc{margin:0 auto;padding:15px 0;color:#999;font-size:12px;}
 .bd .form-item .desc a{color:#999;}
-.bd .sign-nav{margin:30px auto 0;padding:15px 0;font-size:14px;color:#999;background:url(/Store/source/images/sign-page-line.png) no-repeat 50% 0;}
+.bd .sign-nav{margin:0 auto;padding:15px 0;font-size:14px;color:#999;background:url(/Store/source/images/sign-page-line.png) no-repeat 50% 0;}
 .bd .form-item .select{width:87%;max-width:324px;margin:0 auto;height:42px;line-height:44px;color:#aaa;background-color:#f9f9f9;border:1px solid #fff;}
 .bd .form-item .select:hover{border-color:#95b93d;cursor:pointer;}
 .select .list{background-color:#fff;overflow:hidden;padding:10px;}

@@ -5,11 +5,21 @@
 <!--{content body}-->
 <h2>星铺分类</h2>
 <div class="main">
-    <ul>
-        <li class="title"><label><b>ID</b></label><span><b>分类名</b></span></li>
+    <dl class="list">
+        <dt>
+            <ul>
+                <li class="category-id">ID</li>
+                <li class="category-name">分类名</li>
+            </ul>
+        </dt>
         <?php foreach($categorys as $id=>$name){ ?>
-        <li><label><?php echo $id; ?></label><?php echo $name; ?></li>
+        <dd>
+            <ul>
+                <li class="category-id"><?php echo $id; ?></li>
+                <li class="category-name"><?php echo $name; ?></li>
+            </ul>
+        </dd>
         <?php } ?>
-    </ul>
+    </dl>
 <div>
 <!--{/content}-->

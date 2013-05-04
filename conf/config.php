@@ -47,11 +47,11 @@ return array(
     'app_mysql_pool'        => array(
         'Admin' => array(
             'connectString'         => 'mysql://root:11112222tq@localhost:3306',
-            'dbname'                => 'dhc_demo',
+            'dbname'                => 'miao_db',
         ),
         'Home' => array(
             'connectString'         => 'mysql://root:11112222tq@localhost:3306',
-            'dbname'                => 'dhc_demo',
+            'dbname'                => 'miao_db',
         ),
     ),
     //应用redis数据池

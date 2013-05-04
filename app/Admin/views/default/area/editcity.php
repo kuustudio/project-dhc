@@ -1,9 +1,9 @@
 <!--{@page layout="base"}-->
 <!--{content head}-->
-<link rel="stylesheet" href="<?php echo MONK::include_css('area-addcity','/Admin/source/styles/area/addcity.css',false,true); ?>">
+<link rel="stylesheet" href="<?php echo MONK::include_css('form','/Admin/source/styles/form.css',false,true); ?>">
 <!--{/content}--> 
 <!--{content body}-->
-<h2>编辑城市</h2>
+<h2>编辑城市 - <a href="<?php echo MONK::_url('*/city'); ?>">城市列表</a></h2>
 <div class="main">
     <form method="post">
     <input type="hidden" name="city_id" value="<?php echo $city['city_id']; ?>" />

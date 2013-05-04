@@ -28,3 +28,7 @@ h1, h2, h3, h4, h5, h6, dt, .YaHei{font-family:"helvetica neue",helvetica,arial,
 .left-pos .footer{padding:20px;text-align:center;}
 .right-pos{float:left;padding:40px;}
 .main{padding:20px;overflow:hidden;width:640px;}
+.main dl.list dt{border-bottom:1px solid #aaa;}
+.main dl.list li{float:left;padding:5px 10px;}
+.main dl.list ul{display:inline-block;}
+.main .page-bar{margin-top:20px;}
