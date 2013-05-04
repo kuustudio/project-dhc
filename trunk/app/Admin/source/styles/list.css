@@ -1,0 +1,4 @@
+.main dl.list dt{border-bottom:1px solid #aaa;}
+.main dl.list li{float:left;padding:5px 10px;}
+.main dl.list ul{display:inline-block;}
+.main .page-bar{margin-top:20px;}

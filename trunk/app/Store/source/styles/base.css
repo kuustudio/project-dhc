@@ -19,6 +19,6 @@ input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,
 .topbar .account-info{margin-top:8px;float:right;font-size:12px;}
 .topbar .account-info .welcome{color:#666;}
 .topbar .account-info a{color:#99AAA5;margin-left:10px;}
-.footer{max-width:960px;margin:30px auto;padding:0 10px;font-size:12px;color:#AAA;text-align:center;overflow:hidden;}
+.footer{max-width:960px;margin:20px auto;padding:0 10px;font-size:12px;color:#AAA;text-align:center;overflow:hidden;}
 .footer a{color:#AAA;}
 .footer em{padding:0 4px;}
