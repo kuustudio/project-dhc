@@ -80,74 +80,63 @@
         </div>
         <div class="form-item">
             <div class="form-field">
-                <div class="search-area-bar clearfix">
-                    <label>设置送货范围</label>
-                    <input type="number" placeholder="范围值" autocomplete="off"> 米
+                <div class="select search-area-bar clearfix">
+                    <div class="select-btn"><span class="text">选择中心点</span><i>▼</i></div>
+                    <div class="search-key"><input type="number" autocomplete="off"><em>公里</em></div>
                     <button type="button" class="search-perimeter-area">搜</button>
+                    <div class="list hide">
+                        <ul>
+                            <li class="from-address">按填写地址</li>
+                            <li class="from-lbs">按当前位置</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="search-area-result hide">
+                    <h3>设置送货范围</h3>
                     <div class="result-list">
-                        <dl>
-                            <dt>鄞州</dt>
-                            <dd>
-                                <h4>1000米</h4>
-                                <ul>
-                                    <li>
-                                        <label>新四方</label>
-                                        <i>x<i>
-                                    </li>
-                                    <li>
-                                        <label>肯德基</label>
-                                        <i>x<i>
-                                    </li>
-                                    <li>
-                                        <label>南苑饭店</label>
-                                        <i>x<i>
-                                    </li>
-                                    <li>
-                                        <label>来必饱</label>
-                                        <i>x<i>
-                                    </li>
-                                </ul>
-                            </dd>
-                            <dd>
-                                <h4>2000米</h4>
-                                <ul>
-                                    <li>
-                                        <label>台湾美食</label>
-                                        <i>x<i>
-                                    </li>
-                                    <li>
-                                        <label>顺旺基</label>
-                                        <i>x<i>
-                                    </li>
-                                </ul>
-                            </dd>
-                        </dl>
-                        <dl>
-                            <dt>江东</dt>
-                            <dd>
-                                <h4>1000米</h4>
-                                <ul>
-                                    <li>
-                                        <label>南苑饭店</label>
-                                        <i>x<i>
-                                    </li>
-                                    <li>
-                                        <label>来必饱</label>
-                                        <i>x<i>
-                                    </li>
-                                    <li>
-                                        <label>台湾美食</label>
-                                        <i>x<i>
-                                    </li>
-                                    <li>
-                                        <label>顺旺基</label>
-                                        <i>x<i>
-                                    </li>
-                                </ul>
-                            </dd>
-                        </dl>
+                        <table cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td class="s-district"><div>鄞州</div></td>
+                                    <td class="s-distance">1公里</td>
+                                    <td class="s-place">
+                                        <div>
+                                            <span>新四方<i>x</i></span>
+                                            <span>肯德基<i>x</i></span>
+                                            <span>南苑饭店<i>x</i></span>
+                                            <span>来必饱<i>x</i></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="s-district"><div></div></td>
+                                    <td class="s-distance">2公里</td>
+                                    <td class="s-place">
+                                        <div>
+                                            <span>新四方<i>x</i></span>
+                                            <span>肯德基<i>x</i></span>
+                                            <span>南苑饭店<i>x</i></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr><td colspan="3"><div class="line">鄞州</div></td></tr>
+                                 <tr>
+                                    <td class="s-district"><div>江东</div></td>
+                                    <td class="s-distance">1公里</td>
+                                    <td class="s-place">
+                                        <div>
+                                            <span>新四方<i>x</i></span>
+                                            <span>新<i>x</i></span>
+                                            <span>新四<i>x</i></span>
+                                            <span>肯德基<i>x</i></span>
+                                            <span>南苑饭店<i>x</i></span>
+                                            <span>来必饱<i>x</i></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr><td colspan="3"><div class="line">江东</div></td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -170,4 +159,5 @@
 <!--{content foot}-->
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
 <script type="text/javascript" src="<?php echo MONK::include_js('index-reg','/Store/source/scripts/index/reg.js',false,true); ?>"></script>
+<script type="text/javascript" src="<?php echo MONK::include_js('lbs','/source/scripts/lbs.js',false,true); ?>"></script>
 <!--{/content}-->

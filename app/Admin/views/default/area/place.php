@@ -33,7 +33,7 @@
                 <li class="place-type"><?php echo $place_types[$place['place_type']]; ?></li>
                 <li class="start-with"><?php echo $place['start_with']; ?></li>
                 <li class="long-lat"><?php echo $place['long_lat']; ?></li>
-                <li><a href="<?php echo MONK::_url('*/editplace',array('place_id'=>$place['place_id'],'district_id'=>$place['district_id'],'district_name'=>urlencode($district_name),'city_id'=>$city_id,'city_name'=>urlencode($city_name))); ?>">编辑</a> | <a href="<?php echo MONK::_url('*/deleteplace',array('place_id'=>$place['place_id'],'district_id'=>$place['district_id'],'district_name'=>urlencode($district_name),'city_id'=>$city_id,'city_name'=>urlencode($city_name))); ?>">删除</a></li>
+                <li><a href="http://api.map.baidu.com/geocoder?location=<?php echo $place['long_lat']; ?>&key=52490bdd2448a23c3e87613df57079a9&output=json">Geo</a> | <a href="<?php echo MONK::_url('*/editplace',array('place_id'=>$place['place_id'],'district_id'=>$place['district_id'],'district_name'=>urlencode($district_name),'city_id'=>$city_id,'city_name'=>urlencode($city_name))); ?>">编辑</a> | <a href="<?php echo MONK::_url('*/deleteplace',array('place_id'=>$place['place_id'],'district_id'=>$place['district_id'],'district_name'=>urlencode($district_name),'city_id'=>$city_id,'city_name'=>urlencode($city_name))); ?>">删除</a></li>
             </ul>
         </dd>
         <?php } ?>

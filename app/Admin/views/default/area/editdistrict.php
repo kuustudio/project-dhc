@@ -27,7 +27,7 @@
         </dd>
         <dd>
             <label>经纬度：</label>
-            <input type="text" name="long_lat" value="<?php echo $district['long_lat']?>" />
+            <input type="text" disabled=disabled name="long_lat" value="<?php echo $district['long_lat']?>" />
         </dd>
         <dd>
             <button type="submit">更新</button>

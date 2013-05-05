@@ -28,22 +28,20 @@
             <input type="text" name="place_name" />
         </dd>
         <dd>
+            <label>详细地址：</label>
+            <input class="title" type="text" name="place_info" />
+        </dd>
+        <dd>
             <label>地点类型：</label>
             <select name="place_type">
-                <option value="1">写字楼</option>
-                <option value="2">住宅小区</option>
-                <option value="3">学校</option>
-                <option value="4">广场</option>
-                <option value="5">酒店</option>
+                <?php foreach($place_types as $v=>$t){ ?>
+                <option value="<?php echo $v; ?>"><?php echo $t; ?></option>
+                <?php } ?>
             </select>
         </dd>
         <dd>
             <label>开头字母：</label>
             <input class="num" type="text" name="start_with" />
-        </dd>
-        <dd>
-            <label>经纬度：</label>
-            <input type="text" name="long_lat" />
         </dd>
         <dd>
             <button type="submit">提交</button>

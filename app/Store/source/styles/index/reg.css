@@ -14,15 +14,26 @@
 .bd .form-item .select{width:87%;max-width:324px;margin:0 auto;height:42px;line-height:44px;color:#aaa;background-color:#f9f9f9;border:1px solid #fff;}
 .bd .form-item .select:hover{border-color:#95b93d;cursor:pointer;}
 .select .list{background-color:#fff;overflow:hidden;padding:10px;}
+.select .list ul{display:block;overflow:hidden;margin-right:-10px;}
 .select .list ul li{float:left;padding:0 10px;}
 .select .list ul li:hover{background-color:#95b93d;color:#fff;}
 .bd .form-item{color:#aaa;}
-.bd .form-item .search-area-result{width:87%;max-width:324px;margin:0 auto;background-color:#fff;overflow:hidden;margin-top:10px;}
-.search-area-result .result-list{padding:10px;}
-.search-area-result .result-list dl{overflow:hidden;}
-.search-area-result .result-list dt{float:left;width:40px;font-size:12px;overflow:hidden;}
-.search-area-result .result-list dd{margin-left:42px;}
-.search-area-result .result-list dd h4{float:left;font-size:12px;width:40px;}
-.search-area-result .result-list dd ul{margin-left:42px;}
-.search-area-result .result-list dd ul li{float:left;padding:0 4px;margin:0 5px 4px;border:1px solid #95b93d;}
-.search-area-result .result-list dd ul li i{}
+.search-area-bar{position:relative;}
+.search-area-bar .select-btn,.search-area-bar .search-key{float:left;padding-left:12px;}
+.search-area-bar .search-key em{padding-left:12px;}
+.search-area-bar input[type="number"]{width:30px;margin-top:-1px;vertical-align:top;}
+.search-area-bar:hover input[type="number"]{margin-top:0;border:0;}
+.search-perimeter-area{position:absolute;background:#95b93d;color:#fff;font-size:15px;top:-1px;right:-1px;margin:0;padding:13px 15px 12px;border:1px solid #95b93d;}
+.search-area-bar .list{clear:both;}
+.search-area-result{width:87%;max-width:324px;margin:0 auto;background-color:#fff;overflow:hidden;margin-top:10px;}
+.search-area-result h3{line-height:32px;}
+.result-list{padding:10px;}
+.result-list table{font-size:12px;border-collapse:collapse;border-spacing:0;}
+.s-district{padding-right:10px;}
+.s-district div{font-size:16px;line-height:16px;width:16px;font-weight:bold;color:#ccc;padding:0;margin:0;}
+.s-distance{padding-right:8px;font-size:8px;white-space:nowrap;}
+.s-place{text-align:left;}
+.s-place div{margin-right:-5px;}
+.s-place span{display:inline-block;white-space:nowrap;margin:3px 2px;line-height:18px;padding:0 5px;border:1px solid #95b93d;}
+.s-place span i{margin-left:2px;}
+.result-list table .line{height:12px;visibility:hidden;}

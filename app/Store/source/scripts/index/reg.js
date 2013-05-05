@@ -1,4 +1,5 @@
 (function($){
+    
     $('.bd').on('click','.select-store-category .select-btn',function(e){
         $('.select-store-category .list').slideDown('slow');
         $('.select-store-category').css('height','auto');
@@ -14,5 +15,14 @@
         $('.address-more').slideDown('slow');
     }).on('click','.search-perimeter-area',function(e){
         $('.search-area-result').slideDown('slow');
+    }).on('click','.search-area-bar .select-btn',function(e){
+        $('.search-area-bar .list').slideDown('slow');
+        $('.search-area-bar').css('height','auto');
+    }).on('click','.search-area-bar ul li',function(e){
+        if($(this).attr('class') == 'from-lbs'){
+            
+        }
+        $('.search-area-bar .list').slideUp('slow');
+        $('.search-area-bar .text').text($(this).text());
     })
 })(jQuery);
