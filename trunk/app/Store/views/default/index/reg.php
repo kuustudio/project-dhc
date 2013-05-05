@@ -9,6 +9,7 @@
 </div>
 <div class="bd">
     <form class="form" action="/users/sign_in" method="post" data-remote="true" novalidate="">
+        <input type="hidden" name="store_type" value="0">
         <div class="form-item">
             <div class="form-field">
                 <input type="text" name="store_name" id="store_name" placeholder="星铺名称" autocomplete="off" data-validate="required" data-validate-msg="请填写星铺的名称">
@@ -30,16 +31,9 @@
                     <div class="select-btn"><span class="text">给店铺选择一个分类</span><i>▼</i></div>
                     <div class="list hide">
                         <ul>
-                            <li>甬菜</li>
-                            <li>日本料理</li>
-                            <li>海鲜</li>
-                            <li>小吃</li>
-                            <li>农家菜</li>
-                            <li>中餐</li>
-                            <li>快餐</li>
-                            <li>东北菜</li>
-                            <li>西式快餐</li>
-                            <li>家常菜</li>
+                            <?php foreach($store_categorys as $store_category_id=>$store_category_name){ ?>
+                            <li data-store-category-id='<?php echo $store_category_id; ?>'><?php echo $store_category_name; ?></li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
@@ -52,7 +46,12 @@
         </div>
         <div class="form-item">
             <div class="form-field">
-                <input type="text" name="store_contacts" placeholder="设置一个联系人" autocomplete="off" data-validate="required" data-validate-msg="请填写一个联系人">
+                <input type="text" name="store_contacts" placeholder="设置联系人姓名" autocomplete="off" data-validate="required" data-validate-msg="请填写一个联系人">
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-field">
+                <input type="text" name="store_qq" placeholder="设置联系人的QQ号" autocomplete="off" data-validate="required" data-validate-msg="请填写一个联系人">
             </div>
         </div>
         <div class="form-item">

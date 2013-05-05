@@ -1,7 +1,7 @@
 .main li.place-id{width:10px;}
-.main li.place-name{width:80px;}
+.main li.place-name{width:160px;}
 .main li.city-name{width:30px;}
 .main li.district-name{width:30px;}
 .main li.place-type{width:60px;}
 .main li.start-with{width:26px;}
-.main li.long-lat{width:120px;}
+.main li.long-lat{width:150px;}

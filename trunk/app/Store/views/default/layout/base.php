@@ -9,6 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="format-detection" content="telephone=yes" />
 <link rel="stylesheet" href="<?php echo MONK::include_css('store-base','/Store/source/styles/base.css',false,true); ?>">
+<script type="text/javascript" src="<?php echo MONK::include_js('lbs','/source/scripts/lbs.js',false,true); ?>"></script>
 <script type="text/javascript" src="<?php echo MONK::include_js('store-base','/Store/source/scripts/base.js',false,true); ?>"></script>
 <!--{contentplaceholderid head}-->
 </head>
