@@ -27,10 +27,6 @@
             <input class="num" type="text" name="start_with" />
         </dd>
         <dd>
-            <label>经纬度：</label>
-            <input type="text" name="long_lat" />
-        </dd>
-        <dd>
             <button type="submit">提交</button>
         </dd>
     </dl>

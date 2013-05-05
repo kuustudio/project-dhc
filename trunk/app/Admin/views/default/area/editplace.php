@@ -27,13 +27,15 @@
             <input type="text" name="place_name" value="<?php echo $place['place_name']; ?>" />
         </dd>
         <dd>
+            <label>详细地址：</label>
+            <input class="title" type="text" name="place_info" value="<?php echo $place['place_info']; ?>" />
+        </dd>
+        <dd>
             <label>地点类型：</label>
             <select name="place_type">
-                <option value="1" <?php if($place['place_type']==1) { echo 'selected=selected'; } ?>>写字楼</option>
-                <option value="2" <?php if($place['place_type']==2) { echo 'selected=selected'; } ?>>住宅小区</option>
-                <option value="3" <?php if($place['place_type']==3) { echo 'selected=selected'; } ?>>学校</option>
-                <option value="4" <?php if($place['place_type']==4) { echo 'selected=selected'; } ?>>广场</option>
-                <option value="5" <?php if($place['place_type']==5) { echo 'selected=selected'; } ?>>酒店</option>
+                <?php foreach($place_types as $v=>$t){ ?>
+                <option value="<?php echo $v; ?>" <?php if($place['place_type']==$v) { echo 'selected=selected'; } ?>><?php echo $t; ?></option>
+                <?php } ?>
             </select>
         </dd>
         <dd>
@@ -42,7 +44,7 @@
         </dd>
         <dd>
             <label>经纬度：</label>
-            <input type="text" name="long_lat" value="<?php echo $place['long_lat']; ?>" />
+            <input type="text" disabled=disabled name="long_lat" value="<?php echo $place['long_lat']; ?>" />
         </dd>
         <dd>
             <button type="submit">更新</button>

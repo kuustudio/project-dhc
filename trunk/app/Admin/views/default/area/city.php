@@ -29,7 +29,7 @@
                 <li class="parent-province"><?php echo $china_provinces[$city['parent_province']]; ?></li>
                 <li class="start-with"><?php echo $city['start_with']; ?></li>
                 <li class="long-lat"><?php echo $city['long_lat']; ?></li>
-                <li><a href="<?php echo MONK::_url('*/editCity',array('city_id'=>$city['city_id'])); ?>">编辑</a> | <!--<a href="<?php echo MONK::_url('*/deleteCity',array('city_id'=>$city['city_id'])); ?>">删除</a> |--> <a href="<?php echo MONK::_url('*/district',array('city_id'=>$city['city_id'],'city_name'=>urlencode($city['city_name']))); ?>">区域</a></li>
+                <li><a href="http://api.map.baidu.com/geocoder?location=<?php echo $city['long_lat']; ?>&key=52490bdd2448a23c3e87613df57079a9&output=json">Geo</a> | <a href="<?php echo MONK::_url('*/editCity',array('city_id'=>$city['city_id'])); ?>">编辑</a> | <!--<a href="<?php echo MONK::_url('*/deleteCity',array('city_id'=>$city['city_id'])); ?>">删除</a> |--> <a href="<?php echo MONK::_url('*/district',array('city_id'=>$city['city_id'],'city_name'=>urlencode($city['city_name']))); ?>">区域</a></li>
             </ul>
         </dd>
         <?php } ?>
