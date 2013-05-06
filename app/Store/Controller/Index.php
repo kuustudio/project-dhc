@@ -2,10 +2,16 @@
 class Store_Controller_Index extends Store_Controller_Base {
 
     public function actionIndex(){
+        $this->assign('no_topbar',true);
         $this->render();
     }
 
     public function actionHome(){
+        $this->render();
+    }
+
+    public function actionSelectcity(){
+        $this->assign('no_topbar',true);
         $this->render();
     }
 
