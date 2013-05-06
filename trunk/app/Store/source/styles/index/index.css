@@ -1,0 +1,23 @@
+body{background:#FBFBF5;}
+.page#page-Store-Index-Index{padding-top:40px;margin:0 auto;background:url("/Store/source/images/index-bg.png") repeat-x 0 0;overflow:hidden;position:relative;}
+.hd .logo{overflow:hidden;width:251px;height:60px;margin:0 auto 10px;font-size:46px;font-weight:bold;font-family:"Microsoft Yahei";color:#577570;text-align:center;}
+.hd i,.hd h3{color:#457670;text-shadow:0 1px rgba(255, 255, 255, 0.55);}
+.hd i{position:absolute;left:50%;margin-left:80px;top:45px;}
+.hd h3{font-size:14px;line-height:16px;text-align:center;}
+.account-links{width:200px;;margin:40px auto 0;overflow:hidden;}
+.account-links li{float:left;}
+.account-links li a{display:block;width:92px;height:38px;float:left;text-indent:-9999px;overflow:hidden;}
+.account-links li a.btn-signup{margin:0 15px 0 0;background:url("/Store/source/images/btn-signup.png") no-repeat 0 0;}
+.account-links li a.btn-signin{background:url("/Store/source/images/btn-signin.png") no-repeat 0 0;}
+.bd{max-width:960px;margin:0 auto;overflow:hidden;text-align:center;}
+.bd h2{text-align:center;font-size:22px;color:#577570;margin:40px 0 0 0;}
+.bd h2 b{font-weight:bold;color:#dc8100;}
+.bd .section{float:left;width:228px;margin:30px 0 0 0;padding:0 20px 0 70px;text-align:left;}
+.bd .section h3{color:#333;font-size:16px;line-height:18px;font-weight:600;}
+.bd .section .desc{margin:5px 0 0 0;color:#777;font-size:12px;line-height:1.4;}
+#order-menu{background:url("/Store/source/images/order-menu.png") no-repeat 17px 8px;}
+#order-manage{background:url("/Store/source/images/order-manage.png") no-repeat 20px 8px;}
+#order-progress{background:url("/Store/source/images/order-progress.png") no-repeat 20px 8px;}
+.bd .feed{clear:both;margin:0 20px 40px;padding-top:40px;}
+.bd .feed dl{margin-right:-20px;overflow:hidden;}
+.bd .feed dd{float:left;margin:0 10px 10px 0;width:60px;height:60px;background:#fff;}
