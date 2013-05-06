@@ -11,6 +11,7 @@ em{font-style:normal;}
 .hide{display:none;}
 input[type="text"],input[type="password"],input[type="email"],input[type="telephone"],.form-item input[type="number"],textarea{width:220px;height:18px;line-height:18px;margin:0;padding:8px 12px;border:1px solid #ccc;outline:0;}
 input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,input[type="telephone"]:focus,input[type="number"]:focus,textarea:focus{border-color:#95b93d;}
+.avatar{height:50px;width:50px;display:block;-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px;}
 .page{position:relative;}
 .topbar{padding:0 10px;margin:30px auto;max-width:960px;overflow:hidden;}
 .topbar .logo{float:left;}
