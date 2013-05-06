@@ -1,16 +1,28 @@
 <!--{@page layout="base"}-->
 <!--{content head}-->
-<link rel="stylesheet" href="<?php echo MONK::include_css('index-index','/Store/source/styles/index/index.css',false,true); ?>">
+<script type="text/javascript">
+    if(wsd<640){
+        document.writeln('<link rel="stylesheet" type="text/css" media="all" href="<?php echo MONK::include_css("index-index-320","/Store/source/styles/index/index/320.css",false,true); ?>">');
+    }else if(640<wsd&&wsd<1024){
+        document.writeln('<link rel="stylesheet" type="text/css" media="all" href="<?php echo MONK::include_css("index-index-640","/Store/source/styles/index/index/640.css",false,true); ?>">');
+    }else{
+        document.writeln('<link rel="stylesheet" type="text/css" media="all" href="<?php echo MONK::include_css("index-index-1024","/Store/source/styles/index/index/1024.css",false,true); ?>">');
+    }
+</script>
 <!--{/content}-->
 <!--{content content}-->
 <div class="hd">
-    <h1 class="logo">喵星人</h1>
-    <i>&copy 星铺端</i>
-    <h3>简单，好用的星铺管理工具</h3>
-    <ul class="account-links">
-        <li><a class="btn-signup" href="#">注册</a></li>
-        <li><a class="btn-signin" href="#">登录</a></li>
-    </ul>
+    <div class="hl">
+        <h1 class="logo">喵星人</h1>
+        <i>&copy 星铺端</i>
+        <h3>简单，好用的星铺管理工具</h3>
+    </div>
+    <div class="hr">
+        <ul class="account-links">
+            <li><a class="btn-signup" href="#">注册</a></li>
+            <li><a class="btn-signin" href="#">登录</a></li>
+        </ul>
+    </div>
 </div>
 <div class="bd">
     <h2><b>省</b>时间，<b>省</b>成本，<b>快</b>赚钱</h2>
@@ -34,21 +46,21 @@
     </div>
     <div class="feed">
         <dl>
-            <dt></dt>
-            <dd data-info="你好"><img src="#" /></dd>
-            <dd></dd>
-            <dd></dd>
-            <dd></dd>
-            <dt></dt>
-            <dd data-info="你好"><img src="#" /></dd>
-            <dd></dd>
-            <dd></dd>
-            <dd></dd>
-            <dt></dt>
-            <dd data-info="你好"><img src="#" /></dd>
-            <dd></dd>
-            <dd></dd>
-            <dd></dd>
+            <dt class="hide"><a href="#">小明</a>在<a href="#">香格里拉</a>点了一份<a href="#">排骨饭</a></dt>
+            <dd data-info="你好"><img class="avatar" src="/Store/source/uploads/thumb_71d4bed6e310e27cbeeedad3d3c129ad.jpg" /></dd>
+            <dd data-info="你好"><img class="avatar" src="/Store/source/uploads/thumb_71d4bed6e310e27cbeeedad3d3c129ad.jpg" /></dd>
+            <dd data-info="你好"><img class="avatar" src="/Store/source/uploads/thumb_71d4bed6e310e27cbeeedad3d3c129ad.jpg" /></dd>
+            <dd data-info="你好"><img class="avatar" src="/Store/source/uploads/thumb_71d4bed6e310e27cbeeedad3d3c129ad.jpg" /></dd>
+            <dt><a href="#">小明</a>在<a href="#">香格里拉</a>点了一份<a href="#">排骨饭</a>小明</a>在<a href="#">香格里拉</a>点了一份<a href="#">排骨饭</a>小明</a>在<a href="#">香格里拉</a>点了一份<a href="#">排骨饭</a></dt>
+            <dd data-info="你好"><img class="avatar" src="/Store/source/uploads/thumb_71d4bed6e310e27cbeeedad3d3c129ad.jpg" /></dd>
+            <dd class="select" data-info="你好"><img class="avatar" src="/Store/source/uploads/thumb_71d4bed6e310e27cbeeedad3d3c129ad.jpg" /></dd>
+            <dd data-info="你好"><img class="avatar" src="/Store/source/uploads/thumb_71d4bed6e310e27cbeeedad3d3c129ad.jpg" /></dd>
+            <dd data-info="你好"><img class="avatar" src="/Store/source/uploads/thumb_71d4bed6e310e27cbeeedad3d3c129ad.jpg" /></dd>
+            <dt class="hide"><a href="#">小明</a>在<a href="#">香格里拉</a>点了一份<a href="#">排骨饭</a></dt>
+            <dd data-info="你好"><img class="avatar" src="/Store/source/uploads/thumb_71d4bed6e310e27cbeeedad3d3c129ad.jpg" /></dd>
+            <dd data-info="你好"><img class="avatar" src="/Store/source/uploads/thumb_71d4bed6e310e27cbeeedad3d3c129ad.jpg" /></dd>
+            <dd data-info="你好"><img class="avatar" src="/Store/source/uploads/thumb_71d4bed6e310e27cbeeedad3d3c129ad.jpg" /></dd>
+            <dd data-info="你好"><img class="avatar" src="/Store/source/uploads/thumb_71d4bed6e310e27cbeeedad3d3c129ad.jpg" /></dd>
         </dl>
     </div>
 </div>
