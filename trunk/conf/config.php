@@ -49,6 +49,10 @@ return array(
             'connectString'         => 'mysql://root:11112222tq@localhost:3306',
             'dbname'                => 'miao_db',
         ),
+        'Store' => array(
+            'connectString'         => 'mysql://root:11112222tq@localhost:3306',
+            'dbname'                => 'miao_db',
+        ),
         'Home' => array(
             'connectString'         => 'mysql://root:11112222tq@localhost:3306',
             'dbname'                => 'miao_db',

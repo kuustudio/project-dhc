@@ -19,8 +19,8 @@
     </div>
     <div class="hr">
         <ul class="account-links">
-            <li><a class="btn-signup" href="#">注册</a></li>
-            <li><a class="btn-signin" href="#">登录</a></li>
+            <li><a class="btn-signup" href="<?php echo MONK::_url('*/reg')?>">注册</a></li>
+            <li><a class="btn-signin" href="<?php echo MONK::_url('*/login')?>">登录</a></li>
         </ul>
     </div>
 </div>

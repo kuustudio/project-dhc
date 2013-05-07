@@ -11,6 +11,7 @@ class Admin_Model_Area extends model {
         'get_city_page' => 'select `city_id`,`city_name`,`parent_province`,`start_with`,`long_lat` from `area_city` order by `updated` desc limit [@page_index],[@page_size];',
         'get_city_all_count'    => 'select count(1) as c from `area_city`;',
         'get_city_by_id'    => 'select `city_id`,`city_name`,`parent_province`,`start_with`,`long_lat` from `area_city` where `city_id` = [@city_id];',
+        'get_city_by_name'    => 'select `city_id`,`parent_province`,`start_with`,`long_lat` from `area_city` where `city_name` = [@city_name];',
         'get_district_all'  => 'select `district_id`,`district_name`,`city_id`,(select `city_name` from `area_city` where `city_id` = [@city_id]) as `city_name`,`start_with`,`long_lat` from `area_district` where `city_id` = [@city_id] order by `updated` desc;',
         'create_district'   => 'insert into `area_district`(`district_name`,`city_id`,`start_with`,`long_lat`,`latitude`,`longitude`,`created`,`updated`) values([@district_name],[@city_id],[@start_with],[@long_lat],[@latitude],[@longitude],[@created],[@updated])',
         'get_district_by_id'    => 'select `district_id`,`district_name`,`start_with`,`long_lat` from `area_district` where `district_id` = [@district_id];',
@@ -105,6 +106,15 @@ class Admin_Model_Area extends model {
     //根据ID获取单个城市
     public function get_city_by_id($city_id){
         $city = mysql::fetch('area_city', $this->sqls['get_city_by_id'], array('city_id'=>$city_id));
+        if(count($city))
+            return array_shift($city);
+        else
+            return false;
+    }
+
+    //根据名称获取单个城市
+    public function get_city_by_name($city_name){
+        $city = mysql::fetch('area_city', $this->sqls['get_city_by_name'], array('city_name'=>$city_name));
         if(count($city))
             return array_shift($city);
         else
