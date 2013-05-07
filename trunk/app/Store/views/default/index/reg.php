@@ -5,7 +5,7 @@
 <!--{content content}-->
 <div class="hd">
     <h1 class="logo">喵星人</h1>
-    <i><a href="#">宁波</a></i>
+    <i><a href="<?php echo MONK::_url('*/selectcity')?>"><?php echo $city_name; ?></a></i>
 </div>
 <div class="bd">
     <form class="form" action="/users/sign_in" method="post" data-remote="true" novalidate="">
@@ -59,15 +59,7 @@
                 <div class="select select-store-area">
                     <div class="select-btn"><span class="text">给店铺选择一个区域</span><i>▼</i></div>
                     <div class="list hide">
-                        <ul>
-                            <li>鄞州</li>
-                            <li>海曙</li>
-                            <li>江东</li>
-                            <li>江北</li>
-                            <li>慈溪</li>
-                            <li>余姚</li>
-                            <li>镇海</li>
-                        </ul>
+                        <ul></ul>
                     </div>
                 </div>
             </div>
@@ -156,6 +148,15 @@
 </div>
 <!--{/content}-->
 <!--{content foot}-->
+<script type="text/javascript">
+var Url = {
+    get_city:"<?php echo MONK::_url('*/getcity')?>",
+    select_city:"<?php echo MONK::_url('*/selectcity')?>",
+    get_districts:"<?php echo MONK::_url('*/getdistricts')?>",
+    get_places:"<?php echo MONK::_url('*/getplaces')?>",
+}
+</script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="<?php echo MONK::include_js('cookie','/source/scripts/cookie.js',false,true); ?>"></script>
 <script type="text/javascript" src="<?php echo MONK::include_js('index-reg','/Store/source/scripts/index/reg.js',false,true); ?>"></script>
 <!--{/content}-->

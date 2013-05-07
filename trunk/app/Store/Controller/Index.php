@@ -17,6 +17,9 @@ class Store_Controller_Index extends Store_Controller_Base {
 
     public function actionLogin(){
         $this->assign('no_topbar',true);
+        $this->_setType(array('city_name'=>PARAM_STRING),'cookie');
+        $city_name = $this->_cookie('city_name');
+        $this->assign('city_name',$city_name?$city_name:'城市');
         $this->render();
     }
 
@@ -35,20 +38,47 @@ class Store_Controller_Index extends Store_Controller_Base {
             if(!empty($city)){
                 setcookie('city_name',$city_name,0,'/');
                 setcookie('city_id',$city['city_id'],0,'/');
+            }else{
+                $this->_json_return('',false);
             }
         }else{
             $city_name = '';
             $city['city_id'] = 0;
         }
         
-        $this->_json_return(array('city_name'=>$city_name),$city['city_id']);
+        $this->_json_return(array('city_name'=>$city_name,'city_id'=>$city['city_id']),$city['city_id']);
     }
 
     public function actionReg(){
         $admin_model_store = MONK::getSingleton('Admin_Model_Store');
         $this->assign('store_categorys',$admin_model_store->_store_categorys);
         $this->assign('no_topbar',true);
+        $this->_setType(array('city_name'=>PARAM_STRING),'cookie');
+        $city_name = $this->_cookie('city_name');
+        $this->assign('city_name',$city_name?$city_name:'城市');
         $this->render();
+    }
+
+    public function actionGetdistricts_AJAX_POST(){
+        $this->_setType(array('city_id'=>PARAM_UINT),'post');
+        $city_id = $this->_post('city_id');
+        $admin_model_area = MONK::getSingleton('Admin_Model_Area');
+        $districts = $admin_model_area->get_district_all($city_id);
+        $this->_json_return(array('districts'=>$districts),count($districts));
+    }
+
+    public function actionGetplaces_AJAX_POST(){
+        $this->_setType(array('latlon'=>PARAM_STRING,'distance'=>PARAM_UINT),'post');
+        $latlon = $this->_post('latlon');
+        $distance = $this->_post('distance');
+        if(strpos($latlon,',')){
+            list($lat,$lon) = explode(',',$latlon);
+            $admin_model_area = MONK::getSingleton('Admin_Model_Area');
+            $places = $admin_model_area->get_place_by_latlon($lat,$lon,$distance);
+            dump($places);
+        }else{
+            $this->_json_return('',false);
+        }
     }
 
     public function actionLogout(){

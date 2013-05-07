@@ -9,6 +9,8 @@ return array(
         'parent_province' => PARAM_UINT,
         'start_with'=> PARAM_STRING,
         'long_lat'  => PARAM_STRING,
+        'latitude'  => PARAM_FLOAT,
+        'longitude' => PARAM_FLOAT,
         'created'   => PARAM_DATETIME,
         'updated'   => PARAM_DATETIME,
     )
