@@ -222,6 +222,7 @@ class Admin_Controller_Area extends Admin_Controller_Base {
         $_data = array();
         $_data['city_id'] = $this->_post('city_id');
         $_data['district_id'] = $this->_post('district_id');
+        $_data['district_name'] = $this->_get('district_name');
         $_data['place_name'] = $this->_post('place_name');
         $_data['place_info'] = $this->_post('place_info');
         $_data['place_type'] = $this->_post('place_type');

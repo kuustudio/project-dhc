@@ -5,7 +5,7 @@
 <!--{content content}-->
 <div class="hd">
     <h1 class="logo">喵星人</h1>
-    <i><a href="#">宁波</a></i>
+    <i><a href="<?php echo MONK::_url('*/selectcity')?>"><?php echo $city_name; ?></a></i>
 </div>
 <div class="bd">
     <form class="form" action="/users/sign_in" method="post" data-remote="true" novalidate="">
@@ -41,8 +41,10 @@
 <script type="text/javascript">
 var Url = {
     get_city:"<?php echo MONK::_url('*/getcity')?>",
+    select_city:"<?php echo MONK::_url('*/selectcity')?>",
 }
 </script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="<?php echo MONK::include_js('cookie','/source/scripts/cookie.js',false,true); ?>"></script>
 <script type="text/javascript" src="<?php echo MONK::include_js('index-reg','/Store/source/scripts/index/login.js',false,true); ?>"></script>
 <!--{/content}-->

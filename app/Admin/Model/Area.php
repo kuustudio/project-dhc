@@ -1,4 +1,6 @@
 <?php
+define('LAT_CIRC',);
+
 class Admin_Model_Area extends model {
     public function __construct(){
         parent::__construct();
@@ -23,6 +25,8 @@ class Admin_Model_Area extends model {
         'get_place_by_id'    => 'select `place_id`,`place_name`,`place_info`,`place_type`,`start_with`,`long_lat` from `area_place` where `place_id` = [@place_id];',
         'update_place'   => 'update `area_place` set `place_name`=[@place_name],`place_info`=[@place_info],`place_type`=[@place_type],`start_with`=[@start_with],`long_lat`=[@long_lat],`latitude`=[@latitude],`longitude`=[@longitude],`updated`=[@updated] where `place_id` = [@place_id]',
         'delete_place'   => 'delete from `area_place` where `place_id` = [@place_id]',
+        'get_place_by_latlon'   => 'select `place_id`,`place_name`,`city_id`,`district_id`,`district_name` from `area_place` where latitude > [@lat]-[@distance] and 
+        latitude < [@lat]+[@distance] and longitude > [@lon]-[@distance] and longitude < [@lon]+[@distance] order by ACOS(SIN(([@lat] * 3.1415) / 180 ) *SIN((latitude * 3.1415) / 180 ) +COS(([@lat] * 3.1415) / 180 ) * COS((latitude * 3.1415) / 180 ) *COS(([@lon]* 3.1415) / 180 - (longitude * 3.1415) / 180 ) ) * 6380 asc limit 10',
     );
 
     public $_china_provinces = array(
@@ -194,5 +198,10 @@ class Admin_Model_Area extends model {
     public function delete_place($place_id){
         mysql::execute('area_place', $this->sqls['delete_place'], array('place_id'=>$place_id));
         return true;
+    }
+
+    //根据经纬度查询周边地点
+    public function get_place_by_latlon($lat,$lon,$distance = 1){
+        return mysql::fetch('area_place', $this->sqls['get_place_by_latlon'], array('lat'=>$lat,'lon'=>$lon,'distance'=>$distance));
     }
 }
