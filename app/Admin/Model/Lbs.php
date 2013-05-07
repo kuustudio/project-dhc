@@ -27,7 +27,19 @@ class Admin_Model_Lbs extends model {
         $json = file_get_contents('http://api.map.baidu.com/geocoder?'.$type.'='.$data.'&key='.$this->_baidu_key.$city.'&output='.$output);
         $arr = json_decode($json,true);
         if($arr['status'] != 'OK') return null;
-        return array('lat'=>$arr['result']['location']['lat'],'lng'=>$arr['result']['location']['lng']);
+        return array(
+            'lat'=>$arr['result']['location']['lat'],
+            'lng'=>$arr['result']['location']['lng'],
+            'formatted_address'=> $arr['result']['formatted_address'],
+            'business' => $arr['result']['business'],
+            'province' => $arr['result']['addressComponent']['province'],
+            'city' => $arr['result']['addressComponent']['city'],
+            'city_code' => $arr['result']['cityCode'],
+            'street' => $arr['result']['addressComponent']['street'],
+            'district' => $arr['result']['addressComponent']['district'],
+            'street' => $arr['result']['addressComponent']['street'],
+            'street_number' => $arr['result']['addressComponent']['street_number'],
+        );
     }
 
     public function get_from_address($addr,$city = ''){
@@ -37,6 +49,15 @@ class Admin_Model_Lbs extends model {
         }else{
             return null;
         }
+    }
+
+    public function get_from_latlon($latlon){
+        return $this->baidu_geocode($latlon,'location');
+    }
+
+    public function get_city_info($geo_city){
+        $geo_city = str_replace('市','',$geo_city);
+        
     }
 
 }

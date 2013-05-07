@@ -24,3 +24,4 @@ var Lbs = (function(){
         getLbs: getLbs
     }
 })();
+window.Lbs = Lbs;
