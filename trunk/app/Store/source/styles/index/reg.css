@@ -17,6 +17,7 @@
 .select .list ul{display:block;overflow:hidden;margin-right:-10px;}
 .select .list ul li{float:left;padding:0 10px;}
 .select .list ul li:hover{background-color:#95b93d;color:#fff;}
+.select .map{background-color:#fff;overflow:hidden;width:278px;height:278px;}
 .bd .form-item{color:#aaa;}
 .search-area-bar{position:relative;}
 .search-area-bar .select-btn,.search-area-bar .search-key{float:left;padding-left:12px;}
@@ -24,7 +25,7 @@
 .search-area-bar input[type="number"]{width:30px;margin-top:-1px;vertical-align:top;}
 .search-area-bar:hover input[type="number"]{margin-top:0;border:0;}
 .search-perimeter-area{position:absolute;background:#95b93d;color:#fff;font-size:15px;top:-1px;right:-1px;margin:0;padding:13px 15px 12px;border:1px solid #95b93d;}
-.search-area-bar .list{clear:both;}
+.search-area-bar .list,.search-area-bar .map{clear:both;}
 .search-area-result{width:87%;max-width:324px;margin:0 auto;background-color:#fff;overflow:hidden;margin-top:10px;}
 .search-area-result h3{line-height:32px;}
 .result-list{padding:10px;}

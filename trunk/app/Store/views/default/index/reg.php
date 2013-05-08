@@ -1,6 +1,7 @@
 <!--{@page layout="base"}-->
 <!--{content head}-->
 <link rel="stylesheet" href="<?php echo MONK::include_css('index-reg','/Store/source/styles/index/reg.css',false,true); ?>">
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <!--{/content}-->
 <!--{content content}-->
 <div class="hd">
@@ -9,7 +10,9 @@
 </div>
 <div class="bd">
     <form class="form" action="/users/sign_in" method="post" data-remote="true" novalidate="">
-        <input type="hidden" name="store_type" value="0">
+        <input type="hidden" id="store_type" name="store_type">
+        <input type="hidden" id="district_id" name="district_id">
+        <input type="hidden" id="district_latlon" name="district_latlon">
         <div class="form-item">
             <div class="form-field">
                 <input type="text" name="store_name" id="store_name" placeholder="星铺名称" autocomplete="off" data-validate="required" data-validate-msg="请填写星铺的名称">
@@ -75,11 +78,8 @@
                     <div class="select-btn"><span class="text">选择中心点</span><i>▼</i></div>
                     <div class="search-key"><input type="number" autocomplete="off"><em>公里</em></div>
                     <button type="button" class="search-perimeter-area">搜</button>
-                    <div class="list hide">
-                        <ul>
-                            <li class="from-address">按填写地址</li>
-                            <li class="from-lbs">按当前位置</li>
-                        </ul>
+                    <div class="map hide">
+                        
                     </div>
                 </div>
                 <div class="search-area-result hide">
@@ -155,8 +155,8 @@ var Url = {
     get_districts:"<?php echo MONK::_url('*/getdistricts')?>",
     get_places:"<?php echo MONK::_url('*/getplaces')?>",
 }
+var lat_lon
 </script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
-<script type="text/javascript" src="<?php echo MONK::include_js('cookie','/source/scripts/cookie.js',false,true); ?>"></script>
 <script type="text/javascript" src="<?php echo MONK::include_js('index-reg','/Store/source/scripts/index/reg.js',false,true); ?>"></script>
 <!--{/content}-->

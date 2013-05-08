@@ -10,6 +10,16 @@ class Admin_Model_Lbs extends model {
     private $sqls = array(
         
     );
+
+    private function get_component($key,$address_components){
+        if(!empty($address_components)){
+            foreach($address_components as $c){
+                return in_array($key,$c['types'])?$c['long_name']:''
+            }
+        }else{
+            return '';
+        }
+    }
     
     /* $components = 'country:ES|locality:AA'
     */
@@ -19,7 +29,19 @@ class Admin_Model_Lbs extends model {
         $arr = json_decode($json,true);
         if($arr['status'] != 'OK') return null;
         $result = array_shift($arr['results']);
-        return array('lat'=>$result['geometry']['location']['lat'],'lng'=>$result['geometry']['location']['lng']);
+        return array(
+            'lat'=>$result['geometry']['location']['lat'],
+            'lng'=>$result['geometry']['location']['lng'],
+            'formatted_address'=> $result['formatted_address'],
+            'business' => '',
+            'province' => $this->get_component('administrative_area_level_1',$result['address_components']),
+            'city' => $this->get_component('locality',$result['address_components']),
+            'city_code' => '',
+            'street' => '',
+            'district' => '',
+            'street' => '',
+            'street_number' => '',
+        );
     }
 
     private function baidu_geocode($data, $type = 'location', $city = '', $output = 'json'){

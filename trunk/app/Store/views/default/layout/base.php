@@ -11,6 +11,11 @@
 <link rel="stylesheet" href="<?php echo MONK::include_css('store-base','/Store/source/styles/base.css',false,true); ?>">
 <script type="text/javascript" src="<?php echo MONK::include_js('lbs','/source/scripts/lbs.js',false,true); ?>"></script>
 <script type="text/javascript" src="<?php echo MONK::include_js('store-base','/Store/source/scripts/base.js',false,true); ?>"></script>
+<script type="text/javascript">
+var city_id = '<?php echo $city_id; ?>',
+    city_name = '<?php echo $city_name; ?>',
+    latlon = '<?php echo $latlon; ?>';
+</script>
 <!--{contentplaceholderid head}-->
 </head>
 <body>
