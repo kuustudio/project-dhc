@@ -1,10 +1,15 @@
 <?php
-define('LAT_CIRC',);
+define('EQUATOR_PER_KM','0.00898293');
+define('MERIDIAN_PER_KM','0.008998');
 
 class Admin_Model_Area extends model {
     public function __construct(){
         parent::__construct();
     }
+
+    private function getRadian($d){
+		return $d * M_PI / 180;
+	}
 
     private $sqls = array(
         'create_city'   => 'insert into `area_city`(`city_name`,`parent_province`,`start_with`,`long_lat`,`latitude`,`longitude`,`created`,`updated`) values([@city_name],[@parent_province],[@start_with],[@long_lat],[@latitude],[@longitude],[@created],[@updated])',
@@ -25,8 +30,8 @@ class Admin_Model_Area extends model {
         'get_place_by_id'    => 'select `place_id`,`place_name`,`place_info`,`place_type`,`start_with`,`long_lat` from `area_place` where `place_id` = [@place_id];',
         'update_place'   => 'update `area_place` set `place_name`=[@place_name],`place_info`=[@place_info],`place_type`=[@place_type],`start_with`=[@start_with],`long_lat`=[@long_lat],`latitude`=[@latitude],`longitude`=[@longitude],`updated`=[@updated] where `place_id` = [@place_id]',
         'delete_place'   => 'delete from `area_place` where `place_id` = [@place_id]',
-        'get_place_by_latlon'   => 'select `place_id`,`place_name`,`city_id`,`district_id`,`district_name` from `area_place` where latitude > [@lat]-[@distance] and 
-        latitude < [@lat]+[@distance] and longitude > [@lon]-[@distance] and longitude < [@lon]+[@distance] order by ACOS(SIN(([@lat] * 3.1415) / 180 ) *SIN((latitude * 3.1415) / 180 ) +COS(([@lat] * 3.1415) / 180 ) * COS((latitude * 3.1415) / 180 ) *COS(([@lon]* 3.1415) / 180 - (longitude * 3.1415) / 180 ) ) * 6380 asc limit 10',
+        'get_place_by_latlon'   => 'select `place_id`,`place_name`,`city_id`,`district_id`,`district_name`,(ACOS(SIN(([@lat] * 3.1415) / 180 ) *SIN((latitude * 3.1415) / 180 ) +COS(([@lat] * 3.1415) / 180 ) * COS((latitude * 3.1415) / 180 ) *COS(([@lon]* 3.1415) / 180 - (longitude * 3.1415) / 180 ) ) * 6380) as `distance` from `area_place` where latitude > [@lat]-[@m] and 
+        latitude < [@lat]+[@m] and longitude > [@lon]-[@e] and longitude < [@lon]+[@e] order by distance asc limit 10',
     );
 
     public $_china_provinces = array(
@@ -202,6 +207,8 @@ class Admin_Model_Area extends model {
 
     //根据经纬度查询周边地点
     public function get_place_by_latlon($lat,$lon,$distance = 1){
-        return mysql::fetch('area_place', $this->sqls['get_place_by_latlon'], array('lat'=>$lat,'lon'=>$lon,'distance'=>$distance));
+        $e = (EQUATOR_PER_KM / cos($this->getRadian($lat))) * $distance;
+        $m = MERIDIAN_PER_KM * $distance;
+        return mysql::fetch('area_place', $this->sqls['get_place_by_latlon'], array('lat'=>$lat,'lon'=>$lon,'e'=>$e,'m'=>$m));
     }
 }

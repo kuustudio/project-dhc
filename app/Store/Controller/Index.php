@@ -53,9 +53,11 @@ class Store_Controller_Index extends Store_Controller_Base {
         $admin_model_store = MONK::getSingleton('Admin_Model_Store');
         $this->assign('store_categorys',$admin_model_store->_store_categorys);
         $this->assign('no_topbar',true);
-        $this->_setType(array('city_name'=>PARAM_STRING),'cookie');
+        $this->_setType(array('city_name'=>PARAM_STRING,'lat_lon'=>PARAM_STRING),'cookie');
         $city_name = $this->_cookie('city_name');
+        $lat_lon = $this->_cookie('lat_lon');
         $this->assign('city_name',$city_name?$city_name:'城市');
+        $this->assign('lat_lon',$lat_lon?$lat_lon:'');
         $this->render();
     }
 
