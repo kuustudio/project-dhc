@@ -1,11 +1,5 @@
 (function($){
     var places_cache = [];
-
-    var _single_validate = function(element){
-        $(element).
-        return false;
-    }
-
     var _render_district = function(city_id){
         $.post(Url.get_districts,{city_id:city_id},function(d){
             if(d.status == 'true'){
@@ -62,7 +56,7 @@
     };
 
     var _render_place = function(places){
-        p_h = '<table cellpadding="0" cellspacing="0"><tbody>';
+        p_h = '';
         $.each(places,function(i,n){
             var l = 1;
             $.each(n.distance,function(j,m){
@@ -79,9 +73,8 @@
             })
             p_h += '<tr><td colspan="3"><div class="line">'+n.district_name+'</div></td></tr>';
         });
-        p_h += '</tbody></table>';
-        $('.search-area-result .result-list').empty();
-        $('.search-area-result .result-list').append(p_h);
+        $('.search-area-result .result-list tbody').empty();
+        $('.search-area-result .result-list tbody').append(p_h);
     };
 
     /*
@@ -106,8 +99,7 @@
     };
 
     */
-    
-    //生成地图
+
     var _render_map = function(){
         center_latlon = custom_latlon || latlon || $('.form').find('#district_latlon').val();
         center_latlon_arr = center_latlon.split(',')
@@ -141,15 +133,6 @@
         });
     };
 
-    var _add_loading = function(d,t,text){
-        $(d).append('<div class="loading" style="margin-top:'+t+'"><i></i>'+text+'</div>');
-    }
-
-    var _del_loading = function(d){
-        $(d).find('.loading').remove();
-    }
-    
-    //生成区域列表
     if(city_id == '0' || city_name == ''){
         $.getJSON(Url.get_city,function(d){
             if(d.status == 'true'){
@@ -185,7 +168,6 @@
         $('.search-area-bar .map').hide();
         search_latlon = custom_latlon || $(this).closest('.form').find('#custom_latlon').val() || latlon || $(this).closest('.form').find('#district_latlon').val();
         if(search_latlon){
-            _add_loading('.result-list','0','^_^ 数据查询中...');
             $.post(Url.get_places,{latlon:search_latlon,distance:$('.search-key input').val()},function(d){
                 if(d.status == 'true'){
                     places = _place_serialize_and_input(d.data.places);
@@ -194,20 +176,15 @@
                     
                 }
             },'json');
-        }else{
-            //请选择中心点
         }
         $('.search-area-result').show();
         $('.search-area-bar').toggleClass('hover');
     }).on('click','.search-area-bar .select-btn',function(e){
-        $('.search-area-bar .map').show();
-        _add_loading('.search-area-bar .map','117px','^_^ 地图加载中...');
         _render_map();
+        $('.search-area-bar .map').show();
         $('.search-area-bar').toggleClass('hover');
     }).on('click','.result-list .s-place span',function(e){
         $(this).toggleClass('checked');
         _toggle_places_cache($(this).data('place-id'));
-    }).on('submit','.form',function(){
-        console.log(111111111);
     })
 })(jQuery);

@@ -15,6 +15,7 @@
 var city_id = '<?php echo $city_id; ?>',
     city_name = '<?php echo $city_name; ?>',
     latlon = '<?php echo $latlon; ?>';
+    custom_latlon = '<?php echo $custom_latlon; ?>';
 </script>
 <!--{contentplaceholderid head}-->
 </head>

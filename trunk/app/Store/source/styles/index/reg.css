@@ -1,4 +1,6 @@
 .page#page-Store-Index-Reg{margin:40px auto 0;}
+.loading{margin:0 auto;height:44px;}
+.loading i{display:inline-block;padding-right:10px;width:15px;height:15px;margin-top:14px;background:url(/Store/source/images/loading-upload.gif) no-repeat 0 0;}
 .hd .logo{overflow:hidden;width:251px;height:60px;margin:0 auto 50px;font-size:46px;font-weight:bold;font-family:"Microsoft Yahei";color:#577570;text-align:center;}
 .hd i{position:absolute;left:50%;margin-left:100px;top:5px;}
 .bd{margin:0 auto;overflow:hidden;text-align:center;}
@@ -11,19 +13,19 @@
 .sign-in-btn .desc{margin:0 auto;padding:15px 0;color:#999;font-size:12px;}
 .bd .form-item .desc a{color:#999;}
 .bd .sign-nav{margin:0 auto;padding:15px 0;font-size:14px;color:#999;background:url(/Store/source/images/sign-page-line.png) no-repeat 50% 0;}
-.bd .form-item .select{width:87%;max-width:324px;margin:0 auto;height:42px;line-height:44px;color:#aaa;background-color:#f9f9f9;border:1px solid #fff;}
-.bd .form-item .select:hover{border-color:#95b93d;cursor:pointer;}
+.bd .form-item .select{width:87%;max-width:324px;margin:0 auto;line-height:42px;color:#aaa;background-color:#f9f9f9;border:1px solid #fff;}
+.bd .form-item .hover{border-color:#95b93d;cursor:pointer;}
 .select .list{background-color:#fff;overflow:hidden;padding:10px;}
 .select .list ul{display:block;overflow:hidden;margin-right:-10px;}
 .select .list ul li{float:left;padding:0 10px;}
 .select .list ul li:hover{background-color:#95b93d;color:#fff;}
-.select .map{background-color:#fff;overflow:hidden;width:278px;height:278px;}
+.select .map{background-color:#fff;overflow:hidden;width:100%;max-width:324px;height:278px;}
 .bd .form-item{color:#aaa;}
 .search-area-bar{position:relative;}
 .search-area-bar .select-btn,.search-area-bar .search-key{float:left;padding-left:12px;}
 .search-area-bar .search-key em{padding-left:12px;}
 .search-area-bar input[type="number"]{width:30px;margin-top:-1px;vertical-align:top;}
-.search-area-bar:hover input[type="number"]{margin-top:0;border:0;}
+.search-area-bar .hover input[type="number"]{margin-top:0;border:0;}
 .search-perimeter-area{position:absolute;background:#95b93d;color:#fff;font-size:15px;top:-1px;right:-1px;margin:0;padding:13px 15px 12px;border:1px solid #95b93d;}
 .search-area-bar .list,.search-area-bar .map{clear:both;}
 .search-area-result{width:87%;max-width:324px;margin:0 auto;background-color:#fff;overflow:hidden;margin-top:10px;}
@@ -35,6 +37,9 @@
 .s-distance{padding-right:8px;font-size:8px;white-space:nowrap;}
 .s-place{text-align:left;}
 .s-place div{margin-right:-5px;}
-.s-place span{display:inline-block;white-space:nowrap;margin:3px 2px;line-height:18px;padding:0 5px;border:1px solid #95b93d;}
+.s-place span{display:inline-block;white-space:nowrap;margin:3px 2px;line-height:18px;padding:0 5px;border:1px solid #fff;}
+.s-place span i{display:none;}
+.s-place span.checked{border:1px solid #95b93d;}
+.s-place span.checked i{display:inline-block;}
 .s-place span i{margin-left:2px;}
 .result-list table .line{height:12px;visibility:hidden;}
