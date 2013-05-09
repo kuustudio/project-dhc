@@ -72,12 +72,13 @@ class Store_Controller_Index extends Store_Controller_Base {
     public function actionGetplaces_AJAX_POST(){
         $this->_setType(array('latlon'=>PARAM_STRING,'distance'=>PARAM_UINT),'post');
         $latlon = $this->_post('latlon');
+        setcookie('custom_latlon',$latlon,0,'/');
         $distance = $this->_post('distance');
         if(strpos($latlon,',')){
             list($lat,$lon) = explode(',',$latlon);
             $admin_model_area = MONK::getSingleton('Admin_Model_Area');
             $places = $admin_model_area->get_place_by_latlon($lat,$lon,$distance);
-            dump($places);
+            $this->_json_return(array('places'=>$places),count($places));
         }else{
             $this->_json_return('',false);
         }

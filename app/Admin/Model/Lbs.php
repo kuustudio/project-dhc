@@ -14,7 +14,7 @@ class Admin_Model_Lbs extends model {
     private function get_component($key,$address_components){
         if(!empty($address_components)){
             foreach($address_components as $c){
-                return in_array($key,$c['types'])?$c['long_name']:''
+                return in_array($key,$c['types'])?$c['long_name']:'';
             }
         }else{
             return '';

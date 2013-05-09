@@ -9,23 +9,25 @@
     <i><a href="<?php echo MONK::_url('*/selectcity')?>"><?php echo $city_name; ?></a></i>
 </div>
 <div class="bd">
-    <form class="form" action="/users/sign_in" method="post" data-remote="true" novalidate="">
+    <form class="form" action="/users/sign_in" method="post" data-remote="true">
         <input type="hidden" id="store_type" name="store_type">
         <input type="hidden" id="district_id" name="district_id">
         <input type="hidden" id="district_latlon" name="district_latlon">
+        <input type="hidden" id="custom_latlon" name="custom_latlon">
+        <input type="hidden" id="custom_places" name="custom_places">
         <div class="form-item">
             <div class="form-field">
-                <input type="text" name="store_name" id="store_name" placeholder="星铺名称" autocomplete="off" data-validate="required" data-validate-msg="请填写星铺的名称">
+                <input type="text" name="store_name" id="store_name" placeholder="星铺名称" autocomplete="off" required=required data-validate="required" data-validate-msg="请填写星铺的名称">
             </div>
         </div>
         <div class="form-item">
             <div class="form-field">
-                <input type="email" name="email" placeholder="设置一个邮箱作为登陆账号" autocomplete="off" data-validate="required;email" data-validate-msg="请填写您的邮箱地址">
+                <input type="email" name="email" placeholder="设置一个邮箱作为登陆账号" autocomplete="off" required=required data-validate="required;email" data-validate-msg="请填写您的邮箱地址">
             </div>
         </div>
         <div class="form-item">
             <div class="form-field">
-                <input class="password" name="password" type="password" placeholder="设置一个密码" autocomplete="off" data-validate="required;length:6" data-validate-msg="请设置一个登录密码；至少6位">
+                <input class="password" name="password" type="password" placeholder="设置一个密码" required=required autocomplete="off" data-validate="required;length:6" data-validate-msg="请设置一个登录密码；至少6位">
             </div>
         </div>
         <div class="form-item">
@@ -76,59 +78,13 @@
             <div class="form-field">
                 <div class="select search-area-bar clearfix">
                     <div class="select-btn"><span class="text">选择中心点</span><i>▼</i></div>
-                    <div class="search-key"><input type="number" autocomplete="off"><em>公里</em></div>
+                    <div class="search-key"><input type="number" autocomplete="off" data-validate="required;number" data-validate-msg="请填写您有效的联系电话或手机"><em>公里</em></div>
                     <button type="button" class="search-perimeter-area">搜</button>
-                    <div class="map hide">
-                        
-                    </div>
+                    <div class="map hide"></div>
                 </div>
                 <div class="search-area-result hide">
                     <h3>设置送货范围</h3>
-                    <div class="result-list">
-                        <table cellpadding="0" cellspacing="0">
-                            <tbody>
-                                <tr>
-                                    <td class="s-district"><div>鄞州</div></td>
-                                    <td class="s-distance">1公里</td>
-                                    <td class="s-place">
-                                        <div>
-                                            <span>新四方<i>x</i></span>
-                                            <span>肯德基<i>x</i></span>
-                                            <span>南苑饭店<i>x</i></span>
-                                            <span>来必饱<i>x</i></span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="s-district"><div></div></td>
-                                    <td class="s-distance">2公里</td>
-                                    <td class="s-place">
-                                        <div>
-                                            <span>新四方<i>x</i></span>
-                                            <span>肯德基<i>x</i></span>
-                                            <span>南苑饭店<i>x</i></span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr><td colspan="3"><div class="line">鄞州</div></td></tr>
-                                 <tr>
-                                    <td class="s-district"><div>江东</div></td>
-                                    <td class="s-distance">1公里</td>
-                                    <td class="s-place">
-                                        <div>
-                                            <span>新四方<i>x</i></span>
-                                            <span>新<i>x</i></span>
-                                            <span>新四<i>x</i></span>
-                                            <span>肯德基<i>x</i></span>
-                                            <span>南苑饭店<i>x</i></span>
-                                            <span>来必饱<i>x</i></span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr><td colspan="3"><div class="line">江东</div></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <div class="result-list"></div>
                 </div>
             </div>
         </div>
