@@ -1,7 +1,6 @@
 <!--{@page layout="base"}-->
 <!--{content head}-->
 <link rel="stylesheet" href="<?php echo MONK::include_css('index-reg','/Store/source/styles/index/reg.css',false,true); ?>">
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <!--{/content}-->
 <!--{content content}-->
 <div class="hd">
@@ -113,6 +112,8 @@ var Url = {
 }
 var lat_lon
 </script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+<!--<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>-->
+<script type="text/javascript" src="<?php echo MONK::include_js('core','/source/scripts/monk/core.js',false,true); ?>"></script>
 <script type="text/javascript" src="<?php echo MONK::include_js('index-reg','/Store/source/scripts/index/reg.js',false,true); ?>"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <!--{/content}-->

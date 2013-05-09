@@ -1,9 +1,23 @@
 (function($){
     var places_cache = [];
 
+    var required = function(v){
+        if(v=='') return false;
+    }
+
+    var number = function(v){
+        return (/^\d+$/).test(v);
+    }
+
     var _single_validate = function(element){
-        $(element).
-        return false;
+        var op = $(element).data('validate'),
+            v = $(element).val(),
+            m = $(element).data('validate-msg'),
+            r = true;
+        $.each(op.split(';'),function(i,n){
+            r = r && n(v);
+        });
+        return r;
     }
 
     var _render_district = function(city_id){
@@ -41,10 +55,12 @@
             if(place_container[d1_k] == undefined){
                 place_by_district = {};
                 place_by_district.distance = {};
+                place_by_district.count = 0;
             }else{
                 place_by_district = place_container[d1_k];
             }
             place_by_district.district_name = n.district_name;
+            place_by_district.count++;
             d2_k = 'd_' + (parseInt(n.distance) + 1);
             if(place_by_district.distance[d2_k] == undefined){
                 place_by_district.distance[d2_k] = {};
@@ -67,7 +83,7 @@
             var l = 1;
             $.each(n.distance,function(j,m){
                 p_h += '<tr>';
-                p_h += '<td class="s-district"><div>'+(l==1?n.district_name:'')+'</div></td>';
+                p_h += l==1?'<td class="s-district" rowspan="'+n.count+'"><div>'+n.district_name+'</div></td>':'';
                 p_h += '<td class="s-distance">'+m.distance_name+'公里</td>';
                 p_h += '<td class="s-place"><div>';
                 $.each(m.place,function(k,o){
@@ -76,11 +92,11 @@
                 p_h += '</div></td>';
                 p_h += '</tr>';
                 l++;
-            })
+            });
             p_h += '<tr><td colspan="3"><div class="line">'+n.district_name+'</div></td></tr>';
         });
         p_h += '</tbody></table>';
-        $('.search-area-result .result-list').empty();
+        _del_loading('.search-area-result .result-list');
         $('.search-area-result .result-list').append(p_h);
     };
 
@@ -183,8 +199,10 @@
         $('.address-more').show();
     }).on('click','.search-perimeter-area',function(e){
         $('.search-area-bar .map').hide();
+        if(!_single_validate('.search-key input')) return false;
         search_latlon = custom_latlon || $(this).closest('.form').find('#custom_latlon').val() || latlon || $(this).closest('.form').find('#district_latlon').val();
-        if(search_latlon){
+        if(search_latlon && _single_validate('.search-key input')){
+            $('.search-area-result .result-list').empty();
             _add_loading('.result-list','0','^_^ 数据查询中...');
             $.post(Url.get_places,{latlon:search_latlon,distance:$('.search-key input').val()},function(d){
                 if(d.status == 'true'){
@@ -210,4 +228,4 @@
     }).on('submit','.form',function(){
         console.log(111111111);
     })
-})(jQuery);
+})(Monk);

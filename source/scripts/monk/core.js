@@ -35,9 +35,9 @@
                         context && context.nodeType ? context.ownerDocument || context : document,
                         true
                     ) );
-                    if ( rsingleTag.test( match[1] ) && jQuery.isPlainObject( context ) ) {
+                    if ( rsingleTag.test( match[1] ) && Monk.isPlainObject( context ) ) {
                         for ( match in context ) {
-                            if ( jQuery.isFunction( this[ match ] ) ) {
+                            if ( Monk.isFunction( this[ match ] ) ) {
                                 this[ match ]( context[ match ] );
                             } else {
                                 this.attr( match, context[ match ] );
@@ -68,30 +68,48 @@
         }
     };
 
-    Monk.nod = Monk.prototype = {
+    Monk.fn = Monk.prototype = {
         
     };
 
     //继承支持
-    Monk.extend = Monk.nod.extend = function(options) {
-        var src, copyIsArray, copy, name, clone, target = this;
-        if ( options != null ) {
-            for ( name in options ) {
-                src = target[ name ];
-                copy = options[ name ];
-                if ( target === copy ) {
-                    continue;
-                }
-                if ( copy && ( Monk.isPlainObject(copy) || (copyIsArray = Monk.isArray(copy)) ) ) {
-                    if ( copyIsArray ) {
-                        copyIsArray = false;
-                        clone = src && Monk.isArray(src) ? src : [];
-                    } else {
-                        clone = src && Monk.isPlainObject(src) ? src : {};
+    Monk.extend = Monk.fn.extend = function() {
+        var src, copyIsArray, copy, name, options, clone,
+            target = arguments[0] || {},
+            i = 1,
+            length = arguments.length,
+            deep = false;
+        if ( typeof target === "boolean" ) {
+            deep = target;
+            target = arguments[1] || {};
+            i = 2;
+        }
+        if ( typeof target !== "object" && !Monk.isFunction(target) ) {
+            target = {};
+        }
+        if ( length === i ) {
+            target = this;
+            --i;
+        }
+        for ( ; i < length; i++ ) {
+            if ( (options = arguments[ i ]) != null ) {
+                for ( name in options ) {
+                    src = target[ name ];
+                    copy = options[ name ];
+                    if ( target === copy ) {
+                        continue;
                     }
-                    target[ name ] = Monk.extend( copy );
-                } else if ( copy !== undefined ) {
-                    target[ name ] = copy;
+                    if ( deep && copy && ( Monk.isPlainObject(copy) || (copyIsArray = Monk.isArray(copy)) ) ) {
+                        if ( copyIsArray ) {
+                            copyIsArray = false;
+                            clone = src && Monk.isArray(src) ? src : [];
+                        } else {
+                            clone = src && Monk.isPlainObject(src) ? src : {};
+                        }
+                        target[ name ] = Monk.extend( deep, clone, copy );
+                    } else if ( copy !== undefined ) {
+                        target[ name ] = copy;
+                    }
                 }
             }
         }
@@ -101,6 +119,9 @@
     Monk.extend({
         isWindow: function( obj ) {
             return obj != null && obj == obj.window;
+        },
+        isFunction: function( obj ) {
+            return jQuery.type(obj) === "function";
         },
         isArray: Array.isArray || function( obj ) {
             return Monk.type(obj) === "array";
