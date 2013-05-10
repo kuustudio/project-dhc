@@ -1,21 +1,57 @@
 (function($){
+    /*字符串字节数获取*/
+    String.prototype.getBytes = function() {var cArr = this.match(/[^\x00-\xff]/ig);return this.length + (cArr == null ? 0 : cArr.length);}
+
     var places_cache = [];
 
     var required = function(v){
-        if(v=='') return false;
+        return v==''?false:true;
     }
 
     var number = function(v){
         return (/^\d+$/).test(v);
     }
 
+    var email = function(v){
+        return (/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/).test(v);
+    }
+
+    var length = function(v,a){
+        if(a.indexOf(',') != -1){
+            ar = a.split(',');
+            return v.getBytes >= ar[0] && v.getBytes <= ar[1];
+        }else{
+            return v.getBytes >= a;
+        }
+    }
+
+    var phone = function(v){
+        return (/(^[0-9]{3,4}\-[0-9]{3,8}$)|(^[0-9]{3,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}1[34568][0-9]{9}$)/).test(v);
+    }
+
     var _single_validate = function(element){
-        var op = $(element).data('validate'),
+        var f = $(element).closest('.form-item'),
+            op = $(element).data('validate').split(';'),
             v = $(element).val(),
-            m = $(element).data('validate-msg'),
+            m = $(element).data('validate-msg').split(';'),
             r = true;
-        $.each(op.split(';'),function(i,n){
-            r = r && n(v);
+        f.find('.error').remove();
+        $.each(op,function(i,n){
+            if(n.indexOf(':') != -1){
+                var nt = n.split(':');
+                var nr = eval(nt[0]+'("'+v+'","'+nt[1]+'")');
+            }else{
+                var nr = eval(n+'("'+v+'")');
+            }
+            if(!nr){
+                if(m[i] == undefined){
+                    f.append('<div class="error"><i></i>该字段不正确</div>');
+                }else{
+                    f.append('<div class="error"><i></i>'+m[i]+'</div>');
+                }
+                r = r&&nr;
+                return false;
+            }
         });
         return r;
     }
@@ -187,6 +223,7 @@
         $('.select-store-category .list').hide();
         $('.select-store-category').toggleClass('hover');
         $('.select-store-category .text').text($(this).text());
+        $(this).closest('.form-item').find('.error').remove();
     }).on('click','.select-store-area .select-btn',function(e){
         $('.select-store-area .list').show();
         $('.select-store-area').toggleClass('hover');
@@ -197,11 +234,13 @@
         $('.select-store-area').toggleClass('hover');
         $('.select-store-area .text').text($(this).text());
         $('.address-more').show();
+        $(this).closest('.form-item').find('.error').remove();
     }).on('click','.search-perimeter-area',function(e){
         $('.search-area-bar .map').hide();
+        $('.search-area-result').hide();
         if(!_single_validate('.search-key input')) return false;
-        search_latlon = custom_latlon || $(this).closest('.form').find('#custom_latlon').val() || latlon || $(this).closest('.form').find('#district_latlon').val();
-        if(search_latlon && _single_validate('.search-key input')){
+        search_latlon = $(this).closest('.form').find('#custom_latlon').val();
+        if(search_latlon){
             $('.search-area-result .result-list').empty();
             _add_loading('.result-list','0','^_^ 数据查询中...');
             $.post(Url.get_places,{latlon:search_latlon,distance:$('.search-key input').val()},function(d){
@@ -209,11 +248,12 @@
                     places = _place_serialize_and_input(d.data.places);
                     _render_place(places);
                 }else{
-                    
+                    _del_loading('.result-list');
+                    $('.search-area-result .result-list').html($('#custom_places').data('validate-msg'));
                 }
             },'json');
         }else{
-            //请选择中心点
+            $('.search-area-result .result-list').html($('#custom_latlon').data('validate-msg'));
         }
         $('.search-area-result').show();
         $('.search-area-bar').toggleClass('hover');
@@ -222,10 +262,25 @@
         _add_loading('.search-area-bar .map','117px','^_^ 地图加载中...');
         _render_map();
         $('.search-area-bar').toggleClass('hover');
+        $(this).closest('.form-item').find('.error').remove();
     }).on('click','.result-list .s-place span',function(e){
         $(this).toggleClass('checked');
         _toggle_places_cache($(this).data('place-id'));
-    }).on('submit','.form',function(){
-        console.log(111111111);
+    }).on('click','#btn-signup',function(){
+        var r = true;
+        var post_ob = {};
+        $.each(['store_name','email','password','store_type','store_phone','store_contacts','district_id','store_address_more','custom_latlon','store_info'],function(i,n){
+            post_ob[n] = $('[name="'+n+'"]').val();
+            nr = _single_validate('[name="'+n+'"]');
+            r = r&&nr;
+        });
+        if(r){
+            $.post(Url.reg,post_ob,function(d){
+                console.log(d);
+            });
+        }
+        return false;
+    }).on('focusout','.form input,.form textarea',function(){
+        _single_validate($(this));
     })
-})(Monk);
+})(jQuery);
