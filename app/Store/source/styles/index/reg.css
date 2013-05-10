@@ -1,6 +1,6 @@
 .page#page-Store-Index-Reg{margin:40px auto 0;}
 .loading{margin:0 auto;height:44px;}
-.loading i{display:inline-block;padding-right:10px;width:15px;height:15px;margin-top:14px;background:url(/Store/source/images/loading-upload.gif) no-repeat 0 0;}
+.loading i{display:inline-block;padding-right:10px;width:15px;height:15px;margin-top:14px;background:url("/Store/source/images/loading-upload.gif") no-repeat 0 0;}
 .hd .logo{overflow:hidden;width:251px;height:60px;margin:0 auto 50px;font-size:46px;font-weight:bold;font-family:"Microsoft Yahei";color:#577570;text-align:center;}
 .hd i{position:absolute;left:50%;margin-left:100px;top:5px;}
 .bd{margin:0 auto;overflow:hidden;text-align:center;}
@@ -8,6 +8,8 @@
 .form-item input[type="email"],.form-item input[type="telephone"],.form-item input[type="password"],.form-item input[type="text"],.form-item textarea{width:80%;max-width:300px;height:26px;line-height:26px;}
 .form-item textarea{height:66px;}
 .form-item input[type="number"]{width:80px;height:26px;line-height:26px;}
+.form-item div.error{font-size:14px;text-align:left;line-height:24px;width:88%;max-width:326px;margin: 0 auto;color:red;}
+.form-item div.error i{display:inline-block;margin:0 5px;width:12px;height:12px;background:url("/Store/source/images/result.gif") no-repeat 0 -14px;vertical-align:middle;}
 .bd .fix-width{width:88%;max-width:326px;}
 .bd .btn-submit{padding:10px;margin:0;border:none;background:#95b93d;font-size:20px;font-weight:bold;color:#fff;cursor:pointer;}
 .sign-in-btn .desc{margin:0 auto;padding:15px 0;color:#999;font-size:12px;}

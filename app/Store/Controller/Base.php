@@ -16,11 +16,11 @@ class Store_Controller_Base extends controller {
         parent::init();
     }
 
-    protected function _json_return($data,$status = true){
+    protected function _json_return($status,$data = array(),$code = 404){
         if($status){
             echo json_encode(array('status'=>'true','data'=>$data));
         }else{
-            echo json_encode(array('status'=>'false'));
+            echo json_encode(array('status'=>'false','code'=>$code,'data'=>$data));
         }
     }
 }
