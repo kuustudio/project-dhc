@@ -13,16 +13,31 @@
     }
 
     var email = function(v){
-        return (/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/).test(v);
+        return (/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]+$/).test(v);
     }
 
     var length = function(v,a){
         if(a.indexOf(',') != -1){
             ar = a.split(',');
-            return v.getBytes >= ar[0] && v.getBytes <= ar[1];
+            return v.getBytes() >= ar[0] && v.getBytes() <= ar[1];
         }else{
-            return v.getBytes >= a;
+            return v.getBytes() >= a;
         }
+    }
+
+    var registered = function(v){
+        var r = true;
+        $.ajax({
+            url:Url.registered,
+            type:'post',
+            dataType:'json',
+            data:{email:v},
+            async:false,
+            success:function(d){
+                if(d.status == 'false') r = false;
+            }
+        });
+        return r;
     }
 
     var phone = function(v){
@@ -267,17 +282,27 @@
         $(this).toggleClass('checked');
         _toggle_places_cache($(this).data('place-id'));
     }).on('click','#btn-signup',function(){
-        var r = true;
-        var post_ob = {};
+        var r = true,
+            post_ob = {}
+            _this = $(this);
         $.each(['store_name','email','password','store_type','store_phone','store_contacts','district_id','store_address_more','custom_latlon','store_info'],function(i,n){
             post_ob[n] = $('[name="'+n+'"]').val();
             nr = _single_validate('[name="'+n+'"]');
             r = r&&nr;
         });
+        post_ob['store_qq'] = $('[name="store_qq"]').val();
+        post_ob['custom_places'] = $('[name="custom_places"]').val();
         if(r){
+            _this.addClass('btn-disabled').attr('disabled',true).text(_this.data('disable-with'));
             $.post(Url.reg,post_ob,function(d){
-                console.log(d);
-            });
+                if(d.status == 'true'){
+                    _this.addClass('btn-success');
+                    _this.text('注册成功 ^_^');
+                    location.href=Url.home;
+                }else{
+                    _this.removeClass('btn-disabled').addClass('btn-fail').attr('disabled',false).text('注册失败了，继续注册吗？ ~_~')
+                }
+            },'json');
         }
         return false;
     }).on('focusout','.form input,.form textarea',function(){

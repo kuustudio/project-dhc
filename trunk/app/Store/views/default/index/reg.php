@@ -16,7 +16,7 @@
         </div>
         <div class="form-item">
             <div class="form-field">
-                <input type="email" name="email" placeholder="设置一个邮箱作为登陆账号" autocomplete="off" required=required data-validate="required;email" data-validate-msg="邮箱是以后登录的账号了，要填哦 ~_~;邮箱格式不正确 ~_~">
+                <input type="email" name="email" placeholder="设置一个邮箱作为登陆账号" autocomplete="off" required=required data-validate="required;email;registered" data-validate-msg="邮箱是以后登录的账号了，要填哦 ~_~;邮箱格式不正确 ~_~;这个邮箱已经注册过了哦 ~_~">
             </div>
         </div>
         <div class="form-item">
@@ -51,7 +51,7 @@
         </div>
         <div class="form-item">
             <div class="form-field">
-                <input type="text" name="store_qq" placeholder="设置联系人的QQ号" autocomplete="off">
+                <input type="text" name="store_qq" placeholder="设置联系人的QQ号" data-validate="number" data-validate-msg="QQ号要输正确哦 ~_~" autocomplete="off">
             </div>
         </div>
         <div class="form-item">
@@ -93,7 +93,7 @@
             </div>
         </div>
         <div class="form-item sign-in-btn">
-            <button type="button" id="btn-signup" class="btn btn-primary btn-large fix-width btn-submit" data-disable-with="正在注册...">注册</button>
+            <button type="button" id="btn-signup" class="btn fix-width btn-submit" data-disable-with="正在注册...">注册</button>
             <p class="desc fix-width">点击注册表示您已阅读并同意<a href="/agreement/">《喵星人服务条款》</a></p>
         </div>
     </form>
@@ -109,7 +109,9 @@ var Url = {
     select_city:"<?php echo MONK::_url('*/selectcity')?>",
     get_districts:"<?php echo MONK::_url('*/getdistricts')?>",
     get_places:"<?php echo MONK::_url('*/getplaces')?>",
+    registered:"<?php echo MONK::_url('*/registered')?>",
     reg:"<?php echo MONK::_url('*/reg')?>",
+    home:"<?php echo MONK::_url('home/index')?>",
 }
 var lat_lon
 </script>

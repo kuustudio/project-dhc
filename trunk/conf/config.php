@@ -87,6 +87,20 @@ return array(
         'REQUEST_URI'       => PARAM_STRING,
         'HTTP_REFERER'      => PARAM_STRING,
     ),
+
+    //SESSION相关配置
+    'session_name'  => '6e21af644073e2d74d1af41fab505ab0', //禁止更改 md5('_minic_session')
+    'session_path'  => MONK_ROOT.'session', //禁止更改
+
+    //COOKIE保存时间
+    'cookie_expire' => 3600*24*365, //禁止更改
+
+    //用户保存的cookie key
+    'auth_token'    => '81849ce94cd39aab067a921d55c97175', //禁止更改 md5('_minic_auth')
+    'name'          => '0dfa82948db5803ab512ccc0dc2ba564', //禁止更改 md5('_minic_nickname')
+    
+    //时区
+    'default_timezone'      => 'PRC',
     
     //app禁止设置的配置项 //禁止更改
     'deny_app_config'   => array(
@@ -119,19 +133,10 @@ return array(
         'session_name',
         'session_path',
     ),
-    //SESSION相关配置
-    'session_name'  => '6e21af644073e2d74d1af41fab505ab0', //禁止更改 md5('_minic_session')
-    'session_path'  => MONK_ROOT.'session', //禁止更改
 
-    //COOKIE保存时间
-    'cookie_expire' => 3600*24*365, //禁止更改
+    'app_key'   => 'a1f13badce854ce69d5bb6041d80272f',
 
-    //用户保存的cookie key
-    'auth_token'    => '81849ce94cd39aab067a921d55c97175', //禁止更改 md5('_minic_auth')
-    'name'          => '0dfa82948db5803ab512ccc0dc2ba564', //禁止更改 md5('_minic_nickname')
-   
-    'default_timezone'      => 'PRC',
-
+/*
     'db_map' => array(
         'Account' => '账户表',
         'Area' => '地区表',
@@ -154,5 +159,6 @@ return array(
         'SysAuthority' => '权限表',
         'SysAuthorityGroup' => '权限组表'
     ),
+*/
 );
 
