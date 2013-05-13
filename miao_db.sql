@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2013-05-10 17:02:32
+Date: 2013-05-13 17:04:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,11 +44,10 @@ INSERT INTO `##tag_store(移到模型中静态)` VALUES ('12', '其他');
 -- ----------------------------
 DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
-  `account_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '账户ID',
-  `email` varchar(100) NOT NULL COMMENT '账户名',
+  `account_id` varchar(32) NOT NULL COMMENT '账户ID',
+  `email` varchar(64) NOT NULL COMMENT '账户名',
   `paswd` varchar(100) NOT NULL COMMENT '账户密码',
-  `created` int(10) DEFAULT NULL COMMENT '创建时间',
-  `updated` int(10) DEFAULT NULL,
+  `is_checked` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`account_id`),
   KEY `account_name` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -56,6 +55,20 @@ CREATE TABLE `account` (
 -- ----------------------------
 -- Records of account
 -- ----------------------------
+INSERT INTO `account` VALUES ('12e33bef69171ca68397726e424649ea', '', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('19a54558931ae01ff873de4791b01572', '', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('1b7023a963e0079b23ce9020caab994b', '55@cc.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('26d3fcb43dedde30903d1b9195ab8b9f', '55@c2.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('279588c6a103331c2d3a346c7b41e94e', '222@mail.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('3487654b63403f3a6d4b2e5c3bbb2878', '22@cc.om', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('6bf10f53006fe968c406b5cd432ca566', '11@11.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('7547285febdb87a4d99fec42ccf3ae61', '45@cc.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('8f01f57dc627280f897f4c7bd1c33a7b', '44@cc.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('9ff4ff379b3a55feddda3847d0a7acfe', '222@fff.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('a1333da477bbcbd1b75425b60698a860', '55con@c2.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('a7478d7a484313f286c2b212f160e02a', '', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('dc45c515635b7b23791471b001e7b7a7', '', '69b9d7f1b61c986d9d1b00a602bbdcd27a908d5087585eead5f76cd16e63f15d', null);
+INSERT INTO `account` VALUES ('e85c66f2d1e036ef43674f3c2c1d2ece', '2@ff.oc', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
 
 -- ----------------------------
 -- Table structure for `area`
@@ -406,7 +419,7 @@ CREATE TABLE `orders` (
 -- ----------------------------
 DROP TABLE IF EXISTS `store`;
 CREATE TABLE `store` (
-  `account_id` int(11) NOT NULL COMMENT '账户ID',
+  `account_id` varchar(32) NOT NULL COMMENT '账户ID',
   `store_name` varchar(100) NOT NULL COMMENT '店铺名称',
   `store_type` tinyint(1) DEFAULT NULL COMMENT '店铺类型',
   `store_phone` varchar(100) NOT NULL COMMENT '联系电话',
@@ -429,6 +442,20 @@ CREATE TABLE `store` (
 -- ----------------------------
 -- Records of store
 -- ----------------------------
+INSERT INTO `store` VALUES ('12e33bef69171ca68397726e424649ea', '555', '7', '11111', '11', '11', '1', '1', '22', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '555', '1368415363', '1368415363');
+INSERT INTO `store` VALUES ('19a54558931ae01ff873de4791b01572', '11', '2', '777777', '3333', 'fff', '1', '2', 'ffff', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '4444', '1368413236', '1368413236');
+INSERT INTO `store` VALUES ('1b7023a963e0079b23ce9020caab994b', '555', '1', '1111', '11', '11', '1', '1', '11', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '455', '1368415724', '1368415724');
+INSERT INTO `store` VALUES ('26d3fcb43dedde30903d1b9195ab8b9f', '555', '1', '222', '2', '22', '1', '1', '22', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '555', '1368415819', '1368415819');
+INSERT INTO `store` VALUES ('279588c6a103331c2d3a346c7b41e94e', '11111', '2', '13567893344', '33333', 'ff', '1', '1', '333', '29.868335999999996,121.5439900', ',,', 'hhhhhhhhh', '1368412644', '1368412644');
+INSERT INTO `store` VALUES ('3487654b63403f3a6d4b2e5c3bbb2878', '22', '2', '22222', '22', '22', '1', '2', '222', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', 'ffff', '1368414743', '1368414743');
+INSERT INTO `store` VALUES ('6bf10f53006fe968c406b5cd432ca566', '111', '2', '888888', '', '11', '1', '2', 'dddd', '29.868335999999996,121.5439900', ',,', '55555', '1368412397', '1368412397');
+INSERT INTO `store` VALUES ('7547285febdb87a4d99fec42ccf3ae61', '33', '1', '2222', '22', '22', '1', '1', '33', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '5555', '1368415265', '1368415265');
+INSERT INTO `store` VALUES ('8f01f57dc627280f897f4c7bd1c33a7b', '44', '1', '111111', '11', '11', '1', '1', '111', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '444', '1368414847', '1368414847');
+INSERT INTO `store` VALUES ('9ff4ff379b3a55feddda3847d0a7acfe', '222', '11', '22222', '22', '22', '1', '2', '333', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '455', '1368414957', '1368414957');
+INSERT INTO `store` VALUES ('a1333da477bbcbd1b75425b60698a860', '555', '1', '222', '33', '33', '1', '1', '33', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '555', '1368415987', '1368415987');
+INSERT INTO `store` VALUES ('a7478d7a484313f286c2b212f160e02a', '55', '1', '3333', '33', '33', '1', '1', '33', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '555', '1368415128', '1368415128');
+INSERT INTO `store` VALUES ('dc45c515635b7b23791471b001e7b7a7', '77', '1', '33333', '33', '33', '1', '2', '33', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '455', '1368415005', '1368415005');
+INSERT INTO `store` VALUES ('e85c66f2d1e036ef43674f3c2c1d2ece', '3f', '2', '888888', '222', 'ff', '1', '2', 'fff', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', 'fdfff', '1368412764', '1368412764');
 
 -- ----------------------------
 -- Table structure for `sys_admin`

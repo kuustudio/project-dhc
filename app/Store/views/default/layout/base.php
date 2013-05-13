@@ -34,7 +34,7 @@ var city_id = '<?php echo $city_id; ?>',
             <div class="account-info">
                 <span class="welcome">hi, 沈能洲</span>
                 <a href="<?php echo MONK::_url('setting/index')?>" data-method="" rel="nofollow">设置</a>
-                <a href="<?php echo MONK::_url('*/logout')?>" data-method="" rel="nofollow">退出</a>
+                <a href="<?php echo MONK::_url('index/logout')?>" data-method="" rel="nofollow">退出</a>
             </div>
         </div>
         <?php } ?>

@@ -5,20 +5,26 @@
 <!--{content content}-->
 <div class="hd">
     <h1 class="logo">喵星人</h1>
-    <i><a href="<?php echo MONK::_url('*/selectcity')?>"><?php echo $city_name; ?></a></i>
 </div>
 <div class="bd">
-    <form class="form" action="/users/sign_in" method="post" data-remote="true" novalidate="">
+    <form class="form" method="post" data-remote="true">
+        <?php if($name=='all'){ ?>
+        <div class="form-item">
+            <div class="error"><i></i><?php echo urldecode($msg); ?></div>
+        </div>
+        <?php } ?>
         <div class="form-item">
             <div class="form-field">
-                <input type="email" tabindex="1" name="email" id="email" placeholder="登录邮箱" data-validate="required;email" data-validate-msg="请填写您的登录邮箱">
+                <input type="email" tabindex="1" name="email" id="email" placeholder="登录邮箱">
             </div>
+            <?php if($name=='email'){ ?><div class="error"><i></i><?php echo urldecode($msg); ?></div><?php } ?>
         </div>
 
         <div class="form-item">
             <div class="form-field">
-                <input type="password" tabindex="2" name="password" placeholder="密码" data-validate="required;length:6" data-validate-msg="请填写您的登录密码">
+                <input type="password" tabindex="2" name="password" placeholder="密码">
             </div>
+            <?php if($name=='password'){ ?><div class="error"><i></i><?php echo urldecode($msg); ?></div><?php } ?>
         </div>
 
         <div class="form-item sign-in-btn">
@@ -28,8 +34,6 @@
                 <span class="forgot-pw"><a href="/users/forgot_password" tabindex="5">忘记密码了？</a></span>
             </div>
         </div>
-        
-        
     </form>
     
     <div class="sign-nav">
@@ -44,7 +48,4 @@ var Url = {
     select_city:"<?php echo MONK::_url('*/selectcity')?>",
 }
 </script>
-<!--<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>-->
-<script type="text/javascript" src="<?php echo MONK::include_js('core','/source/scripts/jquery-2.0.0.min.js',false,true); ?>"></script>
-<script type="text/javascript" src="<?php echo MONK::include_js('index-reg','/Store/source/scripts/index/login.js',false,true); ?>"></script>
 <!--{/content}-->

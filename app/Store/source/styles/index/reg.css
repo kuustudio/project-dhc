@@ -8,10 +8,11 @@
 .form-item input[type="email"],.form-item input[type="telephone"],.form-item input[type="password"],.form-item input[type="text"],.form-item textarea{width:80%;max-width:300px;height:26px;line-height:26px;}
 .form-item textarea{height:66px;}
 .form-item input[type="number"]{width:80px;height:26px;line-height:26px;}
-.form-item div.error{font-size:14px;text-align:left;line-height:24px;width:88%;max-width:326px;margin: 0 auto;color:red;}
-.form-item div.error i{display:inline-block;margin:0 5px;width:12px;height:12px;background:url("/Store/source/images/result.gif") no-repeat 0 -14px;vertical-align:middle;}
 .bd .fix-width{width:88%;max-width:326px;}
 .bd .btn-submit{padding:10px;margin:0;border:none;background:#95b93d;font-size:20px;font-weight:bold;color:#fff;cursor:pointer;}
+.bd .btn-disabled{background-color:#ccc;}
+.bd .btn-success{color:#95b93d;}
+.bd .btn-fail{background-color:#red;}
 .sign-in-btn .desc{margin:0 auto;padding:15px 0;color:#999;font-size:12px;}
 .bd .form-item .desc a{color:#999;}
 .bd .sign-nav{margin:0 auto;padding:15px 0;font-size:14px;color:#999;background:url(/Store/source/images/sign-page-line.png) no-repeat 50% 0;}
