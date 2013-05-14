@@ -93,7 +93,7 @@
             </div>
         </div>
         <div class="form-item sign-in-btn">
-            <button type="button" id="btn-signup" class="btn fix-width btn-submit" data-disable-with="正在注册...">注册</button>
+            <button type="button" id="btn-signup" class="fix-width btn-submit" data-disable-with="正在注册...">注册</button>
             <p class="desc fix-width">点击注册表示您已阅读并同意<a href="/agreement/">《喵星人服务条款》</a></p>
         </div>
     </form>

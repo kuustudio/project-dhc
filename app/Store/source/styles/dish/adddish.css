@@ -1,0 +1,6 @@
+input[type="text"],.form input[type="password"],.form input[type="email"],.form input[type="telephone"],.form input[type="number"],.form textarea{width:88%;}
+.form-item{margin-bottom:10px;}
+.form-buttons{margin:15px 0 20px 0;overflow:hidden;}
+.form-buttons .btn{float:left;width:auto;padding:10px 30px;}
+.form-item div.error{width:100%;}
+.form-item textarea{height:66px;}

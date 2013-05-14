@@ -28,7 +28,7 @@
         </div>
 
         <div class="form-item sign-in-btn">
-            <button type="submit" tabindex="3" id="btn-signin" class="btn btn-primary btn-submit" data-disable-with="正在登录..." data-goto="/launchpad/">登录</button>
+            <button type="submit" tabindex="3" id="btn-signin" class="btn-primary btn-submit" data-disable-with="正在登录..." data-goto="/launchpad/">登录</button>
             <div class="desc">
                 <label id="label-remember"><input type="checkbox" name="remember_me" id="cb-remember" tabindex="4" checked="1"> 下次自动登录</label>
                 <span class="forgot-pw"><a href="/users/forgot_password" tabindex="5">忘记密码了？</a></span>

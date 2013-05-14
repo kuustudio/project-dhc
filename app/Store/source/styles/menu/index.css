@@ -1,3 +1,11 @@
 .menu-header{padding:15px 0 4px;border-bottom:1px solid #ABC4BD;}
 .menu-header .menu-title{font-size:20px;line-height:20px;font-weight:bold;color:#333;text-align:left;}
 .menu-header .menu-desc{font-size:10px;color:#666;line-height:1.5;margin:4px 0 0 0;padding-bottom:4px;border-bottom:4px solid #ABC4BD;}
+.dishlists{margin:0 0 0 2px;}
+.dishlist .title{margin-bottom:10px;margin-left:-10px;padding-left:10px;}
+.dishlist a{color:#000;}
+.dish{font-size:15px;margin:0 0 5px 0;position:relative;}
+.dish .dish-wrap{padding-left:2px;line-height:1.4;}
+.dish .label{margin:0 0 0 5px;padding:4px 8px 4px;-moz-border-radius:10px;-ms-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;background:#EFEFEF;display:inline-block;font-size:12px;line-height:1;color:#999;font-style:normal;vertical-align:middle;position:relative;top:-2px;white-space:nowrap;word-break:keep-all;word-wrap:normal;}
+.dish-new-wrap{margin:5px 0 0 0;padding:0 0 0 2px;}
+.dish-new-wrap .btn-new-dish{display:inline-block;width:auto;}
