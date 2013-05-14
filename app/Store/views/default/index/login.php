@@ -41,11 +41,3 @@
     </div>
 </div>
 <!--{/content}-->
-<!--{content foot}-->
-<script type="text/javascript">
-var Url = {
-    get_city:"<?php echo MONK::_url('*/getcity')?>",
-    select_city:"<?php echo MONK::_url('*/selectcity')?>",
-}
-</script>
-<!--{/content}-->
