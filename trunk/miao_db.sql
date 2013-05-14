@@ -1,80 +1,17 @@
 /*
-Navicat MySQL Data Transfer
-
-Source Server         : localhost
-Source Server Version : 50528
-Source Host           : 127.0.0.1:3306
-Source Database       : miao_db
-
-Target Server Type    : MYSQL
-Target Server Version : 50528
-File Encoding         : 65001
-
-Date: 2013-05-13 17:04:09
+MySQL Data Transfer
+Source Host: localhost
+Source Database: miao_db
+Target Host: localhost
+Target Database: miao_db
+Date: 2013-05-14 23:44:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
--- Table structure for `##tag_store(移到模型中静态)`
+-- Table structure for ##area(已分别建表)
 -- ----------------------------
-DROP TABLE IF EXISTS `##tag_store(移到模型中静态)`;
-CREATE TABLE `##tag_store(移到模型中静态)` (
-  `tag_store_id` int(11) NOT NULL AUTO_INCREMENT,
-  `tag_store_name` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`tag_store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of ##tag_store(移到模型中静态)
--- ----------------------------
-INSERT INTO `##tag_store(移到模型中静态)` VALUES ('1', '快餐');
-INSERT INTO `##tag_store(移到模型中静态)` VALUES ('2', '火锅');
-INSERT INTO `##tag_store(移到模型中静态)` VALUES ('3', '烧烤');
-INSERT INTO `##tag_store(移到模型中静态)` VALUES ('4', '西餐');
-INSERT INTO `##tag_store(移到模型中静态)` VALUES ('5', '海鲜');
-INSERT INTO `##tag_store(移到模型中静态)` VALUES ('6', '地方菜');
-INSERT INTO `##tag_store(移到模型中静态)` VALUES ('7', '烤鱼');
-INSERT INTO `##tag_store(移到模型中静态)` VALUES ('8', '麻辣香锅');
-INSERT INTO `##tag_store(移到模型中静态)` VALUES ('9', '日韩料理');
-INSERT INTO `##tag_store(移到模型中静态)` VALUES ('10', '蛋糕');
-INSERT INTO `##tag_store(移到模型中静态)` VALUES ('12', '其他');
-
--- ----------------------------
--- Table structure for `account`
--- ----------------------------
-DROP TABLE IF EXISTS `account`;
-CREATE TABLE `account` (
-  `account_id` varchar(32) NOT NULL COMMENT '账户ID',
-  `email` varchar(64) NOT NULL COMMENT '账户名',
-  `paswd` varchar(100) NOT NULL COMMENT '账户密码',
-  `is_checked` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`account_id`),
-  KEY `account_name` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of account
--- ----------------------------
-INSERT INTO `account` VALUES ('12e33bef69171ca68397726e424649ea', '', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
-INSERT INTO `account` VALUES ('19a54558931ae01ff873de4791b01572', '', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
-INSERT INTO `account` VALUES ('1b7023a963e0079b23ce9020caab994b', '55@cc.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
-INSERT INTO `account` VALUES ('26d3fcb43dedde30903d1b9195ab8b9f', '55@c2.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
-INSERT INTO `account` VALUES ('279588c6a103331c2d3a346c7b41e94e', '222@mail.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
-INSERT INTO `account` VALUES ('3487654b63403f3a6d4b2e5c3bbb2878', '22@cc.om', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
-INSERT INTO `account` VALUES ('6bf10f53006fe968c406b5cd432ca566', '11@11.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
-INSERT INTO `account` VALUES ('7547285febdb87a4d99fec42ccf3ae61', '45@cc.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
-INSERT INTO `account` VALUES ('8f01f57dc627280f897f4c7bd1c33a7b', '44@cc.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
-INSERT INTO `account` VALUES ('9ff4ff379b3a55feddda3847d0a7acfe', '222@fff.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
-INSERT INTO `account` VALUES ('a1333da477bbcbd1b75425b60698a860', '55con@c2.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
-INSERT INTO `account` VALUES ('a7478d7a484313f286c2b212f160e02a', '', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
-INSERT INTO `account` VALUES ('dc45c515635b7b23791471b001e7b7a7', '', '69b9d7f1b61c986d9d1b00a602bbdcd27a908d5087585eead5f76cd16e63f15d', null);
-INSERT INTO `account` VALUES ('e85c66f2d1e036ef43674f3c2c1d2ece', '2@ff.oc', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
-
--- ----------------------------
--- Table structure for `area`
--- ----------------------------
-DROP TABLE IF EXISTS `area`;
-CREATE TABLE `area` (
+CREATE TABLE `##area(已分别建表)` (
   `area_id` int(11) NOT NULL AUTO_INCREMENT,
   `area_name` varchar(255) NOT NULL,
   `parent_id` int(11) DEFAULT '0',
@@ -87,13 +24,69 @@ CREATE TABLE `area` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of area
+-- Table structure for ##category_combo(暂时不考虑套餐)
 -- ----------------------------
+CREATE TABLE `##category_combo(暂时不考虑套餐)` (
+  `category_combo_id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_combo_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`category_combo_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for `area_city`
+-- Table structure for ##combo(暂时不考虑套餐)
 -- ----------------------------
-DROP TABLE IF EXISTS `area_city`;
+CREATE TABLE `##combo(暂时不考虑套餐)` (
+  `combo_id` int(11) NOT NULL AUTO_INCREMENT,
+  `combo_item` text NOT NULL COMMENT 'JSON，包含产品以及数量',
+  `combo_unit` varchar(10) DEFAULT '份',
+  `combo_currency` varchar(10) DEFAULT '元',
+  `combo_num` int(11) DEFAULT '0',
+  `combo_price` decimal(8,2) DEFAULT '0.00',
+  `combo_tag` varchar(255) DEFAULT NULL,
+  `combo_promotion` decimal(8,2) DEFAULT '0.00',
+  `created` int(10) DEFAULT NULL,
+  PRIMARY KEY (`combo_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for ##dish_price_group(暂时不考虑价格组)
+-- ----------------------------
+CREATE TABLE `##dish_price_group(暂时不考虑价格组)` (
+  `price_group_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dish_id` int(11) NOT NULL,
+  `price_group_name` varchar(100) NOT NULL DEFAULT '默认',
+  `price_group_price` decimal(8,2) NOT NULL,
+  `price_group_unit` varchar(10) DEFAULT '份',
+  `price_group_currency` varchar(10) DEFAULT '元',
+  `price_group_num` int(11) DEFAULT '0',
+  `price_group_promotion` decimal(8,2) DEFAULT NULL,
+  PRIMARY KEY (`price_group_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for ##tag_store(移到模型中静态)
+-- ----------------------------
+CREATE TABLE `##tag_store(移到模型中静态)` (
+  `tag_store_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tag_store_name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`tag_store_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for account
+-- ----------------------------
+CREATE TABLE `account` (
+  `account_id` varchar(32) NOT NULL COMMENT '账户ID',
+  `email` varchar(64) NOT NULL COMMENT '账户名',
+  `paswd` varchar(100) NOT NULL COMMENT '账户密码',
+  `is_checked` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`account_id`),
+  KEY `account_name` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for area_city
+-- ----------------------------
 CREATE TABLE `area_city` (
   `city_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `city_name` varchar(20) NOT NULL COMMENT '城市名称',
@@ -108,19 +101,8 @@ CREATE TABLE `area_city` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of area_city
+-- Table structure for area_district
 -- ----------------------------
-INSERT INTO `area_city` VALUES ('1', '宁波', '5', 'n', '29.885259,121.579006', '29.885259000000000000000000000', '121.579006000000000000000000000', '1367588839', '1367740237');
-INSERT INTO `area_city` VALUES ('2', '绍兴', '5', 's', '30.002365,120.592467', '30.002365000000000000000000000', '120.592467000000000000000000000', '1367730065', '1367740404');
-INSERT INTO `area_city` VALUES ('3', '杭州', '5', 'h', '30.259244,120.219375', '30.259244000000000000000000000', '120.219375000000000000000000000', '1367730148', '1367740389');
-INSERT INTO `area_city` VALUES ('4', '上海', '2', 's', '31.249162,121.487899', '31.249162000000000000000000000', '121.487899000000000000000000000', '1367730327', '1367740354');
-INSERT INTO `area_city` VALUES ('5', '台州', '5', 't', '28.656522,121.420748', '28.656522000000000000000000000', '121.420748000000000000000000000', '1367745353', '1367745353');
-INSERT INTO `area_city` VALUES ('6', '温州', '5', 'w', '27.994799,120.699298', '27.994799000000000000000000000', '120.699298000000000000000000000', '1367745417', '1367745784');
-
--- ----------------------------
--- Table structure for `area_district`
--- ----------------------------
-DROP TABLE IF EXISTS `area_district`;
 CREATE TABLE `area_district` (
   `district_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `district_name` varchar(20) NOT NULL COMMENT '区域名称',
@@ -135,16 +117,8 @@ CREATE TABLE `area_district` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of area_district
+-- Table structure for area_place
 -- ----------------------------
-INSERT INTO `area_district` VALUES ('1', '鄞州', '1', 'y', '29.785459,121.537835', '29.785459000000000000000000000', '121.537835000000000000000000000', '1367588839', '1367740572');
-INSERT INTO `area_district` VALUES ('2', '海曙', '1', 'h', '29.876801,121.535395', '29.876801000000000000000000000', '121.535395000000000000000000000', '1367730721', '1367740551');
-INSERT INTO `area_district` VALUES ('3', '新昌', '2', 'x', '29.500872,120.903683', '29.500872000000000000000000000', '120.903683000000000000000000000', '1367746023', '1367746075');
-
--- ----------------------------
--- Table structure for `area_place`
--- ----------------------------
-DROP TABLE IF EXISTS `area_place`;
 CREATE TABLE `area_place` (
   `place_id` int(11) NOT NULL AUTO_INCREMENT,
   `place_name` varchar(20) NOT NULL,
@@ -163,69 +137,8 @@ CREATE TABLE `area_place` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of area_place
+-- Table structure for custom
 -- ----------------------------
-INSERT INTO `area_place` VALUES ('1', '和邦大厦', '', '1', '1', '鄞州', '1', 'h', '29.84021,121.560865', '29.840210000000000000000000000', '121.560865000000000000000000000', '1367645992', '1367741332');
-INSERT INTO `area_place` VALUES ('2', '名汇国际', '锦寓路666号', '1', '1', '鄞州', '1', 'm', '29.834559,121.561365', '29.834559000000000000000000000', '121.561365000000000000000000000', '1367651220', '1367740885');
-INSERT INTO `area_place` VALUES ('4', '南裕新村二期', '泰康中路215号', '1', '1', '鄞州', '2', 'n', '29.812397,121.559455', '29.812397000000000000000000000', '121.559455000000000000000000000', '1367656749', '1367741307');
-INSERT INTO `area_place` VALUES ('5', '南裕新村', '', '1', '1', '鄞州', '2', 'n', '29.785459,121.537835', '29.785459000000000000000000000', '121.537835000000000000000000000', '1367731177', '1367741356');
-INSERT INTO `area_place` VALUES ('6', '银河湾', '它山堰路918', '1', '1', '鄞州', '2', 'y', '29.810971,121.539975', '29.810971000000000000000000000', '121.539975000000000000000000000', '1367735676', '1367741189');
-INSERT INTO `area_place` VALUES ('7', '宁海食府(四明中路店)', '鄞州区四明中路613号(近锦寓路)', '1', '1', '鄞州', '5', 'n', '29.832867,121.561698', '29.832867000000000000000000000', '121.561698000000000000000000000', '1367739859', '1367740651');
-INSERT INTO `area_place` VALUES ('8', '宁波博物馆', '首南中路1000号', '1', '1', '鄞州', '6', 'n', '29.814425, 121.544843', '29.814425000000000000000000000', '121.544843000000000000000000000', '1367746397', '1367746437');
-
--- ----------------------------
--- Table structure for `category_combo`
--- ----------------------------
-DROP TABLE IF EXISTS `category_combo`;
-CREATE TABLE `category_combo` (
-  `category_combo_id` int(11) NOT NULL AUTO_INCREMENT,
-  `category_combo_name` varchar(100) NOT NULL,
-  PRIMARY KEY (`category_combo_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of category_combo
--- ----------------------------
-
--- ----------------------------
--- Table structure for `category_dish`
--- ----------------------------
-DROP TABLE IF EXISTS `category_dish`;
-CREATE TABLE `category_dish` (
-  `category_dish_id` int(11) NOT NULL AUTO_INCREMENT,
-  `category_dish_name` varchar(100) NOT NULL,
-  PRIMARY KEY (`category_dish_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of category_dish
--- ----------------------------
-
--- ----------------------------
--- Table structure for `combo`
--- ----------------------------
-DROP TABLE IF EXISTS `combo`;
-CREATE TABLE `combo` (
-  `combo_id` int(11) NOT NULL AUTO_INCREMENT,
-  `combo_item` text NOT NULL COMMENT 'JSON，包含产品以及数量',
-  `combo_unit` varchar(10) DEFAULT '份',
-  `combo_currency` varchar(10) DEFAULT '元',
-  `combo_num` int(11) DEFAULT '0',
-  `combo_price` decimal(8,2) DEFAULT '0.00',
-  `combo_tag` varchar(255) DEFAULT NULL,
-  `combo_promotion` decimal(8,2) DEFAULT '0.00',
-  `created` int(10) DEFAULT NULL,
-  PRIMARY KEY (`combo_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of combo
--- ----------------------------
-
--- ----------------------------
--- Table structure for `custom`
--- ----------------------------
-DROP TABLE IF EXISTS `custom`;
 CREATE TABLE `custom` (
   `custom_id` int(11) NOT NULL AUTO_INCREMENT,
   `account_id` int(11) NOT NULL,
@@ -256,13 +169,8 @@ CREATE TABLE `custom` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of custom
+-- Table structure for custom_book_address
 -- ----------------------------
-
--- ----------------------------
--- Table structure for `custom_book_address`
--- ----------------------------
-DROP TABLE IF EXISTS `custom_book_address`;
 CREATE TABLE `custom_book_address` (
   `book_address_id` int(11) NOT NULL AUTO_INCREMENT,
   `custom_id` int(11) NOT NULL,
@@ -273,13 +181,8 @@ CREATE TABLE `custom_book_address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of custom_book_address
+-- Table structure for dish
 -- ----------------------------
-
--- ----------------------------
--- Table structure for `dish`
--- ----------------------------
-DROP TABLE IF EXISTS `dish`;
 CREATE TABLE `dish` (
   `dish_id` int(11) NOT NULL AUTO_INCREMENT,
   `dish_name` varchar(255) NOT NULL,
@@ -298,34 +201,20 @@ CREATE TABLE `dish` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of dish
+-- Table structure for dish_category
 -- ----------------------------
+CREATE TABLE `dish_category` (
+  `category_id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(100) NOT NULL,
+  `category_orderby` int(11) DEFAULT '0',
+  `created` int(10) DEFAULT NULL,
+  `updated` int(10) DEFAULT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for `dish_price_group`
+-- Table structure for group_chowhound
 -- ----------------------------
-DROP TABLE IF EXISTS `dish_price_group`;
-CREATE TABLE `dish_price_group` (
-  `price_group_id` int(11) NOT NULL AUTO_INCREMENT,
-  `dish_id` int(11) NOT NULL,
-  `price_group_name` varchar(100) NOT NULL DEFAULT '默认',
-  `price_group_price` decimal(8,2) NOT NULL,
-  `price_group_unit` varchar(10) DEFAULT '份',
-  `price_group_currency` varchar(10) DEFAULT '元',
-  `price_group_num` int(11) DEFAULT '0',
-  `price_group_promotion` decimal(8,2) DEFAULT NULL,
-  PRIMARY KEY (`price_group_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of dish_price_group
--- ----------------------------
-INSERT INTO `dish_price_group` VALUES ('1', '1', '默认', '999999.99', '份', '元', '0', '1111.00');
-
--- ----------------------------
--- Table structure for `group_chowhound`
--- ----------------------------
-DROP TABLE IF EXISTS `group_chowhound`;
 CREATE TABLE `group_chowhound` (
   `chowhound_id` int(11) NOT NULL AUTO_INCREMENT,
   `chowhound_name` varchar(100) NOT NULL,
@@ -334,13 +223,8 @@ CREATE TABLE `group_chowhound` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of group_chowhound
+-- Table structure for group_geo
 -- ----------------------------
-
--- ----------------------------
--- Table structure for `group_geo`
--- ----------------------------
-DROP TABLE IF EXISTS `group_geo`;
 CREATE TABLE `group_geo` (
   `geo_id` int(11) NOT NULL AUTO_INCREMENT,
   `area_id` int(11) NOT NULL,
@@ -354,13 +238,8 @@ CREATE TABLE `group_geo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of group_geo
+-- Table structure for group_mission
 -- ----------------------------
-
--- ----------------------------
--- Table structure for `group_mission`
--- ----------------------------
-DROP TABLE IF EXISTS `group_mission`;
 CREATE TABLE `group_mission` (
   `mission_id` int(11) NOT NULL AUTO_INCREMENT,
   `geo_id` int(11) NOT NULL,
@@ -371,13 +250,8 @@ CREATE TABLE `group_mission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of group_mission
+-- Table structure for menu
 -- ----------------------------
-
--- ----------------------------
--- Table structure for `menu`
--- ----------------------------
-DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
   `menu_id` int(11) NOT NULL AUTO_INCREMENT,
   `can_order` tinyint(1) DEFAULT '0',
@@ -391,13 +265,8 @@ CREATE TABLE `menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of menu
+-- Table structure for orders
 -- ----------------------------
-
--- ----------------------------
--- Table structure for `orders`
--- ----------------------------
-DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_number` varchar(20) NOT NULL,
@@ -411,13 +280,8 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of orders
+-- Table structure for store
 -- ----------------------------
-
--- ----------------------------
--- Table structure for `store`
--- ----------------------------
-DROP TABLE IF EXISTS `store`;
 CREATE TABLE `store` (
   `account_id` varchar(32) NOT NULL COMMENT '账户ID',
   `store_name` varchar(100) NOT NULL COMMENT '店铺名称',
@@ -440,8 +304,97 @@ CREATE TABLE `store` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of store
+-- Table structure for sys_admin
 -- ----------------------------
+CREATE TABLE `sys_admin` (
+  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `account_id` int(11) NOT NULL,
+  `admin_name` varchar(100) NOT NULL,
+  `admin_group_id` tinyint(1) DEFAULT NULL,
+  `created` int(10) DEFAULT NULL,
+  PRIMARY KEY (`admin_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for sys_admin_group
+-- ----------------------------
+CREATE TABLE `sys_admin_group` (
+  `admin_group_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `admin_group_name` varchar(100) NOT NULL,
+  `admin_group_authoritys` varchar(255) NOT NULL,
+  PRIMARY KEY (`admin_group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for sys_authority
+-- ----------------------------
+CREATE TABLE `sys_authority` (
+  `authority_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `authority_name` varchar(100) NOT NULL,
+  `authority_app` varchar(100) DEFAULT NULL,
+  `authority_controller` varchar(100) DEFAULT NULL,
+  `authority_action` varchar(100) DEFAULT NULL,
+  `created` int(10) DEFAULT NULL,
+  PRIMARY KEY (`authority_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for sys_authority_group
+-- ----------------------------
+CREATE TABLE `sys_authority_group` (
+  `authority_group_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `authority_group_name` varchar(100) DEFAULT NULL,
+  `authority_group_authoritys` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`authority_group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records 
+-- ----------------------------
+INSERT INTO `##dish_price_group(暂时不考虑价格组)` VALUES ('1', '1', '默认', '999999.99', '份', '元', '0', '1111.00');
+INSERT INTO `##tag_store(移到模型中静态)` VALUES ('1', '快餐');
+INSERT INTO `##tag_store(移到模型中静态)` VALUES ('2', '火锅');
+INSERT INTO `##tag_store(移到模型中静态)` VALUES ('3', '烧烤');
+INSERT INTO `##tag_store(移到模型中静态)` VALUES ('4', '西餐');
+INSERT INTO `##tag_store(移到模型中静态)` VALUES ('5', '海鲜');
+INSERT INTO `##tag_store(移到模型中静态)` VALUES ('6', '地方菜');
+INSERT INTO `##tag_store(移到模型中静态)` VALUES ('7', '烤鱼');
+INSERT INTO `##tag_store(移到模型中静态)` VALUES ('8', '麻辣香锅');
+INSERT INTO `##tag_store(移到模型中静态)` VALUES ('9', '日韩料理');
+INSERT INTO `##tag_store(移到模型中静态)` VALUES ('10', '蛋糕');
+INSERT INTO `##tag_store(移到模型中静态)` VALUES ('12', '其他');
+INSERT INTO `account` VALUES ('12e33bef69171ca68397726e424649ea', '', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('19a54558931ae01ff873de4791b01572', '', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('1b7023a963e0079b23ce9020caab994b', '55@cc.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('26d3fcb43dedde30903d1b9195ab8b9f', '55@c2.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('279588c6a103331c2d3a346c7b41e94e', '222@mail.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('3487654b63403f3a6d4b2e5c3bbb2878', '22@cc.om', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('6bf10f53006fe968c406b5cd432ca566', '11@11.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('7547285febdb87a4d99fec42ccf3ae61', '45@cc.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('8f01f57dc627280f897f4c7bd1c33a7b', '44@cc.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('9ff4ff379b3a55feddda3847d0a7acfe', '222@fff.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('a1333da477bbcbd1b75425b60698a860', '55con@c2.com', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('a7478d7a484313f286c2b212f160e02a', '', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `account` VALUES ('dc45c515635b7b23791471b001e7b7a7', '', '69b9d7f1b61c986d9d1b00a602bbdcd27a908d5087585eead5f76cd16e63f15d', null);
+INSERT INTO `account` VALUES ('e85c66f2d1e036ef43674f3c2c1d2ece', '2@ff.oc', '3c705ee140ca9df8cea3b46f36d470f4ec771846a4bd1b17bd96f2657a168cb4', null);
+INSERT INTO `area_city` VALUES ('1', '宁波', '5', 'n', '29.885259,121.579006', '29.885259000000000000000000000', '121.579006000000000000000000000', '1367588839', '1367740237');
+INSERT INTO `area_city` VALUES ('2', '绍兴', '5', 's', '30.002365,120.592467', '30.002365000000000000000000000', '120.592467000000000000000000000', '1367730065', '1367740404');
+INSERT INTO `area_city` VALUES ('3', '杭州', '5', 'h', '30.259244,120.219375', '30.259244000000000000000000000', '120.219375000000000000000000000', '1367730148', '1367740389');
+INSERT INTO `area_city` VALUES ('4', '上海', '2', 's', '31.249162,121.487899', '31.249162000000000000000000000', '121.487899000000000000000000000', '1367730327', '1367740354');
+INSERT INTO `area_city` VALUES ('5', '台州', '5', 't', '28.656522,121.420748', '28.656522000000000000000000000', '121.420748000000000000000000000', '1367745353', '1367745353');
+INSERT INTO `area_city` VALUES ('6', '温州', '5', 'w', '27.994799,120.699298', '27.994799000000000000000000000', '120.699298000000000000000000000', '1367745417', '1367745784');
+INSERT INTO `area_district` VALUES ('1', '鄞州', '1', 'y', '29.785459,121.537835', '29.785459000000000000000000000', '121.537835000000000000000000000', '1367588839', '1367740572');
+INSERT INTO `area_district` VALUES ('2', '海曙', '1', 'h', '29.876801,121.535395', '29.876801000000000000000000000', '121.535395000000000000000000000', '1367730721', '1367740551');
+INSERT INTO `area_district` VALUES ('3', '新昌', '2', 'x', '29.500872,120.903683', '29.500872000000000000000000000', '120.903683000000000000000000000', '1367746023', '1367746075');
+INSERT INTO `area_place` VALUES ('1', '和邦大厦', '', '1', '1', '鄞州', '1', 'h', '29.84021,121.560865', '29.840210000000000000000000000', '121.560865000000000000000000000', '1367645992', '1367741332');
+INSERT INTO `area_place` VALUES ('2', '名汇国际', '锦寓路666号', '1', '1', '鄞州', '1', 'm', '29.834559,121.561365', '29.834559000000000000000000000', '121.561365000000000000000000000', '1367651220', '1367740885');
+INSERT INTO `area_place` VALUES ('4', '南裕新村二期', '泰康中路215号', '1', '1', '鄞州', '2', 'n', '29.812397,121.559455', '29.812397000000000000000000000', '121.559455000000000000000000000', '1367656749', '1367741307');
+INSERT INTO `area_place` VALUES ('5', '南裕新村', '', '1', '1', '鄞州', '2', 'n', '29.785459,121.537835', '29.785459000000000000000000000', '121.537835000000000000000000000', '1367731177', '1367741356');
+INSERT INTO `area_place` VALUES ('6', '银河湾', '它山堰路918', '1', '1', '鄞州', '2', 'y', '29.810971,121.539975', '29.810971000000000000000000000', '121.539975000000000000000000000', '1367735676', '1367741189');
+INSERT INTO `area_place` VALUES ('7', '宁海食府(四明中路店)', '鄞州区四明中路613号(近锦寓路)', '1', '1', '鄞州', '5', 'n', '29.832867,121.561698', '29.832867000000000000000000000', '121.561698000000000000000000000', '1367739859', '1367740651');
+INSERT INTO `area_place` VALUES ('8', '宁波博物馆', '首南中路1000号', '1', '1', '鄞州', '6', 'n', '29.814425, 121.544843', '29.814425000000000000000000000', '121.544843000000000000000000000', '1367746397', '1367746437');
+INSERT INTO `dish_category` VALUES ('4', '盖浇饭系列', '0', '1368542063', '1368542063');
+INSERT INTO `dish_category` VALUES ('5', '木桶饭系列', '0', '1368542079', '1368542079');
 INSERT INTO `store` VALUES ('12e33bef69171ca68397726e424649ea', '555', '7', '11111', '11', '11', '1', '1', '22', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '555', '1368415363', '1368415363');
 INSERT INTO `store` VALUES ('19a54558931ae01ff873de4791b01572', '11', '2', '777777', '3333', 'fff', '1', '2', 'ffff', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '4444', '1368413236', '1368413236');
 INSERT INTO `store` VALUES ('1b7023a963e0079b23ce9020caab994b', '555', '1', '1111', '11', '11', '1', '1', '11', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '455', '1368415724', '1368415724');
@@ -456,69 +409,4 @@ INSERT INTO `store` VALUES ('a1333da477bbcbd1b75425b60698a860', '555', '1', '222
 INSERT INTO `store` VALUES ('a7478d7a484313f286c2b212f160e02a', '55', '1', '3333', '33', '33', '1', '1', '33', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '555', '1368415128', '1368415128');
 INSERT INTO `store` VALUES ('dc45c515635b7b23791471b001e7b7a7', '77', '1', '33333', '33', '33', '1', '2', '33', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '455', '1368415005', '1368415005');
 INSERT INTO `store` VALUES ('e85c66f2d1e036ef43674f3c2c1d2ece', '3f', '2', '888888', '222', 'ff', '1', '2', 'fff', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', 'fdfff', '1368412764', '1368412764');
-
--- ----------------------------
--- Table structure for `sys_admin`
--- ----------------------------
-DROP TABLE IF EXISTS `sys_admin`;
-CREATE TABLE `sys_admin` (
-  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
-  `account_id` int(11) NOT NULL,
-  `admin_name` varchar(100) NOT NULL,
-  `admin_group_id` tinyint(1) DEFAULT NULL,
-  `created` int(10) DEFAULT NULL,
-  PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of sys_admin
--- ----------------------------
 INSERT INTO `sys_admin` VALUES ('1', '1', 'admin', '1', '1354279261');
-
--- ----------------------------
--- Table structure for `sys_admin_group`
--- ----------------------------
-DROP TABLE IF EXISTS `sys_admin_group`;
-CREATE TABLE `sys_admin_group` (
-  `admin_group_id` smallint(6) NOT NULL AUTO_INCREMENT,
-  `admin_group_name` varchar(100) NOT NULL,
-  `admin_group_authoritys` varchar(255) NOT NULL,
-  PRIMARY KEY (`admin_group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of sys_admin_group
--- ----------------------------
-
--- ----------------------------
--- Table structure for `sys_authority`
--- ----------------------------
-DROP TABLE IF EXISTS `sys_authority`;
-CREATE TABLE `sys_authority` (
-  `authority_id` smallint(6) NOT NULL AUTO_INCREMENT,
-  `authority_name` varchar(100) NOT NULL,
-  `authority_app` varchar(100) DEFAULT NULL,
-  `authority_controller` varchar(100) DEFAULT NULL,
-  `authority_action` varchar(100) DEFAULT NULL,
-  `created` int(10) DEFAULT NULL,
-  PRIMARY KEY (`authority_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of sys_authority
--- ----------------------------
-
--- ----------------------------
--- Table structure for `sys_authority_group`
--- ----------------------------
-DROP TABLE IF EXISTS `sys_authority_group`;
-CREATE TABLE `sys_authority_group` (
-  `authority_group_id` smallint(6) NOT NULL AUTO_INCREMENT,
-  `authority_group_name` varchar(100) DEFAULT NULL,
-  `authority_group_authoritys` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`authority_group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of sys_authority_group
--- ----------------------------

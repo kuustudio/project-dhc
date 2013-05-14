@@ -6,16 +6,36 @@ ol, ul{list-style:none;list-style-image:none;margin:0;padding:0;}
 a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:rgba(0, 0, 0, 0);}
 a{color:#4298BA;text-decoration:none;}
 button{padding:13px 15px;border:1px solid #fff;}
+
+/*page-inner中按钮*/
+.btn{display: block;width:100%;text-align:center;padding:10px 0;color:#FFF;background-color:#A6BBB6;-webkit-border-radius:5px;-ms-border-radius:5px;-moz-border-radius:5px;border-radius:5px;border:none;font-size:18px;line-height:18px;font-weight:bold;cursor:pointer;}
+.btn:active{background:#AFD3CA;}
+.btn.btn-mini{padding:4px 8px;color:#000;line-height:14px;font-size:14px;font-weight:normal;background:#FFF;border:1px solid #CCC;-webkit-border-radius:4px;-ms-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-shadow:1px 1px 1px rgba(0, 0, 0, 0.1);-ms-box-shadow:1px 1px 1px rgba(0,0,0,0.1);-moz-box-shadow:1px 1px 1px rgba(0,0,0,0.1);box-shadow:1px 1px 1px rgba(0, 0, 0, 0.1);}
+.btn.btn-mini:active{-webkit-box-shadow:0 0 0 rgba(0, 0, 0, 0);-moz-box-shadow:0 0 0 rgba(0,0,0,0);-ms-box-shadow:0 0 0 rgba(0,0,0,0);box-shadow:0 0 0 rgba(0, 0, 0, 0);position:relative;top:1px;}
+.btn.btn-mini:hover{background:#F3F3F3;color:#000;}
+.btn.btn-primary{color:#FFF;background:#8BAF47;}
+
 em{font-style:normal;}
 .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
 .hide{display:none;}
-input[type="text"],input[type="password"],input[type="email"],input[type="telephone"],.form-item input[type="number"],textarea{width:220px;height:18px;line-height:18px;margin:0;padding:8px 12px;border:1px solid #ccc;outline:0;}
+input[type="text"],input[type="password"],input[type="email"],input[type="telephone"],input[type="number"],textarea{width:220px;height:18px;line-height:18px;margin:0;padding:8px 12px;border:1px solid #ccc;outline:0;}
 input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,input[type="telephone"]:focus,input[type="number"]:focus,textarea:focus{border-color:#95b93d;}
 .avatar{height:50px;width:50px;display:block;-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px;}
+
+/*page,sheet相关*/
 .page{position:relative;}
-.page .sheet{background:#F7F8F6;border-top:1px solid #DBDFD6;border-bottom:1px solid #DBDFD6;top:0;}
+.page .sheet{max-width:960px;margin:0 auto;background:#F7F8F6;border-top:1px solid #DBDFD6;border-bottom:1px solid #DBDFD6;top:0;}
 .page .sheet.sheet-active {background-color:#FFF;border-color:#FFF;-webkit-box-shadow:0 0 5px rgba(0, 0, 0, 0.15);-ms-box-shadow:0 0 5px rgba(0,0,0,0.15);-moz-box-shadow:0 0 5px rgba(0,0,0,0.15);box-shadow:0 0 5px rgba(0, 0, 0, 0.15);border-color:#CCC 9;}
+.page .sheet .sheet-header .link-parent-sheet{display:block;padding:0 30px;font-weight:bold;font-size:20px;line-height:50px;color:#4298BA;}
+.page .sheet .sheet-header .link-parent-sheet:hover{background:#F9F9F9;}
 .page .page-inner{padding:0 15px 20px;}
+
+/*h3,h4*/
+.page h3{font-size:18px;line-height:24px;margin:20px 0 15px;color:#84A099;overflow:hidden;}
+.page h3 b{float:left;color:#84A099;}
+.page h3 .btn-mini{float:left;margin:0 0 0 10px;width:auto;}
+.page h4{font-size:16px;color:#000;font-weight:bold;line-height:24px;}
+
 .topbar{padding:0 10px;margin:30px auto;max-width:960px;overflow:hidden;}
 .topbar .logo{float:left;}
 .topbar .logo a{width:124px;height:26px;overflow:hidden;}
