@@ -46,7 +46,7 @@ class Store_Controller_Base extends controller {
             list($account_id,$email,$passwd,$is_checked,$store_name,$store_type,$store_phone,$store_contacts,$store_qq,$city_id,$district_id,$store_address,$long_lat,$store_places,$store_info,$created,$updated) = explode(' ',$_encrypt->authTokenDecode($auth_token));
             //登陆检验，不过会增加数据库连接，在刷新频率比较高的情况下会非常耗资源，如果有比较好的缓存服务器倒是可以尝试，因为这样更安全
             //进行邮箱账号验证
-            $is_email = validator::get_param_email($user_email);
+            $is_email = validator::get_param_email($email);
             if($is_email){
                 $this->store['account_id'] = $account_id;
                 $this->store['email'] = $email;
