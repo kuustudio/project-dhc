@@ -56,11 +56,10 @@
 
     $('.bd').on('click','.dish-head .btn',function(e){
         $('.dishlist-form').show();
+        $('.dishlist-form').find('.category-name').focus();
     }).on('click','.btn-cancel-dishlist',function(e){
-        $('.dishlist-form .category-name').val('');
         $('.btn-create-dishlist').removeClass('btn-disabled').attr('disabled',false).text('保存，开始创建系列');
-        $('.dishlist-form').find('.error').remove();
-        $('.dishlist-form').hide();
+        $('.dishlist-form').find('.category-name').val('').end().find('.error').remove().end().hide();
     }).on('click','.btn-create-dishlist',function(e){
         var _this = $(this);
         if(_single_validate('.dishlist-form .category-name')){
@@ -77,5 +76,11 @@
             },'json');
         }
         return false;
-    });
+    }).on('click','.btn-new-dish',function(){
+        $(this).closest('.new-dish').hide();
+        $(this).closest('.dish-new-wrap').find('.dish-form').show().find('.dish-name').focus();
+    }).on('click','.btn-cancel-dish',function(){
+        $(this).closest('.dish-form').find('.dish-name').val('').end().find('.dish-price').val('').end().hide();
+        $(this).closest('.dish-new-wrap').find('.new-dish').show();
+    })
 })(jQuery);

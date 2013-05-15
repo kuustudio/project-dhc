@@ -12,3 +12,7 @@
 .dish .label{margin:0 0 0 5px;padding:4px 8px 4px;-moz-border-radius:10px;-ms-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;background:#EFEFEF;display:inline-block;font-size:12px;line-height:1;color:#999;font-style:normal;vertical-align:middle;position:relative;top:-2px;white-space:nowrap;word-break:keep-all;word-wrap:normal;}
 .dish-new-wrap{margin:5px 0 0 0;padding:0 0 0 2px;}
 .dish-new-wrap .btn-new-dish{display:inline-block;width:auto;}
+.dish-new-wrap li{margin-bottom:15px;}
+.dish-new-wrap .dish-form .form input{margin-bottom:10px;}
+.dish-new-wrap .dish-form .form input.price{width:80px;}
+.dish-new-wrap .dish-form .form textarea{margin-bottom:10px;height:66px;}
