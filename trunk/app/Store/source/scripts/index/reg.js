@@ -1,4 +1,10 @@
 (function($){
+
+    /*
+    * 验证性的代码 start
+    *
+    */
+
     /*字符串字节数获取*/
     String.prototype.getBytes = function() {var cArr = this.match(/[^\x00-\xff]/ig);return this.length + (cArr == null ? 0 : cArr.length);}
 
@@ -70,6 +76,11 @@
         });
         return r;
     }
+
+    /*
+    * 验证性的代码 end
+    *
+    */
 
     var _render_district = function(city_id){
         $.post(Url.get_districts,{city_id:city_id},function(d){

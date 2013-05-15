@@ -8,12 +8,15 @@ a{color:#4298BA;text-decoration:none;}
 button{padding:13px 15px;border:1px solid #fff;}
 
 /*page-inner中按钮*/
-.btn{display: block;width:100%;text-align:center;padding:10px 0;color:#FFF;background-color:#A6BBB6;-webkit-border-radius:5px;-ms-border-radius:5px;-moz-border-radius:5px;border-radius:5px;border:none;font-size:18px;line-height:18px;font-weight:bold;cursor:pointer;}
-.btn:active{background:#AFD3CA;}
+.btn{display:inline-block;text-align:center;padding:8px 12px;color:#FFF;background-color:#A6BBB6;-webkit-border-radius:5px;-ms-border-radius:5px;-moz-border-radius:5px;border-radius:5px;border:none;font-size:14px;cursor:pointer;}
 .btn.btn-mini{padding:4px 8px;color:#000;line-height:14px;font-size:14px;font-weight:normal;background:#FFF;border:1px solid #CCC;-webkit-border-radius:4px;-ms-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-shadow:1px 1px 1px rgba(0, 0, 0, 0.1);-ms-box-shadow:1px 1px 1px rgba(0,0,0,0.1);-moz-box-shadow:1px 1px 1px rgba(0,0,0,0.1);box-shadow:1px 1px 1px rgba(0, 0, 0, 0.1);}
 .btn.btn-mini:active{-webkit-box-shadow:0 0 0 rgba(0, 0, 0, 0);-moz-box-shadow:0 0 0 rgba(0,0,0,0);-ms-box-shadow:0 0 0 rgba(0,0,0,0);box-shadow:0 0 0 rgba(0, 0, 0, 0);position:relative;top:1px;}
-.btn.btn-mini:hover{background:#F3F3F3;color:#000;}
 .btn.btn-primary{color:#FFF;background:#8BAF47;}
+.btn.btn-x{background:rgba(0, 0, 0, 0);font-size:12px;color:#888;}
+.btn.btn-submit{padding:10px;margin:0;border:none;background:#95b93d;font-size:20px;font-weight:bold;color:#fff;cursor:pointer;}
+.btn.btn-disabled{background-color:#ccc;}
+.btn.btn-success{color:#95b93d;}
+.btn.btn-fail{background-color:#red;}
 
 em{font-style:normal;}
 .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
@@ -46,5 +49,5 @@ input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,
 .footer{max-width:960px;margin:20px auto;padding:0 10px;font-size:12px;color:#AAA;text-align:center;overflow:hidden;}
 .footer a{color:#AAA;}
 .footer em{padding:0 4px;}
-.form-item div.error{font-size:14px;text-align:left;line-height:24px;width:88%;max-width:326px;margin: 0 auto;color:red;}
-.form-item div.error i{display:inline-block;margin:0 5px;width:12px;height:12px;background:url("/Store/source/images/result.gif") no-repeat 0 -14px;vertical-align:middle;}
+form div.error{font-size:14px;text-align:left;line-height:24px;width:88%;max-width:326px;color:red;}
+form div.error i{display:inline-block;margin:0 5px;width:12px;height:12px;background:url("/Store/source/images/result.gif") no-repeat 0 -14px;vertical-align:middle;}

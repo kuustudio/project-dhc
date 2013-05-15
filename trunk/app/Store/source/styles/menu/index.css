@@ -2,6 +2,9 @@
 .menu-header .menu-title{font-size:20px;line-height:20px;font-weight:bold;color:#333;text-align:left;}
 .menu-header .menu-desc{font-size:10px;color:#666;line-height:1.5;margin:4px 0 0 0;padding-bottom:4px;border-bottom:4px solid #ABC4BD;}
 .dishlists{margin:0 0 0 2px;}
+.dishlist-form{margin:0 0 30px 0;}
+.dishlist-form input{width:88%;margin-bottom:10px;font-size:16px;}
+.dishlist{margin-bottom:15px;}
 .dishlist .title{margin-bottom:10px;margin-left:-10px;padding-left:10px;}
 .dishlist a{color:#000;}
 .dish{font-size:15px;margin:0 0 5px 0;position:relative;}
