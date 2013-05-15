@@ -113,10 +113,8 @@ var Url = {
     reg:"<?php echo MONK::_url('*/reg')?>",
     home:"<?php echo MONK::_url('home/index')?>",
 }
-var lat_lon
 </script>
-<!--<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>-->
-<script type="text/javascript" src="<?php echo MONK::include_js('core','/source/scripts/jquery-2.0.0.min.js',false,true); ?>"></script>
+<script type="text/javascript" src="<?php echo MONK::include_js('jquery','/source/scripts/jquery-2.0.0.min.js',false,true); ?>"></script>
 <!--<script type="text/javascript" src="<?php echo MONK::include_js('core','/source/scripts/monk/core.js',false,true); ?>"></script>-->
 <script type="text/javascript" src="<?php echo MONK::include_js('index-reg','/Store/source/scripts/index/reg.js',false,true); ?>"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
