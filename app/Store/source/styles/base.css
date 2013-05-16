@@ -1,7 +1,7 @@
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, input, textarea, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
 html, textarea{font-family:helvetica,Arial;}
 body{line-height:1.5;}
-body{background:#F6F7F1 url("/Store/source/images/bg.png") repeat 0 0;}
+body{background:#f1f3e9 url("/Store/source/images/bg.png") repeat 0 0;}
 ol, ul{list-style:none;list-style-image:none;margin:0;padding:0;}
 a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:rgba(0, 0, 0, 0);}
 a{color:#4298BA;text-decoration:none;}
@@ -14,7 +14,7 @@ button{padding:13px 15px;border:1px solid #fff;}
 .btn.btn-primary{color:#FFF;background:#8BAF47;}
 .btn.btn-x{background:rgba(0, 0, 0, 0);font-size:12px;color:#888;}
 .btn.btn-submit{padding:10px;margin:0;border:none;background:#95b93d;font-size:20px;font-weight:bold;color:#fff;cursor:pointer;}
-.btn.btn-disabled{background-color:#ccc;}
+.btn.btn-disabled{background-color:#efefef;}
 .btn.btn-success{color:#95b93d;}
 .btn.btn-fail{background-color:#red;}
 
