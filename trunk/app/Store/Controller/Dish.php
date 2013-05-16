@@ -4,8 +4,9 @@ class Store_Controller_Dish extends Store_Controller_Base {
     public $model_dish;
 
     public function init(){
+        if(!$this->isLogin()) return $this->redirect(MONK::_url('index/login'));
         $this->model_dish = MONK::getSingleton('Store_Model_Dish');
-        $this->isLogin();
+        parent::init();
     }
 
     //添加系列
@@ -14,11 +15,7 @@ class Store_Controller_Dish extends Store_Controller_Base {
         $category_name = $this->_post('category_name');
         if(empty($category_name) || strlen($category_name)>100) return $this->_json_return(false,array('name'=>'category_name'));
         $category_id = $this->model_dish->create_category(array('account_id'=>$this->store['account_id'],'category_name'=>$category_name));
-        if($category_id){
-            return $this->_json_return(true);
-        }else{
-            return $this->_json_return(false);
-        }
+        return $this->_json_return($category_id,array('category_id'=>$category_id));
     }
 
     //编辑系列
@@ -29,23 +26,15 @@ class Store_Controller_Dish extends Store_Controller_Base {
         if(empty($category_id)) return $this->_json_return(false);
         if(empty($category_name) || strlen($category_name)>100) return $this->_json_return(false,array('name'=>'category_name'));
         $r = $this->model_dish->update_category(array('account_id'=>$this->store['account_id'],'category_id'=>$category_id,'category_name'=>$category_name));
-        if($r){
-            return $this->_json_return(true);
-        }else{
-            return $this->_json_return(false);
-        }
+        return $this->_json_return($r);
     }
     //删除系列
     public function actionDeletedishcategory_AJAX_POST(){
-        $this->_setType(array('category_id'=>PARAM_STRING);
+        $this->_setType(array('category_id'=>PARAM_STRING),'post');
         $category_id = $this->_post('category_id');
         if(empty($category_id)) return $this->_json_return(false);
         $r = $this->model_dish->delete_category(array('account_id'=>$this->store['account_id'],'category_id'=>$category_id));
-        if($r){
-            return $this->_json_return(true);
-        }else{
-            return $this->_json_return(false);
-        }
+        return $this->_json_return($r);
     }
     
     //添加菜品
@@ -58,11 +47,7 @@ class Store_Controller_Dish extends Store_Controller_Base {
         if(empty($dish_name) || strlen($dish_name)>100) return $this->_json_return(false,array('name'=>'dish_name'));
         if(empty($dish_price)) return $this->_json_return(false,array('name'=>'dish_price'));
         $dish_id = $this->model_dish->create_dish(array('account_id'=>$this->store['account_id'],'category_id'=>$category_id,'dish_name'=>$dish_name,'dish_price'=>$dish_price));
-        if($dish_id){
-            return $this->_json_return(true);
-        }else{
-            return $this->_json_return(false);
-        }
+        return $this->_json_return($dish_id);
     }
 
     //编辑菜品
@@ -75,11 +60,7 @@ class Store_Controller_Dish extends Store_Controller_Base {
         if(empty($dish_name) || strlen($dish_name)>100) return $this->_json_return(false,array('name'=>'dish_name'));
         if(empty($dish_price)) return $this->_json_return(false,array('name'=>'dish_price'));
         $r = $this->model_dish->update_dish(array('account_id'=>$this->store['account_id'],'dish_id'=>$dish_id,'dish_name'=>$dish_name,'dish_price'=>$dish_price));
-        if($r){
-            return $this->_json_return(true);
-        }else{
-            return $this->_json_return(false);
-        }
+        return $this->_json_return($r);
     }
     //删除菜品
     public function actionDeletedish_AJAX_POST(){
@@ -94,11 +75,7 @@ class Store_Controller_Dish extends Store_Controller_Base {
         $dish_id = $this->_post('dish_id');
         $dish_push = $this->_post('dish_push');
         $r = $this->model_dish->delete_dish(array('account_id'=>$this->store['account_id'],'dish_id'=>$dish_id));
-        if($r){
-            return $this->_json_return(true);
-        }else{
-            return $this->_json_return(false);
-        }
+        return $this->_json_return($r);
     }
 
     //编辑图
@@ -112,10 +89,6 @@ class Store_Controller_Dish extends Store_Controller_Base {
         $dish_id = $this->_post('dish_id');
         $dish_info = $this->_post('dish_info');
         $r = $this->model_dish->update_dish_info(array('account_id'=>$this->store['account_id'],'dish_id'=>$dish_id,'dish_info'=>$dish_info));
-        if($r){
-            return $this->_json_return(true);
-        }else{
-            return $this->_json_return(false);
-        }
+        return $this->_json_return($r);
     }
 }

@@ -1,12 +1,12 @@
 .page#page-Store-Index-Login{margin:40px auto 0;}
 .hd .logo{overflow:hidden;width:251px;height:60px;margin:0 auto 50px;font-size:46px;font-weight:bold;font-family:"Microsoft Yahei";color:#577570;text-align:center;}
 .hd i{position:absolute;left:50%;margin-left:100px;top:5px;}
-.bd{margin:0 auto;overflow:hidden;text-align:center;}
+.bd{margin:0 auto;width:90%;max-width:324px;text-align:center;}
 .form-item{margin-bottom:10px;}
-.form-item input[type="email"],.form-item input[type="password"],.form-item input[type="text"]{width:80%;max-width:300px;height:26px;line-height:26px;}
-.bd .btn-submit{width:88%;max-width:326px;padding:10px;margin:0;border:none;background:#95b93d;font-size:20px;font-weight:bold;color:#fff;cursor:pointer;}
-.sign-in-btn .desc{width:88%;max-width:326px;margin:0 auto;padding:15px 0;color:#999;font-size:12px;}
+.form-item input[type="email"],.form-item input[type="password"],.form-item input[type="text"]{width:100%;max-width:324px;height:26px;line-height:26px;}
+.bd .btn-submit{width:100%;max-width:326px;padding:10px;margin:0;border:none;background:#95b93d;font-size:20px;font-weight:bold;color:#fff;cursor:pointer;}
+.sign-in-btn .desc{width:100%;max-width:326px;margin:0 auto;padding:15px 0;color:#999;font-size:12px;}
 .bd .form-item .desc a{color:#999;}
 .sign-in-btn .desc #label-remember{float:left;cursor:pointer;}
 .sign-in-btn .desc .forgot-pw{float:right;}
-.bd .sign-nav{width:88%;max-width:326px;margin:20px auto 0;padding:15px 0;font-size:14px;color:#999;background:url(/Store/source/images/sign-page-line.png) no-repeat 50% 0;}
+.bd .sign-nav{width:100%;max-width:326px;margin:20px auto 0;padding:15px 0;font-size:14px;color:#999;background:url(/Store/source/images/sign-page-line.png) no-repeat 50% 0;}
