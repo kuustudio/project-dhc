@@ -21,6 +21,7 @@ class Store_Model_Account extends model {
         mysql::startTrans();
         mysql::execute('account', $this->sqls['create_account'], $account);
         mysql::execute('store', $this->sqls['create_store'], $store);
+        //创建菜单
         mysql::commit();
         return $store['account_id'];
     }
