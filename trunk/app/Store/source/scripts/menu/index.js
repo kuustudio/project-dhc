@@ -89,14 +89,14 @@
         $('.dishlist-form.create').find('.category-name').val('').end().find('.error').remove().end().find('.btn-create-dishlist').removeClass('btn-success').end().hide();
     }).on('click','.btn-create-dishlist',function(e){
         //提交创建系列
-        var h,_this = $(this),category_name = $(this).closest('.dishlist-form.create').find('.category-name').val();
-        if(_single_validate('.dishlist-form.create .category-name')){
+        var h,_this = $(this),d_f_c = _this.closest('.dishlist-form.create'), category_name = d_f_c.find('.category-name').val();
+        if(_single_validate(d_f_c.find('.category-name'))){
             _this.addClass('btn-disabled').attr('disabled',true).text(_this.data('disable-with'));
             $.post(_this.closest('form').attr('action'),{category_name:category_name},function(d){
                 if(d.status == 'true'){
                     _this.addClass('btn-success');
                     _this.text('创建成功 ^_^');
-                    _this.closest('.dishlist-form.create').find('.btn-cancel-dishlist').click();
+                    d_f_c.find('.btn-cancel-dishlist').click();
                     h = _format_template($('#tpl-dishlist').html(),{category_id:d.data.category_id,category_name:category_name});
                     $('.dishlists').prepend(h);
                     $('.dishlists .dishlist').first().find('.btn-new-dish').click();
@@ -113,25 +113,26 @@
         t.after(h);
         t.hide();
     }).on('click','.dishlist-form.edit .btn-cancel-dishlist',function(e){
-        //点击取消创建系列
-        $('.btn-update-dishlist').removeClass('btn-disabled').attr('disabled',false).text('保存');
-        $('.dishlist-form.edit').find('.error').remove().end().find('.btn-update-dishlist').removeClass('btn-success').end().hide();
-        $(this).closest('.dishlist').find('.title').show();
+        //点击取消编辑系列
+        var d_f = $(this).closest('.dishlist-form.edit');
+        d_f.closest('.dishlist').find('.title').show();
+        d_f.remove();
     }).on('click','.btn-update-dishlist',function(){
         //提交编辑系列
         var _this = $(this),
-            category_id = $(this).closest('.dishlist').data('category_id'),
-            category_name = $(this).closest('.dishlist-form.edit').find('.category-name').val();
-        if(_single_validate('.dishlist-form.edit .category-name')){
+            t = _this.closest('.dishlist'),
+            category_id = t.data('category-id'),
+            c = t.find('.dishlist-form.edit .category-name'),
+            category_name = c.val();
+        if(_single_validate(c)){
             _this.addClass('btn-disabled').attr('disabled',true).text(_this.data('disable-with'));
-            $.post(_this.closest('form').attr('action'),{category_name:category_name},function(d){
+            $.post(_this.closest('form').attr('action'),{category_id:category_id,category_name:category_name},function(d){
                 if(d.status == 'true'){
                     _this.addClass('btn-success');
-                    _this.text('创建成功 ^_^');
-                    _this.closest('.dishlist-form.create').find('.btn-cancel-dishlist').click();
-                    h = _format_template($('#tpl-dishlist').html(),{category_id:d.data.category_id,category_name:category_name});
-                    $('.dishlists').prepend(h);
-                    $('.dishlists .dishlist').first().find('.btn-new-dish').click();
+                    _this.text('编辑成功 ^_^');
+                    t.find('.title h4').text(category_name);
+                    _this.closest('.dishlist-form.edit').remove();
+                    t.find('.title').show();
                 }else{
                     _this.removeClass('btn-disabled').addClass('btn-fail').attr('disabled',false).text('失败了，继续编辑吗？ ~_~')
                 }
@@ -140,6 +141,32 @@
         return false;
     }).on('click','.delete-dishlist',function(){
         //删除系列
+        var t = $(this).closest('.title'),
+            i = $(this).closest('.inner-tip'),
+            h = _format_template($('#tpl-dishlist-delete-form').html(),{msg:'该系列的菜品也将删除',key:'btn-delete-dishlist',left:t.find('h4').width()+50});
+        if(!i.data('has-tip')){
+            i.data('has-tip',1);
+            t.after(h);
+        }
+    }).on('click','.dishlist .inner-tip .btn-x',function(e){
+        //取消删除系列
+        var i = $(this).closest('.inner-tip');
+        i.remove();
+        i.data('has-tip',0);
+    }).on('click','.inner-tip .btn-delete-dishlist',function(e){
+        //确定删除系列
+        var _this = $(this),
+            t = _this.closest('.dishlist'),
+            category_id = t.data('category-id');
+        _this.addClass('btn-disabled').attr('disabled',true).text(_this.data('disable-with'));
+        $.post(_this.closest('form').attr('action'),{category_id:category_id},function(d){
+            if(d.status == 'true'){
+                t.remove();
+            }else{
+                _this.removeClass('btn-disabled').addClass('btn-fail').attr('disabled',false).text('失败了')
+            }
+        },'json');
+        return false;
     }).on('click','.btn-new-dish',function(){
         //点击添加菜品
         $(this).closest('.new-dish').hide();
@@ -150,21 +177,102 @@
         $(this).closest('.dish-new-wrap').find('.new-dish').show();
     }).on('click','.btn-create-dish',function(e){
         //提交创建菜品
-    }).on('click','.edit-dish',function(e){
+        var _this = $(this),
+            list = _this.closest('.dishlist'),
+            form = _this.closest('.form'),
+            category_id = list.data('category-id'),
+            dish_name = form.find('.dish-name').val(),
+            dish_price = form.find('.dish-price').val();
+        if(_single_validate(form.find('.dish-name')) && _single_validate(form.find('.dish-price'))){
+            _this.addClass('btn-disabled').attr('disabled',true).text(_this.data('disable-with'));
+            $.post(form.attr('action'),{category_id:category_id,dish_name:dish_name,dish_price:dish_price},function(d){
+                if(d.status == 'true'){
+                    _this.addClass('btn-success');
+                    _this.text('添加成功 ^_^');
+                    form.find('.btn-cancel-dish').click();
+                    form.find('.dish-name').val('').end().find('.dish-price').val('');
+                    _this.removeClass('btn-disabled').removeClass('btn-success').attr('disabled',false).text('保存，继续添加');
+                    var h = _format_template($('#tpl-dish').html(),{dish_id:d.data.dish_id,dish_name:d.data.dish_name,dish_price:d.data.dish_price});
+                    list.find('.dishs').append(h);
+                    list.find('.btn-new-dish').click();
+                }else{
+                    _this.removeClass('btn-disabled').addClass('btn-fail').attr('disabled',false).text('失败了，继续添加吗？ ~_~')
+                }
+            },'json');
+        }
+        return false;
+    }).on('click','.dish .edit-dish',function(e){
         //点击编辑菜品
-    }).on('click','.btn-update-dish',function(e){
+        var d = $(this).closest('.dish'),h = _format_template($('#tpl-dish-update-form').html(),{dish_name:d.data('dish-name'),dish_price:d.data('dish-price')});
+        d.find('.dish-wrap').hide().end().find('.actions').hide().end().append(h);
+    }).on('click','.dish-form.edit .btn-cancel-dish',function(){
+        //点击取消编辑菜品
+        var d_f = $(this).closest('.dish-form.edit');
+        d_f.closest('.dish').find('.dish-wrap').show().end().find('.actions').show();
+        d_f.remove();
+    }).on('click','.dish-form.edit .btn-update-dish',function(e){
         //提交编辑菜品
-    }).on('click','.delete-dish',function(e){
+        var _this = $(this),
+            list = _this.closest('.dishlist'),
+            dish = _this.closest('.dish'),
+            form = _this.closest('.form'),
+            dish_id = dish.data('dish-id'),
+            category_id = list.data('category-id'),
+            dish_name = form.find('.dish-name').val(),
+            dish_price = form.find('.dish-price').val();
+        if(_single_validate(form.find('.dish-name')) && _single_validate(form.find('.dish-price'))){
+            _this.addClass('btn-disabled').attr('disabled',true).text(_this.data('disable-with'));
+            $.post(form.attr('action'),{dish_id:dish_id,category_id:category_id,dish_name:dish_name,dish_price:dish_price},function(d){
+                if(d.status == 'true'){
+                    dish.find('.dish-wrap .dish-content').text(dish_name);
+                    dish.find('.dish-wrap em').text(dish_price);
+                    form.find('.btn-cancel-dish').click();
+                }else{
+                    _this.removeClass('btn-disabled').addClass('btn-fail').attr('disabled',false).text('失败了，继续添加吗？ ~_~')
+                }
+            },'json');
+        }
+        return false;
+    }).on('click','.dish .delete-dish',function(e){
         //删除菜品
-    }).on('click','.push-dish',function(e){
+        var _this = $(this),
+            dish = _this.closest('.dish'),
+            dish_id = dish.data('dish-id');
+        _this.removeClass('delete-dish').text(_this.data('disable-with'));
+        $.post(Url.delete_dish,{dish_id:dish_id},function(d){
+            if(d.status == 'true'){
+                dish.remove();
+            }else{
+                _this.addClass('delete-dish').addClass('btn-fail').text('删');
+            }
+        },'json');
+        return false;
+    }).on('click','.dish .push-dish',function(e){
         //菜品上下架
-    }).on('click','.dish-img',function(e){
+        var _this = $(this),
+            dish = _this.closest('.dish'),
+            dish_id = dish.data('dish-id'),
+            dish_push = _this.data('dish-push');
+        _this.removeClass('push-dish').text(_this.data('disable-with'));
+        $.post(Url.push_dish,{dish_id:dish_id,dish_push:dish_push},function(d){
+            if(d.status == 'true'){
+                if(dish_push){
+                    _this.removeClass('btn-fail').addClass('on');
+                }else{
+                    _this.removeClass('btn-fail').removeClass('on');
+                }
+            }else{
+                _this.addClass('push-dish').addClass('btn-fail').text('上架');
+            }
+        },'json');
+        return false;
+    }).on('click','.dish .dish-img',function(e){
         //图
-    }).on('click','.btn-create-dish-img',function(e){
+    }).on('click','.dish .btn-create-dish-img',function(e){
         //点击编辑图
-    }).on('click','.dish-info',function(e){
+    }).on('click','.dish .dish-info',function(e){
         //文
-    }).on('click','.btn-update-dish-info',function(e){
+    }).on('click','.dish .btn-update-dish-info',function(e){
         //点击编辑文
     })
 })(jQuery);
