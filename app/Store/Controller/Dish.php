@@ -47,7 +47,7 @@ class Store_Controller_Dish extends Store_Controller_Base {
         if(empty($dish_name) || strlen($dish_name)>100) return $this->_json_return(false,array('name'=>'dish_name'));
         if(empty($dish_price)) return $this->_json_return(false,array('name'=>'dish_price'));
         $dish_id = $this->model_dish->create_dish(array('account_id'=>$this->store['account_id'],'category_id'=>$category_id,'dish_name'=>$dish_name,'dish_price'=>$dish_price));
-        return $this->_json_return($dish_id);
+        return $this->_json_return($dish_id,array('dish_id'=>$dish_id,'dish_name'=>$dish_name,'dish_price'=>$dish_price));
     }
 
     //编辑菜品
@@ -67,14 +67,17 @@ class Store_Controller_Dish extends Store_Controller_Base {
         $this->_setType(array('dish_id'=>PARAM_STRING),'post');
         $dish_id = $this->_post('dish_id');
         if(empty($dish_id)) return $this->_json_return(false);
+        $r = $this->model_dish->delete_dish(array('account_id'=>$this->store['account_id'],'dish_id'=>$dish_id));
+        return $this->_json_return($r);
     }
 
     //菜品上架
     public function actionPushdish_AJAX_POST(){
-        $this->_setType(array('dish_id'=>PARAM_STRING,'dish_push'=>PARAM_UNIT),'post');
+        $this->_setType(array('dish_id'=>PARAM_STRING,'dish_push'=>PARAM_BOOL),'post');
         $dish_id = $this->_post('dish_id');
         $dish_push = $this->_post('dish_push');
-        $r = $this->model_dish->delete_dish(array('account_id'=>$this->store['account_id'],'dish_id'=>$dish_id));
+        $dish_push = !$dish_push;
+        $r = $this->model_dish->push_dish(array('account_id'=>$this->store['account_id'],'dish_id'=>$dish_id,'dish_push'=>$dish_push));
         return $this->_json_return($r);
     }
 

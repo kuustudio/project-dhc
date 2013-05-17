@@ -1,0 +1,30 @@
+controller::_setType($types, $op = 'get')
+  $types：
+    array('name'=>PARAM_STRING)
+    array('name'=>array('func'=>PARAM_STRING,'argv'=>PARAM_TEXT))
+  func值:
+    PARAM_STRING  => 'get_param_string',
+    PARAM_UINT    => 'get_param_uint',
+    PARAM_SINT    => 'get_param_sint',
+    PARAM_FLOAT   => 'get_param_float',
+    PARAM_BOOL    => 'get_param_bool',
+    PARAM_HEX     => 'get_param_hex',
+    PARAM_EXISTS  => 'get_param_exists',
+    PARAM_ARRAY   => 'get_param_array',
+    PARAM_RAW     => 'get_param_raw',
+    PARAM_HASHVAR => 'get_param_hashvar',
+    PARAM_ERROR   => 'get_param_error',
+    PARAM_NULLOK  => 'get_param_null',
+    PARAM_DATETIME=> 'get_param_datetime',
+    PARAM_EMAIL   => 'get_param_email',
+    PARAM_IPV4    => 'get_param_ipv4',
+    PARAM_DOMAIN  => 'get_param_domain',
+    PARAM_MOBILE  => 'get_param_mobile',
+  argv值:
+    PARAM_TEXT
+
+事务启动
+
+mysql::startTrans();
+xxxxxxxxxxxxx
+mysql::commit();//mysql::rollback();
