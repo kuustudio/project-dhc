@@ -76,7 +76,7 @@ class Store_Controller_Dish extends Store_Controller_Base {
         $this->_setType(array('dish_id'=>PARAM_STRING,'dish_push'=>PARAM_BOOL),'post');
         $dish_id = $this->_post('dish_id');
         $dish_push = $this->_post('dish_push');
-        $dish_push = !$dish_push;
+        $dish_push = intval(!$dish_push);
         $r = $this->model_dish->push_dish(array('account_id'=>$this->store['account_id'],'dish_id'=>$dish_id,'dish_push'=>$dish_push));
         return $this->_json_return($r);
     }
@@ -87,11 +87,20 @@ class Store_Controller_Dish extends Store_Controller_Base {
     }
 
     //编辑文
-    public function actionEditdishinfo(){
+    public function actionEditdishinfo_AJAX_POST(){
         $this->_setType(array('dish_id'=>PARAM_STRING,'dish_info'=>array('func'=>PARAM_STRING,'argv'=>PARAM_TEXT)),'post');
         $dish_id = $this->_post('dish_id');
         $dish_info = $this->_post('dish_info');
         $r = $this->model_dish->update_dish_info(array('account_id'=>$this->store['account_id'],'dish_id'=>$dish_id,'dish_info'=>$dish_info));
+        return $this->_json_return($r);
+    }
+
+    //删除文
+    public function actionDeletedishinfo_AJAX_POST(){
+        $this->_setType(array('dish_id'=>PARAM_STRING),'post');
+        $dish_id = $this->_post('dish_id');
+        if(empty($dish_id)) return $this->_json_return(false);
+        $r = $this->model_dish->delete_dish_info(array('account_id'=>$this->store['account_id'],'dish_id'=>$dish_id));
         return $this->_json_return($r);
     }
 }

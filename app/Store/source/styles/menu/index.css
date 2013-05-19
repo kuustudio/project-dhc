@@ -26,18 +26,21 @@
 .dishs li.dish .dish-wrap em{font-size:16px;color:#aaa;}
 .dishs li.dish .dish-wrap em:before{content:"￥"}
 .dishs li.dish .actions .btn-fail{border-color:red;}
-.dishs li.dish .inner-dialog,.dishlist .inner-tip{position:relative;border:1px solid #ccc;margin:10px 0;padding:5px 10px;-moz-border-radius:6px;-ms-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;-webkit-box-shadow:0 0px 4px rgba(0, 0, 0, 0.2);-moz-box-shadow:0 0px 4px rgba(0,0,0,0.2);-ms-box-shadow:0 0px 4px rgba(0,0,0,0.2);box-shadow:0 0px 4px rgba(0, 0, 0, 0.2);}
-.dishlist .inner-tip{display:inline-block;color:red;}
+.dishs li.dish .inner-dialog,.dishlist .inner-tip{position:relative;border:1px solid #ccc;margin:10px 0;-moz-border-radius:6px;-ms-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;-webkit-box-shadow:0 0px 4px rgba(0, 0, 0, 0.2);-moz-box-shadow:0 0px 4px rgba(0,0,0,0.2);-ms-box-shadow:0 0px 4px rgba(0,0,0,0.2);box-shadow:0 0px 4px rgba(0, 0, 0, 0.2);}
+.dishlist .inner-tip{display:inline-block;color:red;margin:0;}
+.dishlist .inner-tip .inr{padding:5px;}
+.dishlist .inner-tip .inr form{overflow:hidden;}
 .dishlist .inner-tip p{float:left;margin-right:10px;font-size:14px;line-height:25px;}
 .dishlist .inner-tip button{float:right;padding:4px 6px;}
 .dishlist .inner-tip .arrow{top:-10px;}
+.dishs li.dish .inner-dialog .title{margin:5px 0 0 5px;padding-left:5px;}
+.dishs li.dish .inner-dialog .inr{margin-bottom:15px;padding:0 10px;}
 .dishs li.dish .inner-dialog h3{display:inline-block;margin:0;font-size:12px;color:#000;}
-.dishs li.dish .inner-dialog i{float:right;font-size:24px;width:18px;height:18px;line-height:18px;margin:4px 2px;}
-.dishs li.dish .inner-dialog .form{overflow:hidden;}
-.dishs li.dish .inner-dialog textarea{width:90%;margin-top:5px;font-size:16px;height:66px;}
+.dishs li.dish .inner-dialog .title i{float:right;font-size:24px;width:18px;height:18px;line-height:18px;margin:4px 2px;}
+.dishs li.dish .inner-dialog textarea{width:100%;margin-top:5px;font-size:16px;height:66px;}
 .arrow{width:20px;height:10px;background:url("/Store/source/images/arrow.png") no-repeat 0 0;position:absolute;}
-.dishs li.dish .inner-dialog .arrow.info{top:-10px;left:98px;}
-.dishs li.dish .inner-dialog .arrow.img{top:-10px;left:60px;}
+.dishs li.dish .inner-dialog .arrow.info{top:-10px;left:94px;}
+.dishs li.dish .inner-dialog .arrow.img{top:-10px;left:57px;}
 .dishs li.dish .inner-dialog .img-placeholder{display:inline-block;float:left;width:120px;height:80px;margin:5px 10px 5px 0;padding:1px;border:1px solid #eee;text-align:center;}
 .dishs li.dish .inner-dialog .img-placeholder span{display:block;border:1px solid #eee;height:50px;padding-top:28px;}
 .dishs li.dish .inner-dialog p.desc{font-size:12px;color:#999;line-height:19px;}
