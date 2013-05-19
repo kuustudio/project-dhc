@@ -12,6 +12,8 @@ class Store_Model_Dish extends model {
         'update_dish'       => 'update `dish` set `dish_name`=[@dish_name],`dish_price`=[@dish_price],`updated`=[@updated] where `account_id` = [@account_id] and `dish_id` = [@dish_id]',
         'delete_dish'       => 'delete from `dish` where `account_id` = [@account_id] and `dish_id` = [@dish_id]',
         'push_dish'         => 'update `dish` set `dish_push`=[@dish_push],`updated`=[@updated] where `account_id` = [@account_id] and `dish_id` = [@dish_id]',
+        'update_dish_info'  => 'update `dish` set `dish_info`=[@dish_info],`updated`=[@updated] where `account_id` = [@account_id] and `dish_id` = [@dish_id]',
+        'delete_dish_info'  => 'update `dish` set `dish_info`=\'\',`updated`=[@updated] where `account_id` = [@account_id] and `dish_id` = [@dish_id]',
     );
 
     public function __construct(){
@@ -68,6 +70,18 @@ class Store_Model_Dish extends model {
     public function push_dish($data){
         $data['updated'] = time();
         mysql::execute('dish', $this->sqls['push_dish'], $data);
+        return true;
+    }
+
+    public function update_dish_info($data){
+        $data['updated'] = time();
+        mysql::execute('dish', $this->sqls['update_dish_info'], $data);
+        return true;
+    }
+    
+    public function delete_dish_info($data){
+        $data['updated'] = time();
+        mysql::execute('dish', $this->sqls['delete_dish_info'], $data);
         return true;
     }
 

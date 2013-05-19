@@ -44,13 +44,11 @@
                             <?php if($dish['category_id'] == $category['category_id']){?>
                             <li class="dish" data-dish-id="<?php echo $dish['dish_id']; ?>" data-dish-name="<?php echo $dish['dish_name']; ?>" data-dish-price="<?php echo $dish['dish_price']; ?>">
                                 <div class="dish-wrap">
-                                    <span class="dish-content">
-                                        <?php echo $dish['dish_name']; ?>
-                                    </span>
+                                    <span class="dish-content"><?php echo $dish['dish_name']; ?></span>
                                     <em><?php echo $dish['dish_price']; ?></em>
                                 </div>
                                 <div class="actions">
-                                    <a class="label push-dish <?php if($dish['dish_push'] == 1){ ?>on<?php } ?>" data-disable-with="正在执行..." href="javascript:;" data-dish-push="<?php echo $dish['dish_push']; ?>">上架</a>
+                                    <a class="label push-dish <?php if($dish['dish_push'] == 1){ ?>on<?php } ?>" data-disable-with="正在执行..." href="javascript:;" data-dish-push="<?php echo $dish['dish_push']; ?>"><?php if($dish['dish_push'] == 1){ ?>下架<?php }else{ ?>上架<?php } ?></a>
                                     <a class="label dish-img <?php if(!empty($dish['dish_logo'])){ ?>on<?php } ?>" href="javascript:;" data-dish-img="<?php echo $dish['dish_logo']; ?>">图</a> 
                                     <a class="label dish-info <?php if(!empty($dish['dish_info'])){ ?>on<?php } ?>" href="javascript:;" data-dish-info="<?php echo $dish['dish_info']; ?>">文</a> 
                                     <a class="label edit-dish" href="javascript:;">改</a> 
@@ -105,7 +103,7 @@
                     <a href="javascript:;" class="btn btn-mini btn-new-dish">添加新菜品</a>
                 </li>
                 <li class="dish-form hide">
-                    <form class="form" method="post">
+                    <form class="form" action="<?php echo MONK::_url('dish/adddish')?>" method="post">
                         <input type="text" class="dish-name" name="dish_name" placeholder="请填写菜品名称" data-validate="required;length:1,100" data-validate-msg="名称不能不填哦 ~_~;名称太长了哦 ~_~" />
                         <input type="text" class="dish-price price" name="dish_price" placeholder="门市价" data-validate="required" data-validate-msg="门市价不能不填哦 ~_~" /> 元
                         <div class="create-buttons">
@@ -146,9 +144,7 @@
     <script type="text/tpl" id="tpl-dish">
         <li class="dish" data-dish-id="{dish_id}" data-dish-name="{dish_name}" data-dish-price="{dish_price}">
             <div class="dish-wrap">
-                <span class="dish-content">
-                    {dish_name}
-                </span>
+                <span class="dish-content">{dish_name}</span>
                 <em>{dish_price}</em>
             </div>
             <div class="actions">
@@ -185,14 +181,14 @@
     </script>
     <!-- 图 -->
     <script type="text/tpl" id="tpl-dish-img-upload-form">
-        <div class="inner-dialog">
-            <h3>菜品图片</h3><i>×</i>
+        <div class="inner-dialog img">
+            <div class="title"><h3>菜品图片</h3><i>×</i></div>
             <div class="inr">
-                <form class="form" action="{action}" method="post" enctype="multipart/form-data">
-                    <div class="img-placeholder"><span>无图片</span></div>
+                <form class="form" action="<?php echo MONK::_url('dish/editdishimg')?>" method="post" enctype="multipart/form-data">
+                    <div class="img-placeholder">{img}</div>
                     <div class="link-upload">
                         <a id="btn-upload" href="javascript:;">选择图片</a>
-                        <input type="file" title="添加图片" name="upload_file">
+                        <input type="file" class="upload-file" title="添加图片" name="upload_file">
                     </div>
                     <p class="desc">图片格式gif/png/jpg</p>
                     <p class="desc">图片尺寸120*80</p>
@@ -204,12 +200,21 @@
     </script>
     <!-- 文 -->
     <script type="text/tpl" id="tpl-update-dish-info-form">
-        <div class="inner-dialog">
-            <h3>菜品简介</h3><i>×</i>
+        <div class="inner-dialog info">
+            <div class="title"><h3>菜品简介</h3><i>×</i></div>
             <div class="inr">
-                <form class="form" action="{action}" method="post">
-                    <textarea class="dish-info-text">{info}</textarea>
-                    <button class="btn btn-primary" data-disable-with="正在保存...">保存</button>
+                <form class="form" action="<?php echo MONK::_url('dish/editdishinfo')?>" method="post">
+                    <div class="form-item">
+                        <div class="form-field">
+                            <textarea class="dish-info-text" placeholder="写一段简单的菜品描述 ^_^" data-validate="required" data-validate-msg="没有什么可写吗 ~_~">{info}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <div class="buttons">
+                            <button class="btn btn-primary btn-update-dish-info" data-disable-with="正在努力保存...">保存</button>
+                            <button class="btn btn-delete-dish-info" data-disable-with="正在删除...">删除</button>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="arrow info"></div>
@@ -224,6 +229,7 @@ var Url = {
     push_online:'<?php echo MONK::_url('*/pushonline'); ?>',
     delete_dish:'<?php echo MONK::_url('dish/deletedish'); ?>',
     push_dish:'<?php echo MONK::_url('dish/pushdish'); ?>',
+    delete_dish_info:'<?php echo MONK::_url('dish/deletedishinfo'); ?>',
 }
 </script>
 <script type="text/javascript" src="<?php echo MONK::include_js('jquery','/source/scripts/jquery-2.0.0.min.js',false,true); ?>"></script>

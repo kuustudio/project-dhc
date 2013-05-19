@@ -62,6 +62,17 @@
         }));
     }
 
+    /*
+    * 文件上传相关
+    */
+    var _get_file_attr = function(file,key){
+        if(key == 'ext'){
+            return file.name.split(".").pop().toLowerCase();
+        }else{
+            return file[key];
+        }
+    }
+
     $('.bd').on('click','.menu-o2o',function(){
         //菜单上下线
         var _this = $(this),
@@ -142,10 +153,10 @@
     }).on('click','.delete-dishlist',function(){
         //删除系列
         var t = $(this).closest('.title'),
-            i = $(this).closest('.inner-tip'),
-            h = _format_template($('#tpl-dishlist-delete-form').html(),{msg:'该系列的菜品也将删除',key:'btn-delete-dishlist',left:t.find('h4').width()+50});
+            i = $(this).closest('.inner-tip');
         if(!i.data('has-tip')){
             i.data('has-tip',1);
+            var h = _format_template($('#tpl-dishlist-delete-form').html(),{msg:'该系列的菜品也将删除',key:'btn-delete-dishlist',left:t.find('h4').width()+50});
             t.after(h);
         }
     }).on('click','.dishlist .inner-tip .btn-x',function(e){
@@ -203,7 +214,7 @@
         return false;
     }).on('click','.dish .edit-dish',function(e){
         //点击编辑菜品
-        var d = $(this).closest('.dish'),h = _format_template($('#tpl-dish-update-form').html(),{dish_name:d.data('dish-name'),dish_price:d.data('dish-price')});
+        var d = $(this).closest('.dish'),h = _format_template($('#tpl-dish-update-form').html(),{dish_name:d.find('.dish-wrap .dish-content').text(),dish_price:d.find('.dish-wrap em').text()});
         d.find('.dish-wrap').hide().end().find('.actions').hide().end().append(h);
     }).on('click','.dish-form.edit .btn-cancel-dish',function(){
         //点击取消编辑菜品
@@ -256,23 +267,96 @@
         _this.removeClass('push-dish').text(_this.data('disable-with'));
         $.post(Url.push_dish,{dish_id:dish_id,dish_push:dish_push},function(d){
             if(d.status == 'true'){
-                if(dish_push){
-                    _this.removeClass('btn-fail').addClass('on');
+                if(dish_push==1){
+                    _this.data('dish-push','0');
+                    _this.addClass('push-dish').removeClass('btn-fail').removeClass('on').text('上架');
                 }else{
-                    _this.removeClass('btn-fail').removeClass('on');
+                    _this.data('dish-push','1');
+                    _this.addClass('push-dish').removeClass('btn-fail').addClass('on').text('下架');
                 }
             }else{
-                _this.addClass('push-dish').addClass('btn-fail').text('上架');
+                _this.addClass('push-dish').addClass('btn-fail');
             }
         },'json');
         return false;
     }).on('click','.dish .dish-img',function(e){
         //图
-    }).on('click','.dish .btn-create-dish-img',function(e){
+        var dish = $(this).closest('.dish');
+        if(!dish.data('has-img-d')){
+            if(dish.data('has-info-d')){
+                dish.find('.inner-dialog').remove();
+                dish.data('has-info-d',0);
+            }
+            var h = _format_template($('#tpl-dish-img-upload-form').html(),{});
+            dish.append(h);
+            dish.data('has-img-d',1);
+        }
+    }).on('click','.dish .inner-dialog.img i',function(e){
+        //取消图
+        var dish = $(this).closest('.dish');
+        dish.find('.inner-dialog').remove();
+        dish.data('has-img-d',0);
+    }).on('change','.dish .upload-file',function(e){
         //点击编辑图
+        console.log($(this)[0].files[0]);
     }).on('click','.dish .dish-info',function(e){
         //文
+        var dish = $(this).closest('.dish');
+        if(!dish.data('has-info-d')){
+            if(dish.data('has-img-d')){
+                dish.find('.inner-dialog').remove();
+                dish.data('has-img-d',0);
+            }
+            var h = _format_template($('#tpl-update-dish-info-form').html(),{info:$(this).data('dish-info')});
+            dish.append(h);
+            dish.data('has-info-d',1);
+        }
+    }).on('click','.dish .inner-dialog.info i',function(e){
+        //取消文
+        var dish = $(this).closest('.dish');
+        dish.find('.inner-dialog').remove();
+        dish.data('has-info-d',0);
     }).on('click','.dish .btn-update-dish-info',function(e){
         //点击编辑文
+        var _this = $(this),
+            dish = _this.closest('.dish'),
+            form = _this.closest('.form'),
+            info_div = dish.find('.dish-info'),
+            dialog = _this.closest('.inner-dialog.info'),
+            dish_id = dish.data('dish-id'),
+            dish_info = form.find('.dish-info-text').val();
+        if(_single_validate(form.find('.dish-info-text'))){
+            _this.addClass('btn-disabled').attr('disabled',true).text(_this.data('disable-with'));
+            $.post(form.attr('action'),{dish_id:dish_id,dish_info:dish_info},function(d){
+                if(d.status == 'true'){
+                    info_div.data('dish-info',dish_info);
+                    info_div.addClass('on');
+                    dialog.remove();
+                    dish.data('has-info-d',0);
+                }else{
+                    _this.removeClass('btn-disabled').addClass('btn-fail').attr('disabled',false).text('失败了，继续保存吗？ ~_~')
+                }
+            },'json');
+        }
+        return false;
+    }).on('click','.dish .btn-delete-dish-info',function(e){
+        //删除菜品
+        var _this = $(this),
+            dish = _this.closest('.dish'),
+            info_div = dish.find('.dish-info'),
+            dialog = _this.closest('.inner-dialog.info'),
+            dish_id = dish.data('dish-id');
+        _this.addClass('btn-disabled').attr('disabled',true).text(_this.data('disable-with'));
+        $.post(Url.delete_dish_info,{dish_id:dish_id},function(d){
+            if(d.status == 'true'){
+                info_div.data('dish-info','');
+                info_div.removeClass('on');
+                dialog.remove();
+                dish.data('has-info-d',0);
+            }else{
+                _this.removeClass('btn-disabled').addClass('btn-fail').attr('disabled',false).text('删除');
+            }
+        },'json');
+        return false;
     })
 })(jQuery);
