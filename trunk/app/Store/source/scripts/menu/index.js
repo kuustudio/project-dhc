@@ -20,14 +20,19 @@
             return v.getBytes() >= a;
         }
     }
-    
+
+    var _render_error = function(f,m){
+        f.find('.error').remove();
+        m=undefined?f.append('<div class="error"><i></i>该字段不正确</div>'):f.append('<div class="error"><i></i>'+m+'</div>');
+    }
+
     var _single_validate = function(element){
         var f = $(element).closest('.form-item'),
             op = $(element).data('validate').split(';'),
             v = $(element).val(),
             m = $(element).data('validate-msg').split(';'),
             r = true;
-        f.find('.error').remove();
+        
         $.each(op,function(i,n){
             if(n.indexOf(':') != -1){
                 var nt = n.split(':');
@@ -36,11 +41,7 @@
                 var nr = eval(n+'("'+v+'")');
             }
             if(!nr){
-                if(m[i] == undefined){
-                    f.append('<div class="error"><i></i>该字段不正确</div>');
-                }else{
-                    f.append('<div class="error"><i></i>'+m[i]+'</div>');
-                }
+                _render_error(f,m[i]);
                 r = r&&nr;
                 return false;
             }
@@ -65,12 +66,29 @@
     /*
     * 文件上传相关
     */
-    var _get_file_attr = function(file,key){
-        if(key == 'ext'){
-            return file.name.split(".").pop().toLowerCase();
-        }else{
-            return file[key];
+
+    var size = function(t,f,s,m){
+        if(f['size']>s){
+            _render_error(t.closest('.form-item'),m);
+            return false;
         }
+        return true;
+    }
+    
+    var ext = function(t,f,e,m){
+        if($.inArray(f['type'],e.split(','))=='-1'){
+            _render_error(t.closest('.form-item'),m);
+            return false;
+        }
+        return true;
+    }
+
+    var filename = function(t,f,m){
+        if(f['name'].indexOf("%") > -1){
+            _render_error(t.closest('.form-item'),m);
+            return false;
+        }
+        return true;
     }
 
     $('.bd').on('click','.menu-o2o',function(){
@@ -298,7 +316,23 @@
         dish.data('has-img-d',0);
     }).on('change','.dish .upload-file',function(e){
         //点击编辑图
-        console.log($(this)[0].files[0]);
+        var f = $(this)[0].files[0];
+        if(filename($(this),f,'文件名中不能包含“%” ~_~') && ext($(this),f,'image/jpeg,image/gif,image/png','图片格式不符合哦 ~_~') && size($(this),f,'30720','图片尺寸太大了哦 ~_~')){
+            var e = new FormData;
+            e.append("upload_file", f);
+            $.ajax({  
+                url:Url.edit_dish_img,
+                type:'post',
+                processData:false,
+                contentType:false,
+                headers:{"X-File-Name":encodeURIComponent(f.name)},
+                dataType:'json',
+                data:e,
+                success:function(d){
+                    console.log(d);
+                }
+            });
+        }
     }).on('click','.dish .dish-info',function(e){
         //文
         var dish = $(this).closest('.dish');

@@ -185,14 +185,18 @@
             <div class="title"><h3>菜品图片</h3><i>×</i></div>
             <div class="inr">
                 <form class="form" action="<?php echo MONK::_url('dish/editdishimg')?>" method="post" enctype="multipart/form-data">
-                    <div class="img-placeholder">{img}</div>
-                    <div class="link-upload">
-                        <a id="btn-upload" href="javascript:;">选择图片</a>
-                        <input type="file" class="upload-file" title="添加图片" name="upload_file">
+                    <div class="form-item">
+                        <div class="form-field">
+                            <div class="img-placeholder">{img}</div>
+                            <div class="link-upload">
+                                <a id="btn-upload" href="javascript:;">选择图片</a>
+                                <input type="file" class="upload-file" title="添加图片" name="upload_file">
+                            </div>
+                            <p class="desc">图片格式gif/png/jpg</p>
+                            <p class="desc">图片尺寸120*80</p>
+                            <p class="desc">(图片流量大,请谨慎)</p>
+                        </div>
                     </div>
-                    <p class="desc">图片格式gif/png/jpg</p>
-                    <p class="desc">图片尺寸120*80</p>
-                    <p class="desc">(图片流量大,请谨慎)</p>
                 </form>
             </div>
             <div class="arrow img"></div>
@@ -230,6 +234,7 @@ var Url = {
     delete_dish:'<?php echo MONK::_url('dish/deletedish'); ?>',
     push_dish:'<?php echo MONK::_url('dish/pushdish'); ?>',
     delete_dish_info:'<?php echo MONK::_url('dish/deletedishinfo'); ?>',
+    edit_dish_img:'<?php echo MONK::_url('dish/editdishimg'); ?>',
 }
 </script>
 <script type="text/javascript" src="<?php echo MONK::include_js('jquery','/source/scripts/jquery-2.0.0.min.js',false,true); ?>"></script>
