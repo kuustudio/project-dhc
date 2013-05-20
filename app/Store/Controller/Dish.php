@@ -82,8 +82,13 @@ class Store_Controller_Dish extends Store_Controller_Base {
     }
 
     //编辑图
-    public function actionEditdishimg(){
-        //$this->_setType(array('dish_id'=>PARAM_STRING,'dish_push'=>PARAM_UNIT),'post');
+    public function actionEditdishimg_AJAX_POST(){
+        $this->_setType(array('HTTP_X_FILE_NAME'=>PARAM_STRING),'server');
+        if(!empty($_FILES['upload_file']) && $_FILES['upload_file']['name'] == $this->_server('HTTP_X_FILE_NAME')){
+            
+        }else{
+            return $this->_json_return(false);
+        }
     }
 
     //编辑文
