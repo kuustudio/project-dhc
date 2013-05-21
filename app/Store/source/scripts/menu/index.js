@@ -299,7 +299,10 @@
         return false;
     }).on('click','.dish .dish-img',function(e){
         //图
-        var dish = $(this).closest('.dish');
+        var dish = $(this).closest('.dish'),
+            dish_id = dish.data('dish-id'),
+            img_div = dish.find('.dish-img'),
+            dish_img = img_div.data('dish-img');
         if(!dish.data('has-img-d')){
             if(dish.data('has-info-d')){
                 dish.find('.inner-dialog').remove();
@@ -307,6 +310,11 @@
             }
             var h = _format_template($('#tpl-dish-img-upload-form').html(),{});
             dish.append(h);
+            if(img_div.data('dish-img')==''){
+                dish.find('.form-item.delete-dish-img').hide();
+            }else{
+                $('<img>',{src:'/Store/source/uploads/dish/'+dish_id+'/'+dish_img}).appendTo(dish.find('.img-placeholder'));
+            }
             dish.data('has-img-d',1);
         }
     }).on('click','.dish .inner-dialog.img i',function(e){
@@ -316,10 +324,18 @@
         dish.data('has-img-d',0);
     }).on('change','.dish .upload-file',function(e){
         //点击编辑图
-        var f = $(this)[0].files[0];
+        var _this = $(this)
+            f = _this[0].files[0],
+            dish = _this.closest('.dish'),
+            dish_id = dish.data('dish-id'),
+            img_div = dish.find('.dish-img'),
+            dish_img = img_div.data('dish-img'),
+            img_placeholder = dish.find('.img-placeholder');
         if(filename($(this),f,'文件名中不能包含“%” ~_~') && ext($(this),f,'image/jpeg,image/gif,image/png','图片格式不符合哦 ~_~') && size($(this),f,'30720','图片尺寸太大了哦 ~_~')){
             var e = new FormData;
             e.append("upload_file", f);
+            e.append("dish_id", dish_id);
+            e.append("dish_img", dish_img);
             $.ajax({  
                 url:Url.edit_dish_img,
                 type:'post',
@@ -329,10 +345,37 @@
                 dataType:'json',
                 data:e,
                 success:function(d){
-                    console.log(d);
+                    if(d.status == 'true'){
+                        img_placeholder.empty();
+                        dish.find('.form-item.delete-dish-img').show();
+                        img_div.data('dish-img',d.data.dish_img);
+                        img_div.addClass('on');
+                        $('<img>',{src:'/Store/source/uploads/dish/'+dish_id+'/'+d.data.dish_img}).appendTo(dish.find('.img-placeholder'));
+                    }else{
+                        _this.removeClass('btn-disabled').addClass('btn-fail').attr('disabled',false).text('失败了，继续保存吗？ ~_~')
+                    }
                 }
             });
         }
+    }).on('click','.dish .btn-delete-dish-img',function(e){
+        //删除图
+        var _this = $(this),
+            dish = _this.closest('.dish'),
+            img_div = dish.find('.dish-img'),
+            dialog = _this.closest('.inner-dialog.img'),
+            dish_id = dish.data('dish-id');
+        _this.addClass('btn-disabled').attr('disabled',true).text(_this.data('disable-with'));
+        $.post(Url.delete_dish_img,{dish_id:dish_id,dish_img:img_div.data('dish-img')},function(d){
+            if(d.status == 'true'){
+                img_div.data('dish-img','');
+                img_div.removeClass('on');
+                dialog.remove();
+                dish.data('has-img-d',0);
+            }else{
+                _this.removeClass('btn-disabled').addClass('btn-fail').attr('disabled',false).text('清除图片');
+            }
+        },'json');
+        return false;
     }).on('click','.dish .dish-info',function(e){
         //文
         var dish = $(this).closest('.dish');
@@ -374,7 +417,7 @@
         }
         return false;
     }).on('click','.dish .btn-delete-dish-info',function(e){
-        //删除菜品
+        //删除文
         var _this = $(this),
             dish = _this.closest('.dish'),
             info_div = dish.find('.dish-info'),
