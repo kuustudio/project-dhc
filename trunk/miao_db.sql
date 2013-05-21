@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2013-05-20 17:05:16
+Date: 2013-05-21 16:58:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -123,7 +123,7 @@ CREATE TABLE `account` (
   `account_id` varchar(32) NOT NULL COMMENT '账户ID',
   `email` varchar(64) NOT NULL COMMENT '账户名',
   `paswd` varchar(100) NOT NULL COMMENT '账户密码',
-  `is_checked` tinyint(1) DEFAULT NULL,
+  `is_checked` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`account_id`),
   KEY `account_name` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -230,10 +230,10 @@ INSERT INTO `area_place` VALUES ('7', '宁海食府(四明中路店)', '鄞州�
 INSERT INTO `area_place` VALUES ('8', '宁波博物馆', '首南中路1000号', '1', '1', '鄞州', '6', 'n', '29.814425, 121.544843', '29.814425000000000000000000000', '121.544843000000000000000000000', '1367746397', '1367746437');
 
 -- ----------------------------
--- Table structure for `custom`
+-- Table structure for `core_custom`
 -- ----------------------------
-DROP TABLE IF EXISTS `custom`;
-CREATE TABLE `custom` (
+DROP TABLE IF EXISTS `core_custom`;
+CREATE TABLE `core_custom` (
   `custom_id` int(11) NOT NULL AUTO_INCREMENT,
   `account_id` int(11) NOT NULL,
   `created` int(10) DEFAULT NULL,
@@ -263,14 +263,14 @@ CREATE TABLE `custom` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of custom
+-- Records of core_custom
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `custom_book_address`
+-- Table structure for `core_custom_address`
 -- ----------------------------
-DROP TABLE IF EXISTS `custom_book_address`;
-CREATE TABLE `custom_book_address` (
+DROP TABLE IF EXISTS `core_custom_address`;
+CREATE TABLE `core_custom_address` (
   `book_address_id` int(11) NOT NULL AUTO_INCREMENT,
   `custom_id` int(11) NOT NULL,
   `geogroup_id` int(11) NOT NULL,
@@ -280,7 +280,56 @@ CREATE TABLE `custom_book_address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of custom_book_address
+-- Records of core_custom_address
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `core_custom_group_link`
+-- ----------------------------
+DROP TABLE IF EXISTS `core_custom_group_link`;
+CREATE TABLE `core_custom_group_link` (
+  `group_id` varchar(32) NOT NULL,
+  `custom_id` varchar(32) NOT NULL,
+  `created` int(10) DEFAULT NULL,
+  PRIMARY KEY (`group_id`,`custom_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of core_custom_group_link
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `core_group`
+-- ----------------------------
+DROP TABLE IF EXISTS `core_group`;
+CREATE TABLE `core_group` (
+  `group_id` varchar(32) NOT NULL,
+  `group_name` varchar(200) NOT NULL,
+  `create_custom_id` varchar(32) NOT NULL,
+  `group_info` varchar(255) DEFAULT NULL,
+  `group_check` tinyint(1) DEFAULT '0',
+  `created` int(10) DEFAULT NULL,
+  `updated` int(10) DEFAULT NULL,
+  PRIMARY KEY (`group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of core_group
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `core_group_admin_link`
+-- ----------------------------
+DROP TABLE IF EXISTS `core_group_admin_link`;
+CREATE TABLE `core_group_admin_link` (
+  `group_id` varchar(32) NOT NULL,
+  `custom_id` varchar(32) NOT NULL,
+  `created` int(10) DEFAULT NULL,
+  PRIMARY KEY (`group_id`,`custom_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of core_group_admin_link
 -- ----------------------------
 
 -- ----------------------------
@@ -326,58 +375,6 @@ CREATE TABLE `dish_category` (
 INSERT INTO `dish_category` VALUES ('fdd1ff2d66413212f61ae8c962c8e3de', '26d3fcb43dedde30903d1b9195ab8b9f', '盖浇饭系列', '0', '1368855135', '1368855135');
 
 -- ----------------------------
--- Table structure for `group_chowhound`
--- ----------------------------
-DROP TABLE IF EXISTS `group_chowhound`;
-CREATE TABLE `group_chowhound` (
-  `chowhound_id` int(11) NOT NULL AUTO_INCREMENT,
-  `chowhound_name` varchar(100) NOT NULL,
-  `created` int(10) DEFAULT NULL,
-  PRIMARY KEY (`chowhound_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of group_chowhound
--- ----------------------------
-
--- ----------------------------
--- Table structure for `group_geo`
--- ----------------------------
-DROP TABLE IF EXISTS `group_geo`;
-CREATE TABLE `group_geo` (
-  `geo_id` int(11) NOT NULL AUTO_INCREMENT,
-  `area_id` int(11) NOT NULL,
-  `geo_province` smallint(6) NOT NULL,
-  `geo_city` smallint(6) NOT NULL,
-  `geo_dest` smallint(6) NOT NULL,
-  `geo_street` int(11) NOT NULL,
-  `geo_name` varchar(100) NOT NULL,
-  `created` int(10) DEFAULT NULL,
-  PRIMARY KEY (`geo_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of group_geo
--- ----------------------------
-
--- ----------------------------
--- Table structure for `group_mission`
--- ----------------------------
-DROP TABLE IF EXISTS `group_mission`;
-CREATE TABLE `group_mission` (
-  `mission_id` int(11) NOT NULL AUTO_INCREMENT,
-  `geo_id` int(11) NOT NULL,
-  `mission_name` varchar(100) NOT NULL,
-  `additional_address` varchar(255) DEFAULT NULL,
-  `created` int(10) DEFAULT NULL,
-  PRIMARY KEY (`mission_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of group_mission
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `menu`
 -- ----------------------------
 DROP TABLE IF EXISTS `menu`;
@@ -393,26 +390,6 @@ CREATE TABLE `menu` (
 -- Records of menu
 -- ----------------------------
 INSERT INTO `menu` VALUES ('26d3fcb43dedde30903d1b9195ab8b9f', '0', '1368415819', '1368853137');
-
--- ----------------------------
--- Table structure for `orders`
--- ----------------------------
-DROP TABLE IF EXISTS `orders`;
-CREATE TABLE `orders` (
-  `order_id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_number` varchar(20) NOT NULL,
-  `order_user_type` tinyint(1) NOT NULL,
-  `order_user_id` int(11) NOT NULL,
-  `order_total` decimal(8,2) DEFAULT '0.00',
-  `store_id` int(11) DEFAULT NULL,
-  `created` int(10) DEFAULT NULL,
-  `order_status` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of orders
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `store`
@@ -456,6 +433,26 @@ INSERT INTO `store` VALUES ('a1333da477bbcbd1b75425b60698a860', '555', '1', '222
 INSERT INTO `store` VALUES ('a7478d7a484313f286c2b212f160e02a', '55', '1', '3333', '33', '33', '1', '1', '33', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '555', '1368415128', '1368415128');
 INSERT INTO `store` VALUES ('dc45c515635b7b23791471b001e7b7a7', '77', '1', '33333', '33', '33', '1', '2', '33', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', '455', '1368415005', '1368415005');
 INSERT INTO `store` VALUES ('e85c66f2d1e036ef43674f3c2c1d2ece', '3f', '2', '888888', '222', 'ff', '1', '2', 'fff', '29.868335999999996,121.5439900', ',1,2,7,8,6,4,5,', 'fdfff', '1368412764', '1368412764');
+
+-- ----------------------------
+-- Table structure for `store_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `store_order`;
+CREATE TABLE `store_order` (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_number` varchar(20) NOT NULL,
+  `order_user_type` tinyint(1) NOT NULL,
+  `order_user_id` int(11) NOT NULL,
+  `order_total` decimal(8,2) DEFAULT '0.00',
+  `store_id` int(11) DEFAULT NULL,
+  `created` int(10) DEFAULT NULL,
+  `order_status` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of store_order
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `sys_admin`
