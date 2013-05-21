@@ -13,7 +13,9 @@ class Store_Model_Dish extends model {
         'delete_dish'       => 'delete from `dish` where `account_id` = [@account_id] and `dish_id` = [@dish_id]',
         'push_dish'         => 'update `dish` set `dish_push`=[@dish_push],`updated`=[@updated] where `account_id` = [@account_id] and `dish_id` = [@dish_id]',
         'update_dish_info'  => 'update `dish` set `dish_info`=[@dish_info],`updated`=[@updated] where `account_id` = [@account_id] and `dish_id` = [@dish_id]',
+        'update_dish_img'   => 'update `dish` set `dish_logo`=[@dish_logo],`updated`=[@updated] where `account_id` = [@account_id] and `dish_id` = [@dish_id]',
         'delete_dish_info'  => 'update `dish` set `dish_info`=\'\',`updated`=[@updated] where `account_id` = [@account_id] and `dish_id` = [@dish_id]',
+        'delete_dish_img'   => 'update `dish` set `dish_logo`=\'\',`updated`=[@updated] where `account_id` = [@account_id] and `dish_id` = [@dish_id]',
     );
 
     public function __construct(){
@@ -73,12 +75,24 @@ class Store_Model_Dish extends model {
         return true;
     }
 
+    public function update_dish_img($data){
+        $data['updated'] = time();
+        mysql::execute('dish', $this->sqls['update_dish_img'], $data);
+        return true;
+    }
+
+    public function delete_dish_img($data){
+        $data['updated'] = time();
+        mysql::execute('dish', $this->sqls['delete_dish_img'], $data);
+        return true;
+    }
+
     public function update_dish_info($data){
         $data['updated'] = time();
         mysql::execute('dish', $this->sqls['update_dish_info'], $data);
         return true;
     }
-    
+
     public function delete_dish_info($data){
         $data['updated'] = time();
         mysql::execute('dish', $this->sqls['delete_dish_info'], $data);

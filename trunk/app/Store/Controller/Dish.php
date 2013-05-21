@@ -84,11 +84,44 @@ class Store_Controller_Dish extends Store_Controller_Base {
     //编辑图
     public function actionEditdishimg_AJAX_POST(){
         $this->_setType(array('HTTP_X_FILE_NAME'=>PARAM_STRING),'server');
-        if(!empty($_FILES['upload_file']) && $_FILES['upload_file']['name'] == $this->_server('HTTP_X_FILE_NAME')){
-            
+        $this->_setType(array('dish_id'=>PARAM_STRING),'post');
+        $dish_id = $this->_post('dish_id');
+        $dish_logo = $this->_post('dish_img');
+        $uploader = MONK::getSingleton('uploader');
+        $file = $uploader->file('upload_file');
+        if($uploader->existsFile('upload_file') && $file->filename() == $this->_server('HTTP_X_FILE_NAME')){
+            if(!$file->isValid('jpg,jpeg,png,gif')){
+                return $this->_json_return(false,array('errormsg'=>'图片格式不符合哦 ~_~'));
+            }elseif(!$file->isValid(null,30720)){
+                return $this->_json_return(false,array('errormsg'=>'图片尺寸太大了哦 ~_~'));
+            }else{
+                $filename = md5($file->filename().time()).'.'.$file->extname();
+                $dish_id_dir = MONK::getConfig('dish_img_uploads').$dish_id.DS;
+                if(!is_dir($dish_id_dir)){
+                    mkdir($dish_id_dir);
+                }
+                $file->move($dish_id_dir.$filename);
+                if(is_file($dish_id_dir.$dish_logo)){
+                    unlink($dish_id_dir.$dish_logo);
+                }
+                $r = $this->model_dish->update_dish_img(array('account_id'=>$this->store['account_id'],'dish_id'=>$dish_id,'dish_logo'=>$filename));
+                return $this->_json_return($r,array('dish_img'=>$filename));
+            }
         }else{
             return $this->_json_return(false);
         }
+    }
+
+    //删除图
+    public function actionDeletedishimg_AJAX_POST(){
+        $this->_setType(array('dish_id'=>PARAM_STRING,'dish_img'=>PARAM_STRING),'post');
+        $dish_id = $this->_post('dish_id');
+        $dish_logo = $this->_post('dish_img');
+        if(empty($dish_id)) return $this->_json_return(false);
+        $dish_logo_filepath = MONK::getConfig('dish_img_uploads').$dish_id.DS.$dish_logo;
+        if(is_file($dish_logo_filepath)) unlink($dish_logo_filepath);
+        $r = $this->model_dish->delete_dish_img(array('account_id'=>$this->store['account_id'],'dish_id'=>$dish_id));
+        return $this->_json_return($r);
     }
 
     //编辑文

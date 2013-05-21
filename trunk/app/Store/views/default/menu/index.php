@@ -185,7 +185,7 @@
             <div class="title"><h3>菜品图片</h3><i>×</i></div>
             <div class="inr">
                 <form class="form" action="<?php echo MONK::_url('dish/editdishimg')?>" method="post" enctype="multipart/form-data">
-                    <div class="form-item">
+                    <div class="form-item clearfix">
                         <div class="form-field">
                             <div class="img-placeholder">{img}</div>
                             <div class="link-upload">
@@ -197,6 +197,11 @@
                             <p class="desc">(图片流量大,请谨慎)</p>
                         </div>
                     </div>
+                    <div class="form-item delete-dish-img">
+                    <div class="delete-buttons">
+                        <button type="button" class="btn btn-primary btn-delete-dish-img" data-disable-with="正在努力清除...">清除图片</button>
+                    </div>
+                </div>
                 </form>
             </div>
             <div class="arrow img"></div>
@@ -235,6 +240,7 @@ var Url = {
     push_dish:'<?php echo MONK::_url('dish/pushdish'); ?>',
     delete_dish_info:'<?php echo MONK::_url('dish/deletedishinfo'); ?>',
     edit_dish_img:'<?php echo MONK::_url('dish/editdishimg'); ?>',
+    delete_dish_img:'<?php echo MONK::_url('dish/deletedishimg'); ?>',
 }
 </script>
 <script type="text/javascript" src="<?php echo MONK::include_js('jquery','/source/scripts/jquery-2.0.0.min.js',false,true); ?>"></script>

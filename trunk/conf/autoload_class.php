@@ -8,4 +8,5 @@ return array(
     'db'          => MONK_LIB.'core'.DS.'db.php',
     'mysql'       => MONK_LIB.'core'.DS.'db'.DS.'mysql.php',
     'block'       => MONK_LIB.'core'.DS.'block.php',
+    'uploader'    => MONK_LIB.'core'.DS.'uploader.php',
 );
