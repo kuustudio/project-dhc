@@ -331,7 +331,7 @@
             img_div = dish.find('.dish-img'),
             dish_img = img_div.data('dish-img'),
             img_placeholder = dish.find('.img-placeholder');
-        if(filename($(this),f,'文件名中不能包含“%” ~_~') && ext($(this),f,'image/jpeg,image/gif,image/png','图片格式不符合哦 ~_~') && size($(this),f,'30720','图片尺寸太大了哦 ~_~')){
+        if(filename($(this),f,'文件名中不能包含“%” ~_~') && ext($(this),f,'image/jpeg,image/gif,image/png','图片格式不符合哦 ~_~') && size($(this),f,'2097152','图片尺寸太大了哦 ~_~')){
             var e = new FormData;
             e.append("upload_file", f);
             e.append("dish_id", dish_id);

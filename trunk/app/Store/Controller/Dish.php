@@ -92,7 +92,7 @@ class Store_Controller_Dish extends Store_Controller_Base {
         if($uploader->existsFile('upload_file') && $file->filename() == $this->_server('HTTP_X_FILE_NAME')){
             if(!$file->isValid('jpg,jpeg,png,gif')){
                 return $this->_json_return(false,array('errormsg'=>'图片格式不符合哦 ~_~'));
-            }elseif(!$file->isValid(null,30720)){
+            }elseif(!$file->isValid(null,2097152)){
                 return $this->_json_return(false,array('errormsg'=>'图片尺寸太大了哦 ~_~'));
             }else{
                 $filename = md5($file->filename().time()).'.'.$file->extname();
