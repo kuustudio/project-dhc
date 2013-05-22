@@ -193,7 +193,7 @@
                                 <input type="file" class="upload-file" title="添加图片" name="upload_file">
                             </div>
                             <p class="desc">图片格式gif/png/jpg</p>
-                            <p class="desc">图片尺寸120*80</p>
+                            <p class="desc">建议尺寸180*120</p>
                             <p class="desc">(图片流量大,请谨慎)</p>
                         </div>
                     </div>
