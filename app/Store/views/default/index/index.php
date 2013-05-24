@@ -1,4 +1,4 @@
-<!--{@page layout="base"}-->
+<!--{@page layout='base'}-->
 <!--{content head}-->
 <script type="text/javascript">
     if(wsd<640){
