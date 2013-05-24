@@ -1,4 +1,4 @@
-<!--{@page layout="base"}-->
+<!--{@page layout='base'}-->
 <!--{content head}-->
 <link rel="stylesheet" href="<?php echo MONK::include_css('index-reg','/Store/source/styles/index/reg.css',false,true); ?>">
 <!--{/content}-->

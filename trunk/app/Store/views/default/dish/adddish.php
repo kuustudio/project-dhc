@@ -1,4 +1,4 @@
-<!--{@page layout="base"}-->
+<!--{@page layout='base'}-->
 <!--{content head}-->
 <link rel="stylesheet" href="<?php echo MONK::include_css('dish-adddish','/Store/source/styles/dish/adddish.css',false,true); ?>">
 <!--{/content}-->

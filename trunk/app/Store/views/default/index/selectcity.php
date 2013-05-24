@@ -1,4 +1,4 @@
-<!--{@page layout="base"}-->
+<!--{@page layout='base'}-->
 <!--{content head}-->
 <link rel="stylesheet" href="<?php echo MONK::include_css('index-select-city','/Store/source/styles/index/select-city.css',false,true); ?>">
 <!--{/content}-->
