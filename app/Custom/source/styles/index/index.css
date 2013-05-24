@@ -1,0 +1,6 @@
+body{position:relative;background:#FBFBF5 url("/Store/source/images/index-bg.png") repeat-x 0 0;overflow:hidden;}
+.hd,.bd{width:960px;margin:40px auto 0;}
+.logo,.banner,.other-login{height:80px;}
+.logo{width:120px;float:left;}
+.banner{width:420px;float:left;}
+.other-login{width:420px;float:right;}
