@@ -11,10 +11,10 @@
             <div class="city"><a href="#">宁波</a></div>
             <div class="nav">
                 <ul>
-                    <li><a href="#">主页</a></li>
-                    <li><a href="#">美食单</a></li>
-                    <li><a href="#">喵友</a></li>
-                    <li><a href="#">圈圈</a></li>
+                    <li><a href="<?php echo MONK::_url('home/index'); ?>">主页</a></li>
+                    <li><a href="<?php echo MONK::_url('menu/index'); ?>">美食单</a></li>
+                    <li><a href="<?php echo MONK::_url('friend/index'); ?>">喵友</a></li>
+                    <li><a href="<?php echo MONK::_url('group/index'); ?>">圈圈</a></li>
                 </ul>
             </div>
             <div class="top-search"><input type="search" x-webkit-grammar="builtin:translate" x-webkit-speech placeholder="美食单/喵友/圈圈" /><i>搜索</i></div>
