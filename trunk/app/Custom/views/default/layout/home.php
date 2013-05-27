@@ -20,15 +20,15 @@
             <div class="top-search"><input type="search" x-webkit-grammar="builtin:translate" x-webkit-speech placeholder="美食单/喵友/圈圈" /><i>搜索</i></div>
             <div class="quick-list">
                 <ul>
-                    <li><a href="#">退出</a></li>
-                    <li><a href="#">设置</a></li>
-                    <li><a href="#">通知</a></li>
-                    <li><a href="#">i小窝</a></li>
+                    <li><a class="logout" data-icon="," href="#"></a></li>
+                    <li><a class="setting" data-icon="#" href="#"></a></li>
+                    <li><a class="notice" data-icon='"' href="#"></a></li>
+                    <li><a class="ihome" data-icon="！" href="#"></a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="center"><!--{contentplaceholderid pagecontent}--></div>
+    <div class="middle"><!--{contentplaceholderid pagecontent}--></div>
     <div class="footer">
         <div class="container">
             © <a href="#">官方微博</a><em>·</em><a href="#">使用帮助</a>
