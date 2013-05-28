@@ -1,1 +1,23 @@
-.store-menu-item{width:280px;height:400px;background:#FFF;box-shadow:0px 0px 1px rgba(34, 25, 25, 0.1);-webkit-box-shadow:0 0 1px rgba(34, 25, 25, 0.1);-ms-box-shadow:0 0 1px rgba(34, 25, 25, 0.1);-moz-box-shadow:0 0 1px rgba(34, 25, 25, 0.1);border:1px solid #eee;padding:10px;}
+.store-menu-wall{margin-right:-10px;overflow:hidden;}
+.store-menu-item{float:left;margin:0 10px 10px 0;width:210px;height:400px;background:#FFF;box-shadow:0px 0px 1px rgba(34, 25, 25, 0.1);-webkit-box-shadow:0 0 1px rgba(34, 25, 25, 0.1);-ms-box-shadow:0 0 1px rgba(34, 25, 25, 0.1);-moz-box-shadow:0 0 1px rgba(34, 25, 25, 0.1);border:1px solid #eee;padding:10px;}
+.store-menu-item:hover{border:1px solid #087346;}
+.store-head{overflow:hidden;}
+.store-head h3,.store-statistic,.store-status-wrap{line-height:19px;}
+.store-head h3 a{font-size:14px;}
+.store-logo{float:left;height:60px;width:60px;padding-right:7px;}
+.store-logo img{height:100%;width:100%;-moz-border-radius:10%;-ms-border-radius:10%;-webkit-border-radius:10%;border-radius:10%;-webkit-box-shadow:0 2px 3px rgba(0, 0, 0, 0.15);-moz-box-shadow:0 2px 3px rgba(0,0,0,0.15);-moz-box-shadow:0 2px 3px rgba(0,0,0,0.15);box-shadow:0 2px 3px rgba(0, 0, 0, 0.15);}
+.store-statistic{margin-right:-15px;}
+.store-statistic .view,.store-statistic  .reply,.store-statistic  .like{font:12px/1.5 helvetica,arial,"hiragino sans gb",\5b8b\4f53,sans-serif;background:url(/Custom/source/images/ind_icon.png) no-repeat;color:#959595;}
+.store-statistic .view{padding-left:19px;background-position:0 1px;}
+.store-statistic .reply{padding-left:17px;background-position:0 -19px;}
+.store-statistic .like{padding-left:17px;background-position:0 -39px;}
+.store-status-wrap{overflow:hidden;color:#087346;margin-top:1px;font-family:"Helvetica Neue", Helvetica, Arial,"Microsoft Yahei","SimHei",Sans-serif;}
+.menu-set,.announcement,.dishlists{margin-top:7px;}
+.menu-set span,.menu-set label{display:inline-block;line-height:18px;padding:0 5px;background:#087346;color:#fff;font:12px/1.5 helvetica,arial,"hiragino sans gb",\5b8b\4f53,sans-serif;}
+.menu-set label i{margin-left:-5px;padding:0 3px;display:inline-block;height:100%;background:#fff;color:#000;border:1px solid #087346;}
+.menu-set label em{margin-right:-5px;padding:0 3px;}
+.announcement{font-size:14px;width:100%;white-space:nowrap;height:21px;overflow:hidden;text-overflow:ellipsis;color:#F68539;padding-bottom:6px;border-bottom:2px solid #ccc;}
+.dishlist .title h4{font:16px/1.5 "hiragino sans gb","Microsoft YaHei",\9ED1\4F53,\5b8b\4f53,sans-serif;color:#959595;}
+.dish{overflow:hidden;}
+.dish-wrap .dish-content{float:left;padding-left:5px;font-size:14px;}
+.dish-wrap em{float:right;font-family:"hiragino sans gb","Microsoft YaHei",\9ED1\4F53,\5b8b\4f53,sans-serif;font-weight:bold;color:#F68539;}
