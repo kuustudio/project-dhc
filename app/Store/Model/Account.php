@@ -3,7 +3,7 @@ class Store_Model_Account extends model {
 
     private $sqls = array(
         'create_account'    => 'insert into `account`(`account_id`,`email`,`paswd`,`is_checked`) values([@account_id],[@email],[@paswd],0);',
-        'create_store'  => 'insert into `store`(`account_id`,`store_name`,`store_type`,`store_phone`,`store_contacts`,`store_qq`,`city_id`,`district_id`,`store_address`,`long_lat`,`store_places`,`store_info`,`created`,`updated`) values([@account_id],[@store_name],[@store_type],[@store_phone],[@store_contacts],[@store_qq],[@city_id],[@district_id],[@store_address],[@long_lat],[@store_places],[@store_info],[@created],[@updated]);',
+        'create_store'  => 'insert into `store`(`account_id`,`store_name`,`store_type`,`store_phone`,`store_contacts`,`store_qq`,`city_id`,`district_id`,`store_address`,`long_lat`,`latitude`,`longitude`,`store_places`,`store_info`,`created`,`updated`) values([@account_id],[@store_name],[@store_type],[@store_phone],[@store_contacts],[@store_qq],[@city_id],[@district_id],[@store_address],[@long_lat],[@latitude],[@longitude],[@store_places],[@store_info],[@created],[@updated]);',
         'find_by_email'  => 'select 1 from `account` where `email` = [@email] limit 1',
         'login' => 'select `account_id`,`is_checked` from `account` where `email` = [@email] and `paswd` = [@paswd] limit 1;',
         'get_store_by_account_id' => 'select * from `store` where `account_id` = [@account_id] limit 1;',
