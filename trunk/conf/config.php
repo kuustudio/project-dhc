@@ -57,6 +57,10 @@ return array(
             'connectString'         => 'mysql://root:11112222tq@localhost:3306',
             'dbname'                => 'miao_db',
         ),
+        'Custom' => array(
+            'connectString'         => 'mysql://root:11112222tq@localhost:3306',
+            'dbname'                => 'miao_db',
+        ),
     ),
     //应用redis数据池
     'app_redis_pool'        => array(), //禁止更改

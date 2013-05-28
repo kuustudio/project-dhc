@@ -31,7 +31,7 @@ class Admin_Model_Area extends model {
         'update_place'   => 'update `area_place` set `place_name`=[@place_name],`place_info`=[@place_info],`place_type`=[@place_type],`start_with`=[@start_with],`long_lat`=[@long_lat],`latitude`=[@latitude],`longitude`=[@longitude],`updated`=[@updated] where `place_id` = [@place_id]',
         'delete_place'   => 'delete from `area_place` where `place_id` = [@place_id]',
         'get_place_by_latlon'   => 'select `place_id`,`place_name`,`city_id`,`district_id`,`district_name`,(ACOS(SIN(([@lat] * 3.1415) / 180 ) *SIN((latitude * 3.1415) / 180 ) +COS(([@lat] * 3.1415) / 180 ) * COS((latitude * 3.1415) / 180 ) *COS(([@lon]* 3.1415) / 180 - (longitude * 3.1415) / 180 ) ) * 6380) as `distance` from `area_place` where latitude > [@lat]-[@m] and 
-        latitude < [@lat]+[@m] and longitude > [@lon]-[@e] and longitude < [@lon]+[@e] order by distance asc limit 10',
+        latitude < [@lat]+[@m] and longitude > [@lon]-[@e] and longitude < [@lon]+[@e] order by `distance` asc limit 100',
     );
 
     public $_china_provinces = array(

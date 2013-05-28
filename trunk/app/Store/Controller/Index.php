@@ -143,6 +143,12 @@ class Store_Controller_Index extends Store_Controller_Base {
             'created'       => $time,
             'updated'       => $time
         );
+
+        if(strpos($custom_latlon,',')){
+            list($_store_data['latitude'],$_store_data['longitude']) = explode(',',$custom_latlon);
+        }else{
+            $_store_data['latitude'] = $_store_data['longitude'] = 0;
+        }
         
         $account_id = $model_account->create_store_account($_account_data,$_store_data);
         if($account_id){
