@@ -16,7 +16,9 @@ return array(
         'long_lat'      => PARAM_STRING,
         'store_places'  => PARAM_TEXT,
         'store_info'    => PARAM_TEXT,
-        'created'   => PARAM_DATETIME,
-        'updated'   => PARAM_DATETIME,
+        'is_online'     => PARAM_BOOL,
+        'category_with_dish' => PARAM_TEXT,
+        'created'       => PARAM_DATETIME,
+        'updated'       => PARAM_DATETIME,
     )
 );
