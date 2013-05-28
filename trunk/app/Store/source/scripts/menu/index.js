@@ -101,7 +101,6 @@
                 if(to_online){
                     _this.closest('.menu-header').find('.online').show();
                     $('.bd').append('<div class="shade"></div>');
-                    $('.shade').height($('.bd').height());
                 }else{
                     _this.closest('.menu-header').find('.offline').show();
                     $('.shade').remove();
