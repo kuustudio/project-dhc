@@ -393,4 +393,8 @@
 </div>
 <!--{/content}-->
 <!--{content pagefoot}-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="<?php echo MONK::include_js("jquery","/source/scripts/jquery-2.0.0.min.js",false,true); ?>"><\/script>')</script>
+<script src="<?php echo MONK::include_js("grid-a-licious","/Custom/source/scripts/jquery.grid-a-licious.min.js",false,true); ?>"></script>
+<script src="<?php echo MONK::include_js("menu-index","/Custom/source/scripts/menu/index.js",false,true); ?>"></script>
 <!--{/content}-->
