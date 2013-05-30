@@ -4,7 +4,7 @@
 */
 class Custom_Controller_Group extends Custom_Controller_Base {
 
-    public function actionIndex(){
+    public function actionList(){
         $this->render();
     }
 }
