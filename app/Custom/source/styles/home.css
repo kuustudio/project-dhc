@@ -8,7 +8,7 @@
 .page{background:#f7f8f6 url('/source/images/bg.png') repeat 0 0;}
 .header{background:#f7f8f6;border-top:2px solid #4a7269;-webkit-box-shadow:0px 3px 3px rgba(0, 0, 0, 0.1);-moz-box-shadow:0px 3px 3px rgba(0,0,0,0.1);-ms-box-shadow:0px 3px 3px rgba(0,0,0,0.1);box-shadow:0px 3px 3px rgba(0, 0, 0, 0.1);}
 .container{margin:0 auto;width:960px;overflow:hidden;}
-.container:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix:after,.container:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
 .logo,.city,.nav,.nav li,.top-search{float:left;}
 .quick-list,.quick-list li{float:right;}
 .quick-list li{margin:14px 0 0 5px;padding:5px 5px 0 5px;}
