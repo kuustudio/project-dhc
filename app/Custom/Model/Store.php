@@ -1,5 +1,5 @@
 <?php
-class Custom_Model_Menu extends model {
+class Custom_Model_Store extends model {
 
     private $sqls = array(
         'get_all_by_place' => 'select *,(ACOS(SIN(([@lat] * 3.1415) / 180 ) *SIN((latitude * 3.1415) / 180 ) +COS(([@lat] * 3.1415) / 180 ) * COS((latitude * 3.1415) / 180 ) *COS(([@lon]* 3.1415) / 180 - (longitude * 3.1415) / 180 ) ) * 6380) as `distance` from `store` where `is_online`=1 and `store_places` like \'%,[@place_id],%\' order by `distance` asc limit [@page_index],[@frame_length];',

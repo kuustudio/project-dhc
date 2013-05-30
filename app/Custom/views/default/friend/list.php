@@ -1,6 +1,6 @@
 <!--{@page layout='home'}-->
 <!--{content pagehead}-->
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo MONK::include_css("friend-index","/Custom/source/styles/friend/index.css",false,true); ?>">
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo MONK::include_css("friend-list","/Custom/source/styles/friend/list.css",false,true); ?>">
 <!--{/content}-->
 <!--{content pagecontent}-->
 <div class="container">
