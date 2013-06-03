@@ -5,25 +5,25 @@
     font-weight: normal;
     font-style: normal;
 }
-.page{background:#f7f8f6 url('/source/images/bg.png') repeat 0 0;}
-.header{background:#f7f8f6;border-top:2px solid #4a7269;-webkit-box-shadow:0px 3px 3px rgba(0, 0, 0, 0.1);-moz-box-shadow:0px 3px 3px rgba(0,0,0,0.1);-ms-box-shadow:0px 3px 3px rgba(0,0,0,0.1);box-shadow:0px 3px 3px rgba(0, 0, 0, 0.1);}
+.page{background:#fff;}
+.header{background:#f7f8f6;border-top:2px solid #fb2b5e;-webkit-box-shadow:0px 3px 3px rgba(0, 0, 0, 0.1);-moz-box-shadow:0px 3px 3px rgba(0,0,0,0.1);-ms-box-shadow:0px 3px 3px rgba(0,0,0,0.1);box-shadow:0px 3px 3px rgba(0, 0, 0, 0.1);}
 .container{margin:0 auto;width:960px;overflow:hidden;}
 .inner:after,.clearfix:after,.container:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
 .logo,.city,.nav,.nav li,.top-search{float:left;}
 .quick-list,.quick-list li{float:right;}
 .quick-list li{margin:14px 0 0 5px;padding:5px 5px 0 5px;}
-.quick-list li a{display:inline-block;height:22px;width:22px;color:#4A7269;}
-.quick-list li:hover{background:#4A7269;}
+.quick-list li a{display:inline-block;height:22px;width:22px;color:#fb2b5e;}
+.quick-list li:hover{background:#fb2b5e;}
 .quick-list li:hover a{color:#fff;}
 [data-icon]:before{font-family:'dhcicon';content: attr(data-icon);speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;font-size:22px;-webkit-font-smoothing:antialiased;}
 .nav li{height:30px;width:86px;font-size:20px;padding:15px 0;text-align:center;}
-.nav li:hover{background:#4a7269;}
+.nav li:hover{background:#fb2b5e;}
 .nav li:hover a{color:#fff;}
 .top-search{margin:15px 0 15px 20px;}
-.top-search input{height:30px;padding:0 10px;border:1px solid #4a7269;vertical-align:top;}
-.top-search input:focus{border:1px solid #4a7269;}
-.top-search i{display:inline-block;width:50px;height:30px;line-height:30px;text-align:center;color:#fff;background:#4a7269;}
-.logo{width:90px;line-height:60px;font-size:24px;color:#4A7269;font-weight:bold;}
+.top-search input{height:30px;padding:0 10px;border:1px solid #fb2b5e;vertical-align:top;}
+.top-search input:focus{border:1px solid #fb2b5e;}
+.top-search i{display:inline-block;width:50px;height:30px;line-height:30px;text-align:center;color:#fff;background:#fb2b5e;}
+.logo{width:90px;line-height:60px;font-size:24px;color:#fb2b5e;font-weight:bold;}
 .city{width:80px;line-height:60px;font-size:24px;}
 .city a{color:#aaa;border-left:1px solid #aaa;padding-left:15px;}
 .middle,.footer{margin-top:40px;}
