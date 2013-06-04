@@ -1,0 +1,10 @@
+.YaHei{font-family:"hiragino sans gb","Microsoft YaHei",黑体ED1\4F53,宋体b8b\4f53,sans-serif;}
+.p-right{float:right;width:230px;margin-left:25px;}
+.p-left{overflow:hidden;}
+.share h4{color:#999;}
+.share .actions{margin-top:20px;}
+.share .actions li{float:left;border-right:1px solid #ccc;}
+.share .actions li.love{padding-right:10px;}
+.share .actions li.income{padding-left:10px;border:0;}
+.share .actions li em{display:block;color:#147850;font-weight:700;}
+.share .actions li a{color:#d15946;}
