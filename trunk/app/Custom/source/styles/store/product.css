@@ -1,10 +1,20 @@
 .YaHei{font-family:"hiragino sans gb","Microsoft YaHei",黑体ED1\4F53,宋体b8b\4f53,sans-serif;}
 .p-right{float:right;width:230px;margin-left:25px;}
 .p-left{overflow:hidden;}
-.share h4{color:#999;}
-.share .actions{margin-top:20px;}
+.share h4,.cart h4{color:#999;}
+.share .actions{margin-top:20px;overflow:hidden;}
 .share .actions li{float:left;border-right:1px solid #ccc;}
 .share .actions li.love{padding-right:10px;}
 .share .actions li.income{padding-left:10px;border:0;}
 .share .actions li em{display:block;color:#147850;font-weight:700;}
 .share .actions li a{color:#d15946;}
+.cart{border-top:2px solid #ccc;margin-top:20px;padding-top:20px;}
+.cart h4{margin-bottom:10px;}
+.cart p{line-height:24px;font-size:14px;padding-bottom:5px;color:#999;}
+.cart p.notice{color:#F0BD6A;}
+.cart p i{display:inline-block;width:15px;height:15px;background:url(/Custom/source/images/service-icons.png8.png) rgba(0, 0, 0, 0) 0 0 no-repeat;vertical-align:sub;margin-right:5px;}
+.cart p .bao{background-position:0 -40px;}
+.cart p label{font-weight:bold;}
+.cart p em:before{content:"￥";}
+.add{text-align:center;height:40px;margin-top:15px;}
+.add a{display:block;background-color:#ee9f20;padding:7px 0;border:1px solid #eee;color:#fff;}
