@@ -1,7 +1,7 @@
 (function(){
     $(".share-wrap").gridalicious({
         gutter: 0,
-        width: 175,
+        width: 235,
         selector:'.item',
         animate: true,
         animationOptions: {

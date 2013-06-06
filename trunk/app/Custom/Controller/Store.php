@@ -13,7 +13,10 @@ class Custom_Controller_Store extends Custom_Controller_Base {
     }
 
     public function actionIndex(){
-        return $this->render();
+        $this->_setType(array('l'=>PARAM_STRING));
+        $l = $this->_get('l');
+        if(empty($l)) $l = 'productlist';
+        return $this->render(array('action'=>$l));
     }
 
     public function actionProduct(){

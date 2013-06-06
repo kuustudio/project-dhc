@@ -1,4 +1,5 @@
 .YaHei{font-family:"hiragino sans gb","Microsoft YaHei",黑体ED1\4F53,宋体b8b\4f53,sans-serif;}
+.like{opacity:0;width:50px;height:50px;bottom:100px;left:-6px;z-index:10;overflow:hidden;position:absolute;border:1px solid #FFC8D6;background-color:#FFE7ED;;-webkit-transition:opacity 100ms ease-in;right:-4px;border-radius:5px 5px 0 5px;-moz-border-radius: 5px 5px 0 5px;-ms-border-radius: 5px 5px 0 5px;-webkit-border-radius:5px 5px 0 5px;box-shadow:0 1px 1px 0 rgba(0, 0, 0, 0.07);}
 .p-right{float:right;width:230px;margin-left:25px;}
 .p-left{overflow:hidden;}
 .share h4,.cart h4{color:#999;}
@@ -18,3 +19,12 @@
 .cart p em:before{content:"￥";}
 .add{text-align:center;height:40px;margin-top:15px;}
 .add a{display:block;background-color:#ee9f20;padding:7px 0;border:1px solid #eee;color:#fff;}
+.share-wrap{margin:-14px -6px 20px;}
+.share-wrap .item{position:relative;margin:14px 6px;box-shadow:0 0px 1px rgba(34, 25, 25, 0.1);-webkit-box-shadow:rgba(34, 25, 25, 0.1) 0px 0px 1px;}
+.share-wrap .item .img:hover .like{opacity:1;}
+.share-wrap .item .info{background:#F9F9F9;padding:10px 13px;color:#999;line-height:18px;overflow:hidden;}
+.share-wrap .item .avatar{height:40px;width:40px;float:left;}
+.share-wrap .item .avatar img{height:100%;width:100%;-moz-border-radius:50%;-ms-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;}
+.share-wrap .item p{font-size:12px;margin-left:50px;}
+.share-wrap .item p a{margin:0 3px;}
+.share-wrap .item p .author{font-weight:bold;}
