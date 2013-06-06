@@ -26,6 +26,74 @@
     <div class="p-left">
         <div class="share-wrap">
             <div class="item add"><a href="#"><em>+</em>我要分享这个菜</a></div>
+            <div class="item">
+                <div class="img"><a href="#"><img src="/Custom/source/uploads/id/thumb_43eb82660e567c3e73e9e90bc7b1c5bd.jpg" /></a><div class="actions like"></div></div>
+                <div class="info">
+                    <div class="avatar"><img src="/Custom/source/uploads/id/thumb_a603c311248ae77f23a42313ee9962a6.jpg" /></div>
+                    <p>
+                        <a class="author" href="#">沈能洲</a>分享到<a href="#">沈能洲的藏宝盒</a>
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="img"><a href="#"><img src="/Custom/source/uploads/id/thumb_43eb82660e567c3e73e9e90bc7b1c5bd.jpg" /></a><div class="actions like"></div></div>
+                <div class="info">
+                    <div class="avatar"><img src="/Custom/source/uploads/id/thumb_a603c311248ae77f23a42313ee9962a6.jpg" /></div>
+                    <p>
+                        <a class="author" href="#">沈能洲</a>分享到<a href="#">沈能洲的藏宝盒</a>
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="img"><a href="#"><img src="/Custom/source/uploads/id/thumb_43eb82660e567c3e73e9e90bc7b1c5bd.jpg" /></a><div class="actions like"></div></div>
+                <div class="info">
+                    <div class="avatar"><img src="/Custom/source/uploads/id/thumb_a603c311248ae77f23a42313ee9962a6.jpg" /></div>
+                    <p>
+                        <a class="author" href="#">沈能洲</a>分享到<a href="#">沈能洲的藏宝盒</a>
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="img"><a href="#"><img src="/Custom/source/uploads/id/thumb_43eb82660e567c3e73e9e90bc7b1c5bd.jpg" /></a><div class="actions like"></div></div>
+                <div class="info">
+                    <div class="avatar"><img src="/Custom/source/uploads/id/thumb_a603c311248ae77f23a42313ee9962a6.jpg" /></div>
+                    <p>
+                        <a class="author" href="#">沈能洲</a>分享到<a href="#">沈能洲的藏宝盒</a>
+                    </p>
+                </div>
+            </div><div class="item">
+                <div class="img"><a href="#"><img src="/Custom/source/uploads/id/thumb_43eb82660e567c3e73e9e90bc7b1c5bd.jpg" /></a><div class="actions like"></div></div>
+                <div class="info">
+                    <div class="avatar"><img src="/Custom/source/uploads/id/thumb_a603c311248ae77f23a42313ee9962a6.jpg" /></div>
+                    <p>
+                        <a class="author" href="#">沈能洲</a>分享到<a href="#">沈能洲的藏宝盒</a>
+                    </p>
+                </div>
+            </div><div class="item">
+                <div class="img"><a href="#"><img src="/Custom/source/uploads/id/thumb_43eb82660e567c3e73e9e90bc7b1c5bd.jpg" /></a><div class="actions like"></div></div>
+                <div class="info">
+                    <div class="avatar"><img src="/Custom/source/uploads/id/thumb_a603c311248ae77f23a42313ee9962a6.jpg" /></div>
+                    <p>
+                        <a class="author" href="#">沈能洲</a>分享到<a href="#">沈能洲的藏宝盒</a>
+                    </p>
+                </div>
+            </div><div class="item">
+                <div class="img"><a href="#"><img src="/Custom/source/uploads/id/thumb_43eb82660e567c3e73e9e90bc7b1c5bd.jpg" /></a><div class="actions like"></div></div>
+                <div class="info">
+                    <div class="avatar"><img src="/Custom/source/uploads/id/thumb_a603c311248ae77f23a42313ee9962a6.jpg" /></div>
+                    <p>
+                        <a class="author" href="#">沈能洲</a>分享到<a href="#">沈能洲的藏宝盒</a>
+                    </p>
+                </div>
+            </div><div class="item">
+                <div class="img"><a href="#"><img src="/Custom/source/uploads/id/thumb_43eb82660e567c3e73e9e90bc7b1c5bd.jpg" /></a><div class="actions like"></div></div>
+                <div class="info">
+                    <div class="avatar"><img src="/Custom/source/uploads/id/thumb_a603c311248ae77f23a42313ee9962a6.jpg" /></div>
+                    <p>
+                        <a class="author" href="#">沈能洲</a>分享到<a href="#">沈能洲的藏宝盒</a>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

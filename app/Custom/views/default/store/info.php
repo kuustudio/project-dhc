@@ -1,10 +1,10 @@
 <!--{@page layout='home'}-->
 <!--{content pagehead}-->
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo MONK::include_css("store-index","/Custom/source/styles/store/index.css",false,true); ?>">
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo MONK::include_css("store-info","/Custom/source/styles/store/info.css",false,true); ?>">
 <!--{/content}-->
 <!--{content pagecontent}-->
-<div class="container">
-    <div class="topbox-wrap inner">
+<div class="topbox-wrap">
+    <div class="container">
         <div class="title">
             <h4 class="YaHei">开开便利</h4>
             <div class="rate"><em>2345</em>次浏览</div>
@@ -17,10 +17,13 @@
             <div class="has YaHei">有<em>2506</em>人去过此星铺</div>
         </div>
     </div>
+</div>
+<div class="container">
     <div class="s-right">
         <div class="inner">店铺概述</div>
     </div>
     <div class="s-left">
+        <div class="store-menu YaHei"><h3 class="f">产品</h3><h3><a href="#">详情</a></h3></div>
         <div class="logo-wrap wrap">
             <div class="wrap-hd inner">
                 <h4>Logo</h4>
@@ -105,5 +108,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="<?php echo MONK::include_js("jquery","/source/scripts/jquery-2.0.0.min.js",false,true); ?>"><\/script>')</script>
 <script src="<?php echo MONK::include_js("grid-a-licious","/Custom/source/scripts/jquery.masonry.min.js",false,true); ?>"></script>
-<script src="<?php echo MONK::include_js("store-index","/Custom/source/scripts/store/index.js",false,true); ?>"></script>
+<script src="<?php echo MONK::include_js("store-info","/Custom/source/scripts/store/info.js",false,true); ?>"></script>
 <!--{/content}-->
