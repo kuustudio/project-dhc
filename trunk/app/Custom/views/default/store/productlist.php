@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="s-left">
-        <div class="store-menu YaHei"><h3 class="f">产品</h3><h3><a href="#">详情</a></h3></div>
+        <div class="store-menu YaHei"><h3 class="f">产品</h3><h3><a href="<?php echo MONK::_url('*/*',array('l'=>'info')); ?>">详情</a></h3></div>
         <div class="dish-wrap wrap">
             <div class="wrap-hd">
                 <ul>
@@ -44,11 +44,64 @@
             </div>
             <div class="wrap-bd inner">
                 <ul class="product-list">
+                    <li class="category-item">盖浇饭系列</li>
                     <li class="product-item">
                         <div class="product-info inner">
-                            <p>乌骨鸡盖浇饭</p>
+                            <p><a href="<?php echo MONK::_url('store/product'); ?>">乌骨鸡盖浇饭</a></p>
                             <em class="price">35.00</em>
-                            <a href="#">+加入菜篮</a>
+                            <a class="addcart" href="#">+加入菜篮</a>
+                            <ul>
+                                <li class="last"><em>1345</em><span>月售</span></li>
+                                <li><em>134545</em><span>好吃</span></li>
+                                <li><em>1345</em><span>分享</span></li>
+                            </ul>
+                        </div>
+                        <div class="product-share"></div>
+                    </li>
+                    <li class="product-item">
+                        <div class="product-info inner">
+                            <p><a href="<?php echo MONK::_url('store/product'); ?>">乌骨鸡盖浇饭</a></p>
+                            <em class="price">35.00</em>
+                            <a class="addcart" href="#">+加入菜篮</a>
+                            <ul>
+                                <li class="last"><em>1345</em><span>月售</span></li>
+                                <li><em>134545</em><span>好吃</span></li>
+                                <li><em>1345</em><span>分享</span></li>
+                            </ul>
+                        </div>
+                        <div class="product-share"></div>
+                    </li>
+                    <li class="product-item">
+                        <div class="product-info inner">
+                            <p><a href="<?php echo MONK::_url('store/product'); ?>">乌骨鸡盖浇饭</a></p>
+                            <em class="price">35.00</em>
+                            <a class="addcart" href="#">+加入菜篮</a>
+                            <ul>
+                                <li class="last"><em>1345</em><span>月售</span></li>
+                                <li><em>134545</em><span>好吃</span></li>
+                                <li><em>1345</em><span>分享</span></li>
+                            </ul>
+                        </div>
+                        <div class="product-share"></div>
+                    </li>
+                    <li class="product-item">
+                        <div class="product-info inner">
+                            <p><a href="<?php echo MONK::_url('store/product'); ?>">乌骨鸡盖浇饭</a></p>
+                            <em class="price">35.00</em>
+                            <a class="addcart" href="#">+加入菜篮</a>
+                            <ul>
+                                <li class="last"><em>1345</em><span>月售</span></li>
+                                <li><em>134545</em><span>好吃</span></li>
+                                <li><em>1345</em><span>分享</span></li>
+                            </ul>
+                        </div>
+                        <div class="product-share"></div>
+                    </li>
+                    <li class="product-item">
+                        <div class="product-info inner">
+                            <p><a href="<?php echo MONK::_url('store/product'); ?>">乌骨鸡盖浇饭</a></p>
+                            <em class="price">35.00</em>
+                            <a class="addcart" href="#">+加入菜篮</a>
                             <ul>
                                 <li class="last"><em>1345</em><span>月售</span></li>
                                 <li><em>134545</em><span>好吃</span></li>

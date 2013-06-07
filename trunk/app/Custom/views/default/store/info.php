@@ -23,7 +23,7 @@
         <div class="inner">店铺概述</div>
     </div>
     <div class="s-left">
-        <div class="store-menu YaHei"><h3 class="f">产品</h3><h3><a href="#">详情</a></h3></div>
+        <div class="store-menu YaHei"><h3 class="f"><a href="<?php echo MONK::_url('*/*'); ?>">产品</a></h3><h3>详情</h3></div>
         <div class="logo-wrap wrap">
             <div class="wrap-hd inner">
                 <h4>Logo</h4>
@@ -32,7 +32,7 @@
                 <ul>
                     <li class="last"><em>1345</em><span>logo数</span></li>
                     <li><em>134545</em><span>喜欢</span></li>
-                </ul>
+                </ul>  
             </div>
             <div class="wrap-bd">
                 <ul class="img-container">
