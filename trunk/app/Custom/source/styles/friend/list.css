@@ -6,7 +6,7 @@
 .friend-list li{float:left;display:inline;width:216px;padding:10px;}
 .friend-list li:hover{}
 .friend-list .avatar{height:80px;width:80px;float:left;}
-.friend-list .avatar img{height:100%;width:100%;-moz-border-radius:50%;-ms-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;}
+.friend-list .avatar img{height:100%;width:100%;-moz-border-radius:8px;-ms-border-radius:8px;-webkit-border-radius:8px;border-radius:8px;}
 .friend-list li:hover .avatar img{-webkit-box-shadow:0 2px 8px rgba(0, 0, 0, 0.5);-moz-box-shadow:0 2px 8px rgba(0,0,0,0.5);-ms-box-shadow:0 2px 8px rgba(0,0,0,0.5);box-shadow:0 2px 8px rgba(0, 0, 0, 0.5);}
 .friend-list .info{position:relative;margin-left:90px;padding-right:10px;}
 .friend-list .info h4 a{color:#555;font-weight:bold;}

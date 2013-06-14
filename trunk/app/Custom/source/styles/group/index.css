@@ -1,0 +1,12 @@
+.ellipsis{display:inline-block;white-space:nowrap;word-wrap:normal;width:100%;overflow:hidden;-ms-text-overflow:ellipsis;-o-text-overflow:ellipsis;-webkit-text-overflow:ellipsis;text-overflow:ellipsis;}
+.YaHei{font-family:'Microsoft YaHei',SimHei;}
+.g-banner{width:960px;height:255px;}
+.g-banner img,.g-logo img{width:100%;height:100%;}
+.g-info{position:relative;padding:15px 20px 15px 200px;border-bottom:2px solid #ccc;}
+.g-name{float:left;font-size:20px;}
+.g-total{float:right;font-size:12px;line-height:28px;color:#999;}
+.g-logo{position:absolute;top:-130px;left:20px;width:160px;height:160px;}
+.g-logo img{-moz-border-radius:50%;-ms-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;-webkit-box-shadow:0 2px 8px rgba(0, 0, 0, 0.5);-moz-box-shadow:0 2px 8px rgba(0,0,0,0.5);-ms-box-shadow:0 2px 8px rgba(0,0,0,0.5);box-shadow:0 2px 8px rgba(0, 0, 0, 0.5);border:1px solid #efefef;}
+.g-bd{margin-top:25px;}
+.g-right{float:right;width:230px;margin-left:25px;}
+.g-left{overflow:hidden;}
