@@ -5,6 +5,10 @@
 class Custom_Controller_Group extends Custom_Controller_Base {
 
     public function actionList(){
-        $this->render();
+        return $this->render();
+    }
+
+    public function actionIndex(){
+        return $this->render();
     }
 }

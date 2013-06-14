@@ -4,6 +4,6 @@
 .userhead,.app,.userinfo,.task,.feed,.know,.visitor{background:#FFF;box-shadow:0px 0px 1px rgba(34, 25, 25, 0.1);-webkit-box-shadow:0 0 1px rgba(34, 25, 25, 0.1);-ms-box-shadow:0 0 1px rgba(34, 25, 25, 0.1);-moz-box-shadow:0 0 1px rgba(34, 25, 25, 0.1);border:1px solid #eee;padding:10px;}
 .userhead{overflow:hidden;}
 .app,.userinfo,.feed,.visitor{margin-top:10px;}
-.avatar{float:left;width:60px;height:60px;-moz-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;-webkit-box-shadow:0 2px 3px rgba(0, 0, 0, 0.15);-moz-box-shadow:0 2px 3px rgba(0,0,0,0.15);-ms-box-shadow:0 2px 3px rgba(0,0,0,0.15);box-shadow:0 2px 3px rgba(0, 0, 0, 0.15);}
+.avatar{float:left;width:60px;height:60px;-moz-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;-webkit-box-shadow:0 2px 3px rgba(0, 0, 0, 0.15);-moz-box-shadow:0 2px 3px rgba(0,0,0,0.15);-ms-box-shadow:0 2px 3px rgba(0,0,0,0.15);box-shadow:0 2px 3px rgba(0, 0, 0, 0.15);}
 .avatar:hover{-webkit-box-shadow:0 2px 8px rgba(0, 0, 0, 0.5);-moz-box-shadow:0 2px 8px rgba(0,0,0,0.5);-ms-box-shadow:0 2px 8px rgba(0,0,0,0.5);box-shadow:0 2px 8px rgba(0, 0, 0, 0.5);}
 .name{margin-left:70px;overflow:hidden;font-size:12px;font-weight:bold;word-wrap:break-word;color:#84A099;}

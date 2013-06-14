@@ -5,7 +5,7 @@
 .store-head h3,.store-statistic,.store-status-wrap{line-height:19px;}
 .store-head h3 a{font-size:14px;}
 .store-logo{float:left;height:60px;width:60px;padding-right:7px;}
-.store-logo img{height:100%;width:100%;-moz-border-radius:10%;-ms-border-radius:10%;-webkit-border-radius:10%;border-radius:10%;-webkit-box-shadow:0 2px 3px rgba(0, 0, 0, 0.15);-moz-box-shadow:0 2px 3px rgba(0,0,0,0.15);-moz-box-shadow:0 2px 3px rgba(0,0,0,0.15);box-shadow:0 2px 3px rgba(0, 0, 0, 0.15);}
+.store-logo img{height:100%;width:100%;-webkit-box-shadow:0 2px 3px rgba(0, 0, 0, 0.15);-moz-box-shadow:0 2px 3px rgba(0,0,0,0.15);-moz-box-shadow:0 2px 3px rgba(0,0,0,0.15);box-shadow:0 2px 3px rgba(0, 0, 0, 0.15);}
 .store-statistic{margin-right:-15px;}
 .store-statistic .view,.store-statistic  .reply,.store-statistic  .like{font:12px/1.5 helvetica,arial,"hiragino sans gb",\5b8b\4f53,sans-serif;background:url(/Custom/source/images/ind_icon.png) no-repeat;color:#959595;}
 .store-statistic .view{padding-left:19px;background-position:0 1px;}
