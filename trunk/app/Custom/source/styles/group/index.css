@@ -10,3 +10,8 @@
 .g-bd{margin-top:25px;}
 .g-right{float:right;width:230px;margin-left:25px;}
 .g-left{overflow:hidden;}
+.g-actions{padding:10px;background:#fafafa;overflow:hidden;}
+.g-actions li{float:left;padding:10px;font-size:20px;line-height:36px;color:#ccc;}
+.g-actions li:hover{color:#333;}
+.g-actions li i{display:inline-block;width:36px;height:36px;vertical-align:middle;margin-right:10px;background:#ccc;}
+.g-actions li:hover i{background:#333;}

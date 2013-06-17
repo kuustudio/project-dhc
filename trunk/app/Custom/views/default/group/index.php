@@ -20,7 +20,34 @@
 </div>
 <div class="g-bd container">
     <div class="g-right">1</div>
-    <div class="g-left">1</div>
+    <div class="g-left">
+        <div class="g-actions">
+            <ul class="YaHei">
+                <li><i></i>推荐</li>
+                <li><i></i>闲聊</li>
+                <li><i></i>团订</li>
+            </ul>
+        </div>
+        <div>
+            <ul class="g-topic-list">
+                <li>
+                    <div class="g-recommend">
+                        <a class="g-topic-avatar"><img src="/Custom/source/uploads/id/zbz.jpg" /><p>张柏芝</p></a>
+                    </div>
+                </li>
+                <li>
+                    <div class="g-chat">
+                        <a class="g-topic-avatar"><img src="/Custom/source/uploads/id/xtf.jpg" /><p>谢霆锋</p><i>圈主</i></a>
+                    </div>
+                </li>
+                <li>
+                    <div class="g-buy">
+                        <a class="g-topic-avatar"><img src="/Custom/source/uploads/id/zw.jpg" /><p>赵薇</p></a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 <!--{/content}-->
 <!--{content pagefoot}-->
