@@ -32,17 +32,29 @@
             <ul class="g-topic-list">
                 <li>
                     <div class="g-recommend">
-                        <a class="g-topic-avatar"><img src="/Custom/source/uploads/id/zbz.jpg" /><p>张柏芝</p></a>
+                        <a class="g-topic-avatar" href="#"><img src="/Custom/source/uploads/id/zbz.jpg" /><p>张柏芝</p></a>
+                        <div class="mbox">
+                            <div class="mbox-con">
+                                <div class="mbox-con-l">
+                                    <div class="mbox-con-s"></div>
+                                    <div class="mbox-con-i"></div>
+                                </div>
+                                <div class="mbox-con-r">
+                                    
+                                </div>
+                            </div>
+                            <div class="mbox-f"></div>
+                        </div>
                     </div>
                 </li>
                 <li>
                     <div class="g-chat">
-                        <a class="g-topic-avatar"><img src="/Custom/source/uploads/id/xtf.jpg" /><p>谢霆锋</p><i>圈主</i></a>
+                        <a class="g-topic-avatar" href="#"><img src="/Custom/source/uploads/id/xtf.jpg" /><p>谢霆锋</p><i>圈主</i></a>
                     </div>
                 </li>
                 <li>
                     <div class="g-buy">
-                        <a class="g-topic-avatar"><img src="/Custom/source/uploads/id/zw.jpg" /><p>赵薇</p></a>
+                        <a class="g-topic-avatar" href="#"><img src="/Custom/source/uploads/id/zw.jpg" /><p>赵薇</p></a>
                     </div>
                 </li>
             </ul>
