@@ -9,7 +9,7 @@
 .main-actions{float:right;}
 */
 .share-wall{position:relative;height:2000px;}
-.share-wall .select-box{position:absolute;width:230px;height:500px;border:1px solid #ccc;left:0;top:0;}
+.share-wall .select-box{width:230px;height:500px;border:1px solid #ccc;}
 .share-wall .top-recommend{position:absolute;width:714px;height:200px;border:1px solid #ccc;left:242px;top:0;}
 .share-wall .right-recommend{position:absolute;width:230px;height:900px;border:1px solid #ccc;left:726px;top:212px;}
 .share-wall .wall-grid{width:230px;height:400px;border:1px solid #ccc;}
