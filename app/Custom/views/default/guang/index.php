@@ -35,17 +35,15 @@
 -->
 <div class="container">
     <div class="share-wall">
-        <div class="select-box"></div>
-        <div class="top-recommend"></div>
-        <div class="right-recommend"></div>
-        <div class="wall-grid"></div>
-        <div class="wall-grid"></div>
-        <div class="wall-grid"></div>
-        <div class="wall-grid"></div>
-        <div class="wall-grid"></div>
-        <div class="wall-grid"></div>
-        <div class="wall-grid"></div>
-        <div class="wall-grid"></div>
+
+        <div class="wall-grid" style="height:300px;"></div>
+        <div class="wall-grid" style="height:400px;"></div>
+        <div class="wall-grid" style="height:500px;"></div>
+        <div class="wall-grid" style="height:300px;"></div>
+        <div class="wall-grid" style="height:500px;"></div>
+        <div class="wall-grid" style="height:300px;"></div>
+        <div class="wall-grid" style="height:400px;"></div>
+        <div class="wall-grid" style="height:500px;"></div>
     </div>
 </div>
 <!--{/content}-->
