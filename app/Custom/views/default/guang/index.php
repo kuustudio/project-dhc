@@ -34,10 +34,42 @@
 </div>
 -->
 <div class="container">
+    <div class="toolbar"></div>
+</div>
+<div class="container">
     <div class="share-wall">
-
+        <div class="select-box stamp">
+            <ul class="guang-store-category">
+                <li>
+                    <h3>美食</h3>
+                    <p>
+                        <a href="#"></a>
+                        <a href="#"></a>
+                        <a href="#"></a>
+                        <a href="#"></a>
+                    </p>
+                </li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="top-recommend stamp"></div>
+        <div class="right-recommend stamp"></div>
         <div class="wall-grid" style="height:300px;"></div>
         <div class="wall-grid" style="height:400px;"></div>
+        <div class="wall-grid" style="height:500px;"></div>
+        <div class="wall-grid" style="height:300px;"></div>
+        <div class="wall-grid" style="height:500px;"></div>
+        <div class="wall-grid" style="height:300px;"></div>
+        <div class="wall-grid" style="height:400px;"></div>
+        <div class="wall-grid" style="height:500px;"></div>
+        <div class="wall-grid" style="height:500px;"></div>
+        <div class="wall-grid" style="height:300px;"></div>
+        <div class="wall-grid" style="height:500px;"></div>
+        <div class="wall-grid" style="height:300px;"></div>
+        <div class="wall-grid" style="height:400px;"></div>
+        <div class="wall-grid" style="height:500px;"></div>
         <div class="wall-grid" style="height:500px;"></div>
         <div class="wall-grid" style="height:300px;"></div>
         <div class="wall-grid" style="height:500px;"></div>
@@ -50,6 +82,6 @@
 <!--{content pagefoot}-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="<?php echo MONK::include_js("jquery","/source/scripts/jquery-2.0.0.min.js",false,true); ?>"><\/script>')</script>
-<script src="<?php echo MONK::include_js("grid-a-licious","/Custom/source/scripts/jquery.masonry.min.js",false,true); ?>"></script>
+<script src="<?php echo MONK::include_js("grid-a-licious","/Custom/source/scripts/masonry.pkgd.min.js",false,true); ?>"></script>
 <script src="<?php echo MONK::include_js("guang-index","/Custom/source/scripts/guang/index.js",false,true); ?>"></script>
 <!--{/content}-->
