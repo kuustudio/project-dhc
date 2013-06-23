@@ -1,5 +1,6 @@
 .ellipsis{display:inline-block;white-space:nowrap;word-wrap:normal;width:100%;overflow:hidden;-ms-text-overflow:ellipsis;-o-text-overflow:ellipsis;-webkit-text-overflow:ellipsis;text-overflow:ellipsis;}
 .YaHei{font-family:'Microsoft YaHei',SimHei;}
+.page{background:#F2F0F0;}
 /*
 .guang-category li{float:left;text-align:center;padding:0 20px;}
 .guang-category li img{opacity:0.4;-moz-border-radius:50%;-ms-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;}
@@ -8,8 +9,9 @@
 .guang-category li:hover p,.guang-category li.active p{color:#fb2b5e;font-weight:bold;}
 .main-actions{float:right;}
 */
-.share-wall{position:relative;height:2000px;}
-.share-wall .select-box{width:230px;height:500px;border:1px solid #ccc;}
-.share-wall .top-recommend{position:absolute;width:714px;height:200px;border:1px solid #ccc;left:242px;top:0;}
-.share-wall .right-recommend{position:absolute;width:230px;height:900px;border:1px solid #ccc;left:726px;top:212px;}
-.share-wall .wall-grid{width:230px;height:400px;border:1px solid #ccc;}
+.share-wall{position:relative;}
+.share-wall .select-box,.share-wall .top-recommend,.share-wall .right-recommend,.share-wall .wall-grid{position:absolute;background:#fff;width:230px;margin-bottom:10px;-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .1);box-shadow:0 1px 3px rgba(0, 0, 0, .1);border:1px solid #DADADA;}
+.share-wall .select-box{height:500px;}
+.share-wall .top-recommend{width:714px;height:200px;left:242px;top:0;}
+.share-wall .right-recommend{height:900px;left:726px;top:212px;}
+.share-wall .wall-grid{height:400px;}
