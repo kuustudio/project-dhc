@@ -15,3 +15,10 @@
 .share-wall .top-recommend{width:714px;height:200px;left:242px;top:0;}
 .share-wall .right-recommend{height:900px;left:726px;top:212px;}
 .share-wall .wall-grid{height:400px;}
+
+/*店铺分类*/
+.guang-store-category{}
+.guang-store-category li{padding:8px 0;border-bottom:1px solid #ccc;}
+.guang-store-category h3,.guang-store-category p{padding:0 10px 0 20px;}
+.guang-store-category h3{color:#666;}
+.guang-store-category a{display:inline-block;font-size:12px;color:#848484;}

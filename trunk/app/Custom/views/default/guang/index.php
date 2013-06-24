@@ -43,15 +43,59 @@
                 <li>
                     <h3>美食</h3>
                     <p>
-                        <a href="#"></a>
-                        <a href="#"></a>
-                        <a href="#"></a>
-                        <a href="#"></a>
+                        <a href="#">火锅</a>
+                        <a href="#">西餐</a>
+                        <a href="#">日韩料理</a>
+                        <a href="#">东南亚菜</a>
+                        <a href="#">海鲜</a>
+                        <a href="#">快餐</a>
+                        <a href="#">其他</a>
+                        <a href="#">咖啡厅</a>
+                        <a href="#">地方菜</a>
                     </p>
                 </li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li>
+                    <h3>购物</h3>
+                    <p>
+                        <a href="#">火锅</a>
+                        <a href="#">西餐</a>
+                        <a href="#">日韩料理</a>
+                        <a href="#">东南亚菜</a>
+                        <a href="#">海鲜</a>
+                        <a href="#">快餐</a>
+                        <a href="#">其他</a>
+                        <a href="#">咖啡厅</a>
+                        <a href="#">地方菜</a>
+                    </p>
+                </li>
+                <li>
+                    <h3>休闲娱乐</h3>
+                    <p>
+                        <a href="#">火锅</a>
+                        <a href="#">西餐</a>
+                        <a href="#">日韩料理</a>
+                        <a href="#">东南亚菜</a>
+                        <a href="#">海鲜</a>
+                        <a href="#">快餐</a>
+                        <a href="#">其他</a>
+                        <a href="#">咖啡厅</a>
+                        <a href="#">地方菜</a>
+                    </p>
+                </li>
+                <li>
+                    <h3>丽人</h3>
+                    <p>
+                        <a href="#">火锅</a>
+                        <a href="#">西餐</a>
+                        <a href="#">日韩料理</a>
+                        <a href="#">东南亚菜</a>
+                        <a href="#">海鲜</a>
+                        <a href="#">快餐</a>
+                        <a href="#">其他</a>
+                        <a href="#">咖啡厅</a>
+                        <a href="#">地方菜</a>
+                    </p>
+                </li>
             </ul>
         </div>
         <div class="top-recommend stamp"></div>
@@ -80,8 +124,7 @@
 </div>
 <!--{/content}-->
 <!--{content pagefoot}-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="<?php echo MONK::include_js("jquery","/source/scripts/jquery-2.0.0.min.js",false,true); ?>"><\/script>')</script>
+<script src="<?php echo MONK::include_js("jquery","/source/scripts/jquery-2.0.0.min.js",false,true); ?>"></script>
 <script src="<?php echo MONK::include_js("grid-a-licious","/Custom/source/scripts/masonry.pkgd.min.js",false,true); ?>"></script>
 <script src="<?php echo MONK::include_js("guang-index","/Custom/source/scripts/guang/index.js",false,true); ?>"></script>
 <!--{/content}-->
