@@ -43,7 +43,8 @@ h3,.h3{font-family:"微软雅黑E\8F6F\96C5\9ED1";font-weight:bold;}
 .category-topmenu:hover a.h3,.category-topmenu.area:hover h3{color:#fb2b5e;}
 .category-topmenu:hover .more{display:block;}
 .category-topmenu .more{padding:15px;position:absolute;z-index:999;left:230px;top:-11px;background-color:#FFF;border:1px #dadada solid;border-left:none;width:230px;-moz-box-shadow:5px 5px 5px rgba(0,0,0,0.2),,5px -5px 5px rgba(0, 0, 0, 0.2);-webkit-box-shadow:5px 5px 5px rgba(0, 0, 0, 0.2),5px -5px 5px rgba(0, 0, 0, 0.2);box-shadow:5px 5px 5px rgba(0, 0, 0, 0.2),5px -5px 5px rgba(0, 0, 0, 0.2);margin:10px 10px 10px 0;}
-.submenu-item{margin:10px 0;border-bottom:1px solid #ccc;}
+.submenu-item{margin-bottom:10px;padding:10px 0;border-bottom:1px solid #ccc;}
+.submenu-item:last-child{border:0;}
 .submenu-item h3{line-height:16px;font-size:14px;color:#666;border-left:2px solid #fb2b5e;padding-left:7px;}
 .submenu-item h3:hover{color:#fb2b5e;}
 .submenu-item span{float:right;margin-right:10px;}
