@@ -40,61 +40,183 @@
     <div class="share-wall">
         <div class="select-box stamp">
             <ul class="guang-store-category">
-                <li>
-                    <h3>美食</h3>
-                    <p>
-                        <a href="#">火锅</a>
-                        <a href="#">西餐</a>
-                        <a href="#">日韩料理</a>
-                        <a href="#">东南亚菜</a>
-                        <a href="#">海鲜</a>
-                        <a href="#">快餐</a>
-                        <a href="#">其他</a>
-                        <a href="#">咖啡厅</a>
-                        <a href="#">地方菜</a>
-                    </p>
+                <li class="category-topmenu food">
+                    <i>></i>
+                    <a href="#" class="h3">美食</a>
+                    <a href="#">日韩料理</a>
+                    <a href="#">日韩料理</a>
+                    <div class="more hide">
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <h3>地方菜<span><s></s>12364</span></h3>
+                                <p>
+                                    <a href="#">宁波菜</a>
+                                    <a href="#">浙菜</a>
+                                    <a href="#">福建菜</a>
+                                    <a href="#">湘菜</a>
+                                    <a href="#">天津菜</a>
+                                    <a href="#">川菜</a>
+                                    <a href="#">粤菜</a>
+                                </p>
+                            </li>
+                            <li class="submenu-item">
+                                <h3>日韩料理<span><s></s>12364</span></h3>
+                                <p>
+                                    <a href="#">日本料理</a>
+                                    <a href="#">日本烧烤/铁板烧</a>
+                                    <a href="#">寿司/简餐</a>
+                                    <a href="#">日本自助</a>
+                                    <a href="#">韩国料理</a>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
-                <li>
-                    <h3>购物</h3>
-                    <p>
-                        <a href="#">火锅</a>
-                        <a href="#">西餐</a>
-                        <a href="#">日韩料理</a>
-                        <a href="#">东南亚菜</a>
-                        <a href="#">海鲜</a>
-                        <a href="#">快餐</a>
-                        <a href="#">其他</a>
-                        <a href="#">咖啡厅</a>
-                        <a href="#">地方菜</a>
-                    </p>
+                <li class="category-topmenu shopping">
+                    <i>></i>
+                    <a href="#" class="h3">购物</a>
+                    <a href="#">综合商家</a>
+                    <a href="#">数码家电</a>
+                    <div class="more hide">
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <h3>地方菜</h3>
+                                <p> 
+                                    <a href="#">宁波菜</a>
+                                    <a href="#">浙菜</a>
+                                    <a href="#">福建菜</a>
+                                    <a href="#">湘菜</a>
+                                    <a href="#">天津菜</a>
+                                    <a href="#">川菜</a>
+                                    <a href="#">粤菜</a>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
-                <li>
-                    <h3>休闲娱乐</h3>
-                    <p>
-                        <a href="#">火锅</a>
-                        <a href="#">西餐</a>
-                        <a href="#">日韩料理</a>
-                        <a href="#">东南亚菜</a>
-                        <a href="#">海鲜</a>
-                        <a href="#">快餐</a>
-                        <a href="#">其他</a>
-                        <a href="#">咖啡厅</a>
-                        <a href="#">地方菜</a>
-                    </p>
+                <li class="category-topmenu enjoy">
+                    <i>></i>
+                    <a href="#" class="h3">休闲</a>
+                    <a href="#">电影</a>
+                    <a href="#">KTV</a>
+                    <div class="more hide">
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <h3>地方菜</h3>
+                                <p>
+                                    <a href="#">宁波菜</a>
+                                    <a href="#">浙菜</a>
+                                    <a href="#">福建菜</a>
+                                    <a href="#">湘菜</a>
+                                    <a href="#">天津菜</a>
+                                    <a href="#">川菜</a>
+                                    <a href="#">粤菜</a>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
-                <li>
-                    <h3>丽人</h3>
+                <li class="category-topmenu women">
+                    <i>></i>
+                    <a href="#" class="h3">丽人</a>
+                    <a href="#">电影</a>
+                    <a href="#">KTV</a>
+                    <div class="more hide">
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <h3>地方菜</h3>
+                                <p>
+                                    <a href="#">宁波菜</a>
+                                    <a href="#">浙菜</a>
+                                    <a href="#">福建菜</a>
+                                    <a href="#">湘菜</a>
+                                    <a href="#">天津菜</a>
+                                    <a href="#">川菜</a>
+                                    <a href="#">粤菜</a>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="category-topmenu travel">
+                    <i>></i>
+                    <a href="#" class="h3">旅游</a>
+                    <a href="#">酒店</a>
+                    <a href="#">KTV</a>
+                    <div class="more hide">
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <h3>地方菜</h3>
+                                <p>
+                                    <a href="#">宁波菜</a>
+                                    <a href="#">浙菜</a>
+                                    <a href="#">福建菜</a>
+                                    <a href="#">湘菜</a>
+                                    <a href="#">天津菜</a>
+                                    <a href="#">川菜</a>
+                                    <a href="#">粤菜</a>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="category-topmenu life">
+                    <i>></i>
+                    <a href="#" class="h3">生活</a>
+                    <a href="#">酒店</a>
+                    <a href="#">KTV</a>
+                    <div class="more hide">
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <h3>地方菜</h3>
+                                <p>
+                                    <a href="#">宁波菜</a>
+                                    <a href="#">浙菜</a>
+                                    <a href="#">福建菜</a>
+                                    <a href="#">湘菜</a>
+                                    <a href="#">天津菜</a>
+                                    <a href="#">川菜</a>
+                                    <a href="#">粤菜</a>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="category-topmenu area">
+                    <i class="i-area">></i>
+                    <h3>热点商区</h3>
                     <p>
-                        <a href="#">火锅</a>
-                        <a href="#">西餐</a>
-                        <a href="#">日韩料理</a>
-                        <a href="#">东南亚菜</a>
-                        <a href="#">海鲜</a>
-                        <a href="#">快餐</a>
-                        <a href="#">其他</a>
-                        <a href="#">咖啡厅</a>
-                        <a href="#">地方菜</a>
+                        <a href="#">宁波菜</a>
+                        <a href="#">浙菜</a>
+                        <a href="#">福建菜</a>
+                        <a href="#">湘菜</a>
+                        <a href="#">天津菜</a>
+                        <a href="#">川菜</a>
+                        <a href="#">粤菜</a>
+                        <a href="#">宁波菜</a>
+                        <a href="#">浙菜</a>
+                        <a href="#">福建菜</a>
+                        <a href="#">湘菜</a>
+                        <a href="#">天津菜</a>
+                        <a href="#">川菜</a>
+                        <a href="#">粤菜</a>
                     </p>
+                    <div class="more hide">
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <h3>地方菜</h3>
+                                <p>
+                                    <a href="#">宁波菜</a>
+                                    <a href="#">浙菜</a>
+                                    <a href="#">福建菜</a>
+                                    <a href="#">湘菜</a>
+                                    <a href="#">天津菜</a>
+                                    <a href="#">川菜</a>
+                                    <a href="#">粤菜</a>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>
