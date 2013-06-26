@@ -220,9 +220,66 @@
                 </li>
             </ul>
         </div>
-        <div class="top-recommend stamp"></div>
-        <div class="right-recommend stamp"></div>
-        <div class="wall-grid" style="height:300px;"></div>
+        <!--<div class="top-recommend stamp"></div>-->
+        <!--<div class="right-recommend stamp"></div>-->
+        <div class="wall-grid">
+            <div class="grid-hd">
+                <a href="#">
+                    <img src="/Custom/source/images/T1qohkFkJdXXXXXXXX_!!273913842-0-pix.jpg_240x10000.jpg" />
+                    <span class="img-text style1">
+                        <p>喜欢雪纺连衣裙，穿着总有种衣袂飘飘的感觉，仙仙的。这两款哪个更适合约会...</p>
+                    </span>
+                </a>
+            </div>
+            <div class="grid-operate">
+                <a href="javascript:;">
+                    <span class="like-text">喜欢</span>
+                    <span class="like-num">234</span>
+                </a>
+                <a href="javascript:;">
+                    评论(34)
+                </a>
+            </div>
+            <div class="user">
+                <a class="avatar" href="#">
+                    <img src="/Custom/source/images/getAvatar.jpg" />
+                </a>
+                <div class="info">
+                    <p>
+                        <a href="#">沈能洲</a><em>at</em><a class="store-name" href="#">大歌星KTV</a>添加分享并加入<a class="store-name" href="#">我的杂志</a>
+                    </p>
+                </div>
+            </div>
+            <ul class="comm-list">
+                <li class="comm-item">
+                    <a class="avatar" href="#">
+                        <img src="/Custom/source/images/getAvatar (1).jpg" />
+                    </a>
+                    <div class="comm-info">
+                        <a class="comm-user" href="#">王志荣</a>
+                        <a class="comm-content" href="#">真的很好吃啊</a>
+                    </div>
+                </li>
+                <li class="comm-item">
+                    <a class="avatar" href="#">
+                        <img src="/Custom/source/images/getAvatar (2).jpg" />
+                    </a>
+                    <div class="comm-info">
+                        <a class="comm-user" href="#">余政</a>
+                        <a class="comm-content" href="#">真的很好吃啊,下次还要去吃吃看到底怎么样</a>
+                    </div>
+                </li>
+                <li class="comm-item">
+                    <a class="avatar" href="#">
+                        <img src="/Custom/source/images/getAvatar (3).jpg" />
+                    </a>
+                    <div class="comm-info">
+                        <a class="comm-user" href="#">张国荣</a>
+                        <a class="comm-content" href="#">胡说八道，一点都不吃，怎么都乱说的啊，到底有没有责任心啊</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
         <div class="wall-grid" style="height:400px;"></div>
         <div class="wall-grid" style="height:500px;"></div>
         <div class="wall-grid" style="height:300px;"></div>
