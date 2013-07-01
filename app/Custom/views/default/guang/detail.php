@@ -26,7 +26,7 @@
                 <li><a href="#"><img src="T1W1lcFnxbXXXXXXXX_!!69034904-0-pix.jpg_100x100xz.jpg" width="86" height="86"/></a></li>
                 <li><a href="#"><img src="T145XkFhtaXXXXXXXX_!!69034904-0-pix.jpg_100x100xz.jpg" width="86" height="86"/></a></li>
             </ul>
-            <div class=""></div>
+            <a class="btn" href="javascript:;">+ 关注</a>
         </div>
         <div class="from-store">
             <h3>旺旺店铺</h3>
@@ -38,6 +38,7 @@
                 <li><a href="#"><img src="T1W1lcFnxbXXXXXXXX_!!69034904-0-pix.jpg_100x100xz.jpg" width="86" height="86"/></a></li>
                 <li><a href="#"><img src="T145XkFhtaXXXXXXXX_!!69034904-0-pix.jpg_100x100xz.jpg" width="86" height="86"/></a></li>
             </ul>
+            <a class="btn" href="javascript:;">去看看</a>
         </div>
     </div>
     <div class="share-disc">
