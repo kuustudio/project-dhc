@@ -8,4 +8,8 @@ class Custom_Controller_Guang extends Custom_Controller_Base {
         return $this->render();
     }
 
+    public function actionDetail(){
+        return $this->render();
+    }
+
 }
