@@ -1,0 +1,8 @@
+.hide{display:none;}
+.ellipsis{display:inline-block;white-space:nowrap;word-wrap:normal;width:100%;overflow:hidden;-ms-text-overflow:ellipsis;-o-text-overflow:ellipsis;-webkit-text-overflow:ellipsis;text-overflow:ellipsis;}
+.YaHei{font-family:'Microsoft YaHei',SimHei;}
+.page{background:#F2F0F0;}
+
+.share-info{float:right;width:266px;}
+.share-disc{overflow:hidden;}
+/*分享相关介绍*/
