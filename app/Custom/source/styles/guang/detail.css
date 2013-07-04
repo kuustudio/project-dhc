@@ -1,7 +1,6 @@
 .hide{display:none;}
 .ellipsis{display:inline-block;white-space:nowrap;word-wrap:normal;width:100%;overflow:hidden;-ms-text-overflow:ellipsis;-o-text-overflow:ellipsis;-webkit-text-overflow:ellipsis;text-overflow:ellipsis;}
 .YaHei{font-family:'Microsoft YaHei',SimHei;}
-.page{background:#F2F0F0;}
 .btn{display:block;border:1px solid #ccc;width:100px;text-align:center;}
 .avatar img{border-radius:50%;-webkit-border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;}
 .avatar:hover img{-webkit-box-shadow:0 2px 8px rgba(0, 0, 0, 0.5);-moz-box-shadow:0 2px 8px rgba(0,0,0,0.5);-ms-box-shadow:0 2px 8px rgba(0,0,0,0.5);box-shadow:0 2px 8px rgba(0, 0, 0, 0.5);}
