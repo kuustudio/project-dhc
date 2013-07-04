@@ -1,7 +1,6 @@
 .hide{display:none;}
 .ellipsis{display:inline-block;white-space:nowrap;word-wrap:normal;width:100%;overflow:hidden;-ms-text-overflow:ellipsis;-o-text-overflow:ellipsis;-webkit-text-overflow:ellipsis;text-overflow:ellipsis;}
 .YaHei{font-family:'Microsoft YaHei',SimHei;}
-.page{background:#F2F0F0;}
 /*
 .guang-category li{float:left;text-align:center;padding:0 20px;}
 .guang-category li img{opacity:0.4;-moz-border-radius:50%;-ms-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;}

@@ -1,0 +1,16 @@
+.hide{display:none;}
+.ellipsis{display:inline-block;white-space:nowrap;word-wrap:normal;width:100%;overflow:hidden;-ms-text-overflow:ellipsis;-o-text-overflow:ellipsis;-webkit-text-overflow:ellipsis;text-overflow:ellipsis;}
+.YaHei{font-family:'Microsoft YaHei',SimHei;}
+.btn{display:block;border:1px solid #ccc;width:100px;text-align:center;}
+.avatar img{border-radius:50%;-webkit-border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;}
+.avatar:hover img{-webkit-box-shadow:0 2px 8px rgba(0, 0, 0, 0.5);-moz-box-shadow:0 2px 8px rgba(0,0,0,0.5);-ms-box-shadow:0 2px 8px rgba(0,0,0,0.5);box-shadow:0 2px 8px rgba(0, 0, 0, 0.5);}
+
+.utop-wrap{padding-top:80px;}
+.user-info{background:#fff;}
+.user-head{margin:0 auto;width:960px;position:relative;}
+.user-info-wrap{height:60px;padding-left:210px;}
+.unav-list{padding-left:220px;}
+.unav-list li{display:inline-block;float:left;height:28px;line-height:28px;padding:5px 10px;border-bottom:2px solid #fff;}
+.unav-list li a{display:block;line-height:1;padding-right:10px;border-right:1px solid #fff;}
+.user-info .avatar{position:absolute;top:-80px;left:40px;:;margin-right:280px;}
+.self-disc{position:absolute;width:616px;height:48px;background:url(/Custom/source/images/self-disc.png) no-repeat 0 0;left:210px;top:-58px;font-size:12px;color:#fff;padding-left:70px;padding-top:15px;}
