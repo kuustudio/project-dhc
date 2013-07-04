@@ -13,7 +13,7 @@
                 <ul>
                     <li><a href="<?php echo MONK::_url('home/index'); ?>">主页</a></li>
                     <li><a href="<?php echo MONK::_url('guang/index'); ?>">逛街</a></li>
-                    <li><a href="<?php echo MONK::_url('friend/list'); ?>">喵友</a></li>
+                    <li><a href="<?php echo MONK::_url('user/list'); ?>">喵友</a></li>
                     <li><a href="<?php echo MONK::_url('group/list'); ?>">圈圈</a></li>
                     <!--<li><a href="<?php echo MONK::_url('store/list'); ?>">美味单</a></li>-->
                 </ul>
