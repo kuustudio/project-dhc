@@ -69,3 +69,11 @@
 .other-user .time{float:right;color:#BFBEBE;}
 .comm-opt a{display:none;float:right;color:#fb2b5e;}
 .comment-item:hover .comm-opt a{display:block;}
+.detail-pager{padding:19px 0;text-align:center;}
+.detail-pager a,.detail-pager span{display:inline-block;line-height:1;border:1px solid #ccc;margin:0 2px;padding:4px 6px;color:#fb2b5e;}
+.detail-pager span{background:#fb2b5e;color:#fff;border-color:#fb2b5e;}
+.detail-pager a:hover{border-color:#fb2b5e;}
+
+.guess{margin-top:40px;}
+.guess h2{line-height:1;padding-left:10px;border-left:3px solid #fb2b5e;}
+.loading{text-align:center;margin-top:20px;}

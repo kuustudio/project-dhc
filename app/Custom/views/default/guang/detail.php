@@ -102,10 +102,24 @@
                     </div>
                 </li>
                 <li class="detail-pager">
-                    
+                    <a class="page-prev" href="#">< 上一页</a>
+                    <a href="#">1...</a>
+                    <a href="#">12</a>
+                    <span class="">13</span>
+                    <a href="#">14</a>
+                    <a href="#">15</a>
+                    <a href="#">...55</a>
+                    <a class="page-next" href="#">下一页 ></a>
                 </li>
             </ul>
         </div>
+    </div>
+</div>
+<div class="container">
+    <div class="guess">
+        <h2 class="YaHei">猜猜你喜欢</h2>
+        <!--用户分享所属分类及同样喜欢该分享的其他分享-->
+        <div class="loading"><img src="/Custom/source/images/loading.gif" /></div>
     </div>
 </div>
 <!--{/content}-->
