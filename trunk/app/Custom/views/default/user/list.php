@@ -13,9 +13,9 @@
             <div class="f-bd">
                 <ul class="friend-list">
                     <li>
-                        <div class="avatar"><a href="#"><img src="/Custom/source/uploads/id/thumb_a603c311248ae77f23a42313ee9962a6.jpg" /></a></div>
+                        <div class="avatar"><a href="<?php echo MONK::_url('*/home',array('uid'=>"YOAYDDNGKA39543JKFDLJA34J3K2J4")); ?>"><img src="/Custom/source/uploads/id/thumb_a603c311248ae77f23a42313ee9962a6.jpg" /></a></div>
                         <div class="info">
-                            <h4><a href="#">沈能洲</a></h4>
+                            <h4><a href="<?php echo MONK::_url('*/home',array('uid'=>"YOAYDDNGKA39543JKFDLJA34J3K2J4")); ?>">沈能洲</a></h4>
                             <!--<span class="same">同</span>-->
                             <span class="place">同一屋檐下</span>
                             <div class="actions">
