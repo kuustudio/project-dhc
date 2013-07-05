@@ -5,12 +5,53 @@
 .avatar img{border-radius:50%;-webkit-border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;}
 .avatar:hover img{-webkit-box-shadow:0 2px 8px rgba(0, 0, 0, 0.5);-moz-box-shadow:0 2px 8px rgba(0,0,0,0.5);-ms-box-shadow:0 2px 8px rgba(0,0,0,0.5);box-shadow:0 2px 8px rgba(0, 0, 0, 0.5);}
 
+.follow:hover{opacity:.8;}
+.magazine-grid-more:hover,.wall-grid-more:hover{opacity:1;}
+
 .utop-wrap{padding-top:80px;}
 .user-info{background:#fff;}
 .user-head{margin:0 auto;width:960px;position:relative;}
-.user-info-wrap{height:60px;padding-left:210px;}
-.unav-list{padding-left:220px;}
-.unav-list li{display:inline-block;float:left;height:28px;line-height:28px;padding:5px 10px;border-bottom:2px solid #fff;}
-.unav-list li a{display:block;line-height:1;padding-right:10px;border-right:1px solid #fff;}
-.user-info .avatar{position:absolute;top:-80px;left:40px;:;margin-right:280px;}
+.user-head .avatar{position:absolute;top:-80px;left:40px;:;margin-right:280px;}
 .self-disc{position:absolute;width:616px;height:48px;background:url(/Custom/source/images/self-disc.png) no-repeat 0 0;left:210px;top:-58px;font-size:12px;color:#fff;padding-left:70px;padding-top:15px;}
+.user-info-wrap{position:relative;padding:10px 10px 15px 210px;}
+.user-info-wrap p s{background-image:url(/Custom/source/images/icon_gender.png);width:16px;height:15px;display:inline-block;vertical-align:text-bottom;}
+.s-man{background-position:0 -19px;}
+.s-woman{background-position:0 0;}
+.user-info-wrap p .name{display:inline-block;font-size:20px;color:#888;}
+.auth i{display:inline-block;width:16px;height:16px;background-image:url(/Custom/source/images/icon.png);margin-left:2px;vertical-align:text-bottom;}
+.auth i.real-name{background-position:-300px -50px;height:14px;}
+.auth i.member{background-position:-300px -175px;height:14px;width:14px;}
+.number{margin-left:10px;font-size:12px;color:#fb2b5e;}
+.number label{color:#aaa;}
+.user-info-wrap p a{display:inline-block;}
+p.action{margin-top:8px;}
+.follow{background:#fb2b5e;color:#fff;font-size:14px;width:60px;border-color:#FFAEC2 #FF6B8F #FF174F #E7889F;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;-ms-border-radius:3px;}
+.follow i{margin-right:2px;font-weight:bold;font-size:16px;vertical-align:middle;}
+.send-message{font-size:12px;margin-left:6px;}
+.user-status{position:absolute;right:0;top:20px;}
+.user-status li{float:right;text-align:right;padding-right:10px;margin:8px 10px 0 0;border-right:1px solid #CCC;}
+.user-status li.last{border:0;}
+.user-status li em{display:block;color:#fb2b5e;font-weight:700;}
+.user-status li span{color:#888;}
+
+.user-main{padding:40px 0;}
+.unav{float:right;width:160px;}
+.unav li{padding:3px 0 3px 15px;}
+.unav li a{font-size:14px;color:#888;}
+.unav li:hover,.unav li.active{margin-left:-1px;padding:10px 0 10px 14px;border-left:1px solid #fb2b5e;}
+.unav li:hover a,.unav li.active a{color:#fb2b5e;font-size:20px;font-weight:bold;}
+
+.pro-wrap{min-height:600px;padding-right:30px;overflow:hidden;border-right:1px solid #ccc;}
+.share-container{float:right;width:474px;}
+.share-wrap{margin-right:-10px;}
+.short-list{overflow:hidden;}
+.magazine-grid{font-size:12px;background:#fff;width:230px;margin-bottom:10px;-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .1);box-shadow:0 1px 3px rgba(0, 0, 0, .1);border:1px solid #DADADA;}
+.magazine-grid h3{font-size:14px;width:210px;font-family:'Microsoft YaHei',SimHei;margin:4px 10px 0;height:30px;line-height:30px;}
+.magazine-grid h3 a{float:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:bold;}
+.share-num{float:right;font-size:12px;line-height:1;border:1px solid #EE0F46;background:#fb2b5e;color:#fff;padding:1px 4px;margin-top:6px;border-radius:9px;-webkit-border-radius:9px;-moz-border-radius:9px;-ms-border-radius:9px;}
+.magazine-grid .album{margin-left:11px;}
+.album-link img{float:left;width:68px;height:68px;border:0;margin:0 2px 2px 0;}
+.album-link .first img{width:138px;height:138px;}
+.album-action{margin:4px 10px;}
+.magazine-grid-more,.wall-grid-more{width:474px;height:45px;line-height:45px;background:#aaa;font-size:20px;text-align:center;color:#fff;opacity:.5;}
+.magazine-grid-more{margin-bottom:20px;}
