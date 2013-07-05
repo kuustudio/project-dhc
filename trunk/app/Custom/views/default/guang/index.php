@@ -1,6 +1,7 @@
 <!--{@page layout='home'}-->
 <!--{content pagehead}-->
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo MONK::include_css("guang-index","/Custom/source/styles/guang/index.css",false,true); ?>">
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo MONK::include_css("grid","/Custom/source/styles/grid.css",false,true); ?>">
 <!--{/content}-->
 <!--{content pagecontent}-->
 <!--
