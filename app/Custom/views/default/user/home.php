@@ -484,7 +484,14 @@
             </div>
             <div class="wall-grid-more">显示更多...</div>
         </div>
-        <div class="short-list">2</div>
+        <div class="short-list">
+            <div class="friend-box">
+                
+            </div>
+            <div class="group-box">
+                
+            </div>
+        </div>
     </div>
 </div>
 <!--{/content}-->

@@ -42,7 +42,7 @@ p.action{margin-top:8px;}
 .unav li:hover a,.unav li.active a{color:#fb2b5e;font-size:20px;font-weight:bold;}
 
 .pro-wrap{min-height:600px;padding-right:30px;overflow:hidden;border-right:1px solid #ccc;}
-.share-container{float:right;width:474px;}
+.share-container{float:right;width:474px;margin-left:10px;}
 .share-wrap{margin-right:-10px;}
 .short-list{overflow:hidden;}
 .magazine-wrap{margin-right:-10px;}
@@ -57,3 +57,5 @@ p.action{margin-top:8px;}
 .magazine-set{float:right;font-size:12px;padding:3px;margin:5px 0;}
 .magazine-grid-more,.wall-grid-more{width:474px;height:45px;line-height:45px;background:#aaa;font-size:20px;text-align:center;color:#fff;opacity:.5;cursor:pointer;}
 .magazine-grid-more{margin-bottom:20px;}
+
+.short-list{padding-right:10px;border-right:1px dashed #ccc;}
