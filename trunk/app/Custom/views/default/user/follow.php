@@ -22,6 +22,16 @@
             </span>
             <span class="number"><label>喵牌:</label>45845122</span>
         </p>
+        <p>
+            <span class="u-share" title="分享">344</span>
+            <span class="u-like" title="喜欢">3423</span>
+            <span class="u-follow" title="喵友">342</span>
+            <span class="u-group" title="圈圈">32</span>
+        </p>
+        <p>
+            <span class="place">同一屋檐下</span>
+            <span class="distance">1公里</span>
+        </p>
     </div>
 </div>
 <!--{/content}-->
