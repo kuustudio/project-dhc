@@ -13,7 +13,7 @@
 .comm-link{border:1px solid #636363;}
 .comm-text{background:#636363;color:#fff;}
 .comm-num{color:#636363;}
-.wall-grid .avatar img{-moz-border-radius:10%;-ms-border-radius:10%;-webkit-border-radius:10%;border-radius:10%;}
+.wall-grid .avatar img{-moz-border-radius:50%;-ms-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;}
 .user{padding:10px;}
 .user .avatar{float:left;margin-right:10px;height:40px;margin-top:2px;}
 .user .avatar img{width:32px;height:32px;}

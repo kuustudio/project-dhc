@@ -63,7 +63,7 @@
         <ul>
             <li<?php if($page_name=='Home'){?> class="active"<?php }?>><a href="<?php echo MONK::_url('user/home',array('uid'=>'YOAYDDNGKA39543JKFDLJA34J3K2J4')); ?>">Ta的首页</a></li>
             <li<?php if($page_name=='Share'){?> class="active"<?php }?>><a href="<?php echo MONK::_url('user/share',array('uid'=>'YOAYDDNGKA39543JKFDLJA34J3K2J4')); ?>">Ta的分享</a></li>
-            <li<?php if($page_name=='Friend'){?> class="active"<?php }?>><a href="<?php echo MONK::_url('user/friend',array('uid'=>'YOAYDDNGKA39543JKFDLJA34J3K2J4')); ?>">Ta的喵友</a></li>
+            <li<?php if($page_name=='Follow'){?> class="active"<?php }?>><a href="<?php echo MONK::_url('user/follow',array('uid'=>'YOAYDDNGKA39543JKFDLJA34J3K2J4')); ?>">Ta的喵友</a></li>
             <li<?php if($page_name=='Group'){?> class="active"<?php }?>><a href="<?php echo MONK::_url('user/group',array('uid'=>'YOAYDDNGKA39543JKFDLJA34J3K2J4')); ?>">Ta的圈圈</a></li>
             <li<?php if($page_name=='Info'){?> class="active"<?php }?>><a href="<?php echo MONK::_url('user/info',array('uid'=>'YOAYDDNGKA39543JKFDLJA34J3K2J4')); ?>">Ta的资料</a></li>
         </ul>

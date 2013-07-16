@@ -1,0 +1,10 @@
+.magazine-wrap{margin-right:-10px;}
+.magazine-grid{float:left;margin:0 10px 10px 0;font-size:12px;background:#fff;width:230px;margin-bottom:10px;-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .1);box-shadow:0 1px 3px rgba(0, 0, 0, .1);border:1px solid #DADADA;}
+.magazine-grid h3{font-size:14px;width:210px;font-family:'Microsoft YaHei',SimHei;margin:4px 10px 0;height:30px;line-height:30px;}
+.magazine-grid h3 a{float:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:bold;}
+.share-num{float:right;font-size:12px;line-height:1;border:1px solid #EE0F46;background:#fb2b5e;color:#fff;padding:1px 4px;margin-top:6px;border-radius:9px;-webkit-border-radius:9px;-moz-border-radius:9px;-ms-border-radius:9px;}
+.magazine-grid .album{margin-left:11px;}
+.album-link img{float:left;width:68px;height:68px;border:0;margin:0 2px 2px 0;}
+.album-link .first img{width:138px;height:138px;}
+.album-action{margin:4px 10px;overflow:hidden;}
+.magazine-set{float:right;font-size:12px;padding:3px;margin:5px 0;}

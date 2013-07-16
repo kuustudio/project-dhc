@@ -2,6 +2,7 @@
 <!--{content prohead}-->
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo MONK::include_css("user-home","/Custom/source/styles/user/home.css",false,true); ?>">
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo MONK::include_css("grid","/Custom/source/styles/grid.css",false,true); ?>">
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo MONK::include_css("magazine","/Custom/source/styles/magazine.css",false,true); ?>">
 <!--{/content}-->
 <!--{content prowrap}-->
 <div class="share-container">
