@@ -11,9 +11,9 @@
 <div class="user-list-wrap">
     <div class="user-item">
         <a href="<?php echo MONK::_url('*/home',array('uid'=>"YOAYDDNGKA39543JKFDLJA34J3K2J4")); ?>" class="avatar">
-            <img src="/Custom/source/uploads/id/thumb_a603c311248ae77f23a42313ee9962a6.jpg" width="80" height="80" />
+            <img src="/Custom/source/uploads/id/thumb_a603c311248ae77f23a42313ee9962a6.jpg" width="60" height="60" />
         </a>
-        <p>
+        <p class="main-info">
             <s class="s-man"></s>
             <span class="name YaHei"><a href="<?php echo MONK::_url('*/home',array('uid'=>"YOAYDDNGKA39543JKFDLJA34J3K2J4")); ?>">无天暗帝</a></span>
             <span class="auth">
@@ -22,16 +22,23 @@
             </span>
             <span class="number"><label>喵牌:</label>45845122</span>
         </p>
-        <p>
+        <p class="data">
             <span class="u-share" title="分享">344</span>
             <span class="u-like" title="喜欢">3423</span>
             <span class="u-follow" title="喵友">342</span>
             <span class="u-group" title="圈圈">32</span>
         </p>
-        <p>
+        <p class="address">
             <span class="place">同一屋檐下</span>
             <span class="distance">1公里</span>
         </p>
+        <p class="user-desc">
+            <span>“我是一个兵，爱着老百姓。”</span>
+        </p>
+        <div class="user-actions">
+            <a href="#">关注</a>
+            <a href="#">关注</a>
+        </div>
     </div>
 </div>
 <!--{/content}-->
